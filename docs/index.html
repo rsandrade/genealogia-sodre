@@ -68,23 +68,41 @@ main{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
 .status-fail{background:var(--hypothetical-bg);color:var(--hypothetical);border:1px solid rgba(155,34,38,0.2)}
 .status-partial{background:var(--probable-bg);color:var(--probable);border:1px solid rgba(184,134,11,0.2)}
 .status-pending{background:rgba(139,115,85,0.08);color:var(--ink-muted);border:1px solid rgba(139,115,85,0.2)}
-.children-row{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;width:100%;padding:0.5rem 0}
-.child-card{background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:0.6rem 0.9rem;min-width:140px;max-width:180px;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow)}
+
+/* === Cousin-tier: horizontal scrolling row of sibling groups === */
+.cousin-tier{display:flex;gap:1.5rem;padding:1rem 0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--line) var(--parchment-deep);-webkit-overflow-scrolling:touch;width:100%}
+.cousin-tier::-webkit-scrollbar{height:6px}
+.cousin-tier::-webkit-scrollbar-track{background:var(--parchment-deep);border-radius:3px}
+.cousin-tier::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.sibling-group{flex:0 0 auto;min-width:180px;max-width:280px;background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:0.8rem;box-shadow:0 1px 3px var(--shadow);transition:transform 0.25s ease,box-shadow 0.25s ease}
+.sibling-group:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
+.sibling-group-header{font-family:'Playfair Display',serif;font-size:0.85rem;font-weight:700;color:var(--ink);line-height:1.2;text-align:center;margin-bottom:0.15rem}
+.sibling-group-sub{font-size:0.65rem;color:var(--ink-muted);font-style:italic;text-align:center;margin-bottom:0.6rem;padding-bottom:0.5rem;border-bottom:1px solid var(--line-faint)}
+.sibling-group-children{display:flex;flex-direction:column;gap:0.35rem}
+
+/* Children cards within sibling groups */
+.child-card{background:var(--parchment);border:1px solid var(--line-faint);border-radius:var(--radius);padding:0.5rem 0.7rem;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow)}
 .child-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
 .child-card.confirmed{border-left:3px solid var(--confirmed)}
-.child-card.highlight{border-left:3px solid var(--gold);background:linear-gradient(135deg,#fffcf7 60%,rgba(184,134,11,0.06))}
-.child-num{font-family:'Cormorant Garamond',serif;font-size:0.6rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.15rem}
-.child-name{font-family:'Playfair Display',serif;font-size:0.82rem;font-weight:700;color:var(--ink);line-height:1.2}
-.child-note{font-size:0.65rem;color:var(--ink-muted);font-style:italic;margin-top:0.15rem}
-.sub-branch{border-left:2px solid var(--line-faint);margin-left:1rem;padding-left:1rem;margin-top:0.5rem}
-.sub-branch .child-name{font-size:0.78rem}
+.child-card.highlight{border-left:3px solid var(--gold);background:linear-gradient(135deg,var(--parchment) 60%,rgba(184,134,11,0.06))}
+.child-num{font-family:'Cormorant Garamond',serif;font-size:0.6rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.1rem}
+.child-name{font-family:'Playfair Display',serif;font-size:0.78rem;font-weight:700;color:var(--ink);line-height:1.2}
+.child-note{font-size:0.62rem;color:var(--ink-muted);font-style:italic;margin-top:0.1rem}
+
+/* Vertical connector between G4 and cousin tier */
+.connector-tier-down{width:1px;height:1.2rem;background:var(--line);margin:0 auto}
+/* Horizontal bracket above cousin groups */
+.cousin-bracket{position:relative;height:1.5rem;display:flex;align-items:flex-end;justify-content:center;width:100%;max-width:960px}
+.cousin-bracket::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:var(--line)}
+.cousin-bracket::after{content:'';position:absolute;bottom:0;left:50%;width:1px;height:0.75rem;background:var(--line)}
+
 footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--line);margin-top:3rem}
 .footer-ornament{font-family:'Cormorant Garamond',serif;color:var(--line);font-size:1.4rem;margin-bottom:0.8rem;letter-spacing:0.5em}
 .footer-text{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-muted);font-size:0.9rem;line-height:1.7}
 .footer-text a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,134,11,0.3)}
 .footer-date{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--line);margin-top:0.6rem}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.person,.section,.note-box,.child-card{animation:fadeUp 0.5s ease both}
+.person,.section,.note-box,.child-card,.sibling-group{animation:fadeUp 0.5s ease both}
 .generation:nth-child(1) .person{animation-delay:0.05s}
 .generation:nth-child(3) .person{animation-delay:0.15s}
 .generation:nth-child(5) .person{animation-delay:0.25s}
@@ -92,7 +110,7 @@ footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--line);ma
 .generation:nth-child(9) .person{animation-delay:0.45s}
 .generation:nth-child(11) .person{animation-delay:0.55s}
 .generation:nth-child(13) .person{animation-delay:0.65s}
-@media(max-width:640px){header{padding:2.5rem 1rem 2rem}header h1{font-size:1.6rem}main{padding:1.5rem 1rem}.generation{gap:0.6rem}.person{min-width:160px;padding:0.8rem}.child-card{min-width:120px;max-width:150px}.gen-label{display:none}.section{padding:1.2rem}.children-row{gap:0.3rem}}
+@media(max-width:640px){header{padding:2.5rem 1rem 2rem}header h1{font-size:1.6rem}main{padding:1.5rem 1rem}.generation{gap:0.6rem}.person{min-width:160px;padding:0.8rem}.gen-label{display:none}.section{padding:1.2rem}.sibling-group{min-width:160px;max-width:220px;padding:0.6rem}.sibling-group-header{font-size:0.78rem}.child-card{padding:0.4rem 0.55rem}.child-name{font-size:0.72rem}}
 </style>
 </head>
 <body>
@@ -103,7 +121,7 @@ footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--line);ma
 <p class="header-subtitle">Aiquara &amp; Amargosa, Bahia — séculos XVIII a XXI</p>
 <div class="stats-row">
 <div class="stat-item"><div class="stat-num">40</div><div class="stat-label">Pessoas</div></div>
-<div class="stat-item"><div class="stat-num">12</div><div class="stat-label">Filhos de Francisco</div></div>
+<div class="stat-item"><div class="stat-num">16</div><div class="stat-label">Netos de Tomaz</div></div>
 <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Gerações</div></div>
 </div>
 <div class="legend">
@@ -235,16 +253,17 @@ footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--line);ma
 </div>
 </div>
 
-<div class="connector-branch"></div>
+<div class="connector-tier-down"></div>
+<div class="cousin-bracket"></div>
 
-<!-- G5: 12 filhos de Francisco + Atanagilda (ordem: mais velha → mais nova) -->
-<div class="generation" style="flex-direction:column;align-items:center;gap:0">
-<span class="gen-label" style="position:static;transform:none;margin-bottom:0.5rem">12 Filhos</span>
-<div style="text-align:center;margin-bottom:0.5rem">
-<div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink)">Francisco Gramilo Sodré &amp; Atanagilda Odete dos Santos</div>
-<div style="font-size:0.72rem;color:var(--ink-muted);font-style:italic">Aiquara, Bahia</div>
-</div>
-<div class="children-row">
+<!-- G5: Netos de Tomaz — cousin tier: sibling groups side-by-side -->
+<div class="cousin-tier">
+
+<!-- Grupo 1: Francisco + Atanagilda → 12 filhos -->
+<div class="sibling-group">
+<div class="sibling-group-header">Francisco Gramilo Sodré &amp; Atanagilda</div>
+<div class="sibling-group-sub">Aiquara, Bahia · 12 filhos</div>
+<div class="sibling-group-children">
 <div class="child-card confirmed">
 <div class="child-num">1ª</div>
 <div class="child-name">Atanagilda Sodré Sampaio</div>
@@ -308,39 +327,42 @@ footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--line);ma
 </div>
 </div>
 
-<div class="connector-line"></div>
+<!-- Grupo 2: Arlindo (filho de Marcelo) + Noemia → 3 filhos -->
+<div class="sibling-group">
+<div class="sibling-group-header">Arlindo Gramilo Sodré &amp; Noemia</div>
+<div class="sibling-group-sub">Filho de Marcelo · 3 filhos</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed">
+<div class="child-num">1º</div>
+<div class="child-name">Arlenô Gramilo Sodré</div>
+<div class="child-note">Pais: Arlindo + Noemia</div>
+</div>
+<div class="child-card confirmed">
+<div class="child-num">2º</div>
+<div class="child-name">Marcelo Gramilo Sodré Neto</div>
+<div class="child-note">Pais: Arlindo + Noemia</div>
+</div>
+<div class="child-card confirmed">
+<div class="child-num">3º</div>
+<div class="child-name">Arlindo Gramilo Sodré Filho</div>
+<div class="child-note">Pais: Arlindo + Noemia</div>
+</div>
+</div>
+</div>
 
-<!-- G6: Netos — Ramo de Arlindo (filho de Marcelo) -->
-<div class="generation">
-<span class="gen-label">Netos</span>
-<div class="person confirmed">
-<div class="person-name">Arlindo Gramilo Sodré</div>
-<div class="person-detail"><strong>Pai:</strong> Marcelo Gramilo Sodré</div>
-<div class="person-detail"><strong>Cônjuge:</strong> Noemia Rocha Sodré</div>
-<span class="badge badge-confirmed">Confirmado</span>
+<!-- Grupo 3: José → 1 filho -->
+<div class="sibling-group">
+<div class="sibling-group-header">José Gramilo Sodré</div>
+<div class="sibling-group-sub">1 filho</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed">
+<div class="child-num">1º</div>
+<div class="child-name">José Gramilo Sodré Filho</div>
+<div class="child-note">CNPJ ativo em Manoel Vitorino/BA</div>
+</div>
 </div>
 </div>
 
-<div class="connector-branch"></div>
-
-<!-- G7: Bisnetos -->
-<div class="generation">
-<span class="gen-label">Bisnetos</span>
-<div class="person confirmed">
-<div class="person-name">Arlenô Gramilo Sodré</div>
-<div class="person-detail"><strong>Pais:</strong> Arlindo + Noemia</div>
-<span class="badge badge-confirmed">Confirmado</span>
-</div>
-<div class="person confirmed">
-<div class="person-name">Marcelo Gramilo Sodré Neto</div>
-<div class="person-detail"><strong>Pais:</strong> Arlindo + Noemia</div>
-<span class="badge badge-confirmed">Confirmado</span>
-</div>
-<div class="person confirmed">
-<div class="person-name">Arlindo Gramilo Sodré Filho</div>
-<div class="person-detail"><strong>Pais:</strong> Arlindo + Noemia</div>
-<span class="badge badge-confirmed">Confirmado</span>
-</div>
 </div>
 
 </section>
