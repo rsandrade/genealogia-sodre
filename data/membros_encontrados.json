@@ -1,0 +1,194 @@
+{
+  "familia": "Sodré de Aiquara/Amargosa, Bahia",
+  "pesquisa_data": "2026-06-10",
+  "fontes": [
+    "FamilySearch — Brazil, Bahia, Civil Registration, 1877-2021",
+    "FamilySearch — Brazil, Bahía, Catholic Church Records, 1598-2007",
+    "FamilySearch — Brazil, Baptisms, 1688-1935",
+    "parentesco.com.br — PDF SODRE2.pdf"
+  ],
+  "casal_principal": {
+    "nome": "Francisco Gramilo Sodré",
+    "conjuge": "Atanagilda Odete Sodré (nascida dos Santos?)",
+    "local": "Aiquara, Bahia",
+    "filhos_conhecidos": 12,
+    "observacao": "Nome 'Francisco Gramilo Sodré' não encontrado diretamente nos registros. Possivelmente o mesmo que 'Francisco Ludgero Vaz Sodre' encontrado em Amargosa."
+  },
+  "membros": [
+    {
+      "id": "1",
+      "nome": "Francisco Gramilo Sodré",
+      "sexo": "M",
+      "conjuge": "Atanagilda Odete Sodré",
+      "local": "Aiquara, Bahia",
+      "fonte": "Tradição oral",
+      "status": "não encontrado em registros digitais"
+    },
+    {
+      "id": "2",
+      "nome": "Atanagilda Odete Sodré",
+      "sexo": "F",
+      "conjuge": "Francisco Gramilo Sodré",
+      "local": "Aiquara, Bahia",
+      "fonte": "Tradição oral",
+      "status": "não encontrada em registros digitais"
+    },
+    {
+      "id": "3",
+      "nome": "Horácio Vaz Sodré",
+      "sexo": "M",
+      "pai": "Francisco Gramilo Sodré (provável)",
+      "mae": "Atanagilda Odete Sodré (provável)",
+      "conjuge": "Adelina Maria de Jesus",
+      "filhos": ["Amélia Vaz Padri"],
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Bahia, Civil Registration, 1877-2021",
+      "detalhes": "Aparece como 'Father Of Bride' em registro de casamento em Amargosa. Sobrenome Vaz confirma ligação familiar."
+    },
+    {
+      "id": "4",
+      "nome": "Esmeraldo Vaz Sodré",
+      "sexo": "M",
+      "pai": "Francisco Gramilo Sodré (provável)",
+      "mae": "Atanagilda Odete Sodré (provável)",
+      "conjuge": "Florinda de Andrade",
+      "filhos": ["Olympio Sodré", "Anizio"],
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Bahía, Catholic Church Records, 1598-2007",
+      "detalhes": "Confirmado como pai de Olympio Sodré (batismo 1914, Amargosa). Sobrenome Vaz."
+    },
+    {
+      "id": "5",
+      "nome": "José Virgilio Vaz Sodré",
+      "sexo": "M",
+      "pai": "Francisco Gramilo Sodré (provável)",
+      "mae": "Atanagilda Odete Sodré (provável)",
+      "local": "Bahia",
+      "fonte": "FamilySearch — Brazil, Bahía, Catholic Church Records, 1598-2007",
+      "detalhes": "Aparece como 'Other' (possível padrinho/testemunha) em registros católicos da Bahia. Sobrenome Vaz."
+    },
+    {
+      "id": "6",
+      "nome": "Quintino Sodré Tolentino",
+      "sexo": "M",
+      "pai": "Francisco Gramilo Sodré (provável)",
+      "mae": "Atanagilda Odete Sodré (provável)",
+      "local": "Bahia",
+      "fonte": "FamilySearch — Brazil, Bahía, Catholic Church Records, 1598-2007",
+      "detalhes": "Aparece como 'Other' em registros católicos da Bahia."
+    },
+    {
+      "id": "7",
+      "nome": "Olympio Sodré",
+      "sexo": "M",
+      "pai": "Esmeraldo Vaz Sodré",
+      "mae": "Florinda de Andrade",
+      "nascimento": "18 novembro 1913",
+      "batismo": "14 novembro 1914, Amargosa, Bahia",
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Bahía, Catholic Church Records, 1598-2007",
+      "detalhes": "NETO de Francisco Gramilo Sodré (via Esmeraldo). Registro de batismo com data exata."
+    },
+    {
+      "id": "8",
+      "nome": "Francisco Ludgero Vaz Sodre",
+      "sexo": "M",
+      "conjuge": "Olympia Flavia de Miranda Sodre",
+      "filhos": ["Jesuina Vaz Sodre (n. 1891)"],
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935",
+      "detalhes": "OUTRO 'Francisco Vaz Sodre' em Amargosa! Pode ser parente próximo de Francisco Gramilo — irmão, primo, ou possivelmente a mesma pessoa com nome do meio diferente (Gramilo vs Ludgero)."
+    },
+    {
+      "id": "9",
+      "nome": "Jesuina Vaz Sodre",
+      "sexo": "F",
+      "pai": "Francisco Ludgero Vaz Sodre",
+      "mae": "Olympia Flavia de Miranda Sodre",
+      "nascimento": "19 janeiro 1891",
+      "batismo": "7 maio 1893, Amargosa, Bahia",
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935"
+    },
+    {
+      "id": "10",
+      "nome": "Laurinda Vaz Sodré",
+      "sexo": "F",
+      "conjuge": "Firmino Vaz Sodré",
+      "filhos": ["José Vaz Sodré (n. 1900)"],
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935",
+      "detalhes": "Casal 'Vaz Sodré' em Amargosa — possivelmente do mesmo ramo familiar."
+    },
+    {
+      "id": "11",
+      "nome": "Firmino Vaz Sodré",
+      "sexo": "M",
+      "conjuge": "Laurinda Vaz Sodré",
+      "filhos": ["José Vaz Sodré (n. 1900)"],
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935"
+    },
+    {
+      "id": "12",
+      "nome": "Luiz Vaz Sodré",
+      "sexo": "M",
+      "nascimento": "~1870",
+      "batismo": "setembro 1890, Amargosa, Bahia",
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935",
+      "detalhes": "Mais um 'Vaz Sodré' em Amargosa. Data de nascimento sugere que pode ser da geração de Francisco Gramilo."
+    },
+    {
+      "id": "13",
+      "nome": "Adelaide Sodré",
+      "sexo": "F",
+      "pai": "Manoel Sodré",
+      "nascimento": "~1867",
+      "morte": "3 dezembro 1907, Amargosa, Bahia",
+      "local": "Amargosa, Bahia",
+      "fonte": "FamilySearch — Brazil, Bahia, Civil Registration, 1877-2021",
+      "detalhes": "Manoel Sodré como pai — possível ascendente do ramo Sodré em Amargosa."
+    },
+    {
+      "id": "14",
+      "nome": "Tomaz Gramilo Sodré",
+      "sexo": "M",
+      "local": "Amargosa, Bahia (provável)",
+      "fonte": "Tradição oral — possível avô paterno de Francisco Gramilo Sodré",
+      "status": "NÃO encontrado em registros digitais",
+      "detalhes": "Segundo tradição oral, seria avô paterno. Nascimento estimado ~1840-1860."
+    },
+    {
+      "id": "15",
+      "nome": "Clauderio Dino Sodre",
+      "sexo": "M",
+      "conjuge": "Carolina Maria Sodré",
+      "filhos": ["Francisco Sodre"],
+      "local": "Rio de Janeiro (registro)",
+      "fonte": "FamilySearch — Brazil, Rio de Janeiro, Civil Registration",
+      "detalhes": "Nome 'Clauderio' incomum — possivelmente parente distante. Tem filho chamado Francisco Sodre."
+    }
+  ],
+  "padrao_vaz_sodre": {
+    "descricao": "O sobrenome composto 'Vaz Sodré' aparece em múltiplos registros de Amargosa, conectando vários membros da família:",
+    "membros_com_vaz": [
+      "Horácio Vaz Sodré",
+      "Esmeraldo Vaz Sodré",
+      "José Virgilio Vaz Sodré",
+      "Francisco Ludgero Vaz Sodre",
+      "Laurinda Vaz Sodré",
+      "Firmino Vaz Sodré",
+      "Luiz Vaz Sodré",
+      "Jesuina Vaz Sodre"
+    ],
+    "hipotese": "O sobrenome 'Vaz' pode ser de origem materna (linha de Atanagilda) ou um sobrenome composto herdado do avô Tomaz. Francisco Gramilo Sodré pode ser o mesmo 'Francisco Ludgero Vaz Sodre' — 'Gramilo' pode ser apelido ou nome do meio alternativo."
+  },
+  "proximos_passos": [
+    "Acesso manual ao FamilySearch — clicar nos registros de Horácio, Esmeraldo, José Virgilio para ver registos originais digitalizados",
+    "APEB — contactar arquivo@fpc.ba.gov.br por inventários de Tomaz Gramilo Sodré e Francisco Gramilo Sodré",
+    "Cartório de Amargosa — solicitar certidões de óbito e casamento",
+    "Verificar se 'Vaz' é sobrenome materno — buscar 'Atanagilda Vaz'",
+    "FamilySearch Tree — verificar se alguém já montou a árvore colaborativa"
+  ]
+}

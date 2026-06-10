@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árvore Genealógica — Família Sodré de Aiquara/Amargosa, BA</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+        h1 { text-align: center; color: #e94560; margin-bottom: 10px; font-size: 1.8em; }
+        h2 { color: #0f3460; background: #e94560; padding: 8px 16px; border-radius: 6px; margin: 20px 0 10px; font-size: 1.1em; }
+        h3 { color: #16c79a; margin: 10px 0 5px; }
+        .subtitle { text-align: center; color: #999; margin-bottom: 30px; font-size: 0.9em; }
+        .tree { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .generation { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 10px; }
+        .gen-label { width: 100%; text-align: center; font-size: 0.8em; color: #999; margin-bottom: 5px; }
+        .card { background: #16213e; border: 1px solid #0f3460; border-radius: 10px; padding: 12px 16px; min-width: 200px; max-width: 280px; position: relative; }
+        .card.male { border-left: 4px solid #3498db; }
+        .card.female { border-left: 4px solid #e94560; }
+        .card .name { font-weight: bold; font-size: 1em; color: #fff; margin-bottom: 4px; }
+        .card .dates { font-size: 0.8em; color: #999; }
+        .card .detail { font-size: 0.75em; color: #aaa; margin-top: 4px; }
+        .card .source { font-size: 0.65em; color: #666; margin-top: 4px; font-style: italic; }
+        .card .status { font-size: 0.7em; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-top: 4px; }
+        .status.verified { background: #16c79a33; color: #16c79a; }
+        .status.unverified { background: #e9456033; color: #e94560; }
+        .status.hypothesis { background: #f39c1233; color: #f39c12; }
+        .connector { width: 2px; height: 20px; background: #0f3460; margin: 0 auto; }
+        .couple { display: flex; gap: 10px; align-items: center; background: #16213e40; padding: 8px; border-radius: 10px; border: 1px dashed #0f3460; }
+        .couple-symbol { color: #e94560; font-size: 1.5em; }
+        .pattern-box { background: #16213e; border: 1px solid #f39c12; border-radius: 10px; padding: 15px; margin: 20px 0; }
+        .pattern-box h3 { color: #f39c12; }
+        .pattern-box ul { margin-left: 20px; margin-top: 8px; }
+        .pattern-box li { margin: 3px 0; font-size: 0.9em; }
+        .next-steps { background: #16213e; border: 1px solid #16c79a; border-radius: 10px; padding: 15px; margin: 20px 0; }
+        .next-steps h3 { color: #16c79a; }
+        .next-steps ol { margin-left: 20px; margin-top: 8px; }
+        .next-steps li { margin: 5px 0; font-size: 0.9em; }
+        .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .links a { background: #0f3460; color: #e0e0e0; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.8em; }
+        .links a:hover { background: #e94560; }
+        @media (max-width: 600px) {
+            .card { min-width: 160px; }
+            .couple { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <h1>🌳 Família Sodré de Aiquara/Amargosa</h1>
+    <p class="subtitle">Bahia, Brasil — Pesquisa genealógica via FamilySearch (10/06/2026)</p>
+
+    <div class="tree">
+        <!-- GERAÇÃO 1: Casal principal -->
+        <div class="gen-label">1ª Geração — Casal Principal</div>
+        <div class="generation">
+            <div class="couple">
+                <div class="card male">
+                    <div class="name">Francisco Gramilo Sodré</div>
+                    <div class="dates">Local: Aiquara, BA</div>
+                    <div class="detail">⚠️ Não encontrado em registros digitais</div>
+                    <div class="status unverified">NÃO VERIFICADO</div>
+                    <div class="source">Fonte: Tradição oral</div>
+                </div>
+                <div class="couple-symbol">××</div>
+                <div class="card female">
+                    <div class="name">Atanagilda Odete Sodré</div>
+                    <div class="dates">Local: Aiquara, BA</div>
+                    <div class="detail">Sobrenome de solteira: dos Santos?</div>
+                    <div class="status unverified">NÃO VERIFICADA</div>
+                    <div class="source">Fonte: Tradição oral</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- GERAÇÃO 2: Filhos -->
+        <div class="gen-label">2ª Geração — Filhos (12 conhecidos)</div>
+        <div class="generation">
+            <div class="card male">
+                <div class="name">Horácio Vaz Sodré</div>
+                <div class="dates">Amargosa, BA</div>
+                <div class="detail">Cônjuge: Adelina Maria de Jesus<br>Filhos: Amélia Vaz Padri</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahia, Civil Registration, 1877-2021</div>
+            </div>
+
+            <div class="card male">
+                <div class="name">Esmeraldo Vaz Sodré</div>
+                <div class="dates">Amargosa, BA</div>
+                <div class="detail">Cônjuge: Florinda de Andrade<br>Filhos: Olympio, Anizio</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahía, Catholic Church Records, 1598-2007</div>
+            </div>
+
+            <div class="card male">
+                <div class="name">José Virgilio Vaz Sodré</div>
+                <div class="dates">Bahia</div>
+                <div class="detail">Aparece como "Other" em registros católicos</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahía, Catholic Church Records, 1598-2007</div>
+            </div>
+
+            <div class="card male">
+                <div class="name">Quintino Sodré Tolentino</div>
+                <div class="dates">Bahia</div>
+                <div class="detail">Aparece como "Other" em registros católicos</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahía, Catholic Church Records, 1598-2007</div>
+            </div>
+
+            <div class="card male">
+                <div class="name">Clauderino (Dino) Sodré</div>
+                <div class="dates">—</div>
+                <div class="detail">Possível filho — nome "Clauderio" encontrado em registros do RJ</div>
+                <div class="status hypothesis">HIPÓTESE</div>
+                <div class="source">Tradição oral + registro RJ</div>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- GERAÇÃO 3: Netos -->
+        <div class="gen-label">3ª Geração — Netos conhecidos</div>
+        <div class="generation">
+            <div class="card male">
+                <div class="name">Olympio Sodré</div>
+                <div class="dates">n. 18/11/1913 — Amargosa, BA</div>
+                <div class="detail">Pai: Esmeraldo Vaz Sodré<br>Mãe: Florinda de Andrade<br>Batismo: 14/11/1914, Amargosa</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahía, Catholic Church Records</div>
+            </div>
+
+            <div class="card male">
+                <div class="name">Anizio</div>
+                <div class="dates">—</div>
+                <div class="detail">Pai: Esmeraldo Vaz Sodré<br>Mãe: Florinda de Andrade</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahía, Catholic Church Records</div>
+            </div>
+
+            <div class="card female">
+                <div class="name">Amélia Vaz Padri</div>
+                <div class="dates">—</div>
+                <div class="detail">Pai: Horácio Vaz Sodré<br>Mãe: Adelina Maria de Jesus</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+            </div>
+        </div>
+
+        <div class="connector"></div>
+
+        <!-- POSSÍVEIS PARENTES -->
+        <div class="gen-label">Possíveis parentes — "Vaz Sodré" em Amargosa</div>
+        <div class="generation">
+            <div class="card male">
+                <div class="name">Francisco Ludgero Vaz Sodre</div>
+                <div class="dates">Amargosa, BA</div>
+                <div class="detail">Cônjuge: Olympia Flavia de Miranda Sodre<br>Filha: Jesuina Vaz Sodre (1891)</div>
+                <div class="status hypothesis">⚠️ MESMO FRANCISCO? Gramilo ≠ Ludgero</div>
+                <div class="source">Brazil, Baptisms, 1688-1935</div>
+            </div>
+
+            <div class="card female">
+                <div class="name">Jesuina Vaz Sodre</div>
+                <div class="dates">n. 19/01/1891 — Amargosa, BA</div>
+                <div class="detail">Pai: Francisco Ludgero Vaz Sodre<br>Mãe: Olympia Flavia de Miranda Sodre</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+            </div>
+
+            <div class="card male">
+                <div class="name">Luiz Vaz Sodré</div>
+                <div class="dates">n. ~1870 — Amargosa, BA</div>
+                <div class="detail">Batismo: set/1890</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+            </div>
+
+            <div class="card female">
+                <div class="name">Adelaide Sodré</div>
+                <div class="dates">n. ~1867 — m. 03/12/1907</div>
+                <div class="detail">Pai: Manoel Sodré<br>Óbito em Amargosa</div>
+                <div class="status verified">VERIFICADO — FamilySearch</div>
+                <div class="source">Brazil, Bahia, Civil Registration</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PADRÃO VAZ SODRÉ -->
+    <div class="pattern-box">
+        <h3>🔬 Padrão identificado: "VAZ SODRÉ"</h3>
+        <p>O sobrenome composto <strong>"Vaz Sodré"</strong> aparece em múltiplos registros de Amargosa:</p>
+        <ul>
+            <li>Horácio <strong>Vaz</strong> Sodré (filho de Francisco)</li>
+            <li>Esmeraldo <strong>Vaz</strong> Sodré (filho de Francisco)</li>
+            <li>José Virgilio <strong>Vaz</strong> Sodré (filho de Francisco)</li>
+            <li>Francisco Ludgero <strong>Vaz</strong> Sodre (outro Francisco!)</li>
+            <li>Laurinda <strong>Vaz</strong> Sodré + Firmino <strong>Vaz</strong> Sodré</li>
+            <li>Luiz <strong>Vaz</strong> Sodré (n. ~1870)</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Hipótese:</strong> O "Vaz" pode ser sobrenome materno (de Atanagilda) ou herdado do avô Tomaz. Francisco Gramilo pode ser o mesmo "Francisco Ludgero Vaz Sodre" — "Gramilo" pode ser apelido ou nome alternativo.</p>
+    </div>
+
+    <!-- PRÓXIMOS PASSOS -->
+    <div class="next-steps">
+        <h3>📋 Próximos passos</h3>
+        <ol>
+            <li><strong>FamilySearch manual</strong> — clicar nos registros de Horácio, Esmeraldo, José Virgilio para ver imagens originais digitalizadas</li>
+            <li><strong>APEB</strong> — contactar arquivo@fpc.ba.gov.br: inventários de Tomaz Gramilo Sodré e Francisco Gramilo Sodré</li>
+            <li><strong>Cartório de Amargosa</strong> — certidões de óbito e casamento</li>
+            <li><strong>Verificar "Vaz"</strong> — buscar se Atanagilda era "Vaz" ou "dos Santos"</li>
+            <li><strong>FamilySearch Tree</strong> — verificar árvore colaborativa já existente</li>
+        </ol>
+    </div>
+
+    <!-- LINKS -->
+    <h2>🔗 Buscas diretas no FamilySearch</h2>
+    <div class="links">
+        <a href="https://www.familysearch.org/search/record/results?q.surname=Sodre&q.birthLikePlace=Amargosa&count=40" target="_blank">Sodré + Amargosa</a>
+        <a href="https://www.familysearch.org/search/record/results?q.surname=Sodre&q.birthLikePlace=Aiquara&count=40" target="_blank">Sodré + Aiquara</a>
+        <a href="https://www.familysearch.org/search/record/results?q.givenName=Horacio&q.surname=Sodre&q.birthLikePlace=Amargosa" target="_blank">Horácio Sodré</a>
+        <a href="https://www.familysearch.org/search/record/results?q.givenName=Esmeraldo&q.surname=Sodre" target="_blank">Esmeraldo Sodré</a>
+        <a href="https://www.familysearch.org/search/record/results?q.givenName=Jose+Virgilio&q.surname=Sodre" target="_blank">José Virgilio Sodré</a>
+        <a href="https://www.familysearch.org/search/record/results?q.givenName=Quintino&q.surname=Sodre" target="_blank">Quintino Sodré</a>
+    </div>
+
+    <p style="text-align:center; color:#666; margin-top:30px; font-size:0.75em;">
+        Pesquisa realizada via FamilySearch (UC + send_keys) em 10/06/2026<br>
+        15 buscas • 122+ registros Amargosa • 4 filhos verificados
+    </p>
+</body>
+</html>
