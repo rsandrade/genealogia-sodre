@@ -47,11 +47,11 @@
 - Aparece como "Other" em registros
 - 🔗 **Significância:** Quintino é outro dos 12 filhos conhecidos.
 
-### 6. Jesuina Vaz Sodre — Batismo em Amargosa
+### 6. Jesuina Vaz Sodré — Batismo em Amargosa
 - **Cristão:** 7 maio 1893 / Nascimento: 19 janeiro 1891
-- **Pais:** **Francisco Ludgero Vaz Sodre** + **Olympia Flavia de Miranda Sodre**
+- **Pais:** **Francisco Ludgero Vaz Sodré** + **Olympia Flavia de Miranda Sodré**
 - **Coleção:** Brazil, Baptisms, 1688-1935
-- 🔗 **Significância:** "Francisco Ludgero Vaz Sodre" — outro Francisco Sodré com sobrenome Vaz! Possível parente próximo (irmão? primo?) de Francisco Gramilo Sodré.
+- 🔗 **Significância:** "Francisco Ludgero Vaz Sodré" — **NÃO é o mesmo que Francisco Gramilo Sodré** (nomes do meio diferentes: Ludgero ≠ Gramilo). Possível parente do ramo Vaz Sodré em Amargosa, mas pessoa distinta.
 
 ### 7. José Vaz Sodré — Batismo
 - **Cristão:** 31 janeiro 1909 / Nascimento: 30 janeiro 1900
@@ -68,10 +68,11 @@
 - **Pais:** Manoel Sodré
 - 🔗 **Significância:** "Manoel Sodré" como pai — possível ascendente do ramo.
 
-### 10. Clauderio Dino Sodre — Rio de Janeiro
+### 10. Clauderio Dino Sodré — Santa Catarina
 - **Cônjuge:** Carolina Maria Sodré
-- **Filhos:** Francisco Sodre
-- **Coleção:** Brazil, Rio de Janeiro, Civil Registration
+- **Filhos:** Francisco Sodré
+- **Falecimento:** 15/12/1947, Santa Catarina
+- **Coleção:** Brazil, Santa Catarina, Civil Registration, 1850-1999
 - 🔗 **Significância:** "Clauderio" é nome incomum — possivelmente parente distante.
 
 ---
@@ -82,12 +83,12 @@ O sobrenome **"Vaz Sodré"** aparece consistentemente nos registros:
 - **Horácio Vaz Sodré** (filho de Francisco Gramilo)
 - **Esmeraldo Vaz Sodré** (filho de Francisco Gramilo)
 - **José Virgilio Vaz Sodré** (filho de Francisco Gramilo)
-- **Francisco Ludgero Vaz Sodre** (possível parente — outro Francisco!)
+- **Francisco Ludgero Vaz Sodré** (parente do ramo Vaz Sodré — **pessoa distinta** de Francisco Gramilo Sodré)
 - **Laurinda Vaz Sodré** + **Firmino Vaz Sodré** (casal em Amargosa)
 - **Luiz Vaz Sodré** (Amargosa, n. ~1870)
-- **Jesuina Vaz Sodre** (filha de Francisco Ludgero)
+- **Jesuina Vaz Sodré** (filha de Francisco Ludgero)
 
-**Hipótese:** O sobrenome "Vaz" pode vir do lado materno (Atanagilda) ou pode ser um sobrenome de família composto. Francisco Gramilo Sodré pode ser o mesmo que "Francisco Ludgero Vaz Sodre" ou um parente próximo.
+**Conclusão:** Francisco Ludgero Vaz Sodré e Francisco Gramilo Sodré são **pessoas distintas** (nomes do meio diferentes: Ludgero ≠ Gramilo). O sobrenome "Vaz" é provavelmente um sobrenome de família composto recorrente no ramo Sodré de Amargosa, sem relação direta com Atanagilda.
 
 ---
 
