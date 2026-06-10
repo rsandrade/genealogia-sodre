@@ -1,128 +1,223 @@
-# Relatório Genealógico — Família Sodré de Aiquara/Amargosa, Bahia
+# Pesquisa Genealógica: Família Gramilo Sodré
+## Aiquara, Bahia — Relatório Completo (FamilySearch + Web)
 
-## Pesquisa realizada em 10 de junho de 2026
+**Data:** 10 de junho de 2026
+**Pesquisador:** Hermes Agent (assistente de Ricardo Sodré Andrade)
 
-### Fontes consultadas
+---
+
+## 1. Dados Conhecidos (fornecidos pelo pesquisador)
+
+- **Nome:** Francisco Gramilo Sodré
+- **Cônjuge:** Atanagilda Odete dos Santos Sodré
+- **Naturalidade:** Ibitupa/BA (distrito de Ibicuí)
+- **Residência:** Fazenda Santa Terezinha, Aiquara, Bahia
+- **Pai:** Marcelo Gramilo Sodré (natural de Montes Claros/MG)
+- **Mãe:** Rita Rosa Sodré (apelido: "Roxa")
+- **Sogro:** Gervásio Eusébio dos Santos
+- **Sogra:** Maria Aleluia dos Santos
+- **Nº de filhos:** 12 (informação oral)
+
+### 6 irmãos de Francisco (filhos de Marcelo + Rita Rosa)
+
+- **Francisco Gramilo Sodré** — 12 filhos com Atanagilda
+- **Arlindo Gramilo Sodré** — casou com Noemia Rocha Sodré; 3 filhos
+- **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
+- **Otávia Rosa Sodré Bispo** — casou com Eustáquio Eusébio Bispo; 10 filhos
+- **Elisa Gramilo Sodré** — sobrenome casada desconhecido
+- **Isabel Gramilo Sodré** — sobrenome casada desconhecido
+
+### Avós paternos prováveis
+
+- **Tomaz Gramilo Sodré** + **Teodora Julia da Cruz** — casamento ~1891, Amargosa/BA
+
+---
+
+## 2. Registros FamilySearch — Dados Extraídos (10/06/2026)
+
+### ⭐ Registros de alta relevância (diretamente ligados à região)
+
+#### Esmeraldo Vaz Sodré + Florinda de Andrade (Amargosa)
+- **Filhos confirmados:** Olímpio, Luiz Vaz, Maria do Carmo
+- **Luiz Vaz Sodré** — batismo 09/1890, Bahia; nascimento ~1870
+- **Olímpio Sodré** — n. 18/11/1913, batismo 14/11/1914, Amargosa
+- **Maria do Carmo Sodré** — casamento 15/02/1950, Amargosa/Tapera; nascimento ~1930
+- Fonte: Brazil, Bahia, Civil Registration + Catholic Church Records
+
+#### Horácio Vaz Sodré
+- Cônjuge: Adelina Maria de Jesus
+- Filha: Amélia Vaz Padri (noiva em casamento)
+- Grafia alternativa: Horacio Vay Sodré
+- Fonte: Brazil, Bahia, Civil Registration, 1877-2021
+
+#### José Virgílio Vaz Sodré
+- Registro: "Other" em Catholic Church Records (Bahia)
+- Registro parcial — sem dados adicionais visíveis
+- Fonte: Brazil, Bahía, Catholic Church Records, 1598-2007
+
+#### Quintino Sodré Tolentino
+- Registro: "Other" em Catholic Church Records (Bahia)
+- Grafia alternativa: Tollentino
+- Fonte: Brazil, Bahía, Catholic Church Records, 1598-2007
+
+#### Floriaco Ferreira Sodré
+- Nascimento: ~1890, Amargosa/BA
+- Casamento: 09/02/1912, Amargosa/BA
+- Mãe: Maria Lucinda de Jesus
+- Fonte: Brazil, Bahia, Civil Registration, 1877-2021
+
+#### João Gregorio Sodré
+- Nascimento: ~1906
+- Casamento: 1933, Amargosa/Tapera/BA
+- Pais: Antonio Victor Sodré + Adelia Maria Sódre
+- Cônjuge: Maria Magdalena Lopes
+- Fonte: Brazil, Bahia, Civil Registration, 1877-2021
+
+#### Joselito Ribeiro Sodré
+- Nascimento: 30/07/1953, Aiquara/BA
+- Falecimento: 01/03/1995, São Paulo/SP
+- Sepultamento: Cemitério de Aparecida, Monte Alto/SP
+- Fonte: Brazil, São Paulo, Civil Registration, 1925-2023
+
+#### Luciana Caetana Sodré
+- Local: Amargosa/Tapera, BA
+- Pais: Manoel Caetano Sodré + Maria Paulina de Jesus
+- Fonte: Brazil, Bahia, Civil Registration, 1877-2021
+
+#### Francisco Ludgero Vaz Sodré (≠ Francisco Gramilo Sodré!)
+- Cônjuge: Olympia Flavia de Miranda Sodré
+- Filha: Jesuina Vaz Sodré (n. 19/01/1891, batismo 07/05/1893, Amargosa)
+- **PESSOA DISTINTA** de Francisco Gramilo Sodré
+- Fonte: FamilySearch — Brazil, Baptisms, 1688-1935
+
+#### Clauderio Dino Sodré
+- Nascimento: ~1913
+- Cônjuge: Carolina Maria Sodré
+- Filho: Francisco Sodré
+- Falecimento: 15/12/1947, Santa Catarina
+- Fonte: Brazil, Santa Catarina, Civil Registration, 1850-1999
+
+### 🔗 Conexões familiares emergentes
+
+- **Sobrenome "Vaz Sodré"** em Horácio, José Virgílio e Luiz → provável ramo comum
+- **Esmeraldo Sodré** = parente de Francisco Gramilo Sodré? (mesmo sobrenome + Amargosa) → investigar
+- **Joselito Ribeiro Sodré** — Aiquara/BA, mesma cidade → investigar
+- **Eustáquio Eusébio Bispo** ↔ **Gervásio Eusébio dos Santos** → sobrenome "Eusébio" sugere parentesco
+
+---
+
+## 3. Membros da família encontrados na web
+
+- **Francisco Gramilo Sodré Filho** — Diário Oficial Aiquara (Lei 012/2014); professor Informática, PMA; Instagram: @franciscogramilosodre
+- **José Gramilo Sodré Filho** — CNPJ 35.723.982/0001-24 (ativo, Manoel Vitorino/BA)
+- **Ivan Gramilo Sodré** — listagem web, Jequié/BA
+- **Walter Gramilo Sodré** — Deezer (compositor, "Nunca Mais Vou Escrever")
+- **Jailson Gramilo Sodré** — Deezer (compositor, mesmo crédito)
+- **Atanagilda Sodré Sampaio** — TJBA (Agravo 0015000-35.2017.8.05.0000); possível = Atanagilda Odete (sobrenome Sampaio = segundo casamento?)
+- **Ticiane Sena de Santana Sodré** — TJBA (mesmo processo); possível nora/parente
+
+---
+
+## 4. Linhagem histórica dos Sodré na Bahia
+
+### Tronco baiano: Jerônimo Sodré Pereira
+
+- **Origem:** Segundo-cadete da casa dos Sodré Pereira de Santarém, Portugal
+- **Migração:** Fixou-se na Bahia no séc. XVIII (~1661-1700)
+- **1º casamento:** Francisca de Aragão
+- **2º casamento:** Maria de Azevedo (irmã inteira do Padre Antônio Vieira)
+- **Local:** Solar do Sodré, Salvador, BA (onde faleceu Castro Alves)
+
+### Descendentes notórios
+
+- Francisco Pereira Sodré (Barão de Alagoinhas) — 1818-1882
+- Francisco Maria Sodré Pereira — 1836-1903, Gov. Pernambuco, Ministro da Justiça
+- Jerônimo Sodré Pereira (neto) — 1831-1901, abolicionista notável
+- Cap. José Joaquim Sodré ("Zeca Sodré") — séc. XIX, Barra do Mendes/Ipupiara
+
+---
+
+## 5. Referências APEB — Inventários Sodré
+
+**Arquivo Público do Estado da Bahia (APEB)**
+- Endereço: Ladeira da Quinta do Tanque, s/n — Baixa de Quintas, Salvador, BA
+- Catálogo: http://www.atom.fpc.ba.gov.br (indisponível remotamente)
+- Contato: arquivo@fpc.ba.gov.br | (71) 3117-6100
+
+### Nomes a buscar nos inventários (comarca de Amargosa)
+
+1. Tomaz Gramilo Sodré (casamento ~1891)
+2. Marcelo Gramilo Sodré
+3. Gervásio Eusébio dos Santos
+4. Horácio Vaz Sodré
+5. José Virgílio Vaz Sodré
+6. Esmeraldo Vaz Sodré
+7. Francisco Gramilo Sodré
+8. Atanagilda Odete dos Santos Sodré
+
+---
+
+## 6. Hipótese da árvore genealógica (atualizada com FS)
+
+```
+Jerônimo Sodré Pereira (BA, séc. XVIII)
+└── [ramo baiano — 200+ anos de lacuna documental]
+    └── Tomaz Gramilo Sodré + Teodora Julia da Cruz (~1891, Amargosa) [HIPOTÉTICO]
+        └── Marcelo Gramilo Sodré (Montes Claros/MG) + Rita Rosa Sodré ("Roxa")
+            ├── Francisco Gramilo Sodré (Ibitupa/BA) + Atanagilda Odete dos Santos
+            │   ├── 12 filhos (ver lista completa no relatório principal)
+            │   └── Propriedade: Fazenda Santa Terezinha, Aiquara
+            ├── Arlindo Gramilo Sodré + Noemia Rocha Sodré [3 filhos]
+            ├── José "Zeca" Gramilo Sodré [9 filhos c/ Sudré = erro cartorário]
+            ├── Otávia Rosa Sodré Bispo + Eustáquio Eusébio Bispo [10 filhos]
+            ├── Elisa Gramilo Sodré [casada, sobrenome desconhecido]
+            └── Isabel Gramilo Sodré [casada, sobrenome desconhecido]
+
+Gervásio Eusébio dos Santos + Maria Aleluia dos Santos (avós maternos)
+└── Atanagilda Odete dos Santos ← casou com Francisco
+
+Ramo Vaz Sodré (Amargosa, FamilySearch):
+└── Esmeraldo Vaz Sodré + Florinda de Andrade
+    ├── Luiz Vaz Sodré (n.~1870)
+    ├── Olímpio Sodré (n.1913)
+    └── Maria do Carmo Sodré (n.~1930)
+└── Horácio Vaz Sodré + Adelina Maria de Jesus
+└── José Virgílio Vaz Sodré
+└── Francisco Ludgero Vaz Sodré + Olympia Flavia de Miranda Sodré (≠ Francisco Gramilo)
+    └── Jesuina Vaz Sodré (n.19/01/1891, Amargosa)
+
+Outros registros FS (Amargosa):
+└── [Antonio Victor Sodré + Adelia Maria Sódre] → João Gregorio Sodré (n.~1906)
+└── [Manoel Caetano Sodré + Maria Paulina de Jesus] → Luciana Caetana Sodré
+└── Floriaco Ferreira Sodré (n.~1890, mãe: Maria Lucinda de Jesus)
+└── Joselito Ribeiro Sodré (n.1953 Aiquara, f.1995 SP)
+└── Clauderio Dino Sodré (n.~1913, f.1947 SC)
+```
+
+⚠️ Conexões entre os ramos são HIPOTÉTICAS.
+O sobrenome "Vaz Sodré" em Horácio, José Virgílio e Luiz sugere parentesco.
+A ligação Tomaz→Marcelo é baseada em memória oral.
+
+---
+
+## 7. Fontes consultadas
 
 | Fonte | Status | Resultado |
 |-------|--------|-----------|
-| FamilySearch (UC + login) | ✅ Login OK | 15 buscas, 122+ registros Amargosa |
-| FamilySearch API REST | ❌ Bloqueado Incapsula | 403/503 |
-| MyHeritage | ❌ Timeout | Site bloqueia headless |
-| APEB AtoM | ❌ Timeout remoto | Catálogo indisponível |
-| parentesco.com.br | ✅ | PDF SODRE2.pdf baixado (1.5MB) |
-| sodre.blogs.sapo.pt | ✅ | Referências históricas ao sobrenome |
+| Web search (DuckDuckGo) | ✅ | 7 membros; linhagem histórica |
+| Parentesco.com.br (PDF) | ✅ | Ensaio Sodré completo |
+| FamilySearch (15 buscas) | ✅ | 14 registros relevantes Amargosa/BA |
+| MyHeritage | ❌ | Timeout |
+| APEB AtoM | ❌ | Indisponível remotamente |
+| TJBA (Escavador) | ⚠️ | Processo Atanagilda Sodré Sampaio |
 
 ---
 
-## Descobertas principais
+## 8. Próximos passos
 
-### 1. Olympio Sodré — Batismo em Amargosa
-- **Cristão:** 14 novembro 1914, Amargosa, Bahia
-- **Nascimento:** 18 novembro 1913
-- **Pais:** **Esmeraldo Sodré** + **Florinda de Andrade**
-- **Coleção:** Brazil, Bahía, Catholic Church Records, 1598-2007
-- 🔗 **Significância:** Esmeraldo Sodré é um dos 12 filhos de Francisco Gramilo Sodré × Atanagilda
-
-### 2. Horácio Vaz Sodré — Casamento em Amargosa
-- **Pai da Noiva** (Father Of Bride)
-- **Coleção:** Brazil, Bahia, Civil Registration, 1877-2021
-- **Cônjuge:** Adelina Maria de Jesus
-- **Filhos:** Amélia Vaz Padri
-- 🔗 **Significância:** Horácio Vaz Sodré é um dos 12 filhos. O sobrenome "Vaz" (ou Vaz) aparece em **José Virgilio Vaz Sodré** também.
-
-### 3. Esmeraldo Vaz Sodré — Registros de Igreja Católica
-- **Cônjuge:** Florinda de Andrade
-- **Filhos:** Anizio (além de Olympio)
-- **Coleção:** Brazil, Bahía, Catholic Church Records, 1598-2007
-- 🔗 **Significância:** Confirma Esmeraldo como "Vaz Sodré" — o sobrenome "Vaz" é um marcador familiar.
-
-### 4. José Virgilio Vaz Sodré — Registros de Igreja Católica
-- **Coleção:** Brazil, Bahía, Catholic Church Records, 1598-2007
-- Aparece como "Other" em registros (padrinho/testemunha?)
-- 🔗 **Significância:** O sobrenome "Vaz Sodré" conecta José Virgilio ao mesmo ramo que Horácio e Esmeraldo.
-
-### 5. Quintino Sodré Tolentino — Registros de Igreja Católica
-- **Coleção:** Brazil, Bahía, Catholic Church Records, 1598-2007
-- Aparece como "Other" em registros
-- 🔗 **Significância:** Quintino é outro dos 12 filhos conhecidos.
-
-### 6. Jesuina Vaz Sodré — Batismo em Amargosa
-- **Cristão:** 7 maio 1893 / Nascimento: 19 janeiro 1891
-- **Pais:** **Francisco Ludgero Vaz Sodré** + **Olympia Flavia de Miranda Sodré**
-- **Coleção:** Brazil, Baptisms, 1688-1935
-- 🔗 **Significância:** "Francisco Ludgero Vaz Sodré" — **NÃO é o mesmo que Francisco Gramilo Sodré** (nomes do meio diferentes: Ludgero ≠ Gramilo). Possível parente do ramo Vaz Sodré em Amargosa, mas pessoa distinta.
-
-### 7. José Vaz Sodré — Batismo
-- **Cristão:** 31 janeiro 1909 / Nascimento: 30 janeiro 1900
-- **Pais:** **Laurinda Vaz Sodré** + **Firmino Vaz Sodré**
-- 🔗 **Significância:** Outros "Vaz Sodré" em Amargosa — confirma que o ramo Vaz Sodré é extenso na região.
-
-### 8. Luiz Vaz Sodré — Batismo em Amargosa
-- **Cristão:** setembro 1890 / Nascimento: 1870
-- 🔗 **Significância:** Mais um "Vaz Sodré" na região.
-
-### 9. Adelaide Sodré — Óbito em Amargosa
-- **Morte:** 3 dezembro 1907, Amargosa, Bahia
-- **Nascimento:** 1867
-- **Pais:** Manoel Sodré
-- 🔗 **Significância:** "Manoel Sodré" como pai — possível ascendente do ramo.
-
-### 10. Clauderio Dino Sodré — Santa Catarina
-- **Cônjuge:** Carolina Maria Sodré
-- **Filhos:** Francisco Sodré
-- **Falecimento:** 15/12/1947, Santa Catarina
-- **Coleção:** Brazil, Santa Catarina, Civil Registration, 1850-1999
-- 🔗 **Significância:** "Clauderio" é nome incomum — possivelmente parente distante.
-
----
-
-## Padrão identificado: "VAZ SODRÉ"
-
-O sobrenome **"Vaz Sodré"** aparece consistentemente nos registros:
-- **Horácio Vaz Sodré** (filho de Francisco Gramilo)
-- **Esmeraldo Vaz Sodré** (filho de Francisco Gramilo)
-- **José Virgilio Vaz Sodré** (filho de Francisco Gramilo)
-- **Francisco Ludgero Vaz Sodré** (parente do ramo Vaz Sodré — **pessoa distinta** de Francisco Gramilo Sodré)
-- **Laurinda Vaz Sodré** + **Firmino Vaz Sodré** (casal em Amargosa)
-- **Luiz Vaz Sodré** (Amargosa, n. ~1870)
-- **Jesuina Vaz Sodré** (filha de Francisco Ludgero)
-
-**Conclusão:** Francisco Ludgero Vaz Sodré e Francisco Gramilo Sodré são **pessoas distintas** (nomes do meio diferentes: Ludgero ≠ Gramilo). O sobrenome "Vaz" é provavelmente um sobrenome de família composto recorrente no ramo Sodré de Amargosa, sem relação direta com Atanagilda.
-
----
-
-## registros NÃO encontrados
-
-As seguintes buscas retornaram 0 resultados relevantes:
-- **"Francisco Gramilo Sodré"** — nome exato não aparece em nenhuma coleção
-- **"Atanagilda Odete Sodré"** — nome não encontrado
-- **"Atanagilda dos Santos"** — 65.830 resultados genéricos, nenhum relevante
-- **"Sodré + Aiquara"** — 5.939 resultados mas nenhum especificamente de Aiquara
-- **"Tomaz/Tomé Sodré"** — não encontrado (possível avô paterno)
-
----
-
-## Próximos passos recomendados
-
-1. **Acesso manual ao FamilySearch** — clicar nos registros de Horácio, Esmeraldo, José Virgilio para ver os registros originais digitalizados e confirmar os nomes dos pais
-2. **APEB** — visitar presencialmente ou contactar arquivo@fpc.ba.gov.br solicitando:
-   - Inventário de Tomaz Gramilo Sodré (Amargosa, ~1890-1920)
-   - Inventário de Francisco Gramilo Sodré (Aiquara/Amargosa)
-3. **Cartório de Amargosa** — solicitar certidões de:
-   - Óbito de Francisco Gramilo Sodré
-   - Óbito de Atanagilda Odete Sodré
-   - Casamento (para confirmar nomes dos pais)
-4. **Verificar se "Vaz" é sobrenome materno** — buscar "Atanagilda Vaz" ou "Odete Vaz"
-5. **FamilySearch Tree** (árvore genealógica colaborativa) — buscar se alguém já montou a árvore
-
----
-
-## Apêndice: URLs diretos para buscas FamilySearch
-
-- [Sodré + Amargosa](https://www.familysearch.org/search/record/results?q.surname=Sodre&q.birthLikePlace=Amargosa&count=40)
-- [Sodré + Aiquara](https://www.familysearch.org/search/record/results?q.surname=Sodre&q.birthLikePlace=Aiquara&count=40)
-- [Horácio Sodré + Amargosa](https://www.familysearch.org/search/record/results?q.givenName=Horacio&q.surname=Sodre&q.birthLikePlace=Amargosa&count=20)
-- [Esmeraldo Sodré](https://www.familysearch.org/search/record/results?q.givenName=Esmeraldo&q.surname=Sodre&count=20)
-- [José Virgilio Sodré](https://www.familysearch.org/search/record/results?q.givenName=Jose+Virgilio&q.surname=Sodre&count=20)
-- [Quintino Sodré](https://www.familysearch.org/search/record/results?q.givenName=Quintino&q.surname=Sodre&count=20)
+1. **Investigar conexão "Vaz Sodré"** — Horácio, José Virgílio e Luiz são do mesmo ramo?
+2. **Confirmar parentesco Eusébio** — Gervásio Eusébio dos Santos ↔ Eustáquio Eusébio Bispo
+3. **Solicitar inventários no APEB** — presencial ou e-mail
+4. **Contactar cartório de Aiquara** — (73) 3244-2321
+5. **Acessar registros paroquiais completos** — coleção 324815 (Amargosa, 1856-1915)
+6. **Confirmar sobrenomes de casada** de Elisa e Isabel
