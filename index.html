@@ -9,7 +9,7 @@
 <style>
 :root{--parchment:#f5efe6;--parchment-deep:#e8dcc8;--ink:#2c1810;--ink-light:#5a3e2b;--ink-muted:#8b7355;--gold:#b8860b;--gold-light:#d4a843;--gold-glow:rgba(184,134,11,0.15);--confirmed:#2d6a4f;--confirmed-bg:rgba(45,106,79,0.08);--probable:#b8860b;--probable-bg:rgba(184,134,11,0.08);--hypothetical:#9b2226;--hypothetical-bg:rgba(155,34,38,0.08);--fs-accent:#6a4c93;--fs-bg:rgba(106,76,147,0.08);--line:#c9b896;--line-faint:rgba(201,184,150,0.4);--shadow:rgba(44,24,16,0.08);--radius:3px}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Source Sans 3',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:25px}
+body{font-family:'Source Sans 3',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:22.5px}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;z-index:9999}
 header{padding:6.9rem 3.5rem 5.2rem;text-align:center;position:relative;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(232,220,200,0.5) 0%,transparent 100%)}
 header::before{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--gold)}
@@ -45,6 +45,8 @@ main{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem}
 .connector-branch::after{content:'';position:absolute;bottom:0;left:50%;width:1px;height:1.2rem;background:var(--line)}
 .note-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.56rem;color:var(--ink-muted);text-align:center;padding:1.04rem 2.5rem;border:1px dashed var(--line);border-radius:var(--radius);margin:0.65rem 0;max-width:650px}
 .couple-link{display:flex;align-items:center;padding:0 0.4rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.9rem}
+.couple-group{display:flex;align-items:center;gap:0}
+.couple-separator{width:2px;height:2.5rem;background:var(--line);margin:0 1.2rem;flex-shrink:0;border-radius:1px}
 .section{margin-top:5.2rem;padding:3.5rem;background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);box-shadow:0 1px 3px var(--shadow)}
 .section h2{font-family:'Playfair Display',serif;font-size:1.69rem;font-weight:700;color:var(--ink);margin-bottom:2.07rem;padding-bottom:1.04rem;border-bottom:1px solid var(--line-faint)}
 .discovery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(312px,1fr));gap:1rem}
@@ -172,7 +174,8 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="connector-line"></div>
 
 <div class="generation">
-<span class="gen-label">Avós paternos</span>
+<span class="gen-label">Avós</span>
+<div class="couple-group">
 <div class="person confirmed">
 <div class="person-name">Marcelo Gramilo Sodré</div>
 <div class="person-detail"><strong>Origem:</strong> Montes Claros/MG</div>
@@ -185,10 +188,8 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="person-detail"><strong>Apelido:</strong> "Roxa"</div>
 </div>
 </div>
-<div class="connector-line"></div>
-
-<div class="generation">
-<span class="gen-label">Avós maternos</span>
+<div class="couple-separator"></div>
+<div class="couple-group">
 <div class="person probable">
 <div class="person-name">Gervásio Eusébio dos Santos</div>
 <div class="person-detail"><strong>Cônjuge:</strong> Maria Aleluia dos Santos</div>
@@ -201,38 +202,63 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="person-detail"><strong>Filha:</strong> Atanagilda Odete dos Santos</div>
 </div>
 </div>
+</div>
 <div class="connector-branch"></div>
 
 <div class="generation">
 <span class="gen-label">Filhos de Marcelo + Rita Rosa</span>
+<div class="couple-group">
 <div class="person confirmed highlight">
 <div class="person-name">Francisco Gramilo Sodré</div>
 <div class="person-detail"><strong>Nasc.:</strong> Ibitupa/BA (distrito de Ibicuí)</div>
-<div class="person-detail"><strong>Cônjuge:</strong> Atanagilda Odete dos Santos</div>
 <div class="person-detail"><strong>Propriedade:</strong> Fazenda Santa Terezinha, Aiquara/BA</div>
 <div class="person-detail"><strong>Filhos:</strong> 12</div>
 </div>
+<div class="couple-link">&amp;</div>
+<div class="person confirmed highlight">
+<div class="person-name">Atanagilda Odete dos Santos</div>
+<div class="person-detail"><strong>Sobrenome solteira:</strong> dos Santos</div>
+<div class="person-detail"><strong>Pais:</strong> Gervásio + Maria Aleluia</div>
+</div>
+</div>
+<div class="couple-separator"></div>
+<div class="couple-group">
 <div class="person confirmed">
 <div class="person-name">Arlindo Gramilo Sodré</div>
-<div class="person-detail"><strong>Atividade:</strong> Empresário, Pavimentação Sodré e Filhos</div>
+<div class="person-detail"><strong>Atividade:</strong> Pavimentação Sodré e Filhos</div>
 <div class="person-detail"><strong>Local:</strong> Jequié/BA</div>
-<div class="person-detail"><strong>Cônjuge:</strong> Noemia Rocha Sodré</div>
 </div>
+<div class="couple-link">&amp;</div>
+<div class="person confirmed">
+<div class="person-name">Noemia Rocha Sodré</div>
+</div>
+</div>
+<div class="couple-separator"></div>
+<div class="couple-group">
 <div class="person confirmed">
 <div class="person-name">José Gramilo Sodré ("Zeca")</div>
 <div class="person-detail"><strong>Nota:</strong> Sudré = erro cartorário perpetuado neste ramo</div>
 <div class="person-detail"><strong>Filhos:</strong> 9</div>
 <div class="person-detail"><strong>Local:</strong> Jequié/BA</div>
 </div>
+</div>
+<div class="couple-separator"></div>
+<div class="couple-group">
 <div class="person confirmed">
 <div class="person-name">Otávia Rosa Sodré Bispo</div>
-<div class="person-detail"><strong>Cônjuge:</strong> Eustáquio Eusébio Bispo</div>
+</div>
+<div class="couple-link">&amp;</div>
+<div class="person confirmed">
+<div class="person-name">Eustáquio Eusébio Bispo</div>
 <div class="person-detail"><strong>Filhos:</strong> 10</div>
 </div>
+</div>
+<div class="couple-separator"></div>
 <div class="person probable">
 <div class="person-name">Elisa Gramilo Sodré</div>
 <div class="person-detail"><strong>Sobrenome casada:</strong> desconhecido</div>
 </div>
+<div class="couple-separator"></div>
 <div class="person probable">
 <div class="person-name">Isabel Gramilo Sodré</div>
 <div class="person-detail"><strong>Sobrenome casada:</strong> desconhecido</div>
@@ -293,16 +319,16 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="sibling-group-header">Otávia Rosa Sodré &amp; Eustáquio Eusébio Bispo</div>
 <div class="sibling-group-sub">Aiquara/BA · 10 filhos</div>
 <div class="sibling-group-children">
-<div class="child-card confirmed"><div class="child-num">1º</div><div class="child-name">Eustáquio Bispo Filho</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">2ª</div><div class="child-name">Creuza Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">3ª</div><div class="child-name">Tereza Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">4º</div><div class="child-name">Cláudio Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">5ª</div><div class="child-name">Rita Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">6º</div><div class="child-name">Rogério Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">7ª</div><div class="child-name">Lúcia Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">8º</div><div class="child-name">Geraldo Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">9º</div><div class="child-name">Givanildo Bispo</div><div class="child-note"></div></div>
-<div class="child-card confirmed"><div class="child-num">10ª</div><div class="child-name">Nádia Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Geni Bispo</div><div class="child-note">Sobrenome casada: desconhecido</div></div>
+<div class="child-card confirmed"><div class="child-num">2º</div><div class="child-name">Zenito Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">3º</div><div class="child-name">Sinval Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">4ª</div><div class="child-name">Maria Helena Sodré Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">5ª</div><div class="child-name">Maiza Rosa Bispo Gouveia</div><div class="child-note">Rosa = homenagem à mãe</div></div>
+<div class="child-card confirmed"><div class="child-num">6ª</div><div class="child-name">Zélia Bispo</div><div class="child-note">Sobrenome casada: desconhecido</div></div>
+<div class="child-card confirmed"><div class="child-num">7º</div><div class="child-name">Juvenil Sodré Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">8ª</div><div class="child-name">Nilda Bispo de Souza</div><div class="child-note">Souza = marido</div></div>
+<div class="child-card confirmed"><div class="child-num">9º</div><div class="child-name">Carlos Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">10º</div><div class="child-name">Valdeck Bispo</div><div class="child-note"></div></div>
 </div>
 </div>
 
