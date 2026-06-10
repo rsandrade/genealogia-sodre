@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Árvore Genealógica — Família Gramilo Sodré</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--parchment:#f5efe6;--parchment-deep:#e8dcc8;--ink:#2c1810;--ink-light:#5a3e2b;--ink-muted:#8b7355;--gold:#b8860b;--gold-light:#d4a843;--gold-glow:rgba(184,134,11,0.15);--confirmed:#2d6a4f;--confirmed-bg:rgba(45,106,79,0.08);--probable:#b8860b;--probable-bg:rgba(184,134,11,0.08);--hypothetical:#9b2226;--hypothetical-bg:rgba(155,34,38,0.08);--fs-accent:#6a4c93;--fs-bg:rgba(106,76,147,0.08);--line:#c9b896;--line-faint:rgba(201,184,150,0.4);--shadow:rgba(44,24,16,0.08);--radius:3px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:25px}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;z-index:9999}
+header{padding:6.9rem 3.5rem 5.2rem;text-align:center;position:relative;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(232,220,200,0.5) 0%,transparent 100%)}
+header::before{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--gold)}
+.header-ornament{font-family:'Cormorant Garamond',serif;font-size:1.48rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1.3rem}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,6.6vw,5.6rem);font-weight:900;line-height:1.1;color:var(--ink);margin-bottom:0.65rem}
+header h1 em{font-style:italic;font-weight:400;color:var(--gold)}
+.header-subtitle{font-family:'Cormorant Garamond',serif;font-size:2.66rem;font-style:italic;color:var(--ink-muted);margin-bottom:3.5rem}
+.stats-row{display:flex;gap:4.3rem;justify-content:center;flex-wrap:wrap}
+.stat-item{text-align:center;position:relative}
+.stat-item+.stat-item::before{content:'';position:absolute;left:-1.6rem;top:20%;height:60%;width:1px;background:var(--line)}
+.stat-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:1.13rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-top:0.35rem}
+
+main{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem}
+.tree{display:flex;flex-direction:column;align-items:center}
+.generation{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;width:100%;position:relative;padding:1.33rem 0}
+.gen-label{position:absolute;left:-0.6rem;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:center;font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--line);white-space:nowrap}
+.person{background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:1.73rem 1.86rem;min-width:338px;max-width:442px;position:relative;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow)}
+.person:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
+.person.confirmed{border-left:3px solid var(--confirmed)}
+.person.probable{border-left:3px solid var(--probable)}
+.person.hypothetical{border-left:3px solid var(--hypothetical)}
+.person.historical{border-left:3px solid var(--gold);background:linear-gradient(135deg,#fffcf7,#f7f0e3)}
+.person.fs-record{border-left:3px solid var(--fs-accent);background:var(--fs-bg)}
+.person.highlight{border-left:3px solid var(--gold);background:linear-gradient(135deg,#fffcf7 60%,rgba(184,134,11,0.06))}
+.person-name{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;line-height:1.25;color:var(--ink);margin-bottom:0.6rem}
+.person-detail{font-size:1.3rem;color:var(--ink-muted);line-height:1.5;margin:0.17rem 0}
+.person-detail strong{color:var(--ink-light);font-weight:600}
+
+.connector-line{width:1px;height:2.5rem;background:var(--line);margin:0 auto}
+.connector-branch{position:relative;height:3.06rem;display:flex;align-items:flex-end;justify-content:center}
+.connector-branch::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:var(--line)}
+.connector-branch::after{content:'';position:absolute;bottom:0;left:50%;width:1px;height:1.2rem;background:var(--line)}
+.note-box{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.56rem;color:var(--ink-muted);text-align:center;padding:1.04rem 2.5rem;border:1px dashed var(--line);border-radius:var(--radius);margin:0.65rem 0;max-width:650px}
+.couple-link{display:flex;align-items:center;padding:0 0.4rem;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.9rem}
+.section{margin-top:5.2rem;padding:3.5rem;background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);box-shadow:0 1px 3px var(--shadow)}
+.section h2{font-family:'Playfair Display',serif;font-size:1.69rem;font-weight:700;color:var(--ink);margin-bottom:2.07rem;padding-bottom:1.04rem;border-bottom:1px solid var(--line-faint)}
+.discovery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(312px,1fr));gap:1rem}
+.discovery-card{padding:1.73rem;border:1px solid var(--line-faint);border-radius:var(--radius);background:var(--parchment)}
+.discovery-card h3{font-family:'Playfair Display',serif;font-size:1.17rem;font-weight:700;color:var(--ink);margin-bottom:0.4rem}
+.discovery-card p{font-size:1.34rem;color:var(--ink-muted);line-height:1.5}
+.source-list{list-style:none}
+.source-list li{padding:0.78rem 0;border-bottom:1px solid var(--line-faint);display:flex;align-items:center;gap:0.78rem;font-size:1.42rem}
+.source-list li:last-child{border-bottom:none}
+.cousin-tier{display:flex;gap:1.9rem;padding:1.73rem 0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--line) var(--parchment-deep);-webkit-overflow-scrolling:touch;width:100%}
+.cousin-tier::-webkit-scrollbar{height:8px}
+.cousin-tier::-webkit-scrollbar-track{background:var(--parchment-deep);border-radius:3px}
+.cousin-tier::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.sibling-group{flex:0 0 auto;min-width:311px;max-width:484px;background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:1rem;box-shadow:0 1px 3px var(--shadow);transition:transform 0.25s ease,box-shadow 0.25s ease}
+.sibling-group:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
+.sibling-group-header{font-family:'Playfair Display',serif;font-size:1.48rem;font-weight:700;color:var(--ink);line-height:1.2;text-align:center;margin-bottom:0.27rem}
+.sibling-group-sub{font-size:0.85rem;color:var(--ink-muted);font-style:italic;text-align:center;margin-bottom:1.04rem;padding-bottom:0.87rem;border-bottom:1px solid var(--line-faint)}
+.sibling-group-children{display:flex;flex-direction:column;gap:0.6rem}
+.child-card{background:var(--parchment);border:1px solid var(--line-faint);border-radius:var(--radius);padding:0.87rem 1.2rem;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow)}
+.child-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
+.child-card.confirmed{border-left:3px solid var(--confirmed)}
+.child-card.highlight{border-left:3px solid var(--gold);background:linear-gradient(135deg,var(--parchment) 60%,rgba(184,134,11,0.06))}
+.child-num{font-family:'Cormorant Garamond',serif;font-size:1.04rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.17rem}
+.child-name{font-family:'Playfair Display',serif;font-size:1.01rem;font-weight:700;color:var(--ink);line-height:1.2}
+.child-note{font-size:1.08rem;color:var(--ink-muted);font-style:italic;margin-top:0.17rem}
+.connector-tier-down{width:1px;height:2rem;background:var(--line);margin:0 auto}
+.cousin-bracket{position:relative;height:1.9rem;display:flex;align-items:flex-end;justify-content:center;width:100%;max-width:1200px}
+.cousin-bracket::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:var(--line)}
+.cousin-bracket::after{content:'';position:absolute;bottom:0;left:50%;width:1px;height:0.97rem;background:var(--line)}
+footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);margin-top:3.9rem}
+.footer-ornament{font-family:'Cormorant Garamond',serif;color:var(--line);font-size:2.42rem;margin-bottom:1.33rem;letter-spacing:0.67em}
+.footer-text{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-muted);font-size:1.17rem;line-height:1.7}
+.footer-date{font-size:1.21rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--line);margin-top:1.04rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.person,.section,.note-box,.child-card,.sibling-group{animation:fadeUp 0.5s ease both}
+@media(max-width:640px){header{padding:3.3rem 1.33rem 2.66rem}header h1{font-size:2rem}main{padding:2rem 1.33rem}.generation{gap:1.06rem}.person{min-width:277px;padding:1.33rem}.gen-label{display:none}.section{padding:1.5rem}.sibling-group{min-width:277px;max-width:381px;padding:1.06rem}.child-card{padding:0.67rem 0.93rem}.child-name{font-size:1.25rem}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-ornament">Genealogia</div>
+<h1>Família <em>Gramilo Sodré</em></h1>
+<p class="header-subtitle">Aiquara &amp; Amargosa, Bahia — séculos XVIII a XXI</p>
+<div class="stats-row">
+<div class="stat-item"><div class="stat-num">55</div><div class="stat-label">Pessoas</div></div>
+<div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Gerações</div></div>
+<div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Ramos</div></div>
+</div>
+
+</header>
+
+<main>
+<section class="tree">
+
+<div class="generation">
+<span class="gen-label">Tronco</span>
+<div class="person historical">
+<div class="person-name">Jerônimo Sodré Pereira</div>
+<div class="person-detail"><strong>Origem:</strong> Santarém, Portugal, séc. XVII</div>
+<div class="person-detail"><strong>Fixação:</strong> Bahia, séc. XVIII (~1661–1700)</div>
+<div class="person-detail"><strong>1ª esposa:</strong> Francisca de Aragão</div>
+<div class="person-detail"><strong>2ª esposa:</strong> Maria de Azevedo</div>
+</div>
+</div>
+<div class="connector-line"></div>
+<div class="note-box">Ramo baiano espalhou-se pelo interior — mais de 200 anos de lacuna documental</div>
+<div class="connector-line"></div>
+
+<div class="generation">
+<span class="gen-label">Ramo Vaz Sodré</span>
+<div class="person fs-record">
+<div class="person-name">Esmeraldo Vaz Sodré</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Florinda de Andrade</div>
+<div class="person-detail"><strong>Filhos:</strong> Olímpio, Luiz Vaz, Anizio, Maria do Carmo</div>
+</div>
+<div class="person fs-record">
+<div class="person-name">Horácio Vaz Sodré</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Adelina Maria de Jesus</div>
+<div class="person-detail"><strong>Filha:</strong> Amélia Vaz Padri</div>
+</div>
+<div class="person fs-record">
+<div class="person-name">José Virgílio Vaz Sodré</div>
+<div class="person-detail"><strong>Nota:</strong> Sobrenome Vaz Sodré = mesmo ramo</div>
+</div>
+</div>
+<div class="connector-line"></div>
+
+<div class="generation">
+<span class="gen-label">Filhos FS</span>
+<div class="person fs-record">
+<div class="person-name">Olímpio Sodré</div>
+<div class="person-detail"><strong>Nasc.:</strong> 18/11/1913, Amargosa</div>
+<div class="person-detail"><strong>Pais:</strong> Esmeraldo Vaz Sodré + Florinda de Andrade</div>
+</div>
+<div class="person fs-record">
+<div class="person-name">Luiz Vaz Sodré</div>
+<div class="person-detail"><strong>Nasc.:</strong> ~1870, Bahia</div>
+<div class="person-detail"><strong>Pais:</strong> Esmeraldo Vaz Sodré + Florinda de Andrade</div>
+</div>
+<div class="person fs-record">
+<div class="person-name">Maria do Carmo Sodré</div>
+<div class="person-detail"><strong>Casam.:</strong> 15/02/1950, Amargosa/Tapera</div>
+<div class="person-detail"><strong>Pais:</strong> Esmeraldo Vaz Sodré + Florinda de Andrade</div>
+</div>
+</div>
+<div class="connector-line"></div>
+<div class="note-box">Possível ramo paralelo — relação com os Gramilo Sodré ainda não estabelecida</div>
+<div class="connector-line"></div>
+
+<div class="generation">
+<span class="gen-label">Ascendente provável</span>
+<div class="person hypothetical">
+<div class="person-name">Tomaz Gramilo Sodré</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Teodora Julia da Cruz</div>
+<div class="person-detail"><strong>Casamento:</strong> ~1891, Amargosa/BA</div>
+<div class="person-detail"><strong>Nota:</strong> Possível avô ou bisavô de Francisco</div>
+</div>
+<div class="couple-link">&amp;</div>
+<div class="person hypothetical">
+<div class="person-name">Teodora Julia da Cruz</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Tomaz Gramilo Sodré</div>
+</div>
+</div>
+<div class="connector-line"></div>
+
+<div class="generation">
+<span class="gen-label">Avós paternos</span>
+<div class="person confirmed">
+<div class="person-name">Marcelo Gramilo Sodré</div>
+<div class="person-detail"><strong>Origem:</strong> Montes Claros/MG</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Rita Rosa Sodré ("Roxa")</div>
+<div class="person-detail"><strong>Filhos:</strong> 6 (Francisco, Arlindo, José, Otávia, Elisa, Isabel)</div>
+</div>
+<div class="couple-link">&amp;</div>
+<div class="person confirmed">
+<div class="person-name">Rita Rosa Sodré</div>
+<div class="person-detail"><strong>Apelido:</strong> "Roxa"</div>
+</div>
+</div>
+<div class="connector-line"></div>
+
+<div class="generation">
+<span class="gen-label">Avós maternos</span>
+<div class="person probable">
+<div class="person-name">Gervásio Eusébio dos Santos</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Maria Aleluia dos Santos</div>
+<div class="person-detail"><strong>Filha:</strong> Atanagilda Odete dos Santos</div>
+</div>
+<div class="couple-link">&amp;</div>
+<div class="person probable">
+<div class="person-name">Maria Aleluia dos Santos</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Gervásio Eusébio dos Santos</div>
+<div class="person-detail"><strong>Filha:</strong> Atanagilda Odete dos Santos</div>
+</div>
+</div>
+<div class="connector-branch"></div>
+
+<div class="generation">
+<span class="gen-label">Filhos de Marcelo + Rita Rosa</span>
+<div class="person confirmed highlight">
+<div class="person-name">Francisco Gramilo Sodré</div>
+<div class="person-detail"><strong>Nasc.:</strong> Ibitupa/BA (distrito de Ibicuí)</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Atanagilda Odete dos Santos</div>
+<div class="person-detail"><strong>Propriedade:</strong> Fazenda Santa Terezinha, Aiquara/BA</div>
+<div class="person-detail"><strong>Filhos:</strong> 12</div>
+</div>
+<div class="person confirmed">
+<div class="person-name">Arlindo Gramilo Sodré</div>
+<div class="person-detail"><strong>Atividade:</strong> Empresário, Pavimentação Sodré e Filhos</div>
+<div class="person-detail"><strong>Local:</strong> Jequié/BA</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Noemia Rocha Sodré</div>
+</div>
+<div class="person confirmed">
+<div class="person-name">José Gramilo Sodré ("Zeca")</div>
+<div class="person-detail"><strong>Nota:</strong> Sudré = erro cartorário perpetuado neste ramo</div>
+<div class="person-detail"><strong>Filhos:</strong> 9</div>
+<div class="person-detail"><strong>Local:</strong> Jequié/BA</div>
+</div>
+<div class="person confirmed">
+<div class="person-name">Otávia Rosa Sodré Bispo</div>
+<div class="person-detail"><strong>Cônjuge:</strong> Eustáquio Eusébio Bispo</div>
+<div class="person-detail"><strong>Filhos:</strong> 10</div>
+</div>
+<div class="person probable">
+<div class="person-name">Elisa Gramilo Sodré</div>
+<div class="person-detail"><strong>Sobrenome casada:</strong> desconhecido</div>
+</div>
+<div class="person probable">
+<div class="person-name">Isabel Gramilo Sodré</div>
+<div class="person-detail"><strong>Sobrenome casada:</strong> desconhecido</div>
+</div>
+</div>
+
+<div class="connector-tier-down"></div>
+<div class="cousin-bracket"></div>
+
+<div class="cousin-tier">
+
+<div class="sibling-group">
+<div class="sibling-group-header">Francisco Gramilo Sodré &amp; Atanagilda Odete dos Santos</div>
+<div class="sibling-group-sub">Fazenda Santa Terezinha, Aiquara/BA · 12 filhos</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Atanagilda Sodré Sampaio</div><div class="child-note">n. 11/04/1954</div></div>
+<div class="child-card confirmed highlight"><div class="child-num">2ª</div><div class="child-name">Veralúcia Sodré</div><div class="child-note">n. 30/09/1955 · Mãe de Ricardo Sodré Andrade</div></div>
+<div class="child-card confirmed"><div class="child-num">3º</div><div class="child-name">Luiz Carlos Sudré</div><div class="child-note">n. 30/03/1957 · Sudré = erro cartorário</div></div>
+<div class="child-card confirmed"><div class="child-num">4º</div><div class="child-name">Francisco Gramilo Sodré Filho</div><div class="child-note">n. 26/07/1959 · Professor, PMA</div></div>
+<div class="child-card confirmed"><div class="child-num">5ª</div><div class="child-name">Angélica Maria Sodré Costa</div><div class="child-note">n. 02/03/1961</div></div>
+<div class="child-card confirmed"><div class="child-num">6ª</div><div class="child-name">Rita de Cássia Sodré do Amaral</div><div class="child-note">n. 09/10/1962</div></div>
+<div class="child-card confirmed"><div class="child-num">7º</div><div class="child-name">Djalma Gramilo Sodré</div><div class="child-note">n. 15/02/1964</div></div>
+<div class="child-card confirmed"><div class="child-num">8º</div><div class="child-name">Paulo Renato Sodré</div><div class="child-note">n. 19/06/1965</div></div>
+<div class="child-card confirmed"><div class="child-num">9º</div><div class="child-name">Ronaldo Gramilo Sodré</div><div class="child-note">n. 16/12/1966</div></div>
+<div class="child-card confirmed"><div class="child-num">10º</div><div class="child-name">Júlio César Gramilo Sodré</div><div class="child-note">n. 09/01/1968</div></div>
+<div class="child-card confirmed"><div class="child-num">11ª</div><div class="child-name">Cristina Margarete Gramilo Sodré</div><div class="child-note">n. 02/08/1969</div></div>
+<div class="child-card confirmed"><div class="child-num">12ª</div><div class="child-name">Sinara Magali Sodré</div><div class="child-note">n. 20/12/1971</div></div>
+</div>
+</div>
+
+<div class="sibling-group">
+<div class="sibling-group-header">Arlindo Gramilo Sodré &amp; Noemia Rocha Sodré</div>
+<div class="sibling-group-sub">Pavimentação Sodré e Filhos, Jequié/BA · 3 filhos</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Ana Lúcia Sodré</div><div class="child-note">Jequié/BA</div></div>
+<div class="child-card confirmed"><div class="child-num">2º</div><div class="child-name">Arlindo Sodré Filho</div><div class="child-note">Jequié/BA</div></div>
+<div class="child-card confirmed"><div class="child-num">3º</div><div class="child-name">Sandro Sodré</div><div class="child-note">Jequié/BA</div></div>
+</div>
+</div>
+
+<div class="sibling-group">
+<div class="sibling-group-header">José Gramilo Sodré ("Zeca")</div>
+<div class="sibling-group-sub">Jequié/BA · 9 filhos</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Josenilda Sudré Bispo</div><div class="child-note">Sudré = erro cartorário</div></div>
+<div class="child-card confirmed"><div class="child-num">2ª</div><div class="child-name">Joselita Sudré Santos</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">3º</div><div class="child-name">José Carlos Sudré</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">4º</div><div class="child-name">Jorge Luiz Sudré</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">5º</div><div class="child-name">Jailson Sudré</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">6º</div><div class="child-name">João Sudré</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">7ª</div><div class="child-name">Jacyara Sudré</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">8º</div><div class="child-name">Jânio Sudré</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">9ª</div><div class="child-name">Juscileide Sudré</div><div class="child-note"></div></div>
+</div>
+</div>
+
+<div class="sibling-group">
+<div class="sibling-group-header">Otávia Rosa Sodré &amp; Eustáquio Eusébio Bispo</div>
+<div class="sibling-group-sub">Aiquara/BA · 10 filhos</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed"><div class="child-num">1º</div><div class="child-name">Eustáquio Bispo Filho</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">2ª</div><div class="child-name">Creuza Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">3ª</div><div class="child-name">Tereza Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">4º</div><div class="child-name">Cláudio Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">5ª</div><div class="child-name">Rita Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">6º</div><div class="child-name">Rogério Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">7ª</div><div class="child-name">Lúcia Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">8º</div><div class="child-name">Geraldo Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">9º</div><div class="child-name">Givanildo Bispo</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-num">10ª</div><div class="child-name">Nádia Bispo</div><div class="child-note"></div></div>
+</div>
+</div>
+
+</div><!-- end cousin-tier -->
+
+</section><!-- end tree -->
+
+</main>
+
+<footer>
+<div class="footer-ornament">❦ ❦ ❦</div>
+<p class="footer-text">
+Árvore genealógica da família <strong>Gramilo Sodré</strong><br>
+Aiquara &amp; Amargosa, Bahia — pesquisa em andamento<br>
+Dados compilados em junho de 2026
+</p>
+<p class="footer-date">última atualização: 10 de junho de 2026</p>
+</footer>
+
+</body>
+</html>
