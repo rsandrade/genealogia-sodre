@@ -25,7 +25,7 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 1. **Francisco Gramilo Sodré** — casou Atanagilda Odete dos Santos; 12 filhos
 2. **Arlindo Gramilo Sodré** — casou Noemia Rocha Sodré; 3 filhos
 3. **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
-4. **Otávia Rosa Sodré Bispo** — casou Eustáquio Eusébio Bispo; 10 filhos
+4. **Otávia Rosa Sodré Bispo** — casou Eustázio Eusébio Bispo; 10 filhos
 5. **Elisa Gramilo Sodré** — sobrenome casada desconhecido
 6. **Isabel Gramilo Sodré** — sobrenome casada desconhecido
 
@@ -54,7 +54,7 @@ Ver detalhes completos em:
 
 ### Pendências principais
 1. Investigar conexão "Vaz Sodré" (Amargosa/FS) com o ramo Gramilo Sodré
-2. Confirmar parentesco Eusébio (Gervásio ↔ Eustáquio Bispo)
+2. Confirmar parentesco Eusébio (Gervásio ↔ Eustázio Bispo)
 3. Solicitar inventários APEB (comarca de Amargosa)
 4. Contactar cartório de Aiquara — (73) 3244-2321
 5. Confirmar sobrenomes de casada de Elisa e Isabel

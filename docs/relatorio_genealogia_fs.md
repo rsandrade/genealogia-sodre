@@ -23,7 +23,7 @@
 - **Francisco Gramilo Sodré** — 12 filhos com Atanagilda
 - **Arlindo Gramilo Sodré** — casou com Noemia Rocha Sodré; 3 filhos
 - **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
-- **Otávia Rosa Sodré Bispo** — casou com Eustáquio Eusébio Bispo; 10 filhos
+- **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
 - **Elisa Gramilo Sodré** — sobrenome casada desconhecido
 - **Isabel Gramilo Sodré** — sobrenome casada desconhecido
 
@@ -102,7 +102,7 @@
 - **Sobrenome "Vaz Sodré"** em Horácio, José Virgílio e Luiz → provável ramo comum
 - **Esmeraldo Sodré** = parente de Francisco Gramilo Sodré? (mesmo sobrenome + Amargosa) → investigar
 - **Joselito Ribeiro Sodré** — Aiquara/BA, mesma cidade → investigar
-- **Eustáquio Eusébio Bispo** ↔ **Gervásio Eusébio dos Santos** → sobrenome "Eusébio" sugere parentesco
+- **Eustázio Eusébio Bispo** ↔ **Gervásio Eusébio dos Santos** → sobrenome "Eusébio" sugere parentesco
 
 ---
 
@@ -169,7 +169,7 @@ Jerônimo Sodré Pereira (BA, séc. XVIII)
             │   └── Propriedade: Fazenda Santa Terezinha, Aiquara
             ├── Arlindo Gramilo Sodré + Noemia Rocha Sodré [3 filhos]
             ├── José "Zeca" Gramilo Sodré [9 filhos c/ Sudré = erro cartorário]
-            ├── Otávia Rosa Sodré Bispo + Eustáquio Eusébio Bispo [10 filhos]
+            ├── Otávia Rosa Sodré Bispo + Eustázio Eusébio Bispo [10 filhos]
             ├── Elisa Gramilo Sodré [casada, sobrenome desconhecido]
             └── Isabel Gramilo Sodré [casada, sobrenome desconhecido]
 
@@ -216,7 +216,7 @@ A ligação Tomaz→Marcelo é baseada em memória oral.
 ## 8. Próximos passos
 
 1. **Investigar conexão "Vaz Sodré"** — Horácio, José Virgílio e Luiz são do mesmo ramo?
-2. **Confirmar parentesco Eusébio** — Gervásio Eusébio dos Santos ↔ Eustáquio Eusébio Bispo
+2. **Confirmar parentesco Eusébio** — Gervásio Eusébio dos Santos ↔ Eustázio Eusébio Bispo
 3. **Solicitar inventários no APEB** — presencial ou e-mail
 4. **Contactar cartório de Aiquara** — (73) 3244-2321
 5. **Acessar registros paroquiais completos** — coleção 324815 (Amargosa, 1856-1915)

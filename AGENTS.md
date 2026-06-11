@@ -37,12 +37,12 @@ Os membros da família são registrados em `data/membros_encontrados.json` com:
 - `confiabilidade`: "confirmada" | "provável" | "hipotética"
 
 ## Scripts
-
-- `scripts/fs_login_api.py` — Login no FamilySearch via API REST
-- `scripts/fs_uc_login_v3.py` — Login via undetected-chromedriver
+## Scripts
+- `scripts/fs_login_api.py` — Login via API REST ❌ (bloqueado pelo Incapsula WAF)
+- `scripts/fs_uc_login_v3.py` — Login via UC ❌ (Incapsula detecta headless)
+- `scripts/fs_search_v12_hybrid.py` — Híbrido Selenium→requests ⚠️ (funciona parcialmente; cookies expiram rápido)
 
 ## ⚠️ Pendências
-
-- FamilySearch: credenciais precisam verificação (login rejeitado 3x)
+- FamilySearch: login automatizado bloqueado pelo Imperva/Incapsula WAF. Usar cookie manual ou buscas manuais — ver skill `familysearch-data-collection`
 - APEB: catálogo AtoM indisponível remotamente; consultar presencialmente
 - MyHeritage: site com timeout; requer acesso manual

@@ -23,7 +23,7 @@
 - **Francisco Gramilo Sodré** — 12 filhos com Atanagilda
 - **Arlindo Gramilo Sodré** — casou com Noemia Rocha Sodré; 3 filhos (Ana Lúcia, Arlindo Filho, Sandro)
 - **José Gramilo Sodré** ("Zeca") — 9 filhos (todos com "Sudré" = erro cartorário)
-- **Otávia Rosa Sodré Bispo** — casou com Eustáquio Eusébio Bispo; 10 filhos
+- **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
 - **Elisa Gramilo Sodré** — sobrenome de casada desconhecido
 - **Isabel Gramilo Sodré** — sobrenome de casada desconhecido
 
@@ -68,9 +68,9 @@ Todos registrados com "Sudré" (erro cartorário):
 
 ---
 
-## 4. 10 filhos de Otávia + Eustáquio Eusébio Bispo
+## 4. 10 filhos de Otávia + Eustázio Eusébio Bispo
 
-1. Eustáquio Bispo Filho
+1. Eustázio Bispo Filho
 2. Creuza Bispo
 3. Tereza Bispo
 4. Cláudio Bispo
@@ -81,7 +81,7 @@ Todos registrados com "Sudré" (erro cartorário):
 9. Givanildo Bispo
 10. Nádia Bispo
 
-**Nota:** Sobrenome "Eusébio" em Eustáquio Bispo pode indicar parentesco com Gervásio Eusébio dos Santos (avô materno de Atanagilda).
+**Nota:** Sobrenome "Eusébio" em Eustázio Bispo pode indicar parentesco com Gervásio Eusébio dos Santos (avô materno de Atanagilda).
 
 ---
 
@@ -115,7 +115,7 @@ Todos registrados com "Sudré" (erro cartorário):
 
 - Sobrenome **"Vaz Sodré"** em Horácio, José Virgílio e Luiz → provável ramo comum
 - **Esmeraldo Sodré** = parente de Francisco Gramilo Sodré? (mesmo sobrenome + Amargosa) → investigar
-- **Eustáquio Eusébio Bispo** ↔ **Gervásio Eusébio dos Santos** → sobrenome "Eusébio" sugere parentesco
+- **Eustázio Eusébio Bispo** ↔ **Gervásio Eusébio dos Santos** → sobrenome "Eusébio" sugere parentesco
 
 ---
 
@@ -177,8 +177,8 @@ Jerônimo Sodré Pereira (BA, séc. XVIII)
             │   ├── Josenilda, Joselita, José Carlos, Jorge Luiz
             │   ├── Jailson, João, Jacyara, Jânio, Juscileide
             │   └── José Gramilo Sodré Filho (CNPJ, Manoel Vitorino)
-            ├── Otávia Rosa Sodré Bispo + Eustáquio Eusébio Bispo [10 filhos]
-            │   ├── Eustáquio Fº, Creuza, Tereza, Cláudio, Rita
+            ├── Otávia Rosa Sodré Bispo + Eustázio Eusébio Bispo [10 filhos]
+            │   ├── Eustázio Fº, Creuza, Tereza, Cláudio, Rita
             │   └── Rogério, Lúcia, Geraldo, Givanildo, Nádia
             ├── Elisa Gramilo Sodré [sobrenome casada desconhecido]
             └── Isabel Gramilo Sodré [sobrenome casada desconhecido]
@@ -219,5 +219,5 @@ Ramo Vaz Sodré (Amargosa, FamilySearch) — conexão a investigar:
 2. **Solicitar inventários no APEB** — presencial ou e-mail (arquivo@fpc.ba.gov.br)
 3. **Contactar cartório de Aiquara** — (73) 3244-2321
 4. **Confirmar sobrenomes de casada** de Elisa e Isabel
-5. **Investigar parentesco Eusébio** — Gervásio Eusébio dos Santos ↔ Eustáquio Eusébio Bispo
+5. **Investigar parentesco Eusébio** — Gervásio Eusébio dos Santos ↔ Eustázio Eusébio Bispo
 6. **Acessar registros paroquiais completos** — coleção 324815 (Amargosa, 1856-1915)

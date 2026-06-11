@@ -39,3 +39,30 @@ fs_v8_*.html
 fs_v8_all_results.json
 fs_v9_*.html
 fs_v9_all_results.json
+# Chrome profiles and debug data
+data/chrome_profile_fs/
+data/chrome_profile_fs2/
+data/debug_*/
+data/fs_*.log
+data/fs_*.html
+data/fs_homepage.html
+# Scripts temporários
+scripts/fs_v*.py
+scripts/fs_uc_v*.py
+scripts/fs_incap*.py
+scripts/fs_xhr*.py
+scripts/fs_buscas*.py
+scripts/fs_casamentos*.py
+scripts/fs_endpoint*.py
+scripts/fs_item*.py
+scripts/fs_itens*.py
+# Export temporário
+export/
+# Logs de execução
+*.log
+fs_v*_run*.log
+
+# FS data dumps
+data/fs_*.json
+data/fs_*.txt
+data/fs_*.log
