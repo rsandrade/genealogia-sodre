@@ -24,7 +24,7 @@
 - **Arlindo Gramilo Sodré** — casou com Noemia Rocha Sodré; 3 filhos (Ana Lúcia, Arlindo Filho, Sandro)
 - **José Gramilo Sodré** ("Zeca") — 9 filhos (todos com "Sudré" = erro cartorário)
 - **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
-- **Elisa Gramilo Sodré** — sobrenome de casada desconhecido
+- **Elisa Gramilo Sodré** — 3 filhos (Zeilde, Valdeci, Elizete)
 - **Isabel Gramilo Sodré** — casada com Maximiliano; 7 filhos (Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria)
 
 ### Avós paternos prováveis
@@ -180,7 +180,7 @@ Jerônimo Sodré Pereira (BA, séc. XVIII)
             ├── Otávia Rosa Sodré Bispo + Eustázio Eusébio Bispo [10 filhos]
             │   ├── Eustázio Fº, Creuza, Tereza, Cláudio, Rita
             │   └── Rogério, Lúcia, Geraldo, Givanildo, Nádia
-            ├── Elisa Gramilo Sodré [sobrenome casada desconhecido]
+            ├── Elisa Gramilo Sodré [3 filhos: Zeilde, Valdeci, Elizete]
             └── Isabel Gramilo Sodré [casada com Maximiliano; 7 filhos]
 
 Gervásio Eusébio dos Santos + Maria Aleluia dos Santos (avós maternos)

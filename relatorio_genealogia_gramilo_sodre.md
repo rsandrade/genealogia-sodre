@@ -26,7 +26,7 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 2. **Arlindo Gramilo Sodré** — casou Noemia Rocha Sodré; 3 filhos
 3. **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
 4. **Otávia Rosa Sodré Bispo** — casou Eustázio Eusébio Bispo; 10 filhos
-5. **Elisa Gramilo Sodré** — sobrenome casada desconhecido
+5. **Elisa Gramilo Sodré** — 3 filhos (Zeilde, Valdeci, Elizete)
 6. **Isabel Gramilo Sodré** — casada com Maximiliano; 7 filhos (Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria)
 
 ### G4: 12 filhos de Francisco + Atanagilda (com datas)
