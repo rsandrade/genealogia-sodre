@@ -25,7 +25,7 @@
 - **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
 - **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
 - **Elisa Gramilo Sodré** — sobrenome casada desconhecido
-- **Isabel Gramilo Sodré** — sobrenome casada desconhecido
+- **Isabel Gramilo Sodré** — casada com Maximiliano; 7 filhos (Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria)
 
 ### Avós paternos prováveis
 
@@ -171,7 +171,7 @@ Jerônimo Sodré Pereira (BA, séc. XVIII)
             ├── José "Zeca" Gramilo Sodré [9 filhos c/ Sudré = erro cartorário]
             ├── Otávia Rosa Sodré Bispo + Eustázio Eusébio Bispo [10 filhos]
             ├── Elisa Gramilo Sodré [casada, sobrenome desconhecido]
-            └── Isabel Gramilo Sodré [casada, sobrenome desconhecido]
+            └── Isabel Gramilo Sodré [casada com Maximiliano; 7 filhos]
 
 Gervásio Eusébio dos Santos + Maria Aleluia dos Santos (avós maternos)
 └── Atanagilda Odete dos Santos ← casou com Francisco
