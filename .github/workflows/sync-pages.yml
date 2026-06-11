@@ -1,0 +1,28 @@
+name: Sync docs/index.html
+
+on:
+  push:
+    branches: [main]
+    paths: ['src/arvore.html']
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync src/arvore.html → docs/index.html
+        run: |
+          if ! diff -q src/arvore.html docs/index.html > /dev/null 2>&1; then
+            cp src/arvore.html docs/index.html
+            git config user.name "Ricardo Andrade"
+            git config user.email "ricardo@feudo.org"
+            git add docs/index.html
+            git commit -m "Auto-sync docs/index.html com src/arvore.html"
+            git push
+            echo "Synced and pushed."
+          else
+            echo "No changes needed."
+          fi
