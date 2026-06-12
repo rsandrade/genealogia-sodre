@@ -216,6 +216,46 @@ body::before {
 .section:nth-child(4) { animation-delay:0.15s; }
 .section:nth-child(5) { animation-delay:0.2s; }
 
+/* ── Descent tree (ascendentes) ── */
+.descent-tree {
+  display:flex; gap:2rem; justify-content:center; align-items:flex-start; flex-wrap:wrap;
+  padding:1rem 0;
+}
+.descent-branch {
+  display:flex; flex-direction:column; align-items:center; gap:0;
+  min-width:160px;
+}
+.descent-branch-label {
+  font-family:'Cormorant Garamond',serif; font-size:0.75rem;
+  text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-muted);
+  padding:0.2rem 0.6rem; border:1px solid var(--border-line);
+  border-radius:2px; background:var(--parchment-deep); margin-bottom:0.5rem;
+}
+.descent-level {
+  display:flex; gap:0.4rem; align-items:flex-start; justify-content:center;
+  padding:0; position:relative;
+}
+.descent-arrow {
+  text-align:center; color:var(--gold); font-size:0.9rem; padding:0.2rem 0;
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+}
+.descent-arrow::before { content:'↓'; }
+.descent-converge {
+  display:flex; align-items:center; gap:1.5rem; padding:0.5rem 0;
+}
+.descent-converge-line {
+  width:2rem; height:1px; border-top:2px dotted var(--gold);
+}
+.descent-siblings-link {
+  text-align:center; padding:0.3rem 0;
+}
+.descent-siblings-link a {
+  font-family:'Cormorant Garamond',serif; font-size:0.8rem;
+  font-style:italic; color:var(--gold); text-decoration:none;
+  border-bottom:1px dotted var(--gold); cursor:pointer;
+}
+.descent-siblings-link a:hover { color:var(--ink-soft); border-bottom-style:solid; }
+
 @media(max-width:768px) {
   .person { min-width:100px; max-width:145px; padding:0.4rem 0.55rem; }
   .person-name { font-size:0.82rem; }
@@ -338,12 +378,8 @@ const SECTIONS = [
     ]
   },
   {
-    id:'ascendentes', title:'Ascendentes diretos', em:'Tomaz → Marcelo → Francisco', filter:'confirmed',
-    families:[
-      { couple:[{id:'tomaz'},{id:'teodora'}], children:[{id:'marcelo'}], link:{to:'francisco',label:'↓ ver descendência'} },
-      { couple:[{id:'marcelo'},{id:'rita_rosa'}], children:[{id:'francisco'},{id:'arlindo'},{id:'zeca'},{id:'otavia'},{id:'elisa'},{id:'isabel'}], link:{to:'irmaos',label:'↓ ver irmãos e sobrinhos'} },
-      { couple:[{id:'gervasio'},{id:'maria_aleluia'}], children:[{id:'atanagilda'}], link:{to:'francisco',label:'↓'} },
-    ]
+    id:'ascendentes', title:'Ascendentes diretos', em:'ramos paterno e materno convergem em Francisco & Atanagilda', filter:'confirmed',
+    type:'descent-tree'
   },
   {
     id:'francisco', title:'Francisco & Atanagilda', em:'12 filhos', filter:'confirmed',
@@ -382,6 +418,13 @@ function render() {
     title.className = 'section-title';
     title.innerHTML = sec.title + ' <em>' + sec.em + '</em>';
     el.appendChild(title);
+
+    // Special rendering for descent-tree type
+    if (sec.type === 'descent-tree') {
+      renderDescentTree(el);
+      wrap.appendChild(el);
+      return;
+    }
 
     sec.families.forEach(fam => {
       const col = document.createElement('div');
@@ -453,6 +496,144 @@ function render() {
   });
 
   renderControls();
+}
+
+// ── Descent tree: vertical chain of generations converging ──
+function renderDescentTree(container) {
+  const tree = document.createElement('div');
+  tree.className = 'descent-tree';
+
+  // LEFT BRANCH: Patermo (Tomaz → Marcelo → Francisco)
+  const patermo = document.createElement('div');
+  patermo.className = 'descent-branch';
+  const pLabel = document.createElement('div');
+  pLabel.className = 'descent-branch-label';
+  pLabel.textContent = 'Ramo paterno';
+  patermo.appendChild(pLabel);
+
+  // Level 1: Tomaz ∞ Teodora
+  const pL1 = document.createElement('div');
+  pL1.className = 'descent-level';
+  pL1.appendChild(makeCard('tomaz'));
+  const pL1link = document.createElement('span');
+  pL1link.className = 'couple-link';
+  pL1link.textContent = '∞';
+  pL1.appendChild(pL1link);
+  pL1.appendChild(makeCard('teodora'));
+  patermo.appendChild(pL1);
+
+  // Arrow
+  const pA1 = document.createElement('div');
+  pA1.className = 'descent-arrow';
+  patermo.appendChild(pA1);
+
+  // Level 2: Marcelo ∞ Rita Rosa
+  const pL2 = document.createElement('div');
+  pL2.className = 'descent-level';
+  pL2.appendChild(makeCard('marcelo'));
+  const pL2link = document.createElement('span');
+  pL2link.className = 'couple-link';
+  pL2link.textContent = '∞';
+  pL2.appendChild(pL2link);
+  pL2.appendChild(makeCard('rita_rosa'));
+  patermo.appendChild(pL2);
+
+  // Arrow
+  const pA2 = document.createElement('div');
+  pA2.className = 'descent-arrow';
+  patermo.appendChild(pA2);
+
+  // Level 3: Francisco (alone — spouse is in materno branch)
+  const pL3 = document.createElement('div');
+  pL3.className = 'descent-level';
+  pL3.appendChild(makeCard('francisco'));
+  patermo.appendChild(pL3);
+
+  // Link to siblings
+  const sibLink = document.createElement('div');
+  sibLink.className = 'descent-siblings-link';
+  const sibA = document.createElement('a');
+  sibA.textContent = '5 irmãos de Francisco';
+  sibA.onclick = () => {
+    const target = document.getElementById('irmaos');
+    if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  sibLink.appendChild(sibA);
+  patermo.appendChild(sibLink);
+
+  tree.appendChild(patermo);
+
+  // CENTER: convergence lines
+  const center = document.createElement('div');
+  center.className = 'descent-branch';
+  center.style.justifyContent = 'center';
+  center.style.paddingTop = '7.5rem'; // align with Francisco level
+  const cLine = document.createElement('div');
+  cLine.className = 'descent-converge';
+  cLine.style.flexDirection = 'column';
+  cLine.style.alignItems = 'center';
+  cLine.style.gap = '0.3rem';
+  const cArrow1 = document.createElement('div');
+  cArrow1.textContent = '∞';
+  cArrow1.style.fontSize = '1.6rem';
+  cArrow1.style.color = 'var(--gold)';
+  cArrow1.style.fontStyle = 'italic';
+  cLine.appendChild(cArrow1);
+  const cArrow2 = document.createElement('div');
+  cArrow2.textContent = '↓';
+  cArrow2.style.fontSize = '1.2rem';
+  cArrow2.style.color = 'var(--gold)';
+  cArrow2.style.fontStyle = 'italic';
+  cLine.appendChild(cArrow2);
+  center.appendChild(cLine);
+  tree.appendChild(center);
+
+  // RIGHT BRANCH: Materno (Gervásio → Atanagilda)
+  const materno = document.createElement('div');
+  materno.className = 'descent-branch';
+  const mLabel = document.createElement('div');
+  mLabel.className = 'descent-branch-label';
+  mLabel.textContent = 'Ramo materno';
+  materno.appendChild(mLabel);
+
+  // Level 1: Gervásio ∞ Maria Aleluia
+  const mL1 = document.createElement('div');
+  mL1.className = 'descent-level';
+  mL1.appendChild(makeCard('gervasio'));
+  const mL1link = document.createElement('span');
+  mL1link.className = 'couple-link';
+  mL1link.textContent = '∞';
+  mL1.appendChild(mL1link);
+  mL1.appendChild(makeCard('maria_aleluia'));
+  materno.appendChild(mL1);
+
+  // Arrow
+  const mA1 = document.createElement('div');
+  mA1.className = 'descent-arrow';
+  materno.appendChild(mA1);
+
+  // Level 2: Atanagilda
+  const mL2 = document.createElement('div');
+  mL2.className = 'descent-level';
+  mL2.appendChild(makeCard('atanagilda'));
+  materno.appendChild(mL2);
+
+  tree.appendChild(materno);
+
+  // Bottom: link to Francisco & Atanagilda section
+  const bottomLink = document.createElement('div');
+  bottomLink.className = 'desc-link';
+  bottomLink.style.paddingTop = '0.5rem';
+  const bottomA = document.createElement('a');
+  bottomA.textContent = 'Ver 12 filhos de Francisco & Atanagilda';
+  bottomA.onclick = () => {
+    const target = document.getElementById('francisco');
+    if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  bottomLink.appendChild(bottomA);
+  tree.appendChild(bottomLink);
+
+  container.appendChild(tree);
 }
 
 function makeCard(id, showSpouse) {
