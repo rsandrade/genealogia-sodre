@@ -35,7 +35,7 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 3. Luiz Carlos Sudré (30/03/1957)
 4. Francisco Gramilo Sodré Filho (26/07/1959) — professor, PMA
 5. Angélica Maria Sodré Costa (02/03/1961)
-6. Rita de Cássia Sodré do Amaral (09/10/1962)
+6. Rita de Cássia Sodré (09/10/1962)
 7. Djalma Gramilo Sodré (15/02/1964)
 8. Paulo Renato Sodré (19/06/1965)
 9. Ronaldo Gramilo Sodré (16/12/1966)
