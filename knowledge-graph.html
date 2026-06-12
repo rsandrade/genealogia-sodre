@@ -243,17 +243,17 @@ const GENEALOGY_DATA = {
     {from:'otavia',to:'antonio_carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
     {from:'otavia',to:'valdeck',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
     // ── Elisa → 3 filhos ──
-    {from:'elisa',to:'zeilde',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'elisa',to:'valdeci',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'elisa',to:'elizete',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'elisa',to:'zeilde',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'elisa',to:'valdeci',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'elisa',to:'elizete',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
     // ── Isabel → 7 filhos ──
-    {from:'isabel',to:'etelvina',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'carlos',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'francisco_sob',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'dutinha',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'edvaldo',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'lelinha',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'maria_sob',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'etelvina',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'francisco_sob',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'dutinha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'edvaldo',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'lelinha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+    {from:'isabel',to:'maria_sob',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
   ]
 };
 
@@ -296,8 +296,12 @@ const edgeData = {};
 GENEALOGY_DATA.edges.forEach(e => {
   if (!edgeData[e.from]) edgeData[e.from] = [];
   if (!edgeData[e.to]) edgeData[e.to] = [];
-  edgeData[e.from].push(e.label + ' → ' + (nodeData[e.to] ? nodeData[e.to].label.split('\\n')[0] : e.to));
-  edgeData[e.to].push((nodeData[e.from] ? nodeData[e.from].label.split('\\n')[0] : e.from) + ' → ' + e.label);
+  // Para o nó de origem (pai/mãe): "pai/mãe de → NomeFilho"
+  edgeData[e.from].push({type: e.label, name: nodeData[e.to] ? nodeData[e.to].label.split('\\n')[0] : e.to, dir: 'out'});
+  // Para o nó de destino (filho): inverter a leitura → "filho(a) de NomePaiMãe"
+  const inverseMap = {'pai de': 'filho(a) de', 'mãe de': 'filho(a) de', 'casou com': 'casou com', 'irmão de': 'irmão(ã) de', 'filho de': 'pai/mãe de', 'descendente de': 'ancestral de', '(descendente)': 'descendente de'};
+  const invLabel = inverseMap[e.label] || e.label;
+  edgeData[e.to].push({type: invLabel, name: nodeData[e.from] ? nodeData[e.from].label.split('\\n')[0] : e.from, dir: 'in'});
 });
 
 network.on('click', function(params) {
@@ -307,7 +311,7 @@ network.on('click', function(params) {
     const panel = document.getElementById('infoPanel');
     document.getElementById('infoName').textContent = node.label.replace(/\\n/g, ' ');
     const rels = edgeData[nodeId] || [];
-    const relsHtml = rels.map(r => '<div class="relation"><span class="rel-type">' + r.split(' → ')[1] + '</span> ' + r.split(' → ')[0] + '</div>').join('');
+    const relsHtml = rels.map(r => '<div class="relation"><span class="rel-type">' + r.type + '</span> ' + r.name + '</div>').join('');
     document.getElementById('infoRelations').innerHTML = relsHtml;
     panel.style.display = 'block';
   } else {
