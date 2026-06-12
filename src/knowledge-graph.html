@@ -34,7 +34,7 @@ body {
   background: var(--parchment);
   color: var(--ink);
   min-height: 100vh;
-  font-size: 16px;
+  font-size: 19.2px;
   -webkit-font-smoothing: antialiased;
 }
 body::before {
@@ -91,7 +91,7 @@ body::before {
 
 /* ── Section (branch group) ── */
 .section {
-  margin-bottom:2.5rem; position:relative;
+  margin-bottom:2.5rem; position:relative; text-align:center;
 }
 .section-title {
   font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700;
@@ -103,7 +103,7 @@ body::before {
 /* ── Family column ── */
 .family-col {
   display:inline-flex; flex-direction:column; align-items:center;
-  gap:0.5rem; vertical-align:top; margin:0 1rem 1.5rem 0;
+  gap:0.5rem; vertical-align:top; margin:0 0.6rem 1.5rem;
   min-width:140px;
 }
 .family-couple {
@@ -125,7 +125,7 @@ body::before {
 /* ── Person cards ── */
 .person {
   position:relative; border:1px solid var(--border-line); border-radius:4px;
-  padding:0.5rem 0.7rem; min-width:120px; max-width:170px;
+  padding:0.6rem 0.85rem; min-width:144px; max-width:204px;
   cursor:pointer; transition:all 0.2s ease;
   box-shadow:var(--card-shadow);
 }
@@ -149,7 +149,7 @@ body::before {
 .person.cat-materno .person-name { color:var(--materno); }
 .person.cat-filho { background:var(--filho-bg); border-color:#8aba9a; }
 .person.cat-filho .person-name { color:var(--confirmed); }
-.person.cat-sobrinho { background:#f4f8f5; border-color:#b0c8b5; min-width:90px; max-width:130px; }
+.person.cat-sobrinho { background:#f4f8f5; border-color:#b0c8b5; min-width:108px; max-width:156px; }
 .person.cat-sobrinho .person-name { color:#4a7a5a; font-size:0.82rem; }
 
 .person-name {
@@ -223,7 +223,7 @@ body::before {
 }
 .descent-branch {
   display:flex; flex-direction:column; align-items:center; gap:0;
-  min-width:160px;
+  min-width:192px;
 }
 .descent-branch-label {
   font-family:'Cormorant Garamond',serif; font-size:0.75rem;
@@ -257,10 +257,10 @@ body::before {
 .descent-siblings-link a:hover { color:var(--ink-soft); border-bottom-style:solid; }
 
 @media(max-width:768px) {
-  .person { min-width:100px; max-width:145px; padding:0.4rem 0.55rem; }
+  .person { min-width:120px; max-width:174px; padding:0.48rem 0.66rem; }
   .person-name { font-size:0.82rem; }
   .page-header { padding:1.5rem 1rem 1.2rem; }
-  .family-col { margin:0 0.5rem 1rem 0; }
+  .family-col { margin:0 0.4rem 1rem; }
 }
 </style>
 </head>
@@ -567,7 +567,7 @@ function renderDescentTree(container) {
   const center = document.createElement('div');
   center.className = 'descent-branch';
   center.style.justifyContent = 'center';
-  center.style.paddingTop = '7.5rem'; // align with Francisco level
+  center.style.paddingTop = '9rem'; // align with Francisco level
   const cLine = document.createElement('div');
   cLine.className = 'descent-converge';
   cLine.style.flexDirection = 'column';
