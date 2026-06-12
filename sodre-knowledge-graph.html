@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sodré Pereira — Mapa Genealógico do Conhecimento</title>
+<script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+  :root {
+    --parchment: #f5eed6;
+    --parchment-dark: #e8dbb8;
+    --ink: #2c1810;
+    --ink-light: #5a3e2b;
+    --wax-red: #8b1a1a;
+    --wax-red-light: #c44040;
+    --wax-gold: #b8860b;
+    --wax-gold-light: #daa520;
+    --hypothesis: #4a6fa5;
+    --hypothesis-light: #7a9fd4;
+    --retracted: #999;
+    --shadow: rgba(44,24,16,0.15);
+    --border: #c4a86c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    background: var(--parchment);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(184,134,11,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(139,26,26,0.04) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  header {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    border-bottom: 2px solid var(--border);
+    background: linear-gradient(180deg, #efe4c8 0%, var(--parchment) 100%);
+    position: relative;
+  }
+
+  header::after {
+    content: '⚜';
+    display: block;
+    font-size: 1.5rem;
+    color: var(--wax-gold);
+    margin-top: 0.5rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wax-red);
+    text-shadow: 1px 1px 0 var(--parchment-dark);
+  }
+
+  .subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-light);
+    margin-top: 0.3rem;
+  }
+
+  #legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 0.8rem 1rem;
+    background: var(--parchment-dark);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .legend-line {
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .legend-line.solid { background: var(--ink); }
+  .legend-line.dashed {
+    background: repeating-linear-gradient(90deg, var(--hypothesis) 0, var(--hypothesis) 6px, transparent 6px, transparent 10px);
+  }
+  .legend-line.retracted {
+    background: repeating-linear-gradient(90deg, var(--retracted) 0, var(--retracted) 4px, transparent 4px, transparent 8px);
+  }
+  .legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+  }
+
+  #main-container {
+    display: flex;
+    height: calc(100vh - 140px);
+    position: relative;
+  }
+
+  #network {
+    flex: 1;
+    background: var(--parchment);
+    cursor: grab;
+  }
+
+  #network:active { cursor: grabbing; }
+
+  #sidebar {
+    width: 380px;
+    background: linear-gradient(180deg, #efe4c8 0%, var(--parchment-dark) 100%);
+    border-left: 2px solid var(--border);
+    overflow-y: auto;
+    padding: 1.2rem;
+    font-size: 0.92rem;
+    transition: transform 0.3s;
+  }
+
+  #sidebar.collapsed {
+    transform: translateX(380px);
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #sidebar-toggle {
+    position: absolute;
+    right: 380px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--parchment-dark);
+    border: 1px solid var(--border);
+    border-radius: 4px 0 0 4px;
+    padding: 8px 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--ink-light);
+    z-index: 10;
+    transition: right 0.3s;
+  }
+
+  #sidebar.collapsed + #sidebar-toggle,
+  #sidebar-toggle.shifted { right: 0; }
+
+  .person-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--wax-red);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .person-dates {
+    font-style: italic;
+    color: var(--ink-light);
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .info-section {
+    margin-bottom: 0.8rem;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: var(--wax-gold);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+  }
+
+  .info-value {
+    line-height: 1.5;
+    padding-left: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 2px 2px;
+    letter-spacing: 0.03em;
+  }
+
+  .tag-confirmed { background: #d4edda; color: #155724; border: 1px solid #28a745; }
+  .tag-hypothesis { background: #cce5ff; color: #004085; border: 1px solid #5b9bd5; }
+  .tag-retracted { background: #e2e3e5; color: #6c757d; border: 1px solid #999; text-decoration: line-through; }
+  .tag-fs { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+  .tag-apeb { background: #f8d7da; color: #721c24; border: 1px solid #dc3545; }
+  .tag-oral { background: #e2d9f3; color: #44337a; border: 1px solid #9b59b6; }
+
+  .empty-state {
+    text-align: center;
+    color: var(--ink-light);
+    padding: 3rem 1rem;
+    font-style: italic;
+  }
+
+  .empty-state .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+
+  #search-box {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+  }
+
+  #search-box input {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(245,238,214,0.9);
+    color: var(--ink);
+    width: 220px;
+  }
+
+  #search-box button {
+    font-family: 'EB Garamond', serif;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--parchment-dark);
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  #search-box button:hover { background: var(--wax-gold-light); color: white; }
+
+  .vis-network { outline: none; }
+
+  #stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    border-bottom: 1px solid var(--border);
+    background: var(--parchment-dark);
+  }
+
+  #stats-bar span { font-weight: 600; color: var(--wax-gold); }
+
+  @media (max-width: 768px) {
+    #sidebar { width: 100%; height: 40vh; border-left: none; border-top: 2px solid var(--border); }
+    #main-container { flex-direction: column; height: auto; }
+    #network { height: 60vh; }
+    #sidebar-toggle { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sodré Pereira da Bahia</h1>
+  <div class="subtitle">Mapa Genealógico do Conhecimento — Jerônimo Sodré Pereira (1631) a Francisco Gramilo Sodré (1920+)</div>
+</header>
+
+<div id="stats-bar">
+  Pessoas: <span id="p-count">0</span> &nbsp;|&nbsp;
+  Ligações confirmadas: <span id="c-count">0</span> &nbsp;|&nbsp;
+  Hipóteses: <span id="h-count">0</span> &nbsp;|&nbsp;
+  Retratadas: <span id="r-count">0</span>
+</div>
+
+<div id="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#8b1a1a;"></div> Patriarca / Barão</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#b8860b;"></div> Documentado (FS/APEB)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#4a6fa5;"></div> Hipótese</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#999;"></div> Retratado</div>
+  <div class="legend-item"><div class="legend-line solid"></div> Confirmado</div>
+  <div class="legend-item"><div class="legend-line dashed"></div> Hipótese</div>
+  <div class="legend-item"><div class="legend-line retracted"></div> Retratado</div>
+</div>
+
+<div id="main-container">
+  <div id="network"></div>
+  <div id="sidebar">
+    <div id="sidebar-content">
+      <div class="empty-state">
+        <div class="icon">📜</div>
+        <div>Clique em um nó para ver os detalhes da pessoa.<br>Arraste para mover. Scroll para zoom.</div>
+      </div>
+    </div>
+  </div>
+  <button id="sidebar-toggle" title="Mostrar/ocultar painel">◀</button>
+</div>
+
+<div id="search-box">
+  <input type="text" id="search-input" placeholder="Buscar pessoa..." />
+  <button onclick="focusNode()">🔍</button>
+  <button onclick="resetView()">⟳</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA — Pessoas e Ligações Genealógicas
+// ═══════════════════════════════════════════════════════
+
+const people = {
+  // ── G1: Patriarca colonial ──
+  "JSP1": {
+    label: "Jerônimo Sodré Pereira\n(Patriarca)",
+    full: "Jerônimo Sodré Pereira",
+    dates: "c. 1631 – 1711",
+    gen: 1,
+    status: "confirmed",
+    source: "historiografia",
+    info: `<b>Patriarca dos Sodré Pereira da Bahia</b><br>
+    Estabelecido na Bahia ~1661. Moço Fidalgo da Casa Real (1676). Mestre de Campo. Provedor da Santa Casa da Misericórdia.<br><br>
+    Pais: D. Fernando Sodré Pereira + D. Brites Tibão<br>
+    2º casamento: D. Francisca de Aragão (filha de Francisco de Araújo Aragão + D. Anna de Barros Soeiro; neta de D. Balthazer de Aragão &quot;o Bangala&quot;)<br><br>
+    Construiu o <b>Solar do Sodré</b> (Rua Sodré 43, Salvador) — hoje Casa de Castro Alves / Colégio Estadual Ipiranga<br><br>
+    <span class="tag tag-confirmed">Historiografia</span> <span class="tag tag-fs">FS: 3 ocorrências</span><br>
+    <i>3+ Jerônimo distintos — NÃO confundir com JSP-2 (irmão do Barão) ou JSP-3 (filho do Barão)</i>`,
+    titles: ["Moço Fidalgo da Casa Real", "Mestre de Campo", "Provedor Santa Casa"]
+  },
+
+  // ── G2: Filho(s) do patriarca (BURACO) ──
+  "G2_unknown": {
+    label: "Filho(s) de\nJerônimo I\n(???)",
+    full: "G2 — Filho(s) não documentado(s)",
+    dates: "séc. XVII–XVIII",
+    gen: 2,
+    status: "hypothesis",
+    source: "lacuna",
+    info: `<b>BURACO CRÍTICO (~100 anos)</b><br><br>
+    Nenhum filho de Jerônimo Sodré Pereira (patriarca) está diretamente documentado nas fontes consultadas. A passagem de G1→G3 permanece hipotética.<br><br>
+    Fontes textuais indicam que "surgem neste tronco os Sodrés ilustres da Bahia" (bahiatextos), mas sem nomear os elos intermediários.<br><br>
+    <span class="tag tag-hypothesis">Lacuna documental</span>`,
+    titles: []
+  },
+
+  // ── G3: Coronel ──
+  "FAlvaro": {
+    label: "Francisco Álvaro\nSodré Pereira",
+    full: "Francisco Álvaro Sodré Pereira",
+    dates: "? – ?",
+    gen: 3,
+    status: "hypothesis",
+    source: "wikipedia+geni",
+    info: `<b>Ascendente intermediário</b><br>
+    Casou com Maria Josefa Teodora de Ataíde<br><br>
+    Pai do coronel Francisco Maria Sodré Pereira.<br>
+    Primeiro nome documentado na linhagem após o buraco de ~100 anos.<br><br>
+    <span class="tag tag-hypothesis">Wikipédia + Geni</span>`,
+    titles: []
+  },
+
+  "FMaria": {
+    label: "Coronel Francisco\nMaria Sodré Pereira",
+    full: "Coronel Francisco Maria Sodré Pereira",
+    dates: "séc. XVIII – ?",
+    gen: 3,
+    status: "confirmed",
+    source: "wikipedia+cpdoc",
+    info: `<b>Coronel</b><br>
+    Natural de Cachoeira da Bahia, freguesia de São Tiago do Iguape.<br>
+    Casado com Maria Ana de Meneses.<br><br>
+    Pai do Barão de Alagoinhas.<br><br>
+    <span class="tag tag-confirmed">Wikipédia</span> <span class="tag tag-confirmed">CPDOC/FGV</span>`,
+    titles: ["Coronel"]
+  },
+
+  "MAnaNes": {
+    label: "Maria Ana\nde Meneses",
+    full: "Maria Ana de Meneses",
+    dates: "? – ?",
+    gen: 3,
+    status: "confirmed",
+    source: "wikipedia",
+    info: `Esposa do coronel Francisco Maria Sodré Pereira. Mãe do Barão de Alagoinhas.<br><br><span class="tag tag-confirmed">Wikipédia</span>`,
+    titles: []
+  },
+
+  // ── G4: Barão e irmãos ──
+  "Barao": {
+    label: "Barão de\nAlagoinhas\n(Francisco Pereira Sodré)",
+    full: "Francisco Pereira Sodré — Barão de Alagoinhas",
+    dates: "26/04/1818 – 28/09/1882",
+    gen: 4,
+    status: "confirmed",
+    source: "wikipedia+cpdoc+fs",
+    info: `<b>Barão de Alagoinhas com honra de Grandeza</b> (decreto imperial 26/04/1879)<br><br>
+    Nascimento: 26/04/1818, freguesia de São Tiago do Iguape, Cachoeira da Bahia<br>
+    Óbito: 28/09/1882, Salvador<br><br>
+    Filho de: Francisco Maria Sodré Pereira + Maria Ana de Meneses<br>
+    Casou (10/02/1834) com Cora César Coutinho (25/01/1819, Salvador – 25/04/1880)<br><br>
+    <b>11 filhos</b> — 7 identificados, 4 desconhecidos<br><br>
+    <span class="tag tag-confirmed">Wikipédia</span> <span class="tag tag-confirmed">CPDOC/FGV</span> <span class="tag tag-fs">FS: óbito 1880</span><br>
+    <i>O sobrenome &quot;Gramilo&quot; pode ter entrado via um dos 4 filhos não identificados.</i>`,
+    titles: ["Barão de Alagoinhas", "Coronel da Guarda Nacional"]
+  },
+
+  "Cora": {
+    label: "Cora César\nCoutinho",
+    full: "Cora César Coutinho",
+    dates: "25/01/1819 – 25/04/1880",
+    gen: 4,
+    status: "confirmed",
+    source: "wikipedia+fs",
+    info: `Esposa do Barão de Alagoinhas.<br><br>
+    Filha do conselheiro José Lino Coutinho e da poetisa Ildefonsa Laura César.<br><br>
+    <span class="tag tag-confirmed">Wikipédia</span>`,
+    titles: ["Baronesa de Alagoinhas"]
+  },
+
+  "JSP2": {
+    label: "Jerônimo Sodré\nPereira\n(irmão do Barão)",
+    full: "Jerônimo Sodré Pereira (irmão do Barão)",
+    dates: "1831 – 1901",
+    gen: 4,
+    status: "confirmed",
+    source: "cpdoc+fs",
+    info: `<b>IRMÃO do Barão</b> — não confundir com JSP-1 (patriarca) ou JSP-3 (filho do Barão)<br><br>
+    Bacharel em Medicina (1861), Faculdade de Medicina da Bahia<br>
+    Professor catedrático de Fisiologia (1865)<br>
+    Deputado provincial BA: 17ª, 22ª, 23ª legislaturas<br>
+    Deputado geral: 17ª legislatura (1878-81)<br>
+    Diretor da Faculdade de Medicina da Bahia (1884)<br>
+    Presidente da província de Sergipe (jul–nov 1889)<br><br>
+    <span class="tag tag-confirmed">CPDOC/FGV</span> <span class="tag tag-fs">Passenger Lists</span>`,
+    titles: ["Deputado", "Diretor Fac. Medicina", "Presidente Prov. Sergipe"]
+  },
+
+  "JSP3": {
+    label: "Jerônimo Sodré\nPereira\n(filho do Barão)",
+    full: "Jerônimo Sodré Pereira (filho do Barão)",
+    dates: "c. 1855 – ?",
+    gen: 5,
+    status: "confirmed",
+    source: "fs",
+    info: `<b>FILHO do Barão</b> — homônimo do patriarca e do tio<br><br>
+    Casou com Anna Carolina Dantas Sodré<br>
+    Filho batizado em 16/08/1886 (nome ilegível na transcrição)<br><br>
+    <span class="tag tag-fs">FS L1b L152-157</span>`,
+    titles: []
+  },
+
+  "FranciscoM2": {
+    label: "Francisco Maria\nSodré Pereira\n(neto do Barão)",
+    full: "Francisco Maria Sodré Pereira (neto do Barão)",
+    dates: "16/01/1836, Santo Amaro – 16/05/1903",
+    gen: 5,
+    status: "confirmed",
+    source: "bibconsuelo+cpdoc",
+    info: `<b>Neto homônimo do coronel</b><br><br>
+    Bacharel em Direito pelo Recife (1858)<br>
+    Deputado provincial, deputado federal constituinte (1891)<br>
+    Ministro do Império (1879), Ministro da Justiça (1884-85)<br>
+    Presidente da Província de Pernambuco (1882-83)<br>
+    Cavaleiro da Imperial Ordem da Rosa<br>
+    Casado com Maria Constância de Pinho Sodré<br><br>
+    <span class="tag tag-confirmed">Bib. Consuelo Pondé</span> <span class="tag tag-confirmed">CPDOC/FGV</span>`,
+    titles: ["Ministro do Império", "Ministro da Justiça", "Deputado Federal", "Cavaleiro Ordem da Rosa"]
+  },
+
+  "Leopoldina": {
+    label: "Maria Leopoldina\nSodré Muniz",
+    full: "Maria Leopoldina Sodré Muniz D'Aragão",
+    dates: "1845 – 04/07/1915",
+    gen: 5,
+    status: "confirmed",
+    source: "fs",
+    info: `Filha do Barão. Óbito 04/07/1915, Santana BA.<br>
+    Pais confirmados: "Bardos Francisco Pereira Soddi, Eva Coutinho Soddi" (= Barão + Cora)<br>
+    Casou Egas Carlos Moniz Sodré D'Aragão<br>
+    Filha: Cora Moniz Sodre D'Aragao (bat. 15/07/1878)<br><br>
+    <span class="tag tag-fs">FS R12 L361-372</span> <span class="tag tag-confirmed">Confirmada como filha do Barão</span>`,
+    titles: []
+  },
+
+  "JoseLino": {
+    label: "José Lino Coutinho\nSodre Pereira",
+    full: "José Lino Coutinho Sodre Pereira",
+    dates: "? – ?",
+    gen: 5,
+    status: "confirmed",
+    source: "fs",
+    info: `Filho ou neto do Barão. Casou Maria Anna Pitta (Lima/Podré).<br>
+    Filhos: José Coitinho Sodré (bat. 21/04/1876, Iguape), Cora Sodre Pereira (óbito 28/07/1900), Janna Sodré Pereira (óbito 1900)<br><br>
+    <span class="tag tag-fs">FS L3a L372-381</span>`,
+    titles: []
+  },
+
+  "RitaPS": {
+    label: "Rita Pereira\nSodré",
+    full: "Rita Pereira Sodré",
+    dates: "c. 1828 – ?",
+    gen: 5,
+    status: "confirmed",
+    source: "fs",
+    info: `Possível filha do Barão. Óbito: Santana, Salvador BA.<br><br>
+    <span class="tag tag-fs">FS R12 L394-401</span>`,
+    titles: []
+  },
+
+  "Filhos4unknown": {
+    label: "4 filhos\ndesconhecidos\ndo Barão",
+    full: "4 filhos desconhecidos do Barão de Alagoinhas",
+    dates: "?",
+    gen: 5,
+    status: "hypothesis",
+    source: "lacuna",
+    info: `<b>BURACO CRÍTICO</b><br><br>
+    O Barão teve 11 filhos com Cora César Coutinho. Apenas 7 estão identificados.<br><br>
+    <b>Um destes 4 filhos desconhecidos pode ser o elo com o sobrenome &quot;Gramilo&quot;.</b><br><br>
+    Hipóteses:<br>
+    • H1: Filho desconhecido casou com família Gramilo → nasceu Tomaz<br>
+    • H4: Ramo Vaz Sodré de Amargosa como elo (nome "Ludgero" compartilhado)<br><br>
+    <span class="tag tag-hypothesis">Lacuna documental</span>`,
+    titles: []
+  },
+
+  // ── G5-G7: Tomaz e ramo Gramilo ──
+  "Tomaz": {
+    label: "Tomaz Gramilo\nSodré",
+    full: "Tomaz Gramilo Sodré",
+    dates: "c. 1860 – ? (casou 1891)",
+    gen: 7,
+    status: "confirmed",
+    source: "apeb+oral",
+    info: `<b>Elo crítico entre Sodré Pereira e Gramilo</b><br><br>
+    Casou com Teodora Julia da Cruz em Amargosa/BA (1891, certidão APEB)<br>
+    Provável avô de Francisco Gramilo Sodré<br><br>
+    <b>FS: ZERO ocorrências diretas</b> — coleção 324815 (Amargosa) não indexada<br><br>
+    Pistas indiretas: Ademaro Gramilo (Jequié), Clementino Grámilo, Francisco Manoel Granilo, Merced Francisco Gramilo, Deixa Gramilo de Caspanho<br><br>
+    <span class="tag tag-apeb">APEB</span> <span class="tag tag-oral">Informação oral</span>`,
+    titles: []
+  },
+
+  "Teodora": {
+    label: "Teodora Julia\nda Cruz",
+    full: "Teodora Julia da Cruz",
+    dates: "?",
+    gen: 7,
+    status: "confirmed",
+    source: "apeb",
+    info: `Esposa de Tomaz Gramilo Sodré. Casamento em Amargosa/BA, 1891 (certidão APEB).<br><br><span class="tag tag-apeb">APEB</span>`,
+    titles: []
+  },
+
+  // ── G8: Marcelo ──
+  "Marcelo": {
+    label: "Marcelo Gramilo\nSodré",
+    full: "Marcelo Gramilo Sodré",
+    dates: "?",
+    gen: 8,
+    status: "confirmed",
+    source: "oral",
+    info: `Pai de Francisco Gramilo Sodré. Veio de <b>Montes Claros/MG</b>.<br>
+    Casou com Rita Rosa Sodré (&quot;Roxa&quot;).<br><br>
+    <b>Hipótese H3:</b> Gramilo = sobrenome de origem portuguesa (Minho). Deixa Gramilo de Caspanho = passageiro para Salvador.<br>
+    Possível variante: Gramacho.<br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: []
+  },
+
+  "RitaRosa": {
+    label: "Rita Rosa\nSodré\n(&quot;Roxa&quot;)",
+    full: "Rita Rosa Sodré",
+    dates: "?",
+    gen: 8,
+    status: "confirmed",
+    source: "oral",
+    info: `Mãe de Francisco Gramilo Sodré. Conhecida como &quot;Roxa&quot;.<br>
+    Casou com Marcelo Gramilo Sodré.<br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: []
+  },
+
+  // ── G9: Francisco ──
+  "FranciscoGS": {
+    label: "Francisco Gramilo\nSodré",
+    full: "Francisco Gramilo Sodré",
+    dates: "? – ?",
+    gen: 9,
+    status: "confirmed",
+    source: "oral+fs",
+    info: `<b>Nascido em Ibitupa/BA</b> (distrito de Ibicuí)<br>
+    Proprietário da Fazenda Santa Terezinha, Aiquara-BA<br>
+    Casou com Atanagilda Odete dos Santos<br>
+    <b>12 filhos</b><br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: ["Fazendeiro"]
+  },
+
+  "Atanagilda": {
+    label: "Atanagilda Odete\ndos Santos",
+    full: "Atanagilda Odete dos Santos (Sodré por casamento)",
+    dates: "?",
+    gen: 9,
+    status: "confirmed",
+    source: "oral",
+    info: `Esposa de Francisco Gramilo Sodré. Sobrenome de solteira: dos Santos.<br>
+    Pais: Gervásio Eusébio dos Santos + Maria Aleluia dos Santos<br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: []
+  },
+
+  "Veralucia": {
+    label: "Veralúcia\nSodré",
+    full: "Veralúcia Sodré Andrade (n. Andrade)",
+    dates: "30/09/1955",
+    gen: 10,
+    status: "confirmed",
+    source: "oral",
+    info: `7ª filha de Francisco Gramilo Sodré + Atanagilda. Mãe de Ricardo Sodré Andrade.<br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: []
+  },
+
+  "Ricardo": {
+    label: "Ricardo Sodré\nAndrade",
+    full: "Ricardo Sodré Andrade",
+    dates: "vivo",
+    gen: 11,
+    status: "confirmed",
+    source: "oral",
+    info: `Arquivista/PM. Filho de Veralúcia Sodré. Neto de Francisco Gramilo Sodré.<br>
+    Pesquisador da linhagem Sodré Pereira da Bahia.<br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: ["Arquivista", "Pesquisador"]
+  },
+
+  // ── Hipóteses e pistas FS ──
+  "AlexandrePS": {
+    label: "Alexandre Pereira\nSodre",
+    full: "Alexandre Pereira Sodre",
+    dates: "bat. 05/04/1809",
+    gen: 5,
+    status: "confirmed",
+    source: "fs",
+    info: `Batismo 05/04/1809, Vitória, Salvador, Bahia.<br>
+    Padrinho: Alexandre Pereira Sodre.<br><br>
+    <span class="tag tag-fs">Catholic Church Records 1598-2007</span><br>
+    <i>Possível elo: pode ser antepassado do ramo que migrou para Amargosa.</i>`,
+    titles: []
+  },
+
+  "DuarteSP": {
+    label: "Duarte Sodre\nPereira",
+    full: "Duarte Sodre Pereira",
+    dates: "bat. 06/08/1760",
+    gen: 3,
+    status: "confirmed",
+    source: "fs",
+    info: `Batismo 06/08/1760, Bahia. Filho: Jequicio.<br><br>
+    <span class="tag tag-fs">Catholic Church Records 1598-2007</span><br>
+    <i>Prova que o sobrenome composto "Sodré Pereira" já existia em 1760 na Bahia.</i>`,
+    titles: []
+  },
+
+  "EstevaoPS": {
+    label: "Estevão Pereira\nSodré",
+    full: "Estevão Pereira Sodré",
+    dates: "cas. 1894",
+    gen: 7,
+    status: "hypothesis",
+    source: "fs",
+    info: `Casamento 1894, Amargosa/BA.<br>
+    Possível ponte geográfica direta em Amargosa — ramo Sodré na mesma cidade de Tomaz.<br><br>
+    <span class="tag tag-hypothesis">FS — Hipótese H5</span>`,
+    titles: []
+  },
+
+  "FranciscoLudgero": {
+    label: "Francisco Ludgero\nVaz Sodré",
+    full: "Francisco Ludgero Vaz Sodré",
+    dates: "?",
+    gen: 7,
+    status: "confirmed",
+    source: "fs+apeb",
+    info: `Do ramo Vaz Sodré de Amargosa. Casou com Olympia Flavia de Miranda Sodre.<br>
+    ⚠️ Pessoa DISTINTA de Francisco Gramilo Sodré (nomes do meio diferentes).<br><br>
+    <span class="tag tag-fs">FS</span> <span class="tag tag-apeb">APEB: inventários</span><br>
+    <i>Hipótese H4: Vaz Sodré de Amargosa como elo (nome "Ludgero" compartilhado).</i>`,
+    titles: []
+  },
+
+  "HoracioVS": {
+    label: "Horácio Vaz\nSodré",
+    full: "Horácio Vaz Sodré",
+    dates: "?",
+    gen: 7,
+    status: "confirmed",
+    source: "apeb",
+    info: `Ramo Vaz Sodré de Amargosa. 11 registros de inventário no APEB.<br><br>
+    <span class="tag tag-apeb">APEB: inventários</span><br>
+    <i>Hipótese H4: Vaz Sodré de Amargosa como elo.</i>`,
+    titles: []
+  },
+
+  "SodreBrumado": {
+    label: "Sodre Pereira\n(Brumado 1818)",
+    full: "Sodre Pereira (Brumado 1818)",
+    dates: "nasc. 1818, Brumado – óbit. 28/09/1880, Salvador",
+    gen: 4,
+    status: "confirmed",
+    source: "fs",
+    info: `Nascido em Brumado (semiárido baiano), falecido em Salvador.<br>
+    Pais: "Maria Sodre Pereira, Coronel Francisco Sodre"<br>
+    ⚠️ Pode ser esposa ou filha do Barão (mesmo ano de nascimento).<br><br>
+    <span class="tag tag-fs">FS: Civil Registration 1877-2021</span><br>
+    <i>Demonstra mobilidade Sodré Pereira entre interior e capital.</i>`,
+    titles: []
+  },
+
+  "MariaPSaoFelipe": {
+    label: "Maria Pereira\nSodré\n(São Felipe 1869)",
+    full: "Maria Pereira Sodré",
+    dates: "bat. 20/01/1870, São Felipe BA (nasc. ~maio 1869)",
+    gen: 6,
+    status: "confirmed",
+    source: "fs",
+    info: `Batismo em São Felipe BA — PRÓXIMO a Amargosa/São Félix!<br><br>
+    <span class="tag tag-fs">Catholic Church Records 1598-2007</span><br>
+    <i>Relevante porque a árvore Gramilo Sodré tem origem em Amargosa.</i>`,
+    titles: []
+  }
+};
+
+const connections = [
+  // ── Linhagem confirmada (sólida) ──
+  { from: "JSP1", to: "G2_unknown", label: "pai de (hipótese)", type: "hypothesis" },
+  { from: "G2_unknown", to: "FAlvaro", label: "ascendente (hipótese)", type: "hypothesis" },
+  { from: "FAlvaro", to: "FMaria", label: "pai de", type: "confirmed" },
+  { from: "FMaria", to: "MAnaNes", label: "casou com", type: "confirmed" },
+  { from: "FMaria", to: "Barao", label: "pai de", type: "confirmed" },
+  { from: "Barao", to: "Cora", label: "casou com (1834)", type: "confirmed" },
+  { from: "FMaria", to: "JSP2", label: "pai de", type: "confirmed" },
+  { from: "Barao", to: "JSP3", label: "pai de", type: "confirmed" },
+  { from: "Barao", to: "Leopoldina", label: "pai de", type: "confirmed" },
+  { from: "Barao", to: "FranciscoM2", label: "pai de (via filho desconhecido)", type: "hypothesis" },
+  { from: "Barao", to: "JoseLino", label: "pai de (ou avô)", type: "hypothesis" },
+  { from: "Barao", to: "RitaPS", label: "pai de (?)", type: "hypothesis" },
+  { from: "Barao", to: "Filhos4unknown", label: "4 filhos desconhecidos", type: "hypothesis" },
+  { from: "Filhos4unknown", to: "Tomaz", label: "elo hipotético", type: "hypothesis" },
+  { from: "Tomaz", to: "Teodora", label: "casou com (1891)", type: "confirmed" },
+  { from: "Tomaz", to: "Marcelo", label: "ascendente (avô?)", type: "hypothesis" },
+  { from: "Marcelo", to: "RitaRosa", label: "casou com", type: "confirmed" },
+  { from: "Marcelo", to: "FranciscoGS", label: "pai de", type: "confirmed" },
+  { from: "RitaRosa", to: "FranciscoGS", label: "mãe de", type: "confirmed" },
+  { from: "FranciscoGS", to: "Atanagilda", label: "casou com", type: "confirmed" },
+  { from: "FranciscoGS", to: "Veralucia", label: "pai de", type: "confirmed" },
+  { from: "Veralucia", to: "Ricardo", label: "mãe de", type: "confirmed" },
+
+  // ── FS registros confirmados ──
+  { from: "DuarteSP", to: "G2_unknown", label: "possível elo", type: "hypothesis" },
+  { from: "AlexandrePS", to: "FMaria", label: "possível parentesco", type: "hypothesis" },
+  { from: "SodreBrumado", to: "Barao", label: "mesmo nascimento 1818", type: "hypothesis" },
+  { from: "MariaPSaoFelipe", to: "Filhos4unknown", label: "possível elo Amargosa", type: "hypothesis" },
+  { from: "EstevaoPS", to: "Tomaz", label: "mesma cidade (Amargosa)", type: "hypothesis" },
+  { from: "FranciscoLudgero", to: "Tomaz", label: "Vaz Sodré de Amargosa", type: "hypothesis" },
+  { from: "HoracioVS", to: "FranciscoLudgero", label: "ramo Vaz Sodré", type: "confirmed" },
+
+  // ── RETRATADO (alucinação Vision) ──
+  { from: "Tomaz", to: "JSP1", label: "RETIRADO: child_of Jerônimo (ALUCINAÇÃO Vision)", type: "retracted" },
+  { from: "Tomaz", to: "JSP3", label: "RETIRADO: married Antônia de Gramilo (ALUCINAÇÃO)", type: "retracted" },
+];
+
+// ═══════════════════════════════════════════════════════
+// VIS-NETWORK SETUP
+// ═══════════════════════════════════════════════════════
+
+const nodeColors = {
+  confirmed: { background: '#b8860b', border: '#8b6914', highlight: { background: '#daa520', border: '#b8860b' }, hover: { background: '#daa520', border: '#b8860b' } },
+  hypothesis: { background: '#4a6fa5', border: '#3a5f8a', highlight: { background: '#7a9fd4', border: '#4a6fa5' }, hover: { background: '#7a9fd4', border: '#4a6fa5' } },
+  retracted: { background: '#999', border: '#777', highlight: { background: '#bbb', border: '#999' }, hover: { background: '#bbb', border: '#999' } },
+};
+
+const genPrefixes = {
+  1: 'G1', 2: 'G2', 3: 'G3', 4: 'G4', 5: 'G5', 6: 'G6', 7: 'G7', 8: 'G8', 9: 'G9', 10: 'G10', 11: 'G11'
+};
+
+const nodes = Object.entries(people).map(([id, p]) => ({
+  id,
+  label: p.label.replace(/\\n/g, '\n'),
+  title: p.full,
+  shape: 'box',
+  font: { face: 'EB Garamond, Georgia, serif', size: p.gen <= 2 ? 14 : (p.gen <= 4 ? 13 : 12), color: '#2c1810', multi: true },
+  color: nodeColors[p.status],
+  borderWidth: p.gen <= 2 ? 3 : (p.status === 'retracted' ? 1 : 2),
+  shadow: p.status === 'confirmed' && p.gen <= 4 ? { enabled: true, color: 'rgba(184,134,11,0.3)', size: 8 } : { enabled: false },
+  margin: { top: 8, bottom: 8, left: 12, right: 12 },
+  padding: 6,
+  physics: true,
+  mass: p.gen <= 2 ? 3 : (p.gen <= 4 ? 2 : 1),
+}));
+
+const edgeStyles = {
+  confirmed: { color: { color: '#2c1810', highlight: '#8b1a1a', hover: '#5a3e2b' }, width: 2, dashes: false },
+  hypothesis: { color: { color: '#4a6fa5', highlight: '#7a9fd4', hover: '#4a6fa5' }, width: 1.5, dashes: [8, 6] },
+  retracted: { color: { color: '#bbb', highlight: '#999', hover: '#ccc' }, width: 1, dashes: [4, 4] },
+};
+
+const edges = connections.map((c, i) => ({
+  id: `e${i}`,
+  from: c.from,
+  to: c.to,
+  label: c.label,
+  ...edgeStyles[c.type],
+  font: { face: 'EB Garamond, serif', size: 10, color: c.type === 'hypothesis' ? '#4a6fa5' : (c.type === 'retracted' ? '#999' : '#5a3e2b'), strokeWidth: 3, strokeColor: '#f5eed6' },
+  arrows: { to: { enabled: true, scaleFactor: 0.6, type: 'arrow' } },
+  smooth: { type: 'curvedCW', roundness: 0.2 },
+  hoverWidth: 0.5,
+  selectionWidth: 1,
+}));
+
+// Count stats
+const pCount = nodes.length;
+const cCount = connections.filter(c => c.type === 'confirmed').length;
+const hCount = connections.filter(c => c.type === 'hypothesis').length;
+const rCount = connections.filter(c => c.type === 'retracted').length;
+document.getElementById('p-count').textContent = pCount;
+document.getElementById('c-count').textContent = cCount;
+document.getElementById('h-count').textContent = hCount;
+document.getElementById('r-count').textContent = rCount;
+
+const container = document.getElementById('network');
+const data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+
+const options = {
+  layout: {
+    improvedLayout: true,
+  },
+  interaction: {
+    hover: true,
+    tooltipDelay: 200,
+    navigationButtons: true,
+    keyboard: { enabled: true },
+    multiselect: true,
+  },
+  physics: {
+    enabled: true,
+    solver: 'forceAtlas2Based',
+    forceAtlas2Based: {
+      gravitationalConstant: -120,
+      centralGravity: 0.02,
+      springLength: 200,
+      springConstant: 0.05,
+      damping: 0.4,
+    },
+    stabilization: {
+      enabled: true,
+      iterations: 300,
+      updateInterval: 25,
+    },
+  },
+  nodes: {
+    chosen: true,
+  },
+  edges: {
+    chosen: true,
+    smooth: { type: 'curvedCW', roundness: 0.15 },
+  },
+};
+
+const network = new vis.Network(container, data, options);
+
+// Sidebar interaction
+network.on('click', function(params) {
+  const nodeId = params.nodes[0];
+  if (!nodeId) return;
+
+  const person = people[nodeId];
+  if (!person) return;
+
+  const statusTag = person.status === 'confirmed'
+    ? '<span class="tag tag-confirmed">✓ Confirmado</span>'
+    : person.status === 'hypothesis'
+    ? '<span class="tag tag-hypothesis">◆ Hipótese</span>'
+    : '<span class="tag tag-retracted">✗ Retratado</span>';
+
+  const sourceTag = {
+    'historiografia': '<span class="tag tag-confirmed">Historiografia</span>',
+    'wikipedia+cpdoc': '<span class="tag tag-confirmed">Wikipédia + CPDOC</span>',
+    'wikipedia': '<span class="tag tag-confirmed">Wikipédia</span>',
+    'wikipedia+geni': '<span class="tag tag-hypothesis">Wikipédia + Geni</span>',
+    'cpdoc+fs': '<span class="tag tag-confirmed">CPDOC + FS</span>',
+    'fs': '<span class="tag tag-fs">FamilySearch</span>',
+    'apeb': '<span class="tag tag-apeb">APEB</span>',
+    'apeb+oral': '<span class="tag tag-apeb">APEB</span> <span class="tag tag-oral">Oral</span>',
+    'oral': '<span class="tag tag-oral">Informação oral</span>',
+    'oral+fs': '<span class="tag tag-oral">Oral</span> <span class="tag tag-fs">FS</span>',
+    'bibconsuelo+cpdoc': '<span class="tag tag-confirmed">Bib. Consuelo Pondé + CPDOC</span>',
+    'lacuna': '<span class="tag tag-hypothesis">Lacuna documental</span>',
+    'fs+apeb': '<span class="tag tag-fs">FS</span> <span class="tag tag-apeb">APEB</span>',
+  }[person.source] || `<span class="tag tag-fs">${person.source}</span>`;
+
+  const genLabel = genPrefixes[person.gen] || `G${person.gen}`;
+
+  const connectedEdges = network.getConnectedEdges(nodeId);
+  const relList = connectedEdges.map(eid => {
+    const edge = edges.find(e => e.id === eid);
+    if (!edge) return '';
+    const otherNode = edge.from === nodeId ? edge.to : edge.from;
+    const otherPerson = people[otherNode];
+    const otherName = otherPerson ? otherPerson.full : otherNode;
+    const typeIcon = edge.dashes === false ? '━━' : (Array.isArray(edge.dashes) && edge.dashes[0] === 4 ? '╌╌✗' : '╌╌◆');
+    return `<div style="margin:2px 0">${typeIcon} ${edge.label || '→'} ${otherName}</div>`;
+  }).join('');
+
+  const titlesHtml = person.titles.length > 0
+    ? `<div class="info-section"><div class="info-label">Títulos</div><div class="info-value">${person.titles.map(t => `<span class="tag tag-confirmed">${t}</span>`).join(' ')}</div></div>`
+    : '';
+
+  const html = `
+    <div class="person-header">${person.full}</div>
+    <div class="person-dates">${person.dates} &nbsp; ${statusTag} &nbsp; ${sourceTag} &nbsp; <small style="color:var(--ink-light)">${genLabel}</small></div>
+    <div class="info-section">
+      <div class="info-label">Informações</div>
+      <div class="info-value">${person.info}</div>
+    </div>
+    ${titlesHtml}
+    <div class="info-section">
+      <div class="info-label">Relações (${connectedEdges.length})</div>
+      <div class="info-value">${relList || '<i>Sem relações registradas</i>'}</div>
+    </div>
+  `;
+
+  document.getElementById('sidebar-content').innerHTML = html;
+});
+
+// Sidebar toggle
+const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('sidebar-toggle');
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+  toggleBtn.textContent = sidebar.classList.contains('collapsed') ? '▶' : '◀';
+  toggleBtn.style.right = sidebar.classList.contains('collapsed') ? '0' : '380px';
+  setTimeout(() => network.fit(), 300);
+});
+
+// Search
+function focusNode() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  if (!q) return;
+  const allNodes = data.nodes.get();
+  const match = allNodes.find(n => (n.label || '').toLowerCase().includes(q) || (n.title || '').toLowerCase().includes(q));
+  if (match) {
+    network.focus(match.id, { scale: 1.5, animation: true });
+    network.selectNodes([match.id]);
+    // Trigger click to show info
+    network.emit('click', { nodes: [match.id] });
+  }
+}
+
+document.getElementById('search-input').addEventListener('keydown', e => { if (e.key === 'Enter') focusNode(); });
+
+function resetView() {
+  network.fit({ animation: true });
+  document.getElementById('search-input').value = '';
+}
+
+// Fit on load
+network.once('stabilized', () => {
+  network.fit({ animation: true });
+});
+</script>
+</body>
+</html>
