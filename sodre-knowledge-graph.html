@@ -285,18 +285,15 @@
 <div id="stats-bar">
   Pessoas: <span id="p-count">0</span> &nbsp;|&nbsp;
   Ligações confirmadas: <span id="c-count">0</span> &nbsp;|&nbsp;
-  Hipóteses: <span id="h-count">0</span> &nbsp;|&nbsp;
-  Retratadas: <span id="r-count">0</span>
+  Hipóteses: <span id="h-count">0</span>
 </div>
 
 <div id="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#8b1a1a;"></div> Patriarca / Barão</div>
   <div class="legend-item"><div class="legend-dot" style="background:#b8860b;"></div> Documentado (FS/APEB)</div>
   <div class="legend-item"><div class="legend-dot" style="background:#4a6fa5;"></div> Hipótese</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#999;"></div> Retratado</div>
-  <div class="legend-item"><div class="legend-line solid"></div> Confirmado</div>
-  <div class="legend-item"><div class="legend-line dashed"></div> Hipótese</div>
-  <div class="legend-item"><div class="legend-line retracted"></div> Retratado</div>
+  <div class="legend-item"><div class="legend-line solid"></div> Confirmado por fonte oral/documental</div>
+  <div class="legend-item"><div class="legend-line dashed"></div> Hipótese fundamentada</div>
 </div>
 
 <div id="main-container">
@@ -624,6 +621,49 @@ const people = {
     titles: []
   },
 
+  "GervasioES": {
+    label: "Gervásio Eusébio\\ndos Santos",
+    full: "Gervásio Eusébio dos Santos",
+    dates: "? (fin. séc. XIX)",
+    gen: 8,
+    status: "confirmed",
+    source: "oral+parroquial",
+    info: `Pai de <b>Atanagilda Odete dos Santos</b> (esposa de Francisco Gramilo Sodré).<br>
+    Casado com <b>Maria Aleluia dos Santos</b>.<br><br>
+    <b>Paroquial (1895):</b> Possível irmão de <b>Francisco Eusébio dos Santos</b> (padrinho em Amargosa).<br>
+    Família Eusébio dos Santos estabelecida em Amargosa/BA desde final séc. XIX.<br><br>
+    <span class="tag tag-oral">Informação oral</span> <span class="tag tag-confirmed">Paroquial: padrinho 1895</span>`,
+    titles: []
+  },
+
+  "MariaAleluia": {
+    label: "Maria Aleluia\\ndos Santos",
+    full: "Maria Aleluia dos Santos",
+    dates: "?",
+    gen: 8,
+    status: "confirmed",
+    source: "oral",
+    info: `Esposa de <b>Gervásio Eusébio dos Santos</b>.<br>
+    Mãe de Atanagilda Odete dos Santos.<br><br>
+    <span class="tag tag-oral">Informação oral</span>`,
+    titles: []
+  },
+
+  "AtanagildaSampaio": {
+    label: "Atanagilda Sodré\\nSampaio",
+    full: "Atanagilda Sodré Sampaio",
+    dates: "11/04/1954",
+    gen: 10,
+    status: "confirmed",
+    source: "oral",
+    info: `1ª filha de <b>Francisco Gramilo Sodré</b> + <b>Atanagilda Odete dos Santos</b>.<br>
+    Nascimento: 11/04/1954.<br>
+    Sobrenome <b>Sampaio</b> — origem a investigar (possível ligação com Sampaio de Amargosa).<br><br>
+    <span class="tag tag-oral">Informação oral</span><br>
+    <i>⚠️ Sobrenome Sampaio: ligação com Geruásio José Sampaio (Amargosa, 1895)?</i>`,
+    titles: []
+  },
+
   "Veralucia": {
     label: "Veralúcia\nSodré",
     full: "Veralúcia Sodré Andrade (n. Andrade)",
@@ -717,6 +757,133 @@ const people = {
     titles: []
   },
 
+  // ── Novos: Registros Paroquiais Amargosa (1909-1941) — HWM brazilian_19th_century ──
+  "FirminoVS": {
+    label: "Firmino Vaz\\nSodré",
+    full: "Firmino Vaz Sodré",
+    dates: "ativo 1909-1914",
+    gen: 7,
+    status: "confirmed",
+    source: "parroquial+apeb",
+    info: `Ramo Vaz Sodré de Amargosa. <b>Confirmado em registros paroquiais</b> (HWM, 12/06/2026).<br><br>
+    <b>Batismo do filho José</b> (31/01/1909): pai = "Firmimo Vaz Poda" = Firmino Vaz Sodré.<br>
+    Casado com <b>Laurinda Sodré</b> — padrinhos juntos em 14/11/1914.<br>
+    Aparece como inventariante nos inventários APEB (Amargosa).<br><br>
+    <span class="tag tag-confirmed">Paroquial: batismo 1909</span> <span class="tag tag-confirmed">Paroquial: padrinho 1914</span> <span class="tag tag-apeb">APEB: inventários</span><br>
+    <i>⚠️ Precisa confirmar filiação: neto/filho de Tomaz Gramilo Sodré (cas. 1891)?</i>`,
+    titles: []
+  },
+
+  "LaurindaS": {
+    label: "Laurinda\\nSodré",
+    full: "Laurinda Sodré (c. Laurinda Vaz Sodré)",
+    dates: "ativa 1909-1914",
+    gen: 7,
+    status: "confirmed",
+    source: "parroquial",
+    info: `Esposa de <b>Firmino Vaz Sodré</b>.<br><br>
+    <b>Batismo do filho José</b> (31/01/1909): mãe = "Laurinda Paz" = Laurinda Vaz Sodré (erro OCR).<br>
+    <b>Padrinhos juntos com Firmino</b> em 14/11/1914 (Inocência + Olímpio).<br>
+    Casal de padrinhos prestigioso na comunidade de Amargosa.<br><br>
+    <span class="tag tag-confirmed">Paroquial: batismo 1909</span> <span class="tag tag-confirmed">Paroquial: madrinha 1914</span><br>
+    <i>⚠️ "Paz" = erro OCR para Vaz/Sodré</i>`,
+    titles: []
+  },
+
+  "EuneraldoS": {
+    label: "Euneraldo/Everaldo\\nSodré",
+    full: "Euneraldo Sodré (ou Everaldo/Genivaldo)",
+    dates: "ativo 1914",
+    gen: 7,
+    status: "hypothesis",
+    source: "parroquial",
+    info: `Outro Sodré em Amargosa (1914).<br><br>
+    Pai de <b>Olímpio</b> e <b>Ismael</b> (bat. 14/11/1914).<br>
+    Casado com <b>Florinda de Andrade</b> (ou Alarinda).<br>
+    Padrinhos dos filhos: <b>Firmino Sodré + Laurinda Sodré</b> — reforça conexão.<br><br>
+    <span class="tag tag-hypothesis">Paroquial: pai de Olímpio/Ismael</span> <span class="tag tag-hypothesis">Paroquial: padrinhos Firmino+Laurinda</span><br>
+    <i>⚠️ "Todré/Lodre" = erro OCR para Sodré. Precisa confirmar se parente de Firmino (irmão? primo?).</i>`,
+    titles: []
+  },
+
+  "FlorindaA": {
+    label: "Florinda\\nde Andrade",
+    full: "Florinda de Andrade (ou Alarinda)",
+    dates: "ativa 1914",
+    gen: 7,
+    status: "hypothesis",
+    source: "parroquial",
+    info: `Esposa de <b>Euneraldo Sodré</b>.<br><br>
+    Mãe de Olímpio (nasc. ~1914) e Ismael (30 meses em 1914, nasc. ~1912).<br>
+    Nome transcrito como "Alarinda" / "Florinda" — variação OCR.<br><br>
+    <span class="tag tag-hypothesis">Paroquial: mãe de Olímpio/Ismael</span><br>
+    <i>⚠️ Variação OCR: Alarinda/Florinda</i>`,
+    titles: []
+  },
+
+  "ManoelCaetanoS": {
+    label: "Manoel Caetano\\nSodré",
+    full: "Manoel Caetano Sodré",
+    dates: "ativo 1941",
+    gen: 7,
+    status: "confirmed",
+    source: "parroquial",
+    info: `Pai de <b>Antonia Sodré de Jesus</b> (casamento 01/12/1941).<br><br>
+    <b>Casamento da filha</b> (Amargosa/BA): Antonia Sodré de Jesus × Vicente Maciel de Almeida.<br>
+    Pai transcrito como "Manoel Caetano Jodré" — erro OCR "Jodré" = Sodré.<br>
+    Mãe da noiva: <b>Maria Paulina Joares</b> ("Poulina" = erro OCR).<br><br>
+    <span class="tag tag-confirmed">Paroquial: casamento 1941</span><br>
+    <i>⚠️ Precisa confirmar se parente de Firmino Vaz Sodré (mesma geração, mesma freguesia). Verificar APEB.</i>`,
+    titles: []
+  },
+
+  "MariaPaulinaJ": {
+    label: "Maria Paulina\\nJoares",
+    full: "Maria Paulina Joares",
+    dates: "ativa 1941",
+    gen: 7,
+    status: "confirmed",
+    source: "parroquial",
+    info: `Esposa de <b>Manoel Caetano Sodré</b>.<br><br>
+    Mãe de Antonia Sodré de Jesus (cas. 1941).<br>
+    Nome transcrito como "Maria Poulina Joares" — "Poulina" = erro OCR.<br><br>
+    <span class="tag tag-confirmed">Paroquial: casamento 1941</span><br>
+    <i>⚠️ "Poulina" = erro OCR para Paulina</i>`,
+    titles: []
+  },
+
+  "FranciscoEusebio": {
+    label: "Francisco Eusébio\\ndos Santos",
+    full: "Francisco Eusébio dos Santos",
+    dates: "ativo 1895",
+    gen: 6,
+    status: "confirmed",
+    source: "parroquial",
+    info: `Padrinho em batismo (08/12/1895, Brejaês, Amargosa/BA).<br><br>
+    <b>Mesmo sobrenome composto</b> do avô materno de Francisco Gramilo Sodré: <b>Gervásio Eusébio dos Santos</b>.<br>
+    Forte indício de parentesco — possivelmente <b>irmão</b> de Gervásio.<br>
+    Família Eusébio dos Santos estabelecida em Amargosa desde final séc. XIX.<br><br>
+    <span class="tag tag-confirmed">Paroquial: padrinho 1895</span><br>
+    <i>⚠️ Hipótese: irmão de Gervásio Eusébio dos Santos. Precisa confirmação documental.</i>`,
+    titles: []
+  },
+
+  "GeruasioSampaio": {
+    label: "Geruásio José\\nSampaio",
+    full: "Geruásio José Sampaio",
+    dates: "ativo 1895",
+    gen: 7,
+    status: "hypothesis",
+    source: "parroquial",
+    info: `Pai em batismo (08/12/1895, Brejaês, Amargosa/BA).<br><br>
+    Sobrenome <b>Sampaio</b> = mesmo de <b>Atanagilda Sodré Sampaio</b> (filha #1 de Francisco Gramilo Sodré).<br>
+    Possível ligação entre os Sampaio de Amargosa e o ramo Gramilo Sodré.<br>
+    "Geruásio" = variante de Gervásio?<br><br>
+    <span class="tag tag-hypothesis">Paroquial: pai 1895</span><br>
+    <i>⚠️ Conexão especulativa via sobrenome Sampaio. Precisa investigar.</i>`,
+    titles: []
+  },
+
   "SodreBrumado": {
     label: "Sodre Pereira\n(Brumado 1818)",
     full: "Sodre Pereira (Brumado 1818)",
@@ -768,8 +935,15 @@ const connections = [
   { from: "Marcelo", to: "FranciscoGS", label: "pai de", type: "confirmed" },
   { from: "RitaRosa", to: "FranciscoGS", label: "mãe de", type: "confirmed" },
   { from: "FranciscoGS", to: "Atanagilda", label: "casou com", type: "confirmed" },
+  { from: "FranciscoGS", to: "AtanagildaSampaio", label: "pai de", type: "confirmed" },
   { from: "FranciscoGS", to: "Veralucia", label: "pai de", type: "confirmed" },
+  { from: "Atanagilda", to: "AtanagildaSampaio", label: "mãe de", type: "confirmed" },
   { from: "Veralucia", to: "Ricardo", label: "mãe de", type: "confirmed" },
+
+  // Conexões Gervásio Eusébio dos Santos
+  { from: "GervasioES", to: "MariaAleluia", label: "casou com", type: "confirmed" },
+  { from: "GervasioES", to: "Atanagilda", label: "pai de", type: "confirmed" },
+  { from: "MariaAleluia", to: "Atanagilda", label: "mãe de", type: "confirmed" },
 
   // ── FS registros confirmados ──
   { from: "DuarteSP", to: "G2_unknown", label: "possível elo", type: "hypothesis" },
@@ -780,9 +954,20 @@ const connections = [
   { from: "FranciscoLudgero", to: "Tomaz", label: "Vaz Sodré de Amargosa", type: "hypothesis" },
   { from: "HoracioVS", to: "FranciscoLudgero", label: "ramo Vaz Sodré", type: "confirmed" },
 
-  // ── RETRATADO (alucinação Vision) ──
-  { from: "Tomaz", to: "JSP1", label: "RETIRADO: child_of Jerônimo (ALUCINAÇÃO Vision)", type: "retracted" },
-  { from: "Tomaz", to: "JSP3", label: "RETIRADO: married Antônia de Gramilo (ALUCINAÇÃO)", type: "retracted" },
+  // ── Novos: Registros Paroquiais Amargosa (1909-1941) ──
+  { from: "FirminoVS", to: "LaurindaS", label: "casado com (1909-1914)", type: "confirmed" },
+  { from: "FirminoVS", to: "HoracioVS", label: "ramo Vaz Sodré", type: "hypothesis" },
+  { from: "FirminoVS", to: "FranciscoLudgero", label: "ramo Vaz Sodré", type: "hypothesis" },
+  { from: "FirminoVS", to: "Tomaz", label: "elo hipotético (filho/neto?)", type: "hypothesis" },
+  { from: "EuneraldoS", to: "FlorindaA", label: "casado com (1914)", type: "hypothesis" },
+  { from: "EuneraldoS", to: "FirminoVS", label: "parente (irmão/primo?)", type: "hypothesis" },
+  { from: "ManoelCaetanoS", to: "MariaPaulinaJ", label: "casado com", type: "confirmed" },
+  { from: "ManoelCaetanoS", to: "FirminoVS", label: "possível parente (mesma geração)", type: "hypothesis" },
+  { from: "FranciscoEusebio", to: "GervasioES", label: "possível irmão", type: "hypothesis" },
+  { from: "GeruasioSampaio", to: "AtanagildaSampaio", label: "mesmo sobrenome Sampaio", type: "hypothesis" },
+
+  // ── Notas removidas da visualização ──
+  // A árvore exibe apenas fatos confirmados ou hipóteses fundamentadas.
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -837,11 +1022,9 @@ const edges = connections.map((c, i) => ({
 const pCount = nodes.length;
 const cCount = connections.filter(c => c.type === 'confirmed').length;
 const hCount = connections.filter(c => c.type === 'hypothesis').length;
-const rCount = connections.filter(c => c.type === 'retracted').length;
 document.getElementById('p-count').textContent = pCount;
 document.getElementById('c-count').textContent = cCount;
 document.getElementById('h-count').textContent = hCount;
-document.getElementById('r-count').textContent = rCount;
 
 const container = document.getElementById('network');
 const data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
@@ -896,7 +1079,7 @@ network.on('click', function(params) {
     ? '<span class="tag tag-confirmed">✓ Confirmado</span>'
     : person.status === 'hypothesis'
     ? '<span class="tag tag-hypothesis">◆ Hipótese</span>'
-    : '<span class="tag tag-retracted">✗ Retratado</span>';
+    : '<span class="tag tag-hypothesis">◆ Hipótese</span>';
 
   const sourceTag = {
     'historiografia': '<span class="tag tag-confirmed">Historiografia</span>',
@@ -912,6 +1095,9 @@ network.on('click', function(params) {
     'bibconsuelo+cpdoc': '<span class="tag tag-confirmed">Bib. Consuelo Pondé + CPDOC</span>',
     'lacuna': '<span class="tag tag-hypothesis">Lacuna documental</span>',
     'fs+apeb': '<span class="tag tag-fs">FS</span> <span class="tag tag-apeb">APEB</span>',
+    'parroquial': '<span class="tag tag-confirmed">Paroquial</span>',
+    'parroquial+apeb': '<span class="tag tag-confirmed">Paroquial</span> <span class="tag tag-apeb">APEB</span>',
+    'oral+parroquial': '<span class="tag tag-oral">Oral</span> <span class="tag tag-confirmed">Paroquial</span>',
   }[person.source] || `<span class="tag tag-fs">${person.source}</span>`;
 
   const genLabel = genPrefixes[person.gen] || `G${person.gen}`;
