@@ -28,9 +28,7 @@
   --border-line: #c9b896;
   --card-shadow: 0 2px 8px rgba(26,16,8,0.12);
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
-
 body {
   font-family: 'EB Garamond', Georgia, serif;
   background: var(--parchment);
@@ -39,363 +37,190 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
-
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px;
-  z-index: 9999;
+  content:'';
+  position:fixed; inset:0; pointer-events:none; opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px; z-index:9999;
 }
 
-/* ── Header ── */
 .page-header {
-  text-align: center;
-  padding: 3rem 2rem 2rem;
-  border-bottom: 2px solid var(--gold);
-  position: relative;
-  background: linear-gradient(180deg, rgba(232,220,200,0.6) 0%, transparent 100%);
+  text-align:center; padding:2.5rem 2rem 1.8rem;
+  border-bottom:2px solid var(--gold); position:relative;
+  background:linear-gradient(180deg, rgba(232,220,200,0.6) 0%, transparent 100%);
 }
 .page-header::after {
-  content: '✦';
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--parchment);
-  padding: 0 1rem;
-  color: var(--gold);
-  font-size: 1.4rem;
+  content:'✦'; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%);
+  background:var(--parchment); padding:0 1rem; color:var(--gold); font-size:1.4rem;
 }
 .page-header h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  line-height: 1.15;
-  color: var(--ink);
-  letter-spacing: 0.02em;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,4vw,3rem); font-weight:700; line-height:1.15;
 }
-.page-header h1 em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--gold);
-}
+.page-header h1 em { font-style:italic; font-weight:400; color:var(--gold); }
 .page-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  font-style: italic;
-  color: var(--ink-muted);
-  margin-top: 0.5rem;
+  font-family:'Cormorant Garamond',serif; font-size:1.15rem;
+  font-style:italic; color:var(--ink-muted); margin-top:0.4rem;
 }
 
 /* ── Controls ── */
 .controls {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 1.5rem 1rem 0.5rem;
+  display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;
+  padding:1.2rem 1rem 0.4rem;
 }
 .ctrl-btn {
-  font-family: 'EB Garamond', serif;
-  font-size: 0.9rem;
-  padding: 0.4rem 1rem;
-  border: 1px solid var(--border-line);
-  border-radius: 3px;
-  background: var(--parchment-deep);
-  color: var(--ink-soft);
-  cursor: pointer;
-  transition: all 0.2s;
+  font-family:'EB Garamond',serif; font-size:0.9rem;
+  padding:0.35rem 0.9rem; border:1px solid var(--border-line);
+  border-radius:3px; background:var(--parchment-deep);
+  color:var(--ink-soft); cursor:pointer; transition:all 0.2s;
 }
-.ctrl-btn:hover { background: var(--gold-light); color: #fff; border-color: var(--gold); }
-.ctrl-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+.ctrl-btn:hover { background:var(--gold-light); color:#fff; border-color:var(--gold); }
+.ctrl-btn.active { background:var(--gold); color:#fff; border-color:var(--gold); }
 
-/* ── Legend ── */
 .legend {
-  display: flex;
-  gap: 1.2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 0.5rem 1rem 1rem;
-  border-bottom: 1px solid var(--border-line);
+  display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+  padding:0.4rem 1rem 1rem; border-bottom:1px solid var(--border-line);
 }
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.85rem;
-  color: var(--ink-muted);
-}
-.legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  border: 1px solid rgba(0,0,0,0.15);
-}
+.legend-item { display:flex; align-items:center; gap:0.3rem; font-size:0.8rem; color:var(--ink-muted); }
+.legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
 
-/* ── Tree Container ── */
+/* ── Main tree ── */
 .tree-wrap {
-  overflow-x: auto;
-  padding: 2rem 1rem 3rem;
+  overflow-x:auto; padding:2rem 1rem 3rem;
 }
 
-/* ── Generation Layers ── */
-.gen-layer {
-  margin-bottom: 1rem;
-  position: relative;
+/* ── Section (branch group) ── */
+.section {
+  margin-bottom:2.5rem; position:relative;
 }
-.gen-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--ink-muted);
-  padding: 0.3rem 0;
-  border-bottom: 1px dotted var(--border-line);
-  margin-bottom: 0.8rem;
+.section-title {
+  font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700;
+  color:var(--ink-soft); padding:0.5rem 0; margin-bottom:0.8rem;
+  border-bottom:1px solid var(--border-line); letter-spacing:0.04em;
 }
-.gen-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  justify-content: center;
-  padding: 0 0.5rem;
+.section-title em { font-weight:400; font-style:italic; color:var(--ink-muted); }
+
+/* ── Family column ── */
+.family-col {
+  display:inline-flex; flex-direction:column; align-items:center;
+  gap:0.5rem; vertical-align:top; margin:0 1rem 1.5rem 0;
+  min-width:140px;
+}
+.family-couple {
+  display:flex; gap:0.4rem; align-items:flex-start;
+}
+.couple-link {
+  align-self:center; font-size:1.4rem; color:var(--gold);
+  line-height:1; padding:0 0.15rem; font-style:italic;
+}
+.children-list {
+  display:flex; flex-wrap:wrap; gap:0.4rem; justify-content:center;
+  padding:0.5rem 0 0; border-top:1px dotted var(--border-line);
+  margin-top:0.3rem; width:100%;
+}
+.children-list.vertical {
+  flex-direction:column; align-items:center;
 }
 
-/* ── Person Cards ── */
+/* ── Person cards ── */
 .person {
-  position: relative;
-  border: 1px solid var(--border-line);
-  border-radius: 4px;
-  padding: 0.6rem 0.8rem;
-  min-width: 130px;
-  max-width: 180px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--card-shadow);
+  position:relative; border:1px solid var(--border-line); border-radius:4px;
+  padding:0.5rem 0.7rem; min-width:120px; max-width:170px;
+  cursor:pointer; transition:all 0.2s ease;
+  box-shadow:var(--card-shadow);
 }
 .person:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(26,16,8,0.2);
-  z-index: 10;
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(26,16,8,0.2); z-index:10;
 }
-.person.selected {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
+.person.selected { outline:2px solid var(--gold); outline-offset:2px; }
 
-/* Category colors */
-.person.cat-historical {
-  background: linear-gradient(135deg, #f7f0e3, #f0e8d5);
-  border-color: var(--gold);
-}
-.person.cat-historical .person-name { color: var(--gold); }
-
-.person.cat-barao {
-  background: var(--barao-bg);
-  border-color: var(--barao);
-}
-.person.cat-barao .person-name { color: var(--barao); }
-
-.person.cat-colonial {
-  background: var(--colonial-bg);
-  border-color: var(--colonial);
-}
-.person.cat-colonial .person-name { color: var(--colonial); }
-
-.person.cat-hypothetical {
-  background: var(--hypothetical-bg);
-  border-color: var(--hypothetical);
-  border-style: dashed;
-}
-.person.cat-hypothetical .person-name { color: var(--hypothetical); }
-
-.person.cat-confirmed {
-  background: var(--confirmed-bg);
-  border-color: var(--confirmed);
-}
-.person.cat-confirmed .person-name { color: var(--confirmed); }
-
-.person.cat-materno {
-  background: var(--materno-bg);
-  border-color: var(--materno);
-}
-.person.cat-materno .person-name { color: var(--materno); }
-
-.person.cat-filho {
-  background: var(--filho-bg);
-  border-color: #8aba9a;
-}
-.person.cat-filho .person-name { color: var(--confirmed); }
-
-.person.cat-sobrinho {
-  background: #f4f8f5;
-  border-color: #b0c8b5;
-  border-width: 1px;
-  min-width: 100px;
-  max-width: 140px;
-}
-.person.cat-sobrinho .person-name { color: #4a7a5a; font-size: 0.82rem; }
+.person.cat-historical { background:linear-gradient(135deg,#f7f0e3,#f0e8d5); border-color:var(--gold); }
+.person.cat-historical .person-name { color:var(--gold); }
+.person.cat-barao { background:var(--barao-bg); border-color:var(--barao); }
+.person.cat-barao .person-name { color:var(--barao); }
+.person.cat-colonial { background:var(--colonial-bg); border-color:var(--colonial); }
+.person.cat-colonial .person-name { color:var(--colonial); }
+.person.cat-hypothetical { background:var(--hypothetical-bg); border-color:var(--hypothetical); border-style:dashed; }
+.person.cat-hypothetical .person-name { color:var(--hypothetical); }
+.person.cat-confirmed { background:var(--confirmed-bg); border-color:var(--confirmed); }
+.person.cat-confirmed .person-name { color:var(--confirmed); }
+.person.cat-materno { background:var(--materno-bg); border-color:var(--materno); }
+.person.cat-materno .person-name { color:var(--materno); }
+.person.cat-filho { background:var(--filho-bg); border-color:#8aba9a; }
+.person.cat-filho .person-name { color:var(--confirmed); }
+.person.cat-sobrinho { background:#f4f8f5; border-color:#b0c8b5; min-width:90px; max-width:130px; }
+.person.cat-sobrinho .person-name { color:#4a7a5a; font-size:0.82rem; }
 
 .person-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1.2;
+  font-family:'Cormorant Garamond',serif; font-weight:700;
+  font-size:0.9rem; line-height:1.2;
 }
 .person-dates {
-  font-size: 0.75rem;
-  color: var(--ink-muted);
-  margin-top: 0.15rem;
-  font-style: italic;
+  font-size:0.72rem; color:var(--ink-muted); margin-top:0.1rem; font-style:italic;
 }
-.person-tag {
-  display: inline-block;
-  font-size: 0.65rem;
-  padding: 0.1rem 0.35rem;
-  border-radius: 2px;
-  margin-top: 0.25rem;
-  font-family: 'EB Garamond', serif;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.person-spouse {
+  font-size:0.68rem; color:var(--ink-muted); margin-top:0.1rem;
+  font-style:italic;
 }
+.person-spouse strong { color:var(--ink-soft); font-style:normal; }
 
-/* ── Branch Groups ── */
-.branch-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
+/* ── Descendant link arrow ── */
+.desc-link {
+  text-align:center; padding:0.3rem 0; color:var(--gold); font-size:0.85rem;
+  font-family:'Cormorant Garamond',serif; font-style:italic;
 }
-.branch-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-muted);
-  padding: 0.15rem 0.5rem;
-  border: 1px solid var(--border-line);
-  border-radius: 2px;
-  background: var(--parchment-deep);
-  margin-bottom: 0.3rem;
+.desc-link::before { content:'↓ '; }
+.desc-link a {
+  color:var(--gold); text-decoration:none; border-bottom:1px dotted var(--gold);
+  cursor:pointer;
 }
-.branch-members {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-}
+.desc-link a:hover { color:var(--ink-soft); border-bottom-style:solid; }
 
-/* ── Connection Lines (SVG overlay) ── */
-.connections-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+/* ── Connector lines between families ── */
+.connector {
+  display:flex; align-items:center; gap:0.5rem; margin:0.5rem 0;
+  color:var(--ink-muted); font-family:'Cormorant Garamond',serif;
+  font-size:0.8rem; font-style:italic;
 }
+.connector-arrow { font-size:1.2rem; color:var(--gold); }
 
 /* ── Info Panel ── */
 .info-panel {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  background: #fffcf5;
-  border: 2px solid var(--gold);
-  border-radius: 5px;
-  padding: 1.2rem 1.5rem;
-  max-width: 340px;
-  box-shadow: 0 6px 24px rgba(26,16,8,0.2);
-  z-index: 100;
-  display: none;
-  font-size: 0.9rem;
+  position:fixed; bottom:1.5rem; right:1.5rem;
+  background:#fffcf5; border:2px solid var(--gold); border-radius:5px;
+  padding:1.2rem 1.5rem; max-width:340px;
+  box-shadow:0 6px 24px rgba(26,16,8,0.2);
+  z-index:100; display:none; font-size:0.9rem;
 }
 .info-panel h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  color: var(--ink);
-  margin-bottom: 0.6rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border-line);
+  font-family:'Cormorant Garamond',serif; font-size:1.15rem;
+  color:var(--ink); margin-bottom:0.5rem; padding-bottom:0.4rem;
+  border-bottom:1px solid var(--border-line);
 }
-.info-rel {
-  font-size: 0.82rem;
-  color: var(--ink-soft);
-  padding: 0.15rem 0;
-}
-.info-rel .rel-type {
-  font-weight: 600;
-  color: var(--gold);
-}
-.info-close {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  cursor: pointer;
-  color: var(--ink-muted);
-  font-size: 1.3rem;
-  line-height: 1;
-}
-.info-close:hover { color: var(--ink); }
+.info-rel { font-size:0.82rem; color:var(--ink-soft); padding:0.12rem 0; }
+.info-rel .rel-type { font-weight:600; color:var(--gold); }
+.info-note { font-size:0.8rem; color:#5a4a3a; font-style:italic; margin-top:0.3rem; }
+.info-close { position:absolute; top:6px; right:10px; cursor:pointer; color:var(--ink-muted); font-size:1.3rem; line-height:1; }
+.info-close:hover { color:var(--ink); }
 
-/* ── Collapsible Branches ── */
-.collapse-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1px solid var(--border-line);
-  background: var(--parchment-deep);
-  color: var(--ink-muted);
-  font-size: 0.7rem;
-  cursor: pointer;
-  margin-left: 0.3rem;
-  transition: all 0.2s;
-}
-.collapse-toggle:hover { background: var(--gold); color: #fff; }
-.collapse-toggle.collapsed::after { content: '+'; }
-.collapse-toggle.expanded::after { content: '−'; }
-
-.branch-members.collapsed { display: none; }
-
-/* ── Footer ── */
 .page-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  border-top: 1px solid var(--border-line);
-  margin-top: 1rem;
+  text-align:center; padding:2rem 1rem; border-top:1px solid var(--border-line); margin-top:1rem;
 }
-.page-footer p {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  color: var(--ink-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
+.page-footer p { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--ink-muted); font-size:0.9rem; line-height:1.6; }
 
-/* ── Animations ── */
-@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-.gen-layer { animation: fadeIn 0.4s ease both; }
-.gen-layer:nth-child(2) { animation-delay: 0.05s; }
-.gen-layer:nth-child(3) { animation-delay: 0.1s; }
-.gen-layer:nth-child(4) { animation-delay: 0.15s; }
-.gen-layer:nth-child(5) { animation-delay: 0.2s; }
-.gen-layer:nth-child(6) { animation-delay: 0.25s; }
-.gen-layer:nth-child(7) { animation-delay: 0.3s; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+.section { animation:fadeIn 0.4s ease both; }
+.section:nth-child(2) { animation-delay:0.05s; }
+.section:nth-child(3) { animation-delay:0.1s; }
+.section:nth-child(4) { animation-delay:0.15s; }
+.section:nth-child(5) { animation-delay:0.2s; }
 
-@media (max-width: 768px) {
-  .person { min-width: 110px; max-width: 150px; padding: 0.4rem 0.6rem; }
-  .person-name { font-size: 0.85rem; }
-  .page-header { padding: 2rem 1rem 1.5rem; }
-  .tree-wrap { padding: 1rem 0.5rem 2rem; }
+@media(max-width:768px) {
+  .person { min-width:100px; max-width:145px; padding:0.4rem 0.55rem; }
+  .person-name { font-size:0.82rem; }
+  .page-header { padding:1.5rem 1rem 1.2rem; }
+  .family-col { margin:0 0.5rem 1rem 0; }
 }
 </style>
 </head>
@@ -406,13 +231,7 @@ body::before {
   <p class="page-subtitle">Rede genealógica — dados sincronizados em junho de 2026</p>
 </header>
 
-<div class="controls">
-  <button class="ctrl-btn active" onclick="showAll()">Todos os ramos</button>
-  <button class="ctrl-btn" onclick="filterBranch('historical')">Tronco histórico</button>
-  <button class="ctrl-btn" onclick="filterBranch('barao')">Ramo Barão</button>
-  <button class="ctrl-btn" onclick="filterBranch('confirmed')">Ramo Marcelo</button>
-  <button class="ctrl-btn" onclick="filterBranch('materno')">Ramo materno</button>
-</div>
+<div class="controls" id="controls"></div>
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#9e7c2e"></div> Histórico</div>
@@ -420,8 +239,7 @@ body::before {
   <div class="legend-item"><div class="legend-dot" style="background:#2a5a8a"></div> Elo colonial</div>
   <div class="legend-item"><div class="legend-dot" style="background:#2d5a3d"></div> Confirmado</div>
   <div class="legend-item"><div class="legend-dot" style="background:#7a5a10"></div> Materno</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#8b2e2e; border-style:dashed"></div> Hipotético</div>
-  <div class="legend-item" style="font-size:0.78rem;color:#7a6b55">Clique em pessoa para detalhes</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8b2e2e;border-style:dashed"></div> Hipotético</div>
 </div>
 
 <div class="tree-wrap" id="treeWrap"></div>
@@ -438,333 +256,275 @@ body::before {
 </footer>
 
 <script>
-// ── Genealogy Data ──
-const PEOPLE = {
-  // G1: Patriarcas
-  fernando:       { name:'D. Fernando Sodré Pereira', dates:'', cat:'historical', gen:1, tag:'Patriarca' },
-  jeronimo_i:     { name:'Jerônimo Sodré Pereira I', dates:'1631–1711', cat:'historical', gen:1, tag:'Patriarca', note:'Águas Belas, Lisboa → Salvador/BA' },
-  francisca:      { name:'D. Francisca de Aragão', dates:'', cat:'historical', gen:1, tag:'1ª esposa' },
-  maria_azevedo:  { name:'Maria de Azevedo', dates:'', cat:'historical', gen:1, tag:'2ª esposa' },
-
-  // G2: Colonial
-  manuel:         { name:'Manuel Sodré', dates:'', cat:'colonial', gen:2, tag:'Elo colonial' },
-  maria_gramilo:  { name:'Maria Gramilo', dates:'', cat:'colonial', gen:2, tag:'Elo Gramilo' },
-  antonio_p:      { name:'Antônio Pereira', dates:'', cat:'colonial', gen:2, tag:'Elo colonial' },
-  isabel_g:       { name:'Isabel Gramilo', dates:'', cat:'colonial', gen:2, tag:'Elo Gramilo' },
-  coronel:        { name:'Francisco Maria Sodré Pereira', dates:'', cat:'barao', gen:2, tag:'Coronel', note:'Filho de Francisco Álvaro' },
-  meneses:        { name:'Maria Ana de Meneses', dates:'', cat:'barao', gen:2, tag:'Esposa' },
-
-  // G3: Barão
-  barao:          { name:'Barão de Alagoinhas', dates:'1818–1882', cat:'barao', gen:3, tag:'Barão', note:'Francisco Pereira Sodré · Cachoeira/BA' },
-  cora:           { name:'Cora César Coutinho', dates:'1819–1880', cat:'barao', gen:3, tag:'Baronesa' },
-  jeronimo_ii:    { name:'Jerônimo Sodré Pereira II', dates:'~1835', cat:'barao', gen:3, tag:'Médico', note:'Deputado provincial · ≠ patriarca' },
-  conselheiro:    { name:'Conselheiro F. M. S. Pereira', dates:'1836–1903', cat:'barao', gen:3, tag:'Conselheiro', note:'Deputado federal BA 1891–1902' },
-  jose_lino:      { name:'José Lino Coutinho Sodré', dates:'', cat:'barao', gen:3, tag:'Filho do Barão' },
-  elisa_barao:    { name:'Elisa Sodré Pereira', dates:'bat. 1881', cat:'barao', gen:3, tag:'Filha do Barão' },
-  eduardo:        { name:'Eduardo Sodré', dates:'', cat:'colonial', gen:3, tag:'Filho de Manuel' },
-
-  // G4: Ascendentes
-  tomaz:          { name:'Tomaz Gramilo Sodré', dates:'~1860', cat:'hypothetical', gen:4, tag:'Ascendente', note:'Amargosa/BA · ~4-6 gerações entre Jerônimo I e Tomaz' },
-  teodora:        { name:'Teodora Julia da Cruz', dates:'', cat:'hypothetical', gen:4, tag:'Esposa de Tomaz' },
-
-  // G5: Avós
-  marcelo:        { name:'Marcelo Gramilo Sodré', dates:'1897–1976', cat:'confirmed', gen:5, tag:'Avô paterno', note:'Casam. 09/02/1924 · Montes Claros/MG' },
-  rita_rosa:      { name:'Rita Rosa Sodré', dates:'1901–1992', cat:'confirmed', gen:5, tag:'Avó paterna' },
-  gervasio:       { name:'Gervásio Eusébio dos Santos', dates:'1914–?', cat:'materno', gen:5, tag:'Avô materno', note:'Bat. 14/11/1914, Amargosa/BA' },
-  maria_aleluia:  { name:'Maria Aleluia dos Santos', dates:'', cat:'materno', gen:5, tag:'Avó materna' },
-
-  // G6: Pais + irmãos
-  francisco:      { name:'Francisco Gramilo Sodré', dates:'1925–1999', cat:'confirmed', gen:6, tag:'Patriarca familiar', note:'Bat. 17/05/1925 · Casam. 26/12/1953 · Ibitupa/BA' },
-  atanagilda:     { name:'Atanagilda Odete dos Santos', dates:'1933–2016', cat:'confirmed', gen:6, tag:'Matriarca', note:'Bat. 25/06/1933 · Casam. 26/12/1953' },
-  arlindo:        { name:'Arlindo Gramilo Sodré', dates:'', cat:'confirmed', gen:6, tag:'Tio', branch:'arlindo', branchCount:8 },
-  noemia:         { name:'Noemia Rocha Sodré', dates:'', cat:'confirmed', gen:6, tag:'Esposa de Arlindo' },
-  zeca:           { name:'José Gramilo Sodré (Zeca)', dates:'', cat:'confirmed', gen:6, tag:'Tio', branch:'zeca', branchCount:9 },
-  otavia:         { name:'Otávia Rosa Sodré Bispo', dates:'', cat:'confirmed', gen:6, tag:'Tia', branch:'otavia', branchCount:10 },
-  eustaquio:      { name:'Eustáquio Eusébio Bispo', dates:'', cat:'confirmed', gen:6, tag:'Esposo de Otávia' },
-  elisa:          { name:'Elisa Gramilo Sodré', dates:'', cat:'confirmed', gen:6, tag:'Tia', branch:'elisa', branchCount:3 },
-  isabel:         { name:'Isabel Gramilo Sodré', dates:'', cat:'confirmed', gen:6, tag:'Tia', branch:'isabel', branchCount:7 },
-  maximiliano:    { name:'Maximiliano', dates:'', cat:'confirmed', gen:6, tag:'Esposo de Isabel' },
-
-  // G7: Filhos de Francisco
-  atanagilda_f:   { name:'Atanagilda Sodré Sampaio', dates:'1954', cat:'filho', gen:7, tag:'1ª filha', note:'n. 11/04/1954' },
-  veralucia:      { name:'Veralúcia Sodré', dates:'1955', cat:'filho', gen:7, tag:'2ª filha', note:'n. 30/09/1955 · mãe de Ricardo' },
-  luiz_carlos:    { name:'Luiz Carlos Sudré', dates:'1957', cat:'filho', gen:7, tag:'3º filho', note:'n. 30/03/1957 · Sudré = erro cartorário' },
-  francisco_f:    { name:'Francisco G. Sodré Filho', dates:'1959', cat:'filho', gen:7, tag:'4º filho', note:'n. 26/07/1959 · Professor, PMA' },
-  angelica:       { name:'Angélica Maria Sodré Costa', dates:'1961', cat:'filho', gen:7, tag:'5ª filha', note:'n. 02/03/1961' },
-  rita_cassia:    { name:'Rita de Cássia Sodré Amaral', dates:'1962', cat:'filho', gen:7, tag:'6ª filha', note:'n. 09/10/1962' },
-  djalma:         { name:'Djalma Gramilo Sodré', dates:'1964', cat:'filho', gen:7, tag:'7º filho', note:'n. 15/02/1964' },
-  paulo_renato:   { name:'Paulo Renato Sodré', dates:'1965', cat:'filho', gen:7, tag:'8º filho', note:'n. 19/06/1965' },
-  ronaldo:        { name:'Ronaldo Gramilo Sodré', dates:'1966', cat:'filho', gen:7, tag:'9º filho', note:'n. 16/12/1966' },
-  julio:          { name:'Júlio César Gramilo Sodré', dates:'1968', cat:'filho', gen:7, tag:'10º filho', note:'n. 09/01/1968' },
-  cristina:       { name:'Cristina M. Gramilo Sodré', dates:'1969', cat:'filho', gen:7, tag:'11ª filha', note:'n. 02/08/1969' },
-  sinara:         { name:'Sinara Magali Sodré', dates:'1971', cat:'filho', gen:7, tag:'12ª filha', note:'n. 20/12/1971' },
-};
-
-const RELATIONS = {
-  fernando:     [{ to:'jeronimo_i', type:'pai de' }],
-  jeronimo_i:   [{ to:'francisca', type:'casou com' }, { to:'maria_azevedo', type:'casou com' }, { to:'coronel', type:'(descendente)' }],
-  coronel:      [{ to:'meneses', type:'casou com' }, { to:'barao', type:'pai de' }],
-  barao:        [{ to:'cora', type:'casou com' }, { to:'jeronimo_ii', type:'pai de' }, { to:'conselheiro', type:'pai de' }, { to:'jose_lino', type:'pai de' }, { to:'elisa_barao', type:'pai de' }],
-  manuel:       [{ to:'maria_gramilo', type:'casou com' }, { to:'eduardo', type:'pai de' }],
-  antonio_p:    [{ to:'isabel_g', type:'casou com' }],
-  tomaz:        [{ to:'teodora', type:'casou com' }, { to:'marcelo', type:'pai de' }],
-  marcelo:      [{ to:'rita_rosa', type:'casou com' }, { to:'francisco', type:'pai de' }, { to:'arlindo', type:'pai de' }, { to:'zeca', type:'pai de' }, { to:'otavia', type:'pai de' }, { to:'elisa', type:'pai de' }, { to:'isabel', type:'pai de' }],
-  rita_rosa:    [{ to:'francisco', type:'mãe de' }],
-  francisco:    [{ to:'atanagilda', type:'casou com' }, { to:'atanagilda_f', type:'pai de' }, { to:'veralucia', type:'pai de' }, { to:'luiz_carlos', type:'pai de' }, { to:'francisco_f', type:'pai de' }, { to:'angelica', type:'pai de' }, { to:'rita_cassia', type:'pai de' }, { to:'djalma', type:'pai de' }, { to:'paulo_renato', type:'pai de' }, { to:'ronaldo', type:'pai de' }, { to:'julio', type:'pai de' }, { to:'cristina', type:'pai de' }, { to:'sinara', type:'pai de' }],
-  atanagilda:   [{ to:'atanagilda_f', type:'mãe de' }, { to:'veralucia', type:'mãe de' }, { to:'luiz_carlos', type:'mãe de' }, { to:'francisco_f', type:'mãe de' }, { to:'angelica', type:'mãe de' }, { to:'rita_cassia', type:'mãe de' }, { to:'djalma', type:'mãe de' }, { to:'paulo_renato', type:'mãe de' }, { to:'ronaldo', type:'mãe de' }, { to:'julio', type:'mãe de' }, { to:'cristina', type:'mãe de' }, { to:'sinara', type:'mãe de' }],
-  gervasio:     [{ to:'atanagilda', type:'pai de' }],
-  maria_aleluia:[{ to:'atanagilda', type:'mãe de' }],
-  arlindo:      [{ to:'noemia', type:'casou com' }],
-  otavia:       [{ to:'eustaquio', type:'casou com' }],
-  isabel:       [{ to:'maximiliano', type:'casou com' }],
+// ── Data ──
+const P = {
+  fernando:      {n:'D. Fernando Sodré Pereira',d:'',c:'historical',sp:null,note:'Pai de Jerônimo I'},
+  jeronimo_i:    {n:'Jerônimo Sodré Pereira I',d:'1631–1711',c:'historical',sp:'francisca',note:'Águas Belas, Lisboa → Salvador/BA · ≠ Jerônimo II'},
+  francisca:     {n:'D. Francisca de Aragão',d:'',c:'historical',sp:'jeronimo_i',note:'1ª esposa de Jerônimo I'},
+  maria_azevedo: {n:'Maria de Azevedo',d:'',c:'historical',sp:'jeronimo_i',note:'2ª esposa de Jerônimo I'},
+  coronel:       {n:'Francisco Maria Sodré Pereira',d:'',c:'barao',sp:'meneses',note:'Coronel · Filho de Francisco Álvaro'},
+  meneses:       {n:'Maria Ana de Meneses',d:'',c:'barao',sp:'coronel',note:'Esposa do coronel'},
+  barao:         {n:'Barão de Alagoinhas',d:'1818–1882',c:'barao',sp:'cora',note:'Francisco Pereira Sodré · Cachoeira/BA'},
+  cora:          {n:'Cora César Coutinho',d:'1819–1880',c:'barao',sp:'barao',note:'Baronesa · casam. 1834'},
+  jeronimo_ii:   {n:'Jerônimo Sodré Pereira II',d:'~1835',c:'barao',sp:null,note:'Filho do Barão · Médico, Deputado · ≠ patriarca'},
+  conselheiro:   {n:'Conselheiro F. M. S. Pereira',d:'1836–1903',c:'barao',sp:null,note:'Filho do Barão · Deputado federal BA 1891–1902'},
+  jose_lino:     {n:'José Lino C. Sodré Pereira',d:'',c:'barao',sp:null,note:'Filho do Barão'},
+  elisa_barao:   {n:'Elisa Sodré Pereira',d:'bat. 1881',c:'barao',sp:null,note:'Filha do Barão'},
+  manuel:        {n:'Manuel Sodré',d:'',c:'colonial',sp:'maria_gramilo',note:'Elo colonial Sodré–Gramilo'},
+  maria_gramilo: {n:'Maria Gramilo',d:'',c:'colonial',sp:'manuel',note:'Elo colonial Sodré–Gramilo'},
+  eduardo:       {n:'Eduardo Sodré',d:'',c:'colonial',sp:null,note:'Filho de Manuel + Maria'},
+  antonio_p:     {n:'Antônio Pereira',d:'',c:'colonial',sp:'isabel_g',note:'Elo colonial'},
+  isabel_g:      {n:'Isabel Gramilo',d:'',c:'colonial',sp:'antonio_p',note:'Elo colonial'},
+  tomaz:         {n:'Tomaz Gramilo Sodré',d:'~1860',c:'hypothetical',sp:'teodora',note:'Amargosa/BA · ~4-6 gerações entre Jerônimo I e Tomaz'},
+  teodora:       {n:'Teodora Julia da Cruz',d:'',c:'hypothetical',sp:'tomaz',note:'Esposa de Tomaz'},
+  marcelo:       {n:'Marcelo Gramilo Sodré',d:'1897–1976',c:'confirmed',sp:'rita_rosa',note:'Casam. 09/02/1924 · Montes Claros/MG · 6 filhos'},
+  rita_rosa:     {n:'Rita Rosa Sodré',d:'1901–1992',c:'confirmed',sp:'marcelo',note:'6 filhos'},
+  francisco:     {n:'Francisco Gramilo Sodré',d:'1925–1999',c:'confirmed',sp:'atanagilda',note:'Bat. 17/05/1925 · Casam. 26/12/1953 · Ibitupa/BA'},
+  atanagilda:    {n:'Atanagilda Odete dos Santos',d:'1933–2016',c:'confirmed',sp:'francisco',note:'Bat. 25/06/1933 · Casam. 26/12/1953'},
+  gervasio:      {n:'Gervásio E. dos Santos',d:'1914–?',c:'materno',sp:'maria_aleluia',note:'Bat. 14/11/1914, Amargosa/BA'},
+  maria_aleluia: {n:'Maria Aleluia dos Santos',d:'',c:'materno',sp:'gervasio',note:'Avó materna'},
+  arlindo:       {n:'Arlindo Gramilo Sodré',d:'',c:'confirmed',sp:'noemia',note:'8 filhos'},
+  noemia:        {n:'Noemia Rocha Sodré',d:'',c:'confirmed',sp:'arlindo',note:'8 filhos'},
+  zeca:          {n:'José Gramilo Sodré (Zeca)',d:'',c:'confirmed',sp:null,note:'9 filhos'},
+  otavia:        {n:'Otávia Rosa Sodré Bispo',d:'',c:'confirmed',sp:'eustaquio',note:'10 filhos'},
+  eustaquio:     {n:'Eustáquio Eusébio Bispo',d:'',c:'confirmed',sp:'otavia',note:'10 filhos'},
+  elisa:         {n:'Elisa Gramilo Sodré',d:'',c:'confirmed',sp:null,note:'3 filhos'},
+  isabel:        {n:'Isabel Gramilo Sodré',d:'',c:'confirmed',sp:'maximiliano',note:'7 filhos'},
+  maximiliano:   {n:'Maximiliano',d:'',c:'confirmed',sp:'isabel',note:'7 filhos'},
+  atanagilda_f:  {n:'Atanagilda S. Sampaio',d:'1954',c:'filho',sp:null,note:'n. 11/04/1954'},
+  veralucia:     {n:'Veralúcia Sodré',d:'1955',c:'filho',sp:null,note:'n. 30/09/1955 · mãe de Ricardo'},
+  luiz_carlos:   {n:'Luiz Carlos Sudré',d:'1957',c:'filho',sp:null,note:'n. 30/03/1957 · Sudré = erro cartorário'},
+  francisco_f:   {n:'Francisco G. S. Filho',d:'1959',c:'filho',sp:null,note:'n. 26/07/1959 · Professor, PMA'},
+  angelica:      {n:'Angélica M. S. Costa',d:'1961',c:'filho',sp:null,note:'n. 02/03/1961'},
+  rita_cassia:   {n:'Rita de C. S. Amaral',d:'1962',c:'filho',sp:null,note:'n. 09/10/1962'},
+  djalma:        {n:'Djalma Gramilo Sodré',d:'1964',c:'filho',sp:null,note:'n. 15/02/1964'},
+  paulo_renato:  {n:'Paulo Renato Sodré',d:'1965',c:'filho',sp:null,note:'n. 19/06/1965'},
+  ronaldo:       {n:'Ronaldo Gramilo Sodré',d:'1966',c:'filho',sp:null,note:'n. 16/12/1966'},
+  julio:         {n:'Júlio César G. Sodré',d:'1968',c:'filho',sp:null,note:'n. 09/01/1968'},
+  cristina:      {n:'Cristina M. G. Sodré',d:'1969',c:'filho',sp:null,note:'n. 02/08/1969'},
+  sinara:        {n:'Sinara Magali Sodré',d:'1971',c:'filho',sp:null,note:'n. 20/12/1971'},
 };
 
 const SOBRINHOS = {
-  arlindo: ['Arlenô G. Sodré', 'Marcelo G. Sodré Neto', 'Arlindo G. Sodré Filho', 'Antonio C. Silva Sodré', 'Luciane Silva Sodré', 'Cristiane Silva Sodré', 'Rita de Cássia S. Figueiredo', 'Manoel Ailton Silva Sodré'],
-  zeca: ['José G. Sodré Filho', 'Walter Gramilo Sodré', 'Jailson Gramilo Sodré', 'Ivan Gramilo Sodré', 'Manoelito G. Sodré', 'Joselito G. Sodré', 'Cleide', 'Ione Rosa Sudré', 'Maria Rita'],
-  otavia: ['Geni Bispo', 'Zenito Bispo', 'Sinval Bispo', 'Maria Helena S. Bispo', 'Maiza Rosa Bispo Gouveia', 'Zélia Bispo', 'Juvenil S. Bispo', 'Nilda S. Bispo de Souza', 'Antônio Carlos Bispo', 'Valdeck Bispo'],
-  elisa: ['Zeilde', 'Valdeci', 'Elizete'],
-  isabel: ['Etelvina', 'Carlos', 'Francisco', 'Dutinha', 'Edvaldo', 'Lelinha', 'Maria'],
+  arlindo: ['Arlenô G. Sodré','Marcelo G. S. Neto','Arlindo G. S. Filho','Antonio C. S. Sodré','Luciane S. Sodré','Cristiane S. Sodré','Rita de C. S. Figueiredo','Manoel A. S. Sodré'],
+  zeca:    ['José G. S. Filho','Walter G. Sodré','Jailson G. Sodré','Ivan G. Sodré','Manoelito G. Sodré','Joselito G. Sodré','Cleide','Ione Rosa Sudré','Maria Rita'],
+  otavia:  ['Geni Bispo','Zenito Bispo','Sinval Bispo','Maria Helena S. Bispo','Maiza R. Bispo Gouveia','Zélia Bispo','Juvenil S. Bispo','Nilda S. B. de Souza','Antônio C. Bispo','Valdeck Bispo'],
+  elisa:   ['Zeilde','Valdeci','Elizete'],
+  isabel:  ['Etelvina','Carlos','Francisco','Dutinha','Edvaldo','Lelinha','Maria'],
 };
 
-const GEN_LABELS = {
-  1: 'Geração I — Patriarcas (séc. XVII)',
-  2: 'Geração II — Coloniais (séc. XVII–XIX)',
-  3: 'Geração III — Nobreza baiana (séc. XIX)',
-  4: 'Geração IV — Ascendentes diretos',
-  5: 'Geração V — Avós',
-  6: 'Geração VI — Pais, tios e tias',
-  7: 'Geração VII — Filhos e sobrinhos',
-};
+// Families: each is a couple + children + optional link to descendant section
+const SECTIONS = [
+  {
+    id:'trunk', title:'Tronco histórico', em:'séc. XVII–XIX', filter:'historical',
+    families:[
+      { couple:[{id:'fernando'},{id:'jeronimo_i'}], children:[], link:{to:'barao',label:'(descendente)'} },
+      { couple:[{id:'jeronimo_i'},{id:'francisca'}], children:[] },
+      { couple:[{id:'jeronimo_i'},{id:'maria_azevedo'}], children:[] },
+    ]
+  },
+  {
+    id:'colonial', title:'Elo colonial', em:'Sodré–Gramilo', filter:'colonial',
+    families:[
+      { couple:[{id:'manuel'},{id:'maria_gramilo'}], children:[{id:'eduardo'}] },
+      { couple:[{id:'antonio_p'},{id:'isabel_g'}], children:[] },
+    ]
+  },
+  {
+    id:'barao', title:'Ramo Barão de Alagoinhas', em:'nobreza baiana, séc. XIX', filter:'barao',
+    families:[
+      { couple:[{id:'coronel'},{id:'meneses'}], children:[{id:'barao'}] },
+      { couple:[{id:'barao'},{id:'cora'}], children:[{id:'jeronimo_ii'},{id:'conselheiro'},{id:'jose_lino'},{id:'elisa_barao'}] },
+    ]
+  },
+  {
+    id:'ascendentes', title:'Ascendentes diretos', em:'Tomaz → Marcelo → Francisco', filter:'confirmed',
+    families:[
+      { couple:[{id:'tomaz'},{id:'teodora'}], children:[{id:'marcelo'}], link:{to:'francisco',label:'↓ ver descendência'} },
+      { couple:[{id:'marcelo'},{id:'rita_rosa'}], children:[{id:'francisco'},{id:'arlindo'},{id:'zeca'},{id:'otavia'},{id:'elisa'},{id:'isabel'}], link:{to:'irmaos',label:'↓ ver irmãos e sobrinhos'} },
+      { couple:[{id:'gervasio'},{id:'maria_aleluia'}], children:[{id:'atanagilda'}], link:{to:'francisco',label:'↓'} },
+    ]
+  },
+  {
+    id:'francisco', title:'Francisco & Atanagilda', em:'12 filhos', filter:'confirmed',
+    families:[
+      {
+        couple:[{id:'francisco'},{id:'atanagilda'}],
+        children:[{id:'atanagilda_f'},{id:'veralucia'},{id:'luiz_carlos'},{id:'francisco_f'},{id:'angelica'},{id:'rita_cassia'},{id:'djalma'},{id:'paulo_renato'},{id:'ronaldo'},{id:'julio'},{id:'cristina'},{id:'sinara'}],
+        childColumns:3
+      },
+    ]
+  },
+  {
+    id:'irmaos', title:'Irmãos de Francisco e seus filhos', em:'sobrinhos', filter:'confirmed',
+    families:[
+      { couple:[{id:'arlindo'},{id:'noemia'}], sobrinhos:'arlindo' },
+      { couple:[{id:'zeca'}], sobrinhos:'zeca' },
+      { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
+      { couple:[{id:'elisa'}], sobrinhos:'elisa' },
+      { couple:[{id:'isabel'},{id:'maximiliano'}], sobrinhos:'isabel' },
+    ]
+  },
+];
 
 let activeFilter = null;
 let selectedId = null;
-let collapsedBranches = {};
 
 function render() {
   const wrap = document.getElementById('treeWrap');
   wrap.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    if (activeFilter && sec.filter !== activeFilter) return;
+    const el = document.createElement('div');
+    el.className = 'section';
+    el.id = sec.id;
+    const title = document.createElement('div');
+    title.className = 'section-title';
+    title.innerHTML = sec.title + ' <em>' + sec.em + '</em>';
+    el.appendChild(title);
 
-  const gens = {};
-  Object.entries(PEOPLE).forEach(([id, p]) => {
-    if (activeFilter && !matchFilter(p.cat, id)) return;
-    if (!gens[p.gen]) gens[p.gen] = [];
-    gens[p.gen].push({ id, ...p });
+    sec.families.forEach(fam => {
+      const col = document.createElement('div');
+      col.className = 'family-col';
+
+      // Couple row
+      const coupleRow = document.createElement('div');
+      coupleRow.className = 'family-couple';
+      fam.couple.forEach((c, i) => {
+        if (i > 0) {
+          const link = document.createElement('span');
+          link.className = 'couple-link';
+          link.textContent = '∞';
+          coupleRow.appendChild(link);
+        }
+        coupleRow.appendChild(makeCard(c.id));
+      });
+      col.appendChild(coupleRow);
+
+      // Descendant link
+      if (fam.link) {
+        const dl = document.createElement('div');
+        dl.className = 'desc-link';
+        const a = document.createElement('a');
+        a.textContent = fam.link.label;
+        a.onclick = () => {
+          const target = document.getElementById(fam.link.to);
+          if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
+        };
+        dl.appendChild(a);
+        col.appendChild(dl);
+      }
+
+      // Children
+      if (fam.children && fam.children.length > 0) {
+        const childList = document.createElement('div');
+        childList.className = 'children-list' + (fam.childColumns ? ' vertical' : '');
+        if (fam.childColumns && fam.children.length > 4) {
+          // Use CSS columns for large groups
+          childList.style.columnCount = fam.childColumns;
+          childList.style.columnGap = '0.4rem';
+        }
+        fam.children.forEach(ch => {
+          childList.appendChild(makeCard(ch.id, false));
+        });
+        col.appendChild(childList);
+      }
+
+      // Sobrinhos
+      if (fam.sobrinhos && SOBRINHOS[fam.sobrinhos]) {
+        const childList = document.createElement('div');
+        childList.className = 'children-list vertical';
+        SOBRINHOS[fam.sobrinhos].forEach(name => {
+          const el2 = document.createElement('div');
+          el2.className = 'person cat-sobrinho';
+          const nm = document.createElement('div');
+          nm.className = 'person-name';
+          nm.textContent = name;
+          el2.appendChild(nm);
+          childList.appendChild(el2);
+        });
+        col.appendChild(childList);
+      }
+
+      el.appendChild(col);
+    });
+
+    wrap.appendChild(el);
   });
 
-  for (let g = 1; g <= 7; g++) {
-    const people = gens[g] || [];
-    if (people.length === 0) continue;
-
-    const layer = document.createElement('div');
-    layer.className = 'gen-layer';
-    layer.dataset.gen = g;
-
-    const label = document.createElement('div');
-    label.className = 'gen-label';
-    label.textContent = GEN_LABELS[g] || ('Geração ' + g);
-    layer.appendChild(label);
-
-    const row = document.createElement('div');
-    row.className = 'gen-row';
-
-    // Group branches for G6-G7
-    if (g === 6) {
-      renderGen6(row, people);
-    } else if (g === 7) {
-      renderGen7(row);
-    } else {
-      people.forEach(p => row.appendChild(makeCard(p.id, p)));
-    }
-
-    layer.appendChild(row);
-    wrap.appendChild(layer);
-  }
+  renderControls();
 }
 
-function matchFilter(cat, id) {
-  if (activeFilter === 'historical') return cat === 'historical' || cat === 'colonial';
-  if (activeFilter === 'barao') return cat === 'barao' || cat === 'colonial';
-  if (activeFilter === 'confirmed') return cat === 'confirmed' || cat === 'filho' || cat === 'sobrinho';
-  if (activeFilter === 'materno') return cat === 'materno' || id === 'atanagilda';
-  return true;
-}
-
-function makeCard(id, p, small) {
+function makeCard(id, showSpouse) {
+  const p = P[id];
+  if (!p) { const e = document.createElement('div'); e.textContent = id; return e; }
   const el = document.createElement('div');
-  el.className = 'person cat-' + p.cat;
-  if (small) el.style.minWidth = '100px';
-  if (id === selectedId) el.classList.add('selected');
+  el.className = 'person cat-' + p.c;
   el.dataset.id = id;
-  el.onclick = () => selectPerson(id);
+  if (id === selectedId) el.classList.add('selected');
+  el.onclick = (ev) => { ev.stopPropagation(); selectPerson(id); };
 
   const name = document.createElement('div');
   name.className = 'person-name';
-  name.textContent = p.name;
+  name.textContent = p.n;
   el.appendChild(name);
 
-  if (p.dates) {
+  if (p.d) {
     const dates = document.createElement('div');
     dates.className = 'person-dates';
-    dates.textContent = p.dates;
+    dates.textContent = p.d;
     el.appendChild(dates);
   }
 
-  if (p.tag) {
-    const tag = document.createElement('span');
-    tag.className = 'person-tag';
-    tag.style.background = tagBg(p.cat);
-    tag.style.color = tagFg(p.cat);
-    tag.textContent = p.tag;
-    el.appendChild(tag);
-  }
-
-  if (p.branchCount) {
-    const count = document.createElement('span');
-    count.className = 'person-tag';
-    count.style.background = '#e0e8e2';
-    count.style.color = '#4a7a5a';
-    count.textContent = p.branchCount + ' filhos';
-    el.appendChild(count);
+  // Show spouse info on every person card
+  if (p.sp && P[p.sp]) {
+    const sp = document.createElement('div');
+    sp.className = 'person-spouse';
+    sp.innerHTML = '∞ <strong>' + P[p.sp].n + '</strong>';
+    el.appendChild(sp);
   }
 
   return el;
 }
 
-function tagBg(cat) {
-  const m = { historical:'#f7f0e3', barao:'#ede8f4', colonial:'#e4eff8', hypothetical:'#f5e8e8', confirmed:'#e8f0eb', materno:'#f7f0e0', filho:'#eaf5ed', sobrinho:'#f4f8f5' };
-  return m[cat] || '#eee';
-}
-function tagFg(cat) {
-  const m = { historical:'#9e7c2e', barao:'#4a3478', colonial:'#2a5a8a', hypothetical:'#8b2e2e', confirmed:'#2d5a3d', materno:'#7a5a10', filho:'#2d5a3d', sobrinho:'#4a7a5a' };
-  return m[cat] || '#333';
-}
-
-function renderGen6(row, people) {
-  // Main couple
-  const couple = people.filter(p => p.id === 'francisco' || p.id === 'atanagilda');
-  couple.forEach(p => row.appendChild(makeCard(p.id, p)));
-
-  // Siblings with branches
-  const siblings = people.filter(p => p.id !== 'francisco' && p.id !== 'atanagilda');
-  const couples = [['arlindo','noemia'], ['otavia','eustaquio'], ['isabel','maximiliano']];
-  const singles = ['zeca', 'elisa'];
-
-  couples.forEach(([a, b]) => {
-    const pa = siblings.find(p => p.id === a);
-    const pb = siblings.find(p => p.id === b);
-    if (pa) {
-      const card = makeCard(pa.id, pa);
-      if (pa.branch && SOBRINHOS[pa.branch]) {
-        const toggle = document.createElement('span');
-        toggle.className = 'collapse-toggle ' + (collapsedBranches[pa.branch] ? 'collapsed' : 'expanded');
-        toggle.onclick = (e) => { e.stopPropagation(); toggleBranch(pa.branch); };
-        card.appendChild(toggle);
-      }
-      row.appendChild(card);
-    }
-    if (pb) row.appendChild(makeCard(pb.id, pb));
-  });
-
-  singles.forEach(id => {
-    const p = siblings.find(x => x.id === id);
-    if (p) {
-      const card = makeCard(p.id, p);
-      if (p.branch && SOBRINHOS[p.branch]) {
-        const toggle = document.createElement('span');
-        toggle.className = 'collapse-toggle ' + (collapsedBranches[p.branch] ? 'collapsed' : 'expanded');
-        toggle.onclick = (e) => { e.stopPropagation(); toggleBranch(p.branch); };
-        card.appendChild(toggle);
-      }
-      row.appendChild(card);
-    }
-  });
-}
-
-function renderGen7(row) {
-  // Filhos de Francisco
-  const filhos = ['atanagilda_f','veralucia','luiz_carlos','francisco_f','angelica','rita_cassia','djalma','paulo_renato','ronaldo','julio','cristina','sinara'];
-  const grupo = document.createElement('div');
-  grupo.className = 'branch-group';
-  const lbl = document.createElement('div');
-  lbl.className = 'branch-label';
-  lbl.textContent = '12 filhos de Francisco & Atanagilda';
-  grupo.appendChild(lbl);
-  const members = document.createElement('div');
-  members.className = 'branch-members';
-  filhos.forEach(id => {
-    const p = PEOPLE[id];
-    if (p) members.appendChild(makeCard(id, p));
-  });
-  grupo.appendChild(members);
-  row.appendChild(grupo);
-
-  // Sobrinhos
-  Object.entries(SOBRINHOS).forEach(([branch, names]) => {
-    if (collapsedBranches[branch]) return;
-    const parent = PEOPLE[branch] || PEOPLE[branch === 'zeca' ? 'zeca' : branch];
-    const grupo = document.createElement('div');
-    grupo.className = 'branch-group';
-    const lbl = document.createElement('div');
-    lbl.className = 'branch-label';
-    lbl.textContent = 'Filhos de ' + (parent ? parent.name.split('(')[0].trim() : branch);
-    grupo.appendChild(lbl);
-    const members = document.createElement('div');
-    members.className = 'branch-members';
-    names.forEach(name => {
-      const el = document.createElement('div');
-      el.className = 'person cat-sobrinho';
-      const nm = document.createElement('div');
-      nm.className = 'person-name';
-      nm.textContent = name;
-      el.appendChild(nm);
-      el.onclick = () => {};
-      members.appendChild(el);
-    });
-    grupo.appendChild(members);
-    row.appendChild(grupo);
-  });
-}
-
-function toggleBranch(branch) {
-  collapsedBranches[branch] = !collapsedBranches[branch];
-  render();
-}
-
 function selectPerson(id) {
   selectedId = id;
-  const p = PEOPLE[id];
+  const p = P[id];
   if (!p) return;
 
   document.querySelectorAll('.person.selected').forEach(el => el.classList.remove('selected'));
   document.querySelectorAll('.person[data-id="' + id + '"]').forEach(el => el.classList.add('selected'));
 
   const panel = document.getElementById('infoPanel');
-  document.getElementById('infoName').textContent = p.name + (p.dates ? ' (' + p.dates + ')' : '');
+  document.getElementById('infoName').textContent = p.n + (p.d ? ' (' + p.d + ')' : '');
 
   let html = '';
-  if (p.note) html += '<div class="info-rel" style="margin-bottom:0.4rem;color:#5a4a3a;font-style:italic">' + p.note + '</div>';
+  if (p.note) html += '<div class="info-note">' + p.note + '</div>';
 
-  const rels = RELATIONS[id] || [];
-  if (rels.length > 0) {
-    html += '<div style="margin-top:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#7a6b55">Relações</div>';
-    rels.forEach(r => {
-      const target = PEOPLE[r.to];
-      const targetName = target ? target.name : r.to;
-      html += '<div class="info-rel"><span class="rel-type">' + r.type + '</span> ' + targetName + '</div>';
-    });
+  // Spouse
+  if (p.sp && P[p.sp]) {
+    html += '<div class="info-rel"><span class="rel-type">casou com</span> ' + P[p.sp].n + '</div>';
   }
 
-  // Also find incoming relations
-  Object.entries(RELATIONS).forEach(([fromId, rels]) => {
-    rels.forEach(r => {
-      if (r.to === id) {
-        const from = PEOPLE[fromId];
-        if (from) {
-          const invMap = {'pai de':'filho(a) de','mãe de':'filho(a) de','casou com':'casou com','(descendente)':'ancestral de'};
-          const inv = invMap[r.type] || r.type;
-          html += '<div class="info-rel"><span class="rel-type">' + inv + '</span> ' + from.name + '</div>';
-        }
+  // Children: find all sections/families where this id is in couple
+  SECTIONS.forEach(sec => {
+    sec.families.forEach(fam => {
+      const isInCouple = fam.couple.some(c => c.id === id);
+      if (isInCouple && fam.children && fam.children.length > 0) {
+        fam.children.forEach(ch => {
+          if (P[ch.id]) html += '<div class="info-rel"><span class="rel-type">pai/mãe de</span> ' + P[ch.id].n + '</div>';
+        });
+      }
+    });
+  });
+
+  // Parents: find where this id is a child
+  SECTIONS.forEach(sec => {
+    sec.families.forEach(fam => {
+      if (fam.children && fam.children.some(c => c.id === id)) {
+        fam.couple.forEach(c => {
+          if (P[c.id]) html += '<div class="info-rel"><span class="rel-type">filho(a) de</span> ' + P[c.id].n + '</div>';
+        });
       }
     });
   });
@@ -779,21 +539,30 @@ function closeInfo() {
   document.querySelectorAll('.person.selected').forEach(el => el.classList.remove('selected'));
 }
 
-function showAll() {
-  activeFilter = null;
-  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.ctrl-btn')[0].classList.add('active');
-  render();
+function renderControls() {
+  const ctrl = document.getElementById('controls');
+  ctrl.innerHTML = '';
+  const btns = [
+    {label:'Todos',filter:null},
+    {label:'Tronco histórico',filter:'historical'},
+    {label:'Ramo Barão',filter:'barao'},
+    {label:'Ramo Marcelo',filter:'confirmed'},
+    {label:'Elo colonial',filter:'colonial'},
+  ];
+  btns.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'ctrl-btn' + ((activeFilter === b.filter) ? ' active' : '');
+    btn.textContent = b.label;
+    btn.onclick = () => { activeFilter = b.filter; render(); };
+    ctrl.appendChild(btn);
+  });
 }
 
-function filterBranch(f) {
-  activeFilter = f;
-  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  render();
-}
+// Close info on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.person') && !e.target.closest('.info-panel')) closeInfo();
+});
 
-// Initial render
 render();
 </script>
 </body>
