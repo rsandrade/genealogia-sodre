@@ -332,7 +332,7 @@ body::before {
 </div>
 
 <footer class="page-footer">
-  <p>109 pessoas · 7 gerações · MemPalace + HTML sincronizados<br>
+  <p>114 pessoas · 7 gerações · MemPalace + HTML sincronizados<br>
   Jerônimo I (1631–1711) ≠ Jerônimo II (filho do Barão) · Lacuna documental entre Jerônimo I e Tomaz (~1860)</p>
 </footer>
 
@@ -366,6 +366,11 @@ const P = {
   maria_aleluia: {n:'Maria Aleluia dos Santos',d:'',c:'materno',sp:'gervasio',note:'Avó materna · confirmação oral'},
 
   // Ramos documentados em Amargosa — fatos paroquiais, sem ligação direta confirmada ao tronco Gramilo
+  francisco_lud: {n:'Francisco Ludgero Vaz Sodré',d:'',c:'confirmed',sp:'olympia_f',note:'Ramo Vaz Sodré de Amargosa · casou com Olympia Flavia de Miranda Sodré · pessoa distinta de Francisco Gramilo Sodré · possível elo H4, precisa confirmação'},
+  olympia_f:     {n:'Olympia Flavia de Miranda Sodré',d:'',c:'confirmed',sp:'francisco_lud',note:'Esposa de Francisco Ludgero Vaz Sodré · ramo Vaz Sodré de Amargosa'},
+  horacio_vs:    {n:'Horácio Vaz Sodré',d:'',c:'confirmed',sp:'adelina_mj',note:'Ramo Vaz Sodré de Amargosa · 11 registros de inventário no APEB · hipótese H4 como possível elo, precisa confirmação'},
+  adelina_mj:    {n:'Adelina Maria de Jesus',d:'',c:'confirmed',sp:'horacio_vs',note:'Esposa de Horácio Vaz Sodré'},
+  amelia_vaz:    {n:'Amélia Vaz Padri',d:'',c:'confirmed',sp:null,note:'Filha registrada no ramo Horácio Vaz Sodré + Adelina Maria de Jesus'},
   firmino_vs:    {n:'Firmino Vaz Sodré',d:'ativo 1909–1914',c:'confirmed',sp:'laurinda_s',note:'Amargosa/BA · batismo do filho José (31/01/1909) + padrinho em 1914 · relação com Tomaz/Marcelo ainda não confirmada'},
   laurinda_s:    {n:'Laurinda Sodré',d:'ativa 1909–1914',c:'confirmed',sp:'firmino_vs',note:'Esposa de Firmino · mãe de José · madrinha junto com Firmino em 1914'},
   jose_firmino:  {n:'José Sodré',d:'bat. 31/01/1909',c:'confirmed',sp:null,note:'Filho de Firmino Vaz Sodré + Laurinda Sodré · Arraial do Conente, Amargosa'},
@@ -436,6 +441,8 @@ const SECTIONS = [
   {
     id:'amargosa', title:'Ramos documentados em Amargosa', em:'paroquiais 1895–1941 · conexão com Gramilo ainda em confirmação', filter:'amargosa',
     families:[
+      { couple:[{id:'francisco_lud'},{id:'olympia_f'}], children:[] },
+      { couple:[{id:'horacio_vs'},{id:'adelina_mj'}], children:[{id:'amelia_vaz'}] },
       { couple:[{id:'firmino_vs'},{id:'laurinda_s'}], children:[{id:'jose_firmino'}] },
       { couple:[{id:'euneraldo_s'},{id:'florinda_a'}], children:[{id:'olimpio_s'},{id:'ismael_s'}] },
       { couple:[{id:'manoel_caetano'},{id:'maria_paulina'}], children:[{id:'antonia_sodre'}] },
