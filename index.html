@@ -216,7 +216,9 @@ frame.addEventListener('load', () => {
 });
 window.addEventListener('resize', resizeFrame);
 
-const initial = localStorage.getItem('genealogia-sodre-view') || 'familia';
+const params = new URLSearchParams(window.location.search);
+const requestedView = params.get('view');
+const initial = views[requestedView] ? requestedView : (localStorage.getItem('genealogia-sodre-view') || 'familia');
 setView(initial, false);
 </script>
 </body>
