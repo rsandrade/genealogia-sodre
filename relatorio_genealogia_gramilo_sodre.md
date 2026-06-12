@@ -50,11 +50,22 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 Ver detalhes completos em:
 - `docs/relatorio_genealogia.md` — relatório principal (estrutura familiar completa)
 - `docs/relatorio_genealogia_fs.md` — registros FamilySearch detalhados
+- `docs/transcricoes_amargosa.md` — transcrições de registros paroquiais de Amargosa/BA (HWM, 12/06/2026)
 - `data/membros_encontrados.json` — dados estruturados (56 membros)
+
+### Novos dados comprovados (transcrições Amargosa, 12/06/2026)
+1. **Firmino Vaz Sodré** + **Laurinda Sodré** — casal confirmado em registros paroquiais (batismo do filho José, 31/01/1909; padrinhos em 14/11/1914)
+2. **Euneraldo/Everaldo Sodré** + **Florinda de Andrade** — outro casal Sodré em Amargosa (1914)
+3. **Manoel Caetano Sodré** + **Maria Paulina Joares** — pais de Antonia Sodré de Jesus, Amargosa (casamento 1941)
+4. **Francisco Eusébio dos Santos** — padrinho em Amargosa (1895), possível irmão de **Gervásio Eusébio dos Santos** (avô materno)
+5. **Geruásio José Sampaio** — em Amargosa (1895), possível ligação com Atanagilda Sodré Sampaio
 
 ### Pendências principais
 1. Investigar conexão "Vaz Sodré" (Amargosa/FS) com o ramo Gramilo Sodré
-2. Confirmar parentesco Eusébio (Gervásio ↔ Eustázio Bispo)
+2. Confirmar parentesco Eusébio (Gervásio ↔ Eustázio Bispo) ← Francisco Eusébio dos Santos (1895) pode ser o elo
 3. Solicitar inventários APEB (comarca de Amargosa)
 4. Contactar cartório de Aiquara — (73) 3244-2321
 5. Confirmar sobrenomes de casada de Elisa e Isabel
+6. Confirmar se Firmino Vaz Sodré era neto/filho de Tomaz Gramilo Sodré (casamento 1891)
+7. Verificar se Euneraldo Sodré é parente de Firmino (irmão? primo?)
+8. Buscar certidão de nascimento de Firmino Vaz Sodré (filiação)
