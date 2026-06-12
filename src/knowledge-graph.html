@@ -89,16 +89,27 @@ body::before {
 
 /* ── Main tree ── */
 .tree-wrap {
-  overflow-x:auto; padding:2rem 1rem 3rem;
-  scrollbar-width:thin; scrollbar-color:var(--border-line) var(--parchment-deep);
+  padding:2rem 0 3rem;
+}
+.section-scroll{
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:1.73rem 1rem 0.7rem;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border-line) var(--parchment-deep);
   -webkit-overflow-scrolling:touch;
   cursor:grab;
   -webkit-user-select:none;
   user-select:none;
+  white-space:nowrap;
 }
-.tree-wrap.dragging{cursor:grabbing;scrollbar-color:var(--gold) var(--parchment-deep)}
-.tree-wrap.dragging *{cursor:grabbing!important}
-.tree-wrap.dragging::-webkit-scrollbar-thumb{background:var(--gold)}
+.section-scroll::-webkit-scrollbar{height:8px}
+.section-scroll::-webkit-scrollbar-track{background:var(--parchment-deep);border-radius:3px}
+.section-scroll::-webkit-scrollbar-thumb{background:var(--border-line);border-radius:3px}
+.section-scroll.dragging{cursor:grabbing;scrollbar-color:var(--gold) var(--parchment-deep)}
+.section-scroll.dragging *{cursor:grabbing!important}
+.section-scroll.dragging::-webkit-scrollbar-thumb{background:var(--gold)}
 
 /* ── Section (branch group) ── */
 .section {
@@ -236,7 +247,8 @@ body::before {
 
 /* Escala embutida: aproxima o KG da proporção visual da arvore.html */
 body.embedded{font-size:22.5px}
-body.embedded .tree-wrap{max-width:1200px;margin:0 auto;padding:2rem 2.5rem 3rem}
+body.embedded .tree-wrap{max-width:1200px;margin:0 auto;padding:2rem 0 3rem}
+body.embedded .section-scroll{padding:1.73rem 2.5rem 0.7rem}
 body.embedded .section{margin-bottom:3.5rem}
 body.embedded .section-title{font-size:1.45rem;margin-bottom:1.2rem}
 body.embedded .family-col{min-width:360px;max-width:520px;margin:0 1.05rem 2rem;padding:1.05rem}
@@ -253,7 +265,6 @@ body.embedded .person.cat-sobrinho .person-name{font-size:1.12rem}
 body.embedded .person-dates{font-size:1rem;margin-top:0.25rem}
 body.embedded .person-spouse{font-size:0.95rem;margin-top:0.25rem}
 body.embedded .children-list{gap:0.6rem;padding-top:0}
-body.embedded .descent-section{min-width:1680px}
 body.embedded .descent-tree{min-width:1680px}
 body.embedded .descent-couple{flex:1 0 700px;max-width:760px;gap:0.85rem}
 body.embedded .descent-row-spacer,
@@ -320,10 +331,12 @@ body.embedded .info-note{font-size:0.95rem}
 .section:nth-child(5) { animation-delay:0.2s; }
 
 /* ── Descent tree (ascendentes) ── */
-.descent-section{min-width:1320px;margin-left:auto;margin-right:auto}
+.descent-section .section-scroll{
+  overflow-x:auto;overflow-y:hidden;
+}
 .descent-tree {
   display:flex; flex-direction:column; gap:0; justify-content:center; align-items:center;
-  width:max-content; min-width:1320px; margin:0 auto; padding:1rem 0;
+  padding:1rem 0; min-width:max-content;
 }
 .descent-level-row {
   display:flex; gap:0; align-items:flex-start; justify-content:center; width:100%;
@@ -597,9 +610,13 @@ function render() {
     title.innerHTML = sec.title + ' <em>' + sec.em + '</em>';
     el.appendChild(title);
 
+    const scroll = document.createElement('div');
+    scroll.className = 'section-scroll';
+    el.appendChild(scroll);
+
     // Special rendering for descent-tree type
     if (sec.type === 'descent-tree') {
-      renderDescentTree(el);
+      renderDescentTree(scroll);
       wrap.appendChild(el);
       return;
     }
@@ -652,7 +669,7 @@ function render() {
         col.appendChild(childList);
       }
 
-      el.appendChild(col);
+      scroll.appendChild(col);
     });
 
     wrap.appendChild(el);
@@ -709,7 +726,7 @@ function makeChildCard(id) {
 }
 
 function enableDragScroll() {
-  document.querySelectorAll('.tree-wrap').forEach(el => {
+  document.querySelectorAll('.section-scroll').forEach(el => {
     if (el.dataset.dragScrollReady === '1') return;
     el.dataset.dragScrollReady = '1';
     let down = false;
@@ -744,7 +761,7 @@ function enableDragScroll() {
 }
 
 function centerScrollableAreas() {
-  document.querySelectorAll('.tree-wrap').forEach(el => {
+  document.querySelectorAll('.section-scroll').forEach(el => {
     if (el.scrollWidth > el.clientWidth) {
       el.scrollLeft = Math.max(0, (el.scrollWidth - el.clientWidth) / 2);
     }
