@@ -34,7 +34,7 @@ body {
   background: var(--parchment);
   color: var(--ink);
   min-height: 100vh;
-  font-size: 19.2px;
+  font-size: 23.04px;
   -webkit-font-smoothing: antialiased;
 }
 body::before {
@@ -82,7 +82,7 @@ body::before {
   padding:0.4rem 1rem 1rem; border-bottom:1px solid var(--border-line);
 }
 .legend-item { display:flex; align-items:center; gap:0.3rem; font-size:0.8rem; color:var(--ink-muted); }
-.legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
+.legend-dot { width:10.8px; height:10.8px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
 
 /* ── Main tree ── */
 .tree-wrap {
@@ -125,7 +125,7 @@ body::before {
 /* ── Person cards ── */
 .person {
   position:relative; border:1px solid var(--border-line); border-radius:4px;
-  padding:0.6rem 0.85rem; min-width:144px; max-width:204px;
+  padding:0.72rem 1.02rem; min-width:172.8px; max-width:244.8px;
   cursor:pointer; transition:all 0.2s ease;
   box-shadow:var(--card-shadow);
 }
@@ -149,7 +149,7 @@ body::before {
 .person.cat-materno .person-name { color:var(--materno); }
 .person.cat-filho { background:var(--filho-bg); border-color:#8aba9a; }
 .person.cat-filho .person-name { color:var(--confirmed); }
-.person.cat-sobrinho { background:#f4f8f5; border-color:#b0c8b5; min-width:108px; max-width:156px; }
+.person.cat-sobrinho { background:#f4f8f5; border-color:#b0c8b5; min-width:129.6px; max-width:187.2px; }
 .person.cat-sobrinho .person-name { color:#4a7a5a; font-size:0.82rem; }
 
 .person-name {
@@ -189,7 +189,7 @@ body::before {
 .info-panel {
   position:fixed; bottom:1.5rem; right:1.5rem;
   background:#fffcf5; border:2px solid var(--gold); border-radius:5px;
-  padding:1.2rem 1.5rem; max-width:340px;
+  padding:1.44rem 1.8rem; max-width:408px;
   box-shadow:0 6px 24px rgba(26,16,8,0.2);
   z-index:100; display:none; font-size:0.9rem;
 }
@@ -226,7 +226,7 @@ body::before {
 }
 .descent-couple {
   display:flex; gap:0.4rem; align-items:flex-start; justify-content:center;
-  flex:1; max-width:420px;
+  flex:1; max-width:504px;
 }
 .descent-row-spacer {
   flex:0 0 2.5rem;
@@ -259,12 +259,12 @@ body::before {
 .descent-placeholder {
   border:2px dashed var(--border-line) !important;
   background:transparent !important;
-  min-height:3.5rem;
+  min-height:4.2rem;
   opacity:0.65;
 }
 .descent-branch {
   display:flex; flex-direction:column; align-items:center; gap:0;
-  min-width:192px;
+  min-width:230.4px;
 }
 .descent-branch-label {
   font-family:'Cormorant Garamond',serif; font-size:0.75rem;
@@ -298,7 +298,7 @@ body::before {
 .descent-siblings-link a:hover { color:var(--ink-soft); border-bottom-style:solid; }
 
 @media(max-width:768px) {
-  .person { min-width:120px; max-width:174px; padding:0.48rem 0.66rem; }
+  .person { min-width:144px; max-width:208.8px; padding:0.576rem 0.792rem; }
   .person-name { font-size:0.82rem; }
   .page-header { padding:1.5rem 1rem 1.2rem; }
   .family-col { margin:0 0.4rem 1rem; }
