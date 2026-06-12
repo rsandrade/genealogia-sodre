@@ -1,327 +1,326 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Knowledge Graph — Família Gramilo Sodré</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<script type="text/javascript" src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
-<style>
-:root{--parchment:#f5efe6;--ink:#2c1810;--ink-light:#5a3e2b;--ink-muted:#8b7355;--gold:#b8860b;--gold-light:#d4a843;--confirmed:#2d6a4f;--probable:#b8860b;--hypothetical:#9b2226;--line:#c9b896;--shadow:rgba(44,24,16,0.08)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Source Sans 3',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:18px}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;z-index:9999}
-header{padding:4rem 3.5rem 3rem;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(232,220,200,0.5) 0%,transparent 100%)}
-header::before{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--gold)}
-.header-ornament{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1rem}
-header h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.1;color:var(--ink);margin-bottom:0.5rem}
-header h1 em{font-style:italic;font-weight:400;color:var(--gold)}
-.header-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:var(--ink-muted);margin-bottom:2rem}
-.legend{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-.legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.95rem;color:var(--ink-muted)}
-.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-#network-container{width:100%;height:calc(100vh - 260px);min-height:500px;background:var(--parchment);border:1px solid var(--line)}
-.info-panel{position:fixed;bottom:20px;right:20px;background:#fffcf7;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.5rem;max-width:350px;box-shadow:0 4px 20px rgba(44,24,16,0.15);z-index:100;display:none;font-size:0.95rem}
-.info-panel h3{font-family:'Playfair Display',serif;color:var(--ink);margin-bottom:0.5rem;font-size:1.2rem}
-.info-panel .relation{color:var(--ink-muted);font-size:0.85rem;margin:0.2rem 0}
-.info-panel .rel-type{color:var(--gold);font-weight:600}
-.info-close{position:absolute;top:8px;right:12px;cursor:pointer;color:var(--ink-muted);font-size:1.3rem}
-.info-close:hover{color:var(--ink)}
-footer{text-align:center;padding:2rem 3.5rem;border-top:1px solid var(--line);margin-top:0}
-.footer-ornament{font-family:'Cormorant Garamond',serif;color:var(--line);font-size:2rem;margin-bottom:0.8rem;letter-spacing:0.67em}
-.footer-text{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-muted);font-size:1rem}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-header,.legend{animation:fadeUp 0.5s ease both}
-</style>
-</head>
-<body>
-
-<header>
-<div class="header-ornament">Knowledge Graph</div>
-<h1>Família <em>Gramilo Sodré</em></h1>
-<p class="header-subtitle">Rede de relações genealógicas — dados sincronizados em junho de 2026</p>
-<div class="legend">
-<div class="legend-item"><div class="legend-dot" style="background:#b8860b"></div> Tronco / Histórico</div>
-<div class="legend-item"><div class="legend-dot" style="background:#2d6a4f"></div> Confirmado</div>
-<div class="legend-item"><div class="legend-dot" style="background:#eaf5ed"></div> Sobrinhos (G4)</div>
-<div class="legend-item"><div class="legend-dot" style="background:#6a4c93"></div> Ramo Barão</div>
-<div class="legend-item"><div class="legend-dot" style="background:#9b2226"></div> Hipotético</div>
-<div class="legend-item"><div class="legend-dot" style="background:#4a90d9"></div> Elo colonial</div>
-<div class="legend-item"><div class="legend-dot" style="background:#d4a843"></div> Maternos (dos Santos)</div>
-<div class="legend-item" style="font-size:0.8rem;color:#8b7355;margin-left:1rem">Setas: ─ pai/mãe de  ╌ casou com  ┈ hipotético</div>
-</div>
-</header>
-
-<div id="network-container"></div>
-
-<div class="info-panel" id="infoPanel">
-<span class="info-close" onclick="document.getElementById('infoPanel').style.display='none'">×</span>
-<h3 id="infoName"></h3>
-<div id="infoRelations"></div>
-</div>
-
-<footer>
-<div class="footer-ornament">❦ ❦ ❦</div>
-<p class="footer-text">Knowledge Graph — Família Gramilo Sodré · 76 nós · 93 arestas · MemPalace + HTML sincronizados<br><em>Nota:</em> Jerônimo Sodré Pereira I (1631–1711) ≠ Jerônimo Sodré Pereira II (filho do Barão, médico/deputado)</p>
-</footer>
-
-<script>
-const GENEALOGY_DATA = {
-  nodes: [
-    {id:'jeronimo_p', label:'Jerônimo Sodré Pereira I\n(1631–1711)', title:'Patriarca · Águas Belas, Lisboa → Salvador · ≠ Jerônimo II (filho do Barão)', group:'historical', shape:'box', font:{face:'Playfair Display',size:14,color:'#2c1810'}, borderWidth:2, color:{background:'#f7f0e3',border:'#b8860b',highlight:{background:'#f0e8d5',border:'#8b6508'}}},
-    {id:'fernando', label:'D. Fernando\nSodré Pereira', title:'Pai de Jerônimo', group:'historical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#5a3e2b'}, borderWidth:1, color:{background:'#f0e8d5',border:'#c9b896'}},
-    {id:'francisca_aragao', label:'D. Francisca\nde Aragão', title:'1ª esposa de Jerônimo · filha de Francisco de Araújo Aragão', group:'historical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#5a3e2b'}, borderWidth:1, color:{background:'#f0e8d5',border:'#c9b896'}},
-    {id:'maria_azevedo', label:'Maria de Azevedo', title:'2ª esposa de Jerônimo', group:'historical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#5a3e2b'}, borderWidth:1, color:{background:'#f0e8d5',border:'#c9b896'}},
-    {id:'coronel', label:'Francisco Maria Sodré Pereira\n(coronel)', title:'Filho de Francisco Álvaro · pai do Barão', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
-    {id:'meneses', label:'Maria Ana\nde Meneses', title:'Esposa do coronel', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
-    {id:'barao', label:'Barão de Alagoinhas\n(Francisco Pereira Sodré)\n1818–1882', title:'Barão de Alagoinhas · n. Cachoeira/BA', group:'barao', shape:'box', font:{face:'Playfair Display',size:13,color:'#4a3168'}, borderWidth:2, color:{background:'#e8daf0',border:'#6a4c93',highlight:{background:'#dcc8eb',border:'#5a3c83'}}},
-    {id:'cora', label:'Cora César\nCoutinho\n1819–1880', title:'Esposa do Barão · casam. 1834', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
-    {id:'jose_lino', label:'José Lino Coutinho\nSodré Pereira', title:'Filho do Barão', group:'barao', shape:'box', font:{face:'Source Sans 3',size:11,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
-    {id:'elisa_barao', label:'Elisa Sodré Pereira\nbat. 1881', title:'Filha do Barão · Salvador', group:'barao', shape:'box', font:{face:'Source Sans 3',size:11,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
-    {id:'jeronimo_ii', label:'Jerônimo Sodré Pereira II\n~1835', title:'Filho do Barão · ≠ patriarca · Médico, Deputado, Pres. Sergipe 1889', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:2, color:{background:'#e8daf0',border:'#6a4c93',highlight:{background:'#dcc8eb',border:'#5a3c83'}}},
-    {id:'conselheiro', label:'Conselheiro Francisco Maria\nSodré Pereira\n1836–1903', title:'Filho do Barão · Deputado federal BA (1891–1902)', group:'barao', shape:'box', font:{face:'Source Sans 3',size:11,color:'#4a3168'}, borderWidth:2, color:{background:'#e8daf0',border:'#6a4c93'}},
-    {id:'manuel_sodre', label:'Manuel Sodré', title:'Elo colonial Sodré–Gramilo', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:13,color:'#2a5a8a'}, borderWidth:2, color:{background:'#e0ecf7',border:'#4a90d9',highlight:{background:'#d0ddf0',border:'#3a80c9'}}},
-    {id:'maria_gramilo', label:'Maria Gramilo', title:'Elo colonial Sodré–Gramilo', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:13,color:'#2a5a8a'}, borderWidth:2, color:{background:'#e0ecf7',border:'#4a90d9'}},
-    {id:'eduardo_sodre', label:'Eduardo Sodré', title:'Filho de Manuel+Maria', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:11,color:'#2a5a8a'}, borderWidth:1, color:{background:'#e0ecf7',border:'#4a90d9'}},
-    {id:'antonio_pereira', label:'Antônio Pereira', title:'Conectado ao elo colonial', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:11,color:'#2a5a8a'}, borderWidth:1, color:{background:'#e0ecf7',border:'#4a90d9'}},
-    {id:'isabel_gramilo', label:'Isabel Gramilo', title:'Esposa de Antônio Pereira', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:11,color:'#2a5a8a'}, borderWidth:1, color:{background:'#e0ecf7',border:'#4a90d9'}},
-    {id:'tomaz', label:'Tomaz Gramilo Sodré\n~1891, Amargosa/BA', title:'Ascendente provável · origem Gramilo: Penedono, Viseu', group:'hypothetical', shape:'box', font:{face:'Playfair Display',size:14,color:'#7a1a1e'}, borderWidth:2, color:{background:'#fce8e8',border:'#9b2226',highlight:{background:'#f5d5d5',border:'#8b1216'}}},
-    {id:'teodora', label:'Teodora Julia\nda Cruz', title:'Esposa de Tomaz · casam. ~1891', group:'hypothetical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#7a1a1e'}, borderWidth:1, color:{background:'#fce8e8',border:'#9b2226'}},
-    {id:'marcelo', label:'Marcelo Gramilo Sodré\nn. 16/01/1897', title:'Avô paterno · n. 16/01/1897 · casam. 09/02/1924 · Montes Claros/MG · 6 filhos', group:'confirmed', shape:'box', font:{face:'Playfair Display',size:14,color:'#1a4a32'}, borderWidth:2, color:{background:'#e8f5ef',border:'#2d6a4f',highlight:{background:'#d5ecd8',border:'#1d5a3f'}}},
-    {id:'rita_rosa', label:'Rita Rosa Sodré\nn. 22/05/1901', title:'Avó paterna · n. 22/05/1901 · 6 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:13,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'francisco', label:'Francisco Gramilo Sodré\nn. 09/03/1925 · Ibitupa/BA', title:'n. 09/03/1925 · bat. 17/05/1925 · casam. 26/12/1953 · Fazenda Santa Terezinha, Aiquara/BA · 12 filhos', group:'confirmed', shape:'box', font:{face:'Playfair Display',size:16,color:'#1a4a32'}, borderWidth:3, color:{background:'#d5ecd8',border:'#2d6a4f',highlight:{background:'#c5ddb8',border:'#1d5a3f'}}},
-    {id:'atanagilda', label:'Atanagilda Odete\ndos Santos\nn. 17/04/1933', title:'n. 17/04/1933 · bat. 25/06/1933 · casam. 26/12/1953 · 12 filhos', group:'confirmed', shape:'box', font:{face:'Playfair Display',size:14,color:'#1a4a32'}, borderWidth:2, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'gervasio', label:'Gervásio Eusébio\ndos Santos\nn. 09/11/1914', title:'Avô materno · Bat. 14/11/1914, Amargosa/BA', group:'materno', shape:'box', font:{face:'Source Sans 3',size:12,color:'#6b5000'}, borderWidth:1, color:{background:'#faf5e6',border:'#d4a843'}},
-    {id:'maria_aleluia', label:'Maria Aleluia\ndos Santos', title:'Avó materna', group:'materno', shape:'box', font:{face:'Source Sans 3',size:12,color:'#6b5000'}, borderWidth:1, color:{background:'#faf5e6',border:'#d4a843'}},
-    {id:'atanagilda_filha', label:'1. Atanagilda Sodré Sampaio\nn. 11/04/1954', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'veralucia', label:'2. Veralucia Sodré\nn. 30/09/1955', group:'filho', shape:'box', font:{face:'Source Sans 3',size:12,color:'#b8860b'}, borderWidth:2, color:{background:'#faf5e6',border:'#b8860b'}, title:'Mãe de Ricardo'},
-    {id:'luiz_carlos', label:'3. Luiz Carlos Sudré\nn. 30/03/1957', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}, title:'Sudré = erro cartorário'},
-    {id:'francisco_filho', label:'4. Francisco Gramilo Sodré Filho\nn. 26/07/1959', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}, title:'Professor, PMA'},
-    {id:'angelica', label:'5. Angélica Maria Sodré Costa\nn. 02/03/1961', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'rita_cassia', label:'6. Rita de Cássia Sodré do Amaral\nn. 09/10/1962', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'djalma', label:'7. Djalma Gramilo Sodré\nn. 15/02/1964', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'paulo_renato', label:'8. Paulo Renato Sodré\nn. 19/06/1965', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'ronaldo', label:'9. Ronaldo Gramilo Sodré\nn. 16/12/1966', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'julio', label:'10. Júlio César Gramilo Sodré\nn. 09/01/1968', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'cristina', label:'11. Cristina Margarete Gramilo Sodré\nn. 02/08/1969', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'sinara', label:'12. Sinara Magali Sodré\nn. 20/12/1971', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'arlindo', label:'Arlindo Gramilo Sodré\n8 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'noemia', label:'Noemia Rocha Sodré', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'zeca', label:'José Gramilo Sodré (Zeca)\n9 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'otavia', label:'Otávia Rosa Sodré Bispo\n10 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'eustaquio', label:'Eustáquio Eusébio Bispo', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'elisa', label:'Elisa Gramilo Sodré\n3 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'isabel', label:'Isabel Gramilo Sodré\n7 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    {id:'maximiliano', label:'Maximiliano', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
-    // ── Sobrinhos: Filhos de Arlindo ──
-    {id:'arleno', label:'Arlenô Gramilo\nSodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'marcelo_neto', label:'Marcelo Gramilo\nSodré Neto', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'arlindo_filho', label:'Arlindo Gramilo\nSodré Filho', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'antonio_cesar', label:'Antonio Cesar\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'luciane', label:'Luciane\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'cristiane', label:'Cristiane\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'rita_cassia_silva', label:'Rita de Cássia Silva\nSodré Figueredo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'manoel_ailton', label:'Manoel Ailton\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    // ── Sobrinhos: Filhos de Zeca ──
-    {id:'zeca_filho', label:'José Gramilo\nSodré Filho', title:'Empresário, Jequié/BA', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'walter', label:'Walter Gramilo\nSodré', title:'Empresário e compositor', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'jailson', label:'Jailson Gramilo\nSodré', title:'Compositor', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'ivan', label:'Ivan Gramilo\nSodré', title:'Empresário, Jequié/BA', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'manoelito', label:'Manoelito Gramilo\nSodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'joselito', label:'Joselito Gramilo\nSodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'cleide', label:'Cleide', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'ione_rosa', label:'Ione Rosa\nSudré', title:'Falecida · Sudré = erro cartorário', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'maria_rita', label:'Maria Rita', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    // ── Sobrinhos: Filhos de Otávia ──
-    {id:'geni', label:'Geni Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'zenito', label:'Zenito Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'sinval', label:'Sinval Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'maria_helena', label:'Maria Helena\nSodré Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'maiza', label:'Maiza Rosa\nBispo Gouveia', title:'Rosa = homenagem à mãe', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'zelia', label:'Zélia Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'juvenil', label:'Juvenil\nSodré Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'nilda', label:'Nilda Sodré\nBispo de Souza', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'antonio_carlos', label:'Antônio Carlos\nBispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'valdeck', label:'Valdeck Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    // ── Sobrinhos: Filhos de Elisa ──
-    {id:'zeilde', label:'Zeilde', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'valdeci', label:'Valdeci', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'elizete', label:'Elizete', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    // ── Sobrinhos: Filhos de Isabel ──
-    {id:'etelvina', label:'Etelvina', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'carlos', label:'Carlos', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'francisco_sob', label:'Francisco', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'dutinha', label:'Dutinha', title:'Apelido', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'edvaldo', label:'Edvaldo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'lelinha', label:'Lelinha', title:'Apelido', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-    {id:'maria_sob', label:'Maria', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
-  ],
-  edges: [
-    {from:'fernando',to:'jeronimo_p',label:'pai de',arrows:'to',color:{color:'#b8860b',highlight:'#8b6508'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:false,width:1},
-    {from:'jeronimo_p',to:'francisca_aragao',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'jeronimo_p',to:'maria_azevedo',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'jeronimo_p',to:'coronel',label:'(descendente)',arrows:'to',color:{color:'#c9b896',highlight:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},dashes:[3,3],width:1},
-    {from:'coronel',to:'barao',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
-    {from:'coronel',to:'meneses',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'barao',to:'cora',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'barao',to:'jose_lino',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
-    {from:'barao',to:'elisa_barao',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
-    {from:'barao',to:'jeronimo_ii',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
-    {from:'barao',to:'conselheiro',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
-    {from:'manuel_sodre',to:'maria_gramilo',label:'casou com',color:{color:'#4a90d9'},font:{size:10,color:'#2a5a8a',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'manuel_sodre',to:'eduardo_sodre',label:'pai de',arrows:'to',color:{color:'#4a90d9'},font:{size:10,color:'#2a5a8a',face:'Source Sans 3'},width:1},
-    {from:'antonio_pereira',to:'isabel_gramilo',label:'casou com',color:{color:'#4a90d9'},font:{size:10,color:'#2a5a8a',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'jeronimo_p',to:'tomaz',label:'(provável avô)',arrows:'to',color:{color:'#c9b896',highlight:'#9b2226'},font:{size:10,color:'#9b2226',face:'Source Sans 3'},dashes:[3,5],width:1},
-    {from:'tomaz',to:'teodora',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#9b2226',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'tomaz',to:'marcelo',label:'(provável avô)',arrows:'to',color:{color:'#c9b896'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:[3,5],width:1},
-    {from:'marcelo',to:'rita_rosa',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'marcelo',to:'francisco',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:11,color:'#1a4a32',face:'Source Sans 3'},width:2},
-    {from:'rita_rosa',to:'francisco',label:'mãe de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'atanagilda',label:'casou com',color:{color:'#c9b896'},font:{size:11,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:2},
-    {from:'gervasio',to:'atanagilda',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'maria_aleluia',to:'atanagilda',label:'mãe de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'atanagilda_filha',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'veralucia',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'luiz_carlos',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'francisco_filho',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'angelica',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'rita_cassia',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'djalma',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'paulo_renato',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'ronaldo',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'julio',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'cristina',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'francisco',to:'sinara',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'atanagilda_filha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'veralucia',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'luiz_carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'francisco_filho',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'angelica',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'rita_cassia',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'djalma',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'paulo_renato',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'ronaldo',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'julio',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'cristina',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'atanagilda',to:'sinara',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'marcelo',to:'arlindo',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'marcelo',to:'zeca',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'marcelo',to:'otavia',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'marcelo',to:'elisa',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'marcelo',to:'isabel',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'noemia',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'otavia',to:'eustaquio',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
-    {from:'isabel',to:'maximiliano',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
-    // ── Arlindo → 8 filhos ──
-    {from:'arlindo',to:'arleno',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'marcelo_neto',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'arlindo_filho',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'antonio_cesar',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'luciane',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'cristiane',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'rita_cassia_silva',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'arlindo',to:'manoel_ailton',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    // ── Zeca → 9 filhos ──
-    {from:'zeca',to:'zeca_filho',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'walter',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'jailson',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'ivan',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'manoelito',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'joselito',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'cleide',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'ione_rosa',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'zeca',to:'maria_rita',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    // ── Otávia → 10 filhos ──
-    {from:'otavia',to:'geni',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'zenito',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'sinval',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'maria_helena',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'maiza',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'zelia',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'juvenil',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'nilda',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'antonio_carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'otavia',to:'valdeck',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    // ── Elisa → 3 filhos ──
-    {from:'elisa',to:'zeilde',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'elisa',to:'valdeci',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'elisa',to:'elizete',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    // ── Isabel → 7 filhos ──
-    {from:'isabel',to:'etelvina',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'francisco_sob',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'dutinha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'edvaldo',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'lelinha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-    {from:'isabel',to:'maria_sob',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
-  ]
-};
-
-const container = document.getElementById('network-container');
-const options = {
-  physics: {
-    forceAtlas2Based: {
-      gravitationalConstant: -80,
-      centralGravity: 0.008,
-      springLength: 120,
-      springConstant: 0.04,
-      damping: 0.4
-    },
-    maxVelocity: 50,
-    solver: 'forceAtlas2Based',
-    stabilization: { iterations: 200 }
-  },
-  interaction: {
-    hover: true,
-    tooltipDelay: 200,
-    zoomView: true,
-    dragView: true,
-    multiselect: false
-  },
-  edges: {
-    smooth: { type: 'continuous', roundness: 0.3 }
-  },
-  nodes: {
-    margin: { top: 10, bottom: 10, left: 15, right: 15 },
-    shadow: { enabled: true, color: 'rgba(44,24,16,0.08)', size: 3, x: 1, y: 2 }
-  }
-};
-
-const network = new vis.Network(container, GENEALOGY_DATA, options);
-
-const nodeData = {};
-GENEALOGY_DATA.nodes.forEach(n => { nodeData[n.id] = n; });
-
-const edgeData = {};
-GENEALOGY_DATA.edges.forEach(e => {
-  if (!edgeData[e.from]) edgeData[e.from] = [];
-  if (!edgeData[e.to]) edgeData[e.to] = [];
-  // Para o nó de origem (pai/mãe): "pai/mãe de → NomeFilho"
-  edgeData[e.from].push({type: e.label, name: nodeData[e.to] ? nodeData[e.to].label.split('\\n')[0] : e.to, dir: 'out'});
-  // Para o nó de destino (filho): inverter a leitura → "filho(a) de NomePaiMãe"
-  const inverseMap = {'pai de': 'filho(a) de', 'mãe de': 'filho(a) de', 'casou com': 'casou com', 'irmão de': 'irmão(ã) de', 'filho de': 'pai/mãe de', 'descendente de': 'ancestral de', '(descendente)': 'descendente de'};
-  const invLabel = inverseMap[e.label] || e.label;
-  edgeData[e.to].push({type: invLabel, name: nodeData[e.from] ? nodeData[e.from].label.split('\\n')[0] : e.from, dir: 'in'});
-});
-
-network.on('click', function(params) {
-  if (params.nodes.length > 0) {
-    const nodeId = params.nodes[0];
-    const node = nodeData[nodeId];
-    const panel = document.getElementById('infoPanel');
-    document.getElementById('infoName').textContent = node.label.replace(/\\n/g, ' ');
-    const rels = edgeData[nodeId] || [];
-    const relsHtml = rels.map(r => '<div class="relation"><span class="rel-type">' + r.type + '</span> ' + r.name + '</div>').join('');
-    document.getElementById('infoRelations').innerHTML = relsHtml;
-    panel.style.display = 'block';
-  } else {
-    document.getElementById('infoPanel').style.display = 'none';
-  }
-});
-
-network.once('stabilizationIterationsDone', function() {
-  network.fit({ animation: { duration: 500, easingFunction: 'easeOutQuad' } });
-});
-</script>
-</body>
-</html>
+1|<!DOCTYPE html>
+2|<html lang="pt-BR">
+3|<head>
+4|<meta charset="UTF-8">
+5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+6|<title>Knowledge Graph — Família Gramilo Sodré</title>
+7|<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+8|<script type="text/javascript" src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+9|<style>
+10|:root{--parchment:#f5efe6;--ink:#2c1810;--ink-light:#5a3e2b;--ink-muted:#8b7355;--gold:#b8860b;--gold-light:#d4a843;--confirmed:#2d6a4f;--probable:#b8860b;--hypothetical:#9b2226;--line:#c9b896;--shadow:rgba(44,24,16,0.08)}
+11|*{margin:0;padding:0;box-sizing:border-box}
+12|body{font-family:'Source Sans 3',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:18px}
+13|body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;z-index:9999}
+14|header{padding:4rem 3.5rem 3rem;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(232,220,200,0.5) 0%,transparent 100%)}
+15|header::before{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--gold)}
+16|.header-ornament{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1rem}
+17|header h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.1;color:var(--ink);margin-bottom:0.5rem}
+18|header h1 em{font-style:italic;font-weight:400;color:var(--gold)}
+19|.header-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:var(--ink-muted);margin-bottom:2rem}
+20|.legend{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+21|.legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.95rem;color:var(--ink-muted)}
+22|.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+23|#network-container{width:100%;height:calc(100vh - 260px);min-height:500px;background:var(--parchment);border:1px solid var(--line)}
+24|.info-panel{position:fixed;bottom:20px;right:20px;background:#fffcf7;border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.5rem;max-width:350px;box-shadow:0 4px 20px rgba(44,24,16,0.15);z-index:100;display:none;font-size:0.95rem}
+25|.info-panel h3{font-family:'Playfair Display',serif;color:var(--ink);margin-bottom:0.5rem;font-size:1.2rem}
+26|.info-panel .relation{color:var(--ink-muted);font-size:0.85rem;margin:0.2rem 0}
+27|.info-panel .rel-type{color:var(--gold);font-weight:600}
+28|.info-close{position:absolute;top:8px;right:12px;cursor:pointer;color:var(--ink-muted);font-size:1.3rem}
+29|.info-close:hover{color:var(--ink)}
+30|footer{text-align:center;padding:2rem 3.5rem;border-top:1px solid var(--line);margin-top:0}
+31|.footer-ornament{font-family:'Cormorant Garamond',serif;color:var(--line);font-size:2rem;margin-bottom:0.8rem;letter-spacing:0.67em}
+32|.footer-text{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--ink-muted);font-size:1rem}
+33|@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+34|header,.legend{animation:fadeUp 0.5s ease both}
+35|</style>
+36|</head>
+37|<body>
+38|
+39|<header>
+40|<div class="header-ornament">Knowledge Graph</div>
+41|<h1>Família <em>Gramilo Sodré</em></h1>
+42|<p class="header-subtitle">Rede de relações genealógicas — dados sincronizados em junho de 2026</p>
+43|<div class="legend">
+44|<div class="legend-item"><div class="legend-dot" style="background:#b8860b"></div> Tronco / Histórico</div>
+45|<div class="legend-item"><div class="legend-dot" style="background:#2d6a4f"></div> Confirmado</div>
+46|<div class="legend-item"><div class="legend-dot" style="background:#eaf5ed"></div> Sobrinhos (G4)</div>
+47|<div class="legend-item"><div class="legend-dot" style="background:#6a4c93"></div> Ramo Barão</div>
+48|<div class="legend-item"><div class="legend-dot" style="background:#9b2226"></div> Hipotético</div>
+49|<div class="legend-item"><div class="legend-dot" style="background:#4a90d9"></div> Elo colonial</div>
+50|<div class="legend-item"><div class="legend-dot" style="background:#d4a843"></div> Maternos (dos Santos)</div>
+51|<div class="legend-item" style="font-size:0.8rem;color:#8b7355;margin-left:1rem">Setas: ─ pai/mãe de  ╌ casou com  ┈ hipotético</div>
+52|</div>
+53|</header>
+54|
+55|<div id="network-container"></div>
+56|
+57|<div class="info-panel" id="infoPanel">
+58|<span class="info-close" onclick="document.getElementById('infoPanel').style.display='none'">×</span>
+59|<h3 id="infoName"></h3>
+60|<div id="infoRelations"></div>
+61|</div>
+62|
+63|<footer>
+64|<div class="footer-ornament">❦ ❦ ❦</div>
+65|<p class="footer-text">Knowledge Graph — Família Gramilo Sodré · 82 nós · 91 arestas · MemPalace + HTML sincronizados<br><em>Notas:</em> Jerônimo Sodré Pereira I (1631–1711) ≠ Jerônimo Sodré Pereira II (filho do Barão) · Entre Jerônimo I e Tomaz (~1860) existem ~4-6 gerações não documentadas</p>
+66|</footer>
+67|
+68|<script>
+69|const GENEALOGY_DATA = {
+70|  nodes: [
+71|    {id:'jeronimo_p', label:'Jerônimo Sodré Pereira I\n(1631–1711)', title:'Patriarca · Águas Belas, Lisboa → Salvador · ≠ Jerônimo II (filho do Barão)', group:'historical', shape:'box', font:{face:'Playfair Display',size:14,color:'#2c1810'}, borderWidth:2, color:{background:'#f7f0e3',border:'#b8860b',highlight:{background:'#f0e8d5',border:'#8b6508'}}},
+72|    {id:'fernando', label:'D. Fernando\nSodré Pereira', title:'Pai de Jerônimo', group:'historical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#5a3e2b'}, borderWidth:1, color:{background:'#f0e8d5',border:'#c9b896'}},
+73|    {id:'francisca_aragao', label:'D. Francisca\nde Aragão', title:'1ª esposa de Jerônimo · filha de Francisco de Araújo Aragão', group:'historical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#5a3e2b'}, borderWidth:1, color:{background:'#f0e8d5',border:'#c9b896'}},
+74|    {id:'maria_azevedo', label:'Maria de Azevedo', title:'2ª esposa de Jerônimo', group:'historical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#5a3e2b'}, borderWidth:1, color:{background:'#f0e8d5',border:'#c9b896'}},
+75|    {id:'coronel', label:'Francisco Maria Sodré Pereira\n(coronel)', title:'Filho de Francisco Álvaro · pai do Barão', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
+76|    {id:'meneses', label:'Maria Ana\nde Meneses', title:'Esposa do coronel', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
+77|    {id:'barao', label:'Barão de Alagoinhas\n(Francisco Pereira Sodré)\n1818–1882', title:'Barão de Alagoinhas · n. Cachoeira/BA', group:'barao', shape:'box', font:{face:'Playfair Display',size:13,color:'#4a3168'}, borderWidth:2, color:{background:'#e8daf0',border:'#6a4c93',highlight:{background:'#dcc8eb',border:'#5a3c83'}}},
+78|    {id:'cora', label:'Cora César\nCoutinho\n1819–1880', title:'Esposa do Barão · casam. 1834', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
+79|    {id:'jose_lino', label:'José Lino Coutinho\nSodré Pereira', title:'Filho do Barão', group:'barao', shape:'box', font:{face:'Source Sans 3',size:11,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
+80|    {id:'elisa_barao', label:'Elisa Sodré Pereira\nbat. 1881', title:'Filha do Barão · Salvador', group:'barao', shape:'box', font:{face:'Source Sans 3',size:11,color:'#4a3168'}, borderWidth:1, color:{background:'#f0eaf7',border:'#6a4c93'}},
+81|    {id:'jeronimo_ii', label:'Jerônimo Sodré Pereira II\n~1835', title:'Filho do Barão · ≠ patriarca · Médico, Deputado, Pres. Sergipe 1889', group:'barao', shape:'box', font:{face:'Source Sans 3',size:12,color:'#4a3168'}, borderWidth:2, color:{background:'#e8daf0',border:'#6a4c93',highlight:{background:'#dcc8eb',border:'#5a3c83'}}},
+82|    {id:'conselheiro', label:'Conselheiro Francisco Maria\nSodré Pereira\n1836–1903', title:'Filho do Barão · Deputado federal BA (1891–1902)', group:'barao', shape:'box', font:{face:'Source Sans 3',size:11,color:'#4a3168'}, borderWidth:2, color:{background:'#e8daf0',border:'#6a4c93'}},
+83|    {id:'manuel_sodre', label:'Manuel Sodré', title:'Elo colonial Sodré–Gramilo', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:13,color:'#2a5a8a'}, borderWidth:2, color:{background:'#e0ecf7',border:'#4a90d9',highlight:{background:'#d0ddf0',border:'#3a80c9'}}},
+84|    {id:'maria_gramilo', label:'Maria Gramilo', title:'Elo colonial Sodré–Gramilo', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:13,color:'#2a5a8a'}, borderWidth:2, color:{background:'#e0ecf7',border:'#4a90d9'}},
+85|    {id:'eduardo_sodre', label:'Eduardo Sodré', title:'Filho de Manuel+Maria', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:11,color:'#2a5a8a'}, borderWidth:1, color:{background:'#e0ecf7',border:'#4a90d9'}},
+86|    {id:'antonio_pereira', label:'Antônio Pereira', title:'Conectado ao elo colonial', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:11,color:'#2a5a8a'}, borderWidth:1, color:{background:'#e0ecf7',border:'#4a90d9'}},
+87|    {id:'isabel_gramilo', label:'Isabel Gramilo', title:'Esposa de Antônio Pereira', group:'colonial', shape:'box', font:{face:'Source Sans 3',size:11,color:'#2a5a8a'}, borderWidth:1, color:{background:'#e0ecf7',border:'#4a90d9'}},
+88|    {id:'tomaz', label:'Tomaz Gramilo Sodré\n~1891, Amargosa/BA', title:'Ascendente · origem Gramilo: Penedono, Viseu · ~4-6 gerações intermediárias entre Jerônimo I (1631) e Tomaz (~1860)', group:'hypothetical', shape:'box', font:{face:'Playfair Display',size:14,color:'#7a1a1e'}, borderWidth:2, color:{background:'#fce8e8',border:'#9b2226',highlight:{background:'#f5d5d5',border:'#8b1216'}}},
+89|    {id:'teodora', label:'Teodora Julia\nda Cruz', title:'Esposa de Tomaz · casam. ~1891', group:'hypothetical', shape:'box', font:{face:'Source Sans 3',size:12,color:'#7a1a1e'}, borderWidth:1, color:{background:'#fce8e8',border:'#9b2226'}},
+90|    {id:'marcelo', label:'Marcelo Gramilo Sodré\nn. 16/01/1897', title:'Avô paterno · n. 16/01/1897 · casam. 09/02/1924 · Montes Claros/MG · 6 filhos', group:'confirmed', shape:'box', font:{face:'Playfair Display',size:14,color:'#1a4a32'}, borderWidth:2, color:{background:'#e8f5ef',border:'#2d6a4f',highlight:{background:'#d5ecd8',border:'#1d5a3f'}}},
+91|    {id:'rita_rosa', label:'Rita Rosa Sodré\nn. 22/05/1901', title:'Avó paterna · n. 22/05/1901 · 6 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:13,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+92|    {id:'francisco', label:'Francisco Gramilo Sodré\nn. 09/03/1925 · Ibitupa/BA', title:'n. 09/03/1925 · bat. 17/05/1925 · casam. 26/12/1953 · Fazenda Santa Terezinha, Aiquara/BA · 12 filhos', group:'confirmed', shape:'box', font:{face:'Playfair Display',size:16,color:'#1a4a32'}, borderWidth:3, color:{background:'#d5ecd8',border:'#2d6a4f',highlight:{background:'#c5ddb8',border:'#1d5a3f'}}},
+93|    {id:'atanagilda', label:'Atanagilda Odete\ndos Santos\nn. 17/04/1933', title:'n. 17/04/1933 · bat. 25/06/1933 · casam. 26/12/1953 · 12 filhos', group:'confirmed', shape:'box', font:{face:'Playfair Display',size:14,color:'#1a4a32'}, borderWidth:2, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+94|    {id:'gervasio', label:'Gervásio Eusébio\ndos Santos\nn. 09/11/1914', title:'Avô materno · Bat. 14/11/1914, Amargosa/BA', group:'materno', shape:'box', font:{face:'Source Sans 3',size:12,color:'#6b5000'}, borderWidth:1, color:{background:'#faf5e6',border:'#d4a843'}},
+95|    {id:'maria_aleluia', label:'Maria Aleluia\ndos Santos', title:'Avó materna', group:'materno', shape:'box', font:{face:'Source Sans 3',size:12,color:'#6b5000'}, borderWidth:1, color:{background:'#faf5e6',border:'#d4a843'}},
+96|    {id:'atanagilda_filha', label:'1. Atanagilda Sodré Sampaio\nn. 11/04/1954', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+97|    {id:'veralucia', label:'2. Veralucia Sodré\nn. 30/09/1955', group:'filho', shape:'box', font:{face:'Source Sans 3',size:12,color:'#b8860b'}, borderWidth:2, color:{background:'#faf5e6',border:'#b8860b'}, title:'Mãe de Ricardo'},
+98|    {id:'luiz_carlos', label:'3. Luiz Carlos Sudré\nn. 30/03/1957', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}, title:'Sudré = erro cartorário'},
+99|    {id:'francisco_filho', label:'4. Francisco Gramilo Sodré Filho\nn. 26/07/1959', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}, title:'Professor, PMA'},
+100|    {id:'angelica', label:'5. Angélica Maria Sodré Costa\nn. 02/03/1961', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+101|    {id:'rita_cassia', label:'6. Rita de Cássia Sodré do Amaral\nn. 09/10/1962', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+102|    {id:'djalma', label:'7. Djalma Gramilo Sodré\nn. 15/02/1964', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+103|    {id:'paulo_renato', label:'8. Paulo Renato Sodré\nn. 19/06/1965', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+104|    {id:'ronaldo', label:'9. Ronaldo Gramilo Sodré\nn. 16/12/1966', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+105|    {id:'julio', label:'10. Júlio César Gramilo Sodré\nn. 09/01/1968', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+106|    {id:'cristina', label:'11. Cristina Margarete Gramilo Sodré\nn. 02/08/1969', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+107|    {id:'sinara', label:'12. Sinara Magali Sodré\nn. 20/12/1971', group:'filho', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+108|    {id:'arlindo', label:'Arlindo Gramilo Sodré\n8 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+109|    {id:'noemia', label:'Noemia Rocha Sodré', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+110|    {id:'zeca', label:'José Gramilo Sodré (Zeca)\n9 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+111|    {id:'otavia', label:'Otávia Rosa Sodré Bispo\n10 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+112|    {id:'eustaquio', label:'Eustáquio Eusébio Bispo', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+113|    {id:'elisa', label:'Elisa Gramilo Sodré\n3 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+114|    {id:'isabel', label:'Isabel Gramilo Sodré\n7 filhos', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:12,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+115|    {id:'maximiliano', label:'Maximiliano', group:'confirmed', shape:'box', font:{face:'Source Sans 3',size:11,color:'#1a4a32'}, borderWidth:1, color:{background:'#e8f5ef',border:'#2d6a4f'}},
+116|    // ── Sobrinhos: Filhos de Arlindo ──
+117|    {id:'arleno', label:'Arlenô Gramilo\nSodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+118|    {id:'marcelo_neto', label:'Marcelo Gramilo\nSodré Neto', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+119|    {id:'arlindo_filho', label:'Arlindo Gramilo\nSodré Filho', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+120|    {id:'antonio_cesar', label:'Antonio Cesar\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+121|    {id:'luciane', label:'Luciane\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+122|    {id:'cristiane', label:'Cristiane\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+123|    {id:'rita_cassia_silva', label:'Rita de Cássia Silva\nSodré Figueredo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+124|    {id:'manoel_ailton', label:'Manoel Ailton\nSilva Sodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+125|    // ── Sobrinhos: Filhos de Zeca ──
+126|    {id:'zeca_filho', label:'José Gramilo\nSodré Filho', title:'Empresário, Jequié/BA', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+127|    {id:'walter', label:'Walter Gramilo\nSodré', title:'Empresário e compositor', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+128|    {id:'jailson', label:'Jailson Gramilo\nSodré', title:'Compositor', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+129|    {id:'ivan', label:'Ivan Gramilo\nSodré', title:'Empresário, Jequié/BA', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+130|    {id:'manoelito', label:'Manoelito Gramilo\nSodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+131|    {id:'joselito', label:'Joselito Gramilo\nSodré', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+132|    {id:'cleide', label:'Cleide', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+133|    {id:'ione_rosa', label:'Ione Rosa\nSudré', title:'Falecida · Sudré = erro cartorário', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+134|    {id:'maria_rita', label:'Maria Rita', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+135|    // ── Sobrinhos: Filhos de Otávia ──
+136|    {id:'geni', label:'Geni Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+137|    {id:'zenito', label:'Zenito Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+138|    {id:'sinval', label:'Sinval Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+139|    {id:'maria_helena', label:'Maria Helena\nSodré Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+140|    {id:'maiza', label:'Maiza Rosa\nBispo Gouveia', title:'Rosa = homenagem à mãe', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+141|    {id:'zelia', label:'Zélia Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+142|    {id:'juvenil', label:'Juvenil\nSodré Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+143|    {id:'nilda', label:'Nilda Sodré\nBispo de Souza', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+144|    {id:'antonio_carlos', label:'Antônio Carlos\nBispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+145|    {id:'valdeck', label:'Valdeck Bispo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+146|    // ── Sobrinhos: Filhos de Elisa ──
+147|    {id:'zeilde', label:'Zeilde', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+148|    {id:'valdeci', label:'Valdeci', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+149|    {id:'elizete', label:'Elizete', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+150|    // ── Sobrinhos: Filhos de Isabel ──
+151|    {id:'etelvina', label:'Etelvina', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+152|    {id:'carlos', label:'Carlos', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+153|    {id:'francisco_sob', label:'Francisco', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+154|    {id:'dutinha', label:'Dutinha', title:'Apelido', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+155|    {id:'edvaldo', label:'Edvaldo', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+156|    {id:'lelinha', label:'Lelinha', title:'Apelido', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+157|    {id:'maria_sob', label:'Maria', group:'sobrinho', shape:'box', font:{face:'Source Sans 3',size:10,color:'#1a4a32'}, borderWidth:1, color:{background:'#eaf5ed',border:'#2d6a4f'}},
+158|  ],
+159|  edges: [
+160|    {from:'fernando',to:'jeronimo_p',label:'pai de',arrows:'to',color:{color:'#b8860b',highlight:'#8b6508'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:false,width:1},
+161|    {from:'jeronimo_p',to:'francisca_aragao',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:[5,5],width:1},
+162|    {from:'jeronimo_p',to:'maria_azevedo',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#8b7355',face:'Source Sans 3'},dashes:[5,5],width:1},
+163|    {from:'jeronimo_p',to:'coronel',label:'(descendente)',arrows:'to',color:{color:'#c9b896',highlight:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},dashes:[3,3],width:1},
+164|    {from:'coronel',to:'barao',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
+165|    {from:'coronel',to:'meneses',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},dashes:[5,5],width:1},
+166|    {from:'barao',to:'cora',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},dashes:[5,5],width:1},
+167|    {from:'barao',to:'jose_lino',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
+168|    {from:'barao',to:'elisa_barao',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
+169|    {from:'barao',to:'jeronimo_ii',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
+170|    {from:'barao',to:'conselheiro',label:'pai de',arrows:'to',color:{color:'#6a4c93'},font:{size:10,color:'#6a4c93',face:'Source Sans 3'},width:1},
+171|    {from:'manuel_sodre',to:'maria_gramilo',label:'casou com',color:{color:'#4a90d9'},font:{size:10,color:'#2a5a8a',face:'Source Sans 3'},dashes:[5,5],width:1},
+172|    {from:'manuel_sodre',to:'eduardo_sodre',label:'pai de',arrows:'to',color:{color:'#4a90d9'},font:{size:10,color:'#2a5a8a',face:'Source Sans 3'},width:1},
+173|    {from:'antonio_pereira',to:'isabel_gramilo',label:'casou com',color:{color:'#4a90d9'},font:{size:10,color:'#2a5a8a',face:'Source Sans 3'},dashes:[5,5],width:1},
+174|    175|    {from:'tomaz',to:'teodora',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#9b2226',face:'Source Sans 3'},dashes:[5,5],width:1},
+176|    {from:'tomaz',to:'marcelo',label:'pai de',arrows:'to',color:{color:'#9b2226'},font:{size:10,color:'#7a1a1e',face:'Source Sans 3'},width:1},
+177|    {from:'marcelo',to:'rita_rosa',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
+178|    {from:'marcelo',to:'francisco',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:11,color:'#1a4a32',face:'Source Sans 3'},width:2},
+179|    {from:'rita_rosa',to:'francisco',label:'mãe de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+180|    {from:'francisco',to:'atanagilda',label:'casou com',color:{color:'#c9b896'},font:{size:11,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:2},
+181|    {from:'gervasio',to:'atanagilda',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+182|    {from:'maria_aleluia',to:'atanagilda',label:'mãe de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+183|    {from:'francisco',to:'atanagilda_filha',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+184|    {from:'francisco',to:'veralucia',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+185|    {from:'francisco',to:'luiz_carlos',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+186|    {from:'francisco',to:'francisco_filho',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+187|    {from:'francisco',to:'angelica',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+188|    {from:'francisco',to:'rita_cassia',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+189|    {from:'francisco',to:'djalma',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+190|    {from:'francisco',to:'paulo_renato',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+191|    {from:'francisco',to:'ronaldo',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+192|    {from:'francisco',to:'julio',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+193|    {from:'francisco',to:'cristina',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+194|    {from:'francisco',to:'sinara',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+195|    {from:'atanagilda',to:'atanagilda_filha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+196|    {from:'atanagilda',to:'veralucia',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+197|    {from:'atanagilda',to:'luiz_carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+198|    {from:'atanagilda',to:'francisco_filho',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+199|    {from:'atanagilda',to:'angelica',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+200|    {from:'atanagilda',to:'rita_cassia',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+201|    {from:'atanagilda',to:'djalma',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+202|    {from:'atanagilda',to:'paulo_renato',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+203|    {from:'atanagilda',to:'ronaldo',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+204|    {from:'atanagilda',to:'julio',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+205|    {from:'atanagilda',to:'cristina',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+206|    {from:'atanagilda',to:'sinara',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.5},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+207|    {from:'marcelo',to:'arlindo',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+208|    {from:'marcelo',to:'zeca',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+209|    {from:'marcelo',to:'otavia',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+210|    {from:'marcelo',to:'elisa',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+211|    {from:'marcelo',to:'isabel',label:'pai de',arrows:'to',color:{color:'#2d6a4f'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},width:1},
+212|    {from:'arlindo',to:'noemia',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
+213|    {from:'otavia',to:'eustaquio',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
+214|    {from:'isabel',to:'maximiliano',label:'casou com',color:{color:'#c9b896'},font:{size:10,color:'#1a4a32',face:'Source Sans 3'},dashes:[5,5],width:1},
+215|    // ── Arlindo → 8 filhos ──
+216|    {from:'arlindo',to:'arleno',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+217|    {from:'arlindo',to:'marcelo_neto',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+218|    {from:'arlindo',to:'arlindo_filho',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+219|    {from:'arlindo',to:'antonio_cesar',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+220|    {from:'arlindo',to:'luciane',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+221|    {from:'arlindo',to:'cristiane',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+222|    {from:'arlindo',to:'rita_cassia_silva',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+223|    {from:'arlindo',to:'manoel_ailton',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+224|    // ── Zeca → 9 filhos ──
+225|    {from:'zeca',to:'zeca_filho',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+226|    {from:'zeca',to:'walter',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+227|    {from:'zeca',to:'jailson',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+228|    {from:'zeca',to:'ivan',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+229|    {from:'zeca',to:'manoelito',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+230|    {from:'zeca',to:'joselito',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+231|    {from:'zeca',to:'cleide',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+232|    {from:'zeca',to:'ione_rosa',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+233|    {from:'zeca',to:'maria_rita',label:'pai de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+234|    // ── Otávia → 10 filhos ──
+235|    {from:'otavia',to:'geni',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+236|    {from:'otavia',to:'zenito',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+237|    {from:'otavia',to:'sinval',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+238|    {from:'otavia',to:'maria_helena',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+239|    {from:'otavia',to:'maiza',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+240|    {from:'otavia',to:'zelia',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+241|    {from:'otavia',to:'juvenil',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+242|    {from:'otavia',to:'nilda',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+243|    {from:'otavia',to:'antonio_carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+244|    {from:'otavia',to:'valdeck',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+245|    // ── Elisa → 3 filhos ──
+246|    {from:'elisa',to:'zeilde',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+247|    {from:'elisa',to:'valdeci',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+248|    {from:'elisa',to:'elizete',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+249|    // ── Isabel → 7 filhos ──
+250|    {from:'isabel',to:'etelvina',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+251|    {from:'isabel',to:'carlos',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+252|    {from:'isabel',to:'francisco_sob',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+253|    {from:'isabel',to:'dutinha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+254|    {from:'isabel',to:'edvaldo',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+255|    {from:'isabel',to:'lelinha',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+256|    {from:'isabel',to:'maria_sob',label:'mãe de',arrows:'to',color:{color:'#2d6a4f',opacity:0.6},font:{size:9,color:'#1a4a32',face:'Source Sans 3'},width:1},
+257|  ]
+258|};
+259|
+260|const container = document.getElementById('network-container');
+261|const options = {
+262|  physics: {
+263|    forceAtlas2Based: {
+264|      gravitationalConstant: -80,
+265|      centralGravity: 0.008,
+266|      springLength: 120,
+267|      springConstant: 0.04,
+268|      damping: 0.4
+269|    },
+270|    maxVelocity: 50,
+271|    solver: 'forceAtlas2Based',
+272|    stabilization: { iterations: 200 }
+273|  },
+274|  interaction: {
+275|    hover: true,
+276|    tooltipDelay: 200,
+277|    zoomView: true,
+278|    dragView: true,
+279|    multiselect: false
+280|  },
+281|  edges: {
+282|    smooth: { type: 'continuous', roundness: 0.3 }
+283|  },
+284|  nodes: {
+285|    margin: { top: 10, bottom: 10, left: 15, right: 15 },
+286|    shadow: { enabled: true, color: 'rgba(44,24,16,0.08)', size: 3, x: 1, y: 2 }
+287|  }
+288|};
+289|
+290|const network = new vis.Network(container, GENEALOGY_DATA, options);
+291|
+292|const nodeData = {};
+293|GENEALOGY_DATA.nodes.forEach(n => { nodeData[n.id] = n; });
+294|
+295|const edgeData = {};
+296|GENEALOGY_DATA.edges.forEach(e => {
+297|  if (!edgeData[e.from]) edgeData[e.from] = [];
+298|  if (!edgeData[e.to]) edgeData[e.to] = [];
+299|  // Para o nó de origem (pai/mãe): "pai/mãe de → NomeFilho"
+300|  edgeData[e.from].push({type: e.label, name: nodeData[e.to] ? nodeData[e.to].label.split('\\n')[0] : e.to, dir: 'out'});
+301|  // Para o nó de destino (filho): inverter a leitura → "filho(a) de NomePaiMãe"
+302|  const inverseMap = {'pai de': 'filho(a) de', 'mãe de': 'filho(a) de', 'casou com': 'casou com', 'irmão de': 'irmão(ã) de', 'filho de': 'pai/mãe de', 'descendente de': 'ancestral de', '(descendente)': 'descendente de'};
+303|  const invLabel = inverseMap[e.label] || e.label;
+304|  edgeData[e.to].push({type: invLabel, name: nodeData[e.from] ? nodeData[e.from].label.split('\\n')[0] : e.from, dir: 'in'});
+305|});
+306|
+307|network.on('click', function(params) {
+308|  if (params.nodes.length > 0) {
+309|    const nodeId = params.nodes[0];
+310|    const node = nodeData[nodeId];
+311|    const panel = document.getElementById('infoPanel');
+312|    document.getElementById('infoName').textContent = node.label.replace(/\\n/g, ' ');
+313|    const rels = edgeData[nodeId] || [];
+314|    const relsHtml = rels.map(r => '<div class="relation"><span class="rel-type">' + r.type + '</span> ' + r.name + '</div>').join('');
+315|    document.getElementById('infoRelations').innerHTML = relsHtml;
+316|    panel.style.display = 'block';
+317|  } else {
+318|    document.getElementById('infoPanel').style.display = 'none';
+319|  }
+320|});
+321|
+322|network.once('stabilizationIterationsDone', function() {
+323|  network.fit({ animation: { duration: 500, easingFunction: 'easeOutQuad' } });
+324|});
+325|</script>
+326|</body>
+327|</html>
