@@ -218,8 +218,49 @@ body::before {
 
 /* ── Descent tree (ascendentes) ── */
 .descent-tree {
-  display:flex; gap:2rem; justify-content:center; align-items:flex-start; flex-wrap:wrap;
+  display:flex; flex-direction:column; gap:0; justify-content:center; align-items:center;
   padding:1rem 0;
+}
+.descent-level-row {
+  display:flex; gap:0; align-items:flex-start; justify-content:center; width:100%;
+}
+.descent-couple {
+  display:flex; gap:0.4rem; align-items:flex-start; justify-content:center;
+  flex:1; max-width:420px;
+}
+.descent-row-spacer {
+  flex:0 0 2.5rem;
+}
+.descent-arrow-row {
+  display:flex; align-items:center; justify-content:center; width:100%;
+}
+.descent-arrow-row .descent-arrow {
+  flex:1; text-align:center;
+}
+.descent-arrow-row .descent-row-spacer {
+  flex:0 0 2.5rem;
+}
+.descent-converge-center {
+  flex:0 0 3rem; display:flex; align-items:center; justify-content:center;
+}
+.converge-symbol {
+  font-size:1.8rem; color:var(--gold); font-style:italic;
+  font-family:'Cormorant Garamond',serif;
+}
+.descent-labels-row {
+  display:flex; align-items:center; justify-content:center; width:100%; margin-bottom:0.3rem;
+}
+.descent-labels-row .descent-branch-label {
+  flex:1; text-align:center;
+}
+.descent-labels-row .descent-row-spacer {
+  flex:0 0 2.5rem;
+}
+.descent-placeholder {
+  border:2px dashed var(--border-line) !important;
+  background:transparent !important;
+  min-height:3.5rem;
+  opacity:0.65;
 }
 .descent-branch {
   display:flex; flex-direction:column; align-items:center; gap:0;
@@ -228,7 +269,7 @@ body::before {
 .descent-branch-label {
   font-family:'Cormorant Garamond',serif; font-size:0.75rem;
   text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-muted);
-  padding:0.2rem 0.6rem; border:1px solid var(--border-line);
+  padding:0.15rem 0.5rem;
   border-radius:2px; background:var(--parchment-deep); margin-bottom:0.5rem;
 }
 .descent-level {
@@ -503,53 +544,141 @@ function renderDescentTree(container) {
   const tree = document.createElement('div');
   tree.className = 'descent-tree';
 
-  // LEFT BRANCH: Patermo (Tomaz → Marcelo → Francisco)
-  const patermo = document.createElement('div');
-  patermo.className = 'descent-branch';
-  const pLabel = document.createElement('div');
-  pLabel.className = 'descent-branch-label';
-  pLabel.textContent = 'Ramo paterno';
-  patermo.appendChild(pLabel);
+  /* Layout: 3 aligned levels across both branches
+     Level 1 (avós):    Tomaz ∞ Teodora  |  ▒ ∞ ▒  (placeholders)
+     Level 2 (pais):    Marcelo ∞ Rita   |  Gervásio ∞ Maria Aleluia
+     Level 3 (filhos):  Francisco        |  Atanagilda
+  */
 
-  // Level 1: Tomaz ∞ Teodora
-  const pL1 = document.createElement('div');
-  pL1.className = 'descent-level';
-  pL1.appendChild(makeCard('tomaz'));
-  const pL1link = document.createElement('span');
-  pL1link.className = 'couple-link';
-  pL1link.textContent = '∞';
-  pL1.appendChild(pL1link);
-  pL1.appendChild(makeCard('teodora'));
-  patermo.appendChild(pL1);
+  // Helper: create a placeholder card (dashed border, empty)
+  function makePlaceholder(label) {
+    const el = document.createElement('div');
+    el.className = 'person descent-placeholder';
+    const name = document.createElement('div');
+    name.className = 'person-name';
+    name.textContent = label || '?';
+    name.style.fontStyle = 'italic';
+    name.style.color = 'var(--ink-muted)';
+    el.appendChild(name);
+    return el;
+  }
 
-  // Arrow
-  const pA1 = document.createElement('div');
-  pA1.className = 'descent-arrow';
-  patermo.appendChild(pA1);
+  // Helper: create a level row
+  function makeLevelRow() {
+    const row = document.createElement('div');
+    row.className = 'descent-level-row';
+    return row;
+  }
 
-  // Level 2: Marcelo ∞ Rita Rosa
-  const pL2 = document.createElement('div');
-  pL2.className = 'descent-level';
-  pL2.appendChild(makeCard('marcelo'));
-  const pL2link = document.createElement('span');
-  pL2link.className = 'couple-link';
-  pL2link.textContent = '∞';
-  pL2.appendChild(pL2link);
-  pL2.appendChild(makeCard('rita_rosa'));
-  patermo.appendChild(pL2);
+  // Helper: create a couple (two cards + ∞)
+  function makeCouple(idA, idB, placeholderA, placeholderB) {
+    const wrap = document.createElement('div');
+    wrap.className = 'descent-couple';
+    if (idA) wrap.appendChild(makeCard(idA));
+    else if (placeholderA) wrap.appendChild(makePlaceholder(placeholderA));
+    const link = document.createElement('span');
+    link.className = 'couple-link';
+    link.textContent = '∞';
+    wrap.appendChild(link);
+    if (idB) wrap.appendChild(makeCard(idB));
+    else if (placeholderB) wrap.appendChild(makePlaceholder(placeholderB));
+    return wrap;
+  }
 
-  // Arrow
-  const pA2 = document.createElement('div');
-  pA2.className = 'descent-arrow';
-  patermo.appendChild(pA2);
+  // ── LEVEL 1: Avós ──
+  const row1 = makeLevelRow();
+  // Paterno: Tomaz ∞ Teodora
+  row1.appendChild(makeCouple('tomaz', 'teodora'));
+  // Center spacer
+  const sp1 = document.createElement('div');
+  sp1.className = 'descent-row-spacer';
+  row1.appendChild(sp1);
+  // Materno: placeholders (avós desconhecidos)
+  row1.appendChild(makeCouple(null, null, 'Avô materno', 'Avó materna'));
+  tree.appendChild(row1);
 
-  // Level 3: Francisco (alone — spouse is in materno branch)
-  const pL3 = document.createElement('div');
-  pL3.className = 'descent-level';
-  pL3.appendChild(makeCard('francisco'));
-  patermo.appendChild(pL3);
+  // ── Arrow row 1 ──
+  const ar1 = document.createElement('div');
+  ar1.className = 'descent-arrow-row';
+  // Paterno arrow
+  const ar1p = document.createElement('div');
+  ar1p.className = 'descent-arrow';
+  ar1.appendChild(ar1p);
+  // Center spacer
+  const ar1s = document.createElement('div');
+  ar1s.className = 'descent-row-spacer';
+  ar1.appendChild(ar1s);
+  // Materno arrow
+  const ar1m = document.createElement('div');
+  ar1m.className = 'descent-arrow';
+  ar1.appendChild(ar1m);
+  tree.appendChild(ar1);
 
-  // Link to siblings
+  // ── LEVEL 2: Pais ──
+  const row2 = makeLevelRow();
+  // Paterno: Marcelo ∞ Rita Rosa
+  row2.appendChild(makeCouple('marcelo', 'rita_rosa'));
+  // Center spacer
+  const sp2 = document.createElement('div');
+  sp2.className = 'descent-row-spacer';
+  row2.appendChild(sp2);
+  // Materno: Gervásio ∞ Maria Aleluia
+  row2.appendChild(makeCouple('gervasio', 'maria_aleluia'));
+  tree.appendChild(row2);
+
+  // ── Arrow row 2 ──
+  const ar2 = document.createElement('div');
+  ar2.className = 'descent-arrow-row';
+  const ar2p = document.createElement('div');
+  ar2p.className = 'descent-arrow';
+  ar2.appendChild(ar2p);
+  const ar2s = document.createElement('div');
+  ar2s.className = 'descent-row-spacer';
+  ar2.appendChild(ar2s);
+  const ar2m = document.createElement('div');
+  ar2m.className = 'descent-arrow';
+  ar2.appendChild(ar2m);
+  tree.appendChild(ar2);
+
+  // ── LEVEL 3: Francisco & Atanagilda ──
+  const row3 = makeLevelRow();
+  // Paterno: Francisco
+  const fWrap = document.createElement('div');
+  fWrap.className = 'descent-couple';
+  fWrap.appendChild(makeCard('francisco'));
+  row3.appendChild(fWrap);
+  // Center: ∞ convergence
+  const converge = document.createElement('div');
+  converge.className = 'descent-converge-center';
+  const cInf = document.createElement('div');
+  cInf.textContent = '∞';
+  cInf.className = 'converge-symbol';
+  converge.appendChild(cInf);
+  row3.appendChild(converge);
+  // Materno: Atanagilda
+  const aWrap = document.createElement('div');
+  aWrap.className = 'descent-couple';
+  aWrap.appendChild(makeCard('atanagilda'));
+  row3.appendChild(aWrap);
+  tree.appendChild(row3);
+
+  // ── Branch labels ──
+  const labels = document.createElement('div');
+  labels.className = 'descent-labels-row';
+  const lp = document.createElement('div');
+  lp.className = 'descent-branch-label';
+  lp.textContent = 'Ramo paterno';
+  labels.appendChild(lp);
+  const ls = document.createElement('div');
+  ls.className = 'descent-row-spacer';
+  labels.appendChild(ls);
+  const lm = document.createElement('div');
+  lm.className = 'descent-branch-label';
+  lm.textContent = 'Ramo materno';
+  labels.appendChild(lm);
+  tree.insertBefore(labels, tree.firstChild);
+
+  // ── Link to siblings ──
   const sibLink = document.createElement('div');
   sibLink.className = 'descent-siblings-link';
   const sibA = document.createElement('a');
@@ -559,73 +688,14 @@ function renderDescentTree(container) {
     if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
   };
   sibLink.appendChild(sibA);
-  patermo.appendChild(sibLink);
+  tree.appendChild(sibLink);
 
-  tree.appendChild(patermo);
-
-  // CENTER: convergence lines
-  const center = document.createElement('div');
-  center.className = 'descent-branch';
-  center.style.justifyContent = 'center';
-  center.style.paddingTop = '9rem'; // align with Francisco level
-  const cLine = document.createElement('div');
-  cLine.className = 'descent-converge';
-  cLine.style.flexDirection = 'column';
-  cLine.style.alignItems = 'center';
-  cLine.style.gap = '0.3rem';
-  const cArrow1 = document.createElement('div');
-  cArrow1.textContent = '∞';
-  cArrow1.style.fontSize = '1.6rem';
-  cArrow1.style.color = 'var(--gold)';
-  cArrow1.style.fontStyle = 'italic';
-  cLine.appendChild(cArrow1);
-  const cArrow2 = document.createElement('div');
-  cArrow2.textContent = '↓';
-  cArrow2.style.fontSize = '1.2rem';
-  cArrow2.style.color = 'var(--gold)';
-  cArrow2.style.fontStyle = 'italic';
-  cLine.appendChild(cArrow2);
-  center.appendChild(cLine);
-  tree.appendChild(center);
-
-  // RIGHT BRANCH: Materno (Gervásio → Atanagilda)
-  const materno = document.createElement('div');
-  materno.className = 'descent-branch';
-  const mLabel = document.createElement('div');
-  mLabel.className = 'descent-branch-label';
-  mLabel.textContent = 'Ramo materno';
-  materno.appendChild(mLabel);
-
-  // Level 1: Gervásio ∞ Maria Aleluia
-  const mL1 = document.createElement('div');
-  mL1.className = 'descent-level';
-  mL1.appendChild(makeCard('gervasio'));
-  const mL1link = document.createElement('span');
-  mL1link.className = 'couple-link';
-  mL1link.textContent = '∞';
-  mL1.appendChild(mL1link);
-  mL1.appendChild(makeCard('maria_aleluia'));
-  materno.appendChild(mL1);
-
-  // Arrow
-  const mA1 = document.createElement('div');
-  mA1.className = 'descent-arrow';
-  materno.appendChild(mA1);
-
-  // Level 2: Atanagilda
-  const mL2 = document.createElement('div');
-  mL2.className = 'descent-level';
-  mL2.appendChild(makeCard('atanagilda'));
-  materno.appendChild(mL2);
-
-  tree.appendChild(materno);
-
-  // Bottom: link to Francisco & Atanagilda section
+  // ── Link to children ──
   const bottomLink = document.createElement('div');
   bottomLink.className = 'desc-link';
   bottomLink.style.paddingTop = '0.5rem';
   const bottomA = document.createElement('a');
-  bottomA.textContent = 'Ver 12 filhos de Francisco & Atanagilda';
+  bottomA.textContent = '↓ Ver 12 filhos de Francisco & Atanagilda';
   bottomA.onclick = () => {
     const target = document.getElementById('francisco');
     if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
