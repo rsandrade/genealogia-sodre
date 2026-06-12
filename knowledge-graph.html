@@ -90,7 +90,15 @@ body::before {
 /* ── Main tree ── */
 .tree-wrap {
   overflow-x:auto; padding:2rem 1rem 3rem;
+  scrollbar-width:thin; scrollbar-color:var(--border-line) var(--parchment-deep);
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  -webkit-user-select:none;
+  user-select:none;
 }
+.tree-wrap.dragging{cursor:grabbing;scrollbar-color:var(--gold) var(--parchment-deep)}
+.tree-wrap.dragging *{cursor:grabbing!important}
+.tree-wrap.dragging::-webkit-scrollbar-thumb{background:var(--gold)}
 
 /* ── Section (branch group) ── */
 .section {
@@ -182,6 +190,13 @@ body.embedded .person.cat-sobrinho .person-name{font-size:1.12rem}
 body.embedded .person-dates{font-size:1rem;margin-top:0.25rem}
 body.embedded .person-spouse{font-size:0.95rem;margin-top:0.25rem}
 body.embedded .children-list{gap:0.65rem;padding-top:0.8rem}
+body.embedded .descent-section{min-width:1680px}
+body.embedded .descent-tree{min-width:1680px}
+body.embedded .descent-couple{flex:1 0 700px;max-width:760px;gap:0.85rem}
+body.embedded .descent-row-spacer,
+body.embedded .descent-arrow-row .descent-row-spacer,
+body.embedded .descent-labels-row .descent-row-spacer,
+body.embedded .descent-converge-center{flex-basis:12rem}
 body.embedded .controls{padding:1.2rem 1rem 0.8rem}
 body.embedded .ctrl-btn{font-size:1rem;padding:0.5rem 1rem}
 body.embedded .legend-item{font-size:0.95rem}
@@ -242,19 +257,20 @@ body.embedded .info-note{font-size:0.95rem}
 .section:nth-child(5) { animation-delay:0.2s; }
 
 /* ── Descent tree (ascendentes) ── */
+.descent-section{min-width:1320px;margin-left:auto;margin-right:auto}
 .descent-tree {
   display:flex; flex-direction:column; gap:0; justify-content:center; align-items:center;
-  padding:1rem 0;
+  width:max-content; min-width:1320px; margin:0 auto; padding:1rem 0;
 }
 .descent-level-row {
   display:flex; gap:0; align-items:flex-start; justify-content:center; width:100%;
 }
 .descent-couple {
-  display:flex; gap:0.4rem; align-items:flex-start; justify-content:center;
-  flex:1; max-width:504px;
+  display:flex; gap:0.7rem; align-items:flex-start; justify-content:center;
+  flex:1 0 560px; max-width:720px;
 }
 .descent-row-spacer {
-  flex:0 0 2.5rem;
+  flex:0 0 7rem;
 }
 .descent-arrow-row {
   display:flex; align-items:center; justify-content:center; width:100%;
@@ -263,10 +279,10 @@ body.embedded .info-note{font-size:0.95rem}
   flex:1; text-align:center;
 }
 .descent-arrow-row .descent-row-spacer {
-  flex:0 0 2.5rem;
+  flex:0 0 7rem;
 }
 .descent-converge-center {
-  flex:0 0 3rem; display:flex; align-items:center; justify-content:center;
+  flex:0 0 7rem; display:flex; align-items:center; justify-content:center;
 }
 .converge-symbol {
   font-size:1.8rem; color:var(--gold); font-style:italic;
@@ -279,7 +295,7 @@ body.embedded .info-note{font-size:0.95rem}
   flex:1; text-align:center;
 }
 .descent-labels-row .descent-row-spacer {
-  flex:0 0 2.5rem;
+  flex:0 0 7rem;
 }
 .descent-placeholder {
   border:2px dashed var(--border-line) !important;
@@ -511,7 +527,7 @@ function render() {
   SECTIONS.forEach(sec => {
     if (activeFilter && sec.filter !== activeFilter) return;
     const el = document.createElement('div');
-    el.className = 'section';
+    el.className = 'section' + (sec.type === 'descent-tree' ? ' descent-section' : '');
     el.id = sec.id;
     const title = document.createElement('div');
     title.className = 'section-title';
@@ -595,6 +611,51 @@ function render() {
   });
 
   renderControls();
+  enableDragScroll();
+  centerScrollableAreas();
+}
+
+function enableDragScroll() {
+  document.querySelectorAll('.tree-wrap').forEach(el => {
+    if (el.dataset.dragScrollReady === '1') return;
+    el.dataset.dragScrollReady = '1';
+    let down = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let moved = false;
+    el.addEventListener('mousedown', e => {
+      down = true;
+      moved = false;
+      el.classList.add('dragging');
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    });
+    el.addEventListener('mouseleave', () => { down = false; el.classList.remove('dragging'); });
+    el.addEventListener('mouseup', () => { down = false; el.classList.remove('dragging'); });
+    el.addEventListener('mousemove', e => {
+      if (!down) return;
+      const x = e.pageX - el.offsetLeft;
+      const walk = x - startX;
+      if (Math.abs(walk) > 4) moved = true;
+      if (moved) e.preventDefault();
+      el.scrollLeft = scrollLeft - walk;
+    });
+    el.addEventListener('click', e => {
+      if (moved) {
+        e.preventDefault();
+        e.stopPropagation();
+        moved = false;
+      }
+    }, true);
+  });
+}
+
+function centerScrollableAreas() {
+  document.querySelectorAll('.tree-wrap').forEach(el => {
+    if (el.scrollWidth > el.clientWidth) {
+      el.scrollLeft = Math.max(0, (el.scrollWidth - el.clientWidth) / 2);
+    }
+  });
 }
 
 // ── Descent tree: vertical chain of generations converging ──
