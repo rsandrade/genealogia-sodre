@@ -138,7 +138,13 @@ body::before {
   padding:1rem;
   box-shadow:0 1px 3px rgba(44,24,16,0.08);
   transition:transform 0.25s ease,box-shadow 0.25s ease;
+  white-space:normal;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:auto;
+  box-sizing:border-box;
 }
+.family-col *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
 .family-col:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
 .family-header{
   font-family:'Playfair Display',serif;
@@ -150,6 +156,7 @@ body::before {
   margin-bottom:0.27rem;
 }
 .family-header-person{cursor:pointer;border-bottom:1px dotted transparent;transition:color .2s,border-color .2s}
+.couple-amp{color:var(--gold);white-space:nowrap}
 .family-header-person:hover{color:var(--gold);border-color:var(--gold)}
 .family-sub{
   font-size:0.85rem;
@@ -208,7 +215,9 @@ body::before {
   padding:0.72rem 1.02rem; min-width:172.8px; max-width:244.8px;
   cursor:pointer; transition:all 0.2s ease;
   box-shadow:var(--card-shadow);
+  white-space:normal; overflow-wrap:break-word; word-break:normal; hyphens:auto; box-sizing:border-box;
 }
+.person *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
 .person:hover {
   transform:translateY(-2px);
   box-shadow:0 4px 16px rgba(26,16,8,0.2); z-index:10;
@@ -684,7 +693,13 @@ function makeFamilyHeader(fam) {
   const header = document.createElement('div');
   header.className = 'family-header';
   fam.couple.forEach((c, i) => {
-    if (i > 0) header.appendChild(document.createTextNode(' & '));
+    if (i > 0) {
+      const amp = document.createElement('span');
+      amp.className = 'couple-amp';
+      amp.textContent = ' &';
+      header.appendChild(amp);
+      header.appendChild(document.createElement('br'));
+    }
     const person = P[c.id];
     const span = document.createElement('span');
     span.className = 'family-header-person';
