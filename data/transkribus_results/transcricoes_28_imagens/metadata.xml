@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<trpDocMetadata>
+    <docId>16803438</docId>
+    <title>28-Imagens</title>
+    <uploadTimestamp>1781267420202</uploadTimestamp>
+    <uploader>ricardo@feudo.org</uploader>
+    <uploaderId>3029</uploaderId>
+    <nrOfPages>24</nrOfPages>
+    <pageId>122154107</pageId>
+    <url>https://files.transkribus.eu/Get?fileType=view&amp;id=XBASMQLKPWQPVKOXTFVKHHLW</url>
+    <thumbUrl>https://files.transkribus.eu/Get?fileType=thumb&amp;id=XBASMQLKPWQPVKOXTFVKHHLW</thumbUrl>
+    <status>0</status>
+    <fimgStoreColl>TrpDoc_DEA_16803438</fimgStoreColl>
+    <storeType>0</storeType>
+    <storeRegion>eu</storeRegion>
+    <origDocId>0</origDocId>
+    <collectionList>
+        <colList>
+            <colId>2431072</colId>
+            <colName>Gramilo Sodré</colName>
+            <description>created by ricardo@feudo.org</description>
+            <crowdsourcing>false</crowdsourcing>
+            <elearning>false</elearning>
+            <nrOfDocuments>0</nrOfDocuments>
+            <isFavorite>false</isFavorite>
+        </colList>
+    </collectionList>
+    <mainColId>2431072</mainColId>
+</trpDocMetadata>

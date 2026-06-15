@@ -198,3 +198,52 @@ As últimas páginas (p. 22-26) contêm registros da **Doutrina de São Miguel d
 4. Buscar certidão de nascimento de Firmino Vaz Sodré (para determinar filiação)
 5. Verificar ligação entre os Sampaio de Amargosa e Atanagilda Sodré Sampaio
 6. Confirmar se "Manoel Caetano Sodré" aparece nos inventários APEB
+
+---
+
+## 9. Lote Novo — 24 Imagens Transkribus (14/06/2026)
+
+**Fonte:** Coleção "Gramilo Sodré" no Transkribus (doc 16803438), modelo HWM
+**Total:** 24 imagens transcritas
+
+### Classificação dos registros
+
+| # | ARK | Tipo | Relevância Sodré |
+|---|-----|------|-------------------|
+| 0001 | 33S7-9PXT-3J1 | Indeterminado | — |
+| 0002 | 33S7-9RYW-5HN | Indeterminado | — |
+| 0003 | 33S7-9Y3K-9F8 | Batismo (séc. XVIII) | — |
+| 0004 | 33S7-9Y9W-BV4 | Batismo (séc. XVIII) | — |
+| 0005 | 33S7-9YFT-SWFC | Batismo (séc. XIX) | — |
+| 0006 | 33S7-95G9-51Y | Batismo (Amargosa, 1903) | — |
+| 0007 | 33S7-95LB-4PL | Casamento (1950s) | — |
+| 0008 | 33S7-95LT-7WF | Batismo (Brejaês, 1895) | — |
+| 0009 | 33S7-95LT-8B | Batismo (Palmeira/Amargosa) | — |
+| 0010 | 33S7-95LY-CQM | Batismo (Amargosa, 1900-01) | — |
+| 0011 | 33S7-95LY-ZV9 | Batismo (Conente, 1908-09) | **Firmino, Laurinda** |
+| 0012 | 33SQ-G5GW-NKC | Casamento (1938) | — |
+| 0013 | 33SQ-G5GX-9P62 | Batismo (1895) | — |
+| 0014 | 33SQ-G5LB-7BY | Casamento (1941) | **Sodré** |
+| 0015 | 33SQ-G5LB-7K4 | Casamento (1938) | — |
+| 0016 | 33SQ-G5LB-725 | Casamento (1938-41) | — |
+| 0017 | 33SQ-G5LR-8TF | Batismo (Amargosa, 1880) | — |
+| 0018 | 33SQ-G5LY-CNB | Batismo (Amargosa, 1907) | — |
+| 0019 | 33SQ-G5LY-DB9 | Batismo (Amargosa, 1914) | **Sodré, Firmino, Laurinda** |
+| 0020 | 33SQ-G5LY-FSR | Batismo (Amargosa, 1925) | — |
+| 0021 | 33SQ-GR51-L7V | Batismo (séc. XVIII, Ayamanes) | — |
+| 0022 | 33SQ-GTBK-HF6 | Registro civil (Bahia) | — |
+| 0023 | 33SQ-GY3G-6TN | Batismo (S. Pablo/Casabuco, 1825) | — |
+| 0024 | 33SQ-GY3G-FPZ | Batismo (séc. XIX, Bolivia/Peru) | — |
+
+### Novos dados relevantes confirmados
+
+Os registros 0011, 0014 e 0019 **confirmam** dados já identificados:
+
+- **0011**: Batismo de José (30/01/1909), filho de Firmino Vaz Sodré e Laurinda Vaz — Arraial do Conente
+- **0019**: Batismos de 14/11/1914 — Inocência (padrinhos: Firmino + Laurinda Sodré), Olímpio (filho de Euneraldo Sodré + Alarinda de Andrade; padrinhos: Firmino + Laurinda Sodré), Ismael (filho de Ceneraldo Sodré + Florinda de Andrade)
+- **0014**: Casamento de Vicente Maciel de Almeida × Antonia Sodré de Jesus (filha de Manoel Caetano Sodré e Maria Paulina Joares) — 10/12/1941
+
+### Dados novos (não-Brasil)
+
+As imagens 0001-0005, 0021-0024 parecem ser registros **não-brasileiros** (espanhol colonial — Bolívia/Peru, séc. XVIII-XIX) e **não relevantes** para a família Gramilo Sodré de Amargosa/BA.
+
