@@ -1,85 +1,1171 @@
 [
-  {"id": "h1", "nome_completo": "Jerônimo Sodré Pereira", "nascimento": "Santarém, Portugal, séc. XVII", "falecimento": "Bahia, séc. XVIII (~1661-1700)", "pais": null, "conjuge": ["Francisca de Aragão", "Maria de Azevedo"], "fonte": "Ensaio genealógico (Parentesco.com.br, SODRE2.pdf)", "confiabilidade": "confirmada", "notas": "Tronco baiano. 2ª esposa = irmã do Padre Antônio Vieira.", "geracao": 0},
-  {"id": "1", "nome_completo": "Tomaz Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Teodora Julia da Cruz", "casamento": "~1891, Amargosa/BA", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "hipotética", "notas": "Possível avô ou bisavô de Francisco. Sobrenome Gramilo Sodré = ramo direto.", "geracao": 1},
-  {"id": "2", "nome_completo": "Teodora Julia da Cruz", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Tomaz Gramilo Sodré", "casamento": "~1891, Amargosa/BA", "fonte": "Memória oral", "confiabilidade": "hipotética", "geracao": 1},
-  {"id": "gp1", "nome_completo": "Marcelo Gramilo Sodré", "nascimento": "Montes Claros/MG", "falecimento": null, "pais": null, "conjuge": "Rita Rosa Sodré", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Pai de Francisco, Arlindo, José, Otávia, Elisa e Isabel. Origem mineira.", "geracao": 2},
-  {"id": "gp2", "nome_completo": "Rita Rosa Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Marcelo Gramilo Sodré", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Apelido: Roxa. Mãe dos 6 irmãos Gramilo Sodré.", "geracao": 2},
-  {"id": "gm1", "nome_completo": "Gervásio Eusébio dos Santos", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Maria Aleluia dos Santos", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "provável", "notas": "Pai de Atanagilda Odete dos Santos. Sobrenome Eusébio dos Santos aparece em Eustázio Bispo.", "geracao": 2},
-  {"id": "gm2", "nome_completo": "Maria Aleluia dos Santos", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Gervásio Eusébio dos Santos", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "provável", "notas": "Mãe de Atanagilda Odete dos Santos.", "geracao": 2},
-  {"id": "3", "nome_completo": "Francisco Gramilo Sodré", "nascimento": "Ibitupa/BA (distrito de Ibicuí)", "falecimento": null, "pais": ["Marcelo Gramilo Sodré", "Rita Rosa Sodré"], "conjuge": "Atanagilda Odete dos Santos", "fonte": "Memória oral; Diário Oficial Aiquara; LinkedIn", "confiabilidade": "confirmada", "notas": "Propriedade: Fazenda Santa Terezinha, Aiquara/BA. 12 filhos.", "geracao": 3},
-  {"id": "4", "nome_completo": "Atanagilda Odete dos Santos", "nascimento": null, "falecimento": null, "pais": ["Gervásio Eusébio dos Santos", "Maria Aleluia dos Santos"], "conjuge": "Francisco Gramilo Sodré", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Mãe de 12 filhos. Nascida Santos, adotou Sodré ao casar.", "geracao": 3},
-  {"id": "f2", "nome_completo": "Arlindo Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": ["Marcelo Gramilo Sodré", "Rita Rosa Sodré"], "conjuge": "Noemia Rocha Sodré", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Empresário. Pavimentação Sodré e Filhos, Jequié/BA.", "geracao": 3},
-  {"id": "f3", "nome_completo": "Noemia Rocha Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Arlindo Gramilo Sodré", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 3},
-  {"id": "f7", "nome_completo": "José Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": ["Marcelo Gramilo Sodré", "Rita Rosa Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Apelido: Zeca. 11 filhos. Sudré = erro cartorário neste ramo.", "geracao": 3},
-  {"id": "f8", "nome_completo": "Otávia Rosa Sodré Bispo", "nascimento": null, "falecimento": null, "pais": ["Marcelo Gramilo Sodré", "Rita Rosa Sodré"], "conjuge": "Eustázio Eusébio Bispo", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "10 filhos. Sobrenome Bispo do marido.", "geracao": 3},
-  {"id": "f8c", "nome_completo": "Eustázio Eusébio Bispo", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Otávia Rosa Sodré Bispo", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sobrenome Eusébio — possível parentesco com Gervásio Eusébio dos Santos.", "geracao": 3},
-  {"id": "f9", "nome_completo": "Elisa Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": ["Marcelo Gramilo Sodré", "Rita Rosa Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "3 filhos: Zeilde, Valdeci, Elizete.", "geracao": 3},
-  {"id": "f10", "nome_completo": "Isabel Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": ["Marcelo Gramilo Sodré", "Rita Rosa Sodré"], "conjuge": "Maximiliano", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Casada com Maximiliano. 7 filhos: Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria.", "geracao": 3},
-  {"id": "c1", "nome_completo": "Atanagilda Sodré Sampaio", "nascimento": "11/04/1954", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 1},
-  {"id": "c2", "nome_completo": "Veralúcia Sodré", "nascimento": "30/09/1955", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Mãe de Ricardo Sodré Andrade.", "geracao": 4, "ordem_filho": 2},
-  {"id": "c3", "nome_completo": "Luiz Carlos Sudré", "nascimento": "30/03/1957", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4, "ordem_filho": 3},
-  {"id": "c4", "nome_completo": "Francisco Gramilo Sodré Filho", "nascimento": "26/07/1959", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Diário Oficial Aiquara (Lei 012/2014); LinkedIn", "confiabilidade": "confirmada", "notas": "Professor de Informática, PMA.", "geracao": 4, "ordem_filho": 4},
-  {"id": "c5", "nome_completo": "Angélica Maria Sodré Costa", "nascimento": "02/03/1961", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 5},
-  {"id": "c6", "nome_completo": "Rita de Cássia Sodré", "nascimento": "09/10/1962", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 6},
-  {"id": "c7", "nome_completo": "Djalma Gramilo Sodré", "nascimento": "15/02/1964", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 7},
-  {"id": "c8", "nome_completo": "Paulo Renato Sodré", "nascimento": "19/06/1965", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 8},
-  {"id": "c9", "nome_completo": "Ronaldo Gramilo Sodré", "nascimento": "16/12/1966", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 9},
-  {"id": "c10", "nome_completo": "Júlio César Gramilo Sodré", "nascimento": "09/01/1968", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 10},
-  {"id": "c11", "nome_completo": "Cristina Margarete Gramilo Sodré", "nascimento": "02/08/1969", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 11},
-  {"id": "c12", "nome_completo": "Sinara Magali Sodré", "nascimento": "20/12/1971", "falecimento": null, "pais": ["Francisco Gramilo Sodré", "Atanagilda Odete dos Santos"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 12},
-  {"id": "f4a", "nome_completo": "Ana Lúcia Sodré", "nascimento": null, "falecimento": null, "pais": ["Arlindo Gramilo Sodré", "Noemia Rocha Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "f4b", "nome_completo": "Arlindo Sodré Filho", "nascimento": null, "falecimento": null, "pais": ["Arlindo Gramilo Sodré", "Noemia Rocha Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "f4c", "nome_completo": "Sandro Sodré", "nascimento": null, "falecimento": null, "pais": ["Arlindo Gramilo Sodré", "Noemia Rocha Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "z1", "nome_completo": "Josenilda Sudré Bispo", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z2", "nome_completo": "Joselita Sudré Santos", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z3", "nome_completo": "José Carlos Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z4", "nome_completo": "Jorge Luiz Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z5", "nome_completo": "Jailson Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z6", "nome_completo": "João Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z7", "nome_completo": "Jacyara Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z8", "nome_completo": "Jânio Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
-  {"id": "z9", "nome_completo": "Juscileide Sudré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Sudré = erro cartorário.", "geracao": 4},
- {"id": "z10", "nome_completo": "Manoelito Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
- {"id": "z11", "nome_completo": "Joselito Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b1", "nome_completo": "Eustázio Bispo Filho", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b2", "nome_completo": "Creuza Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b3", "nome_completo": "Tereza Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b4", "nome_completo": "Cláudio Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b5", "nome_completo": "Rita Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b6", "nome_completo": "Rogério Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b7", "nome_completo": "Lúcia Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b8", "nome_completo": "Geraldo Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b9", "nome_completo": "Givanildo Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "b10", "nome_completo": "Nádia Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4},
-  {"id": "6", "nome_completo": "José Gramilo Sodré Filho", "nascimento": null, "falecimento": null, "pais": ["José Gramilo Sodré"], "conjuge": null, "fonte": "Receita Federal (CNPJ 35.723.982/0001-24)", "confiabilidade": "confirmada", "notas": "CNPJ ativo em Manoel Vitorino/BA.", "geracao": 4},
-  {"id": "7", "nome_completo": "Ivan Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": null, "fonte": "Listagem web (Jequié/BA)", "confiabilidade": "provável", "notas": "Parentesco a confirmar."},
-  {"id": "8", "nome_completo": "Walter Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": null, "fonte": "Deezer (compositor)", "confiabilidade": "confirmada", "notas": "Parentesco a confirmar."},
-  {"id": "9", "nome_completo": "Jailson Gramilo Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": null, "fonte": "Deezer (compositor)", "confiabilidade": "confirmada", "notas": "Parentesco a confirmar."},
-  {"id": "10", "nome_completo": "Ticiane Sena de Santana Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": null, "fonte": "TJBA (Agravo 0015000-35.2017.8.05.0000)", "confiabilidade": "confirmada", "notas": "Possível nora/parente de Atanagilda."},
-  {"id": "fs1", "nome_completo": "Esmeraldo Vaz Sodré", "nascimento": "~1850 (?)", "falecimento": null, "pais": null, "conjuge": "Florinda de Andrade", "fonte": "FamilySearch — Brazil, Bahia, Civil Registration + Catholic Church Records", "confiabilidade": "confirmada", "notas": "Pai de Olímpio, Luiz Vaz, Anizio e Maria do Carmo. Amargosa/BA."},
-  {"id": "fs2", "nome_completo": "Olímpio Sodré", "nascimento": "18/11/1913, Amargosa/BA", "falecimento": null, "pais": ["Esmeraldo Vaz Sodré", "Florinda de Andrade"], "conjuge": null, "fonte": "FamilySearch — Catholic Church Records, batismo 14/11/1914, Amargosa", "confiabilidade": "confirmada"},
-  {"id": "fs3", "nome_completo": "Luiz Vaz Sodré", "nascimento": "~1870, Bahia", "falecimento": null, "pais": ["Esmeraldo Vaz Sodré", "Florinda de Andrade"], "conjuge": null, "fonte": "FamilySearch — Catholic Church Records, batismo 09/1890", "confiabilidade": "confirmada"},
-  {"id": "fs4", "nome_completo": "Maria do Carmo Sodré", "nascimento": "~1930, Amargosa/BA", "falecimento": null, "pais": ["Esmeraldo Vaz Sodré", "Florinda de Andrade"], "conjuge": null, "casamento": "15/02/1950, Amargosa/Tapera/BA", "fonte": "FamilySearch — Civil Registration", "confiabilidade": "confirmada"},
-  {"id": "fs5", "nome_completo": "Horácio Vaz Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Adelina Maria de Jesus", "filhos": "Amélia Vaz Padri", "fonte": "FamilySearch — Civil Registration, Bahia", "confiabilidade": "confirmada", "notas": "Grafia alt: Horacio Vay Sodré. Sobrenome Vaz Sodré = mesmo ramo."},
-  {"id": "fs6", "nome_completo": "José Virgílio Vaz Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": null, "fonte": "FamilySearch — Catholic Church Records (Bahia)", "confiabilidade": "confirmada", "notas": "Registro parcial. Vaz Sodré = mesmo ramo de Horácio e Luiz."},
-  {"id": "fs7", "nome_completo": "Quintino Sodré Tolentino", "nascimento": null, "falecimento": null, "pais": null, "conjuge": null, "fonte": "FamilySearch — Catholic Church Records (Bahia)", "confiabilidade": "confirmada", "notas": "Grafia alt: Tollentino. Registro parcial."},
-  {"id": "fs8", "nome_completo": "Floriaco Ferreira Sodré", "nascimento": "~1890, Amargosa/BA", "falecimento": null, "pais": [null, "Maria Lucinda de Jesus"], "conjuge": null, "casamento": "09/02/1912, Amargosa/BA", "fonte": "FamilySearch — Civil Registration", "confiabilidade": "confirmada"},
-  {"id": "fs9", "nome_completo": "João Gregorio Sodré", "nascimento": "~1906", "falecimento": null, "pais": ["Antonio Victor Sodré", "Adelia Maria Sódre"], "conjuge": "Maria Magdalena Lopes", "casamento": "1933, Amargosa/Tapera/BA", "fonte": "FamilySearch — Civil Registration", "confiabilidade": "confirmada"},
-  {"id": "fs10", "nome_completo": "Joselito Ribeiro Sodré", "nascimento": "30/07/1953, Aiquara/BA", "falecimento": "01/03/1995, São Paulo/SP", "pais": null, "conjuge": null, "fonte": "FamilySearch — São Paulo Civil Registration", "confiabilidade": "confirmada", "notas": "Nasceu em Aiquara — possivelmente da mesma família."},
-  {"id": "fs11", "nome_completo": "Luciana Caetana Sodré", "nascimento": null, "falecimento": null, "pais": ["Manoel Caetano Sodré", "Maria Paulina de Jesus"], "conjuge": null, "fonte": "FamilySearch — Civil Registration, Amargosa/Tapera/BA", "confiabilidade": "confirmada"},
-  {"id": "fs12", "nome_completo": "Clauderio Dino Sodré", "nascimento": "~1913", "falecimento": "15/12/1947, Santa Catarina", "pais": null, "conjuge": "Carolina Maria Sodré", "filhos": "Francisco Sodré", "fonte": "FamilySearch — SC Civil Registration", "confiabilidade": "confirmada"},
-  {"id": "fs13", "nome_completo": "Francisco Ludgero Vaz Sodré", "nascimento": null, "falecimento": null, "pais": null, "conjuge": "Olympia Flavia de Miranda Sodré", "filhos": "Jesuina Vaz Sodré", "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935", "confiabilidade": "confirmada", "notas": "Pessoa DISTINTA de Francisco Gramilo Sodré. Ramo Vaz Sodré de Amargosa."},
-  {"id": "fs14", "nome_completo": "Jesuina Vaz Sodré", "nascimento": "19/01/1891, Amargosa/BA", "falecimento": null, "pais": ["Francisco Ludgero Vaz Sodré", "Olympia Flavia de Miranda Sodré"], "conjuge": null, "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935 (batismo 07/05/1893)", "confiabilidade": "confirmada", "notas": "Filha de Francisco Ludgero. Ramo Vaz Sodré."},
-{"id": "b8", "nome_completo": "Nilda Sodré Bispo de Souza", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": "Souza", "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Nome de solteira: Sodré Bispo. Souza = sobrenome do marido.", "geracao": 4, "ordem_filho": 8},
-{"id": "b9", "nome_completo": "Antônio Carlos Bispo", "nascimento": null, "falecimento": null, "pais": ["Eustázio Eusébio Bispo", "Otávia Rosa Sodré Bispo"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 9},
-{"id": "i1", "nome_completo": "Etelvina", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 1},
-{"id": "i2", "nome_completo": "Carlos", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 2},
-{"id": "i3", "nome_completo": "Francisco", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 3},
-{"id": "i4", "nome_completo": "Dutinha", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Apelido.", "geracao": 4, "ordem_filho": 4},
-{"id": "i5", "nome_completo": "Edvaldo", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 5},
-{"id": "i6", "nome_completo": "Lelinha", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "notas": "Apelido.", "geracao": 4, "ordem_filho": 6},
-{"id": "i7", "nome_completo": "Maria", "nascimento": null, "falecimento": null, "pais": ["Maximiliano", "Isabel Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 7},
-{"id": "e1", "nome_completo": "Zeilde", "nascimento": null, "falecimento": null, "pais": ["Elisa Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 1},
-{"id": "e2", "nome_completo": "Valdeci", "nascimento": null, "falecimento": null, "pais": ["Elisa Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 2},
-{"id": "e3", "nome_completo": "Elizete", "nascimento": null, "falecimento": null, "pais": ["Elisa Gramilo Sodré"], "conjuge": null, "fonte": "Memória oral (Ricardo Sodré Andrade)", "confiabilidade": "confirmada", "geracao": 4, "ordem_filho": 3}
+  {
+    "id": "h1",
+    "nome_completo": "Jerônimo Sodré Pereira",
+    "nascimento": "Santarém, Portugal, séc. XVII",
+    "falecimento": "Bahia, séc. XVIII (~1661-1700)",
+    "pais": null,
+    "conjuge": [
+      "Francisca de Aragão",
+      "Maria de Azevedo"
+    ],
+    "fonte": "Ensaio genealógico (Parentesco.com.br, SODRE2.pdf)",
+    "confiabilidade": "confirmada",
+    "notas": "Tronco baiano. 2ª esposa = irmã do Padre Antônio Vieira.",
+    "geracao": 0
+  },
+  {
+    "id": "1",
+    "nome_completo": "Tomaz Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Teodora Julia da Cruz",
+    "casamento": "~1891, Amargosa/BA",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "hipotética",
+    "notas": "Possível avô ou bisavô de Francisco. Sobrenome Gramilo Sodré = ramo direto.",
+    "geracao": 1
+  },
+  {
+    "id": "2",
+    "nome_completo": "Teodora Julia da Cruz",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Tomaz Gramilo Sodré",
+    "casamento": "~1891, Amargosa/BA",
+    "fonte": "Memória oral",
+    "confiabilidade": "hipotética",
+    "geracao": 1
+  },
+  {
+    "id": "gp1",
+    "nome_completo": "Marcelo Gramilo Sodré",
+    "nascimento": "Montes Claros/MG",
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Rita Rosa Sodré",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Pai de Francisco, Arlindo, José, Otávia, Elisa e Isabel. Origem mineira.",
+    "geracao": 2
+  },
+  {
+    "id": "gp2",
+    "nome_completo": "Rita Rosa Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Marcelo Gramilo Sodré",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Apelido: Roxa. Mãe dos 6 irmãos Gramilo Sodré.",
+    "geracao": 2
+  },
+  {
+    "id": "gm1",
+    "nome_completo": "Gervásio Eusébio dos Santos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Maria Aleluia dos Santos",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "provável",
+    "notas": "Pai de Atanagilda Odete dos Santos. Sobrenome Eusébio dos Santos aparece em Eustázio Bispo.",
+    "geracao": 2
+  },
+  {
+    "id": "gm2",
+    "nome_completo": "Maria Aleluia dos Santos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Gervásio Eusébio dos Santos",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "provável",
+    "notas": "Mãe de Atanagilda Odete dos Santos.",
+    "geracao": 2
+  },
+  {
+    "id": "3",
+    "nome_completo": "Francisco Gramilo Sodré",
+    "nascimento": "Ibitupa/BA (distrito de Ibicuí)",
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": "Atanagilda Odete dos Santos",
+    "fonte": "Memória oral; Diário Oficial Aiquara; LinkedIn",
+    "confiabilidade": "confirmada",
+    "notas": "Propriedade: Fazenda Santa Terezinha, Aiquara/BA. 12 filhos.",
+    "geracao": 3
+  },
+  {
+    "id": "4",
+    "nome_completo": "Atanagilda Odete dos Santos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Gervásio Eusébio dos Santos",
+      "Maria Aleluia dos Santos"
+    ],
+    "conjuge": "Francisco Gramilo Sodré",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Mãe de 12 filhos. Nascida Santos, adotou Sodré ao casar.",
+    "geracao": 3
+  },
+  {
+    "id": "f2",
+    "nome_completo": "Arlindo Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": "Noemia Rocha Sodré",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Empresário. Pavimentação Sodré e Filhos, Jequié/BA.",
+    "geracao": 3
+  },
+  {
+    "id": "f3",
+    "nome_completo": "Noemia Rocha Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Arlindo Gramilo Sodré",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 3
+  },
+  {
+    "id": "f7",
+    "nome_completo": "José Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Apelido: Zeca. 11 filhos. Sudré = erro cartorário neste ramo.",
+    "geracao": 3
+  },
+  {
+    "id": "f8",
+    "nome_completo": "Otávia Rosa Sodré Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": "Eustázio Eusébio Bispo",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "10 filhos. Sobrenome Bispo do marido.",
+    "geracao": 3
+  },
+  {
+    "id": "f8c",
+    "nome_completo": "Eustázio Eusébio Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Otávia Rosa Sodré Bispo",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sobrenome Eusébio — possível parentesco com Gervásio Eusébio dos Santos.",
+    "geracao": 3
+  },
+  {
+    "id": "f9",
+    "nome_completo": "Elisa Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "3 filhos: Zeilde, Valdeci, Elizete.",
+    "geracao": 3
+  },
+  {
+    "id": "f10",
+    "nome_completo": "Isabel Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": "Maximiliano",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Casada com Maximiliano. 7 filhos: Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria.",
+    "geracao": 3
+  },
+  {
+    "id": "c1",
+    "nome_completo": "Atanagilda Sodré Sampaio",
+    "nascimento": "11/04/1954",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 1
+  },
+  {
+    "id": "c2",
+    "nome_completo": "Veralúcia Sodré",
+    "nascimento": "30/09/1955",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Mãe de Ricardo Sodré Andrade.",
+    "geracao": 4,
+    "ordem_filho": 2
+  },
+  {
+    "id": "c3",
+    "nome_completo": "Luiz Carlos Sudré",
+    "nascimento": "30/03/1957",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4,
+    "ordem_filho": 3
+  },
+  {
+    "id": "c4",
+    "nome_completo": "Francisco Gramilo Sodré Filho",
+    "nascimento": "26/07/1959",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Diário Oficial Aiquara (Lei 012/2014); LinkedIn",
+    "confiabilidade": "confirmada",
+    "notas": "Professor de Informática, PMA.",
+    "geracao": 4,
+    "ordem_filho": 4
+  },
+  {
+    "id": "c5",
+    "nome_completo": "Angélica Maria Sodré Costa",
+    "nascimento": "02/03/1961",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 5
+  },
+  {
+    "id": "c6",
+    "nome_completo": "Rita de Cássia Sodré",
+    "nascimento": "09/10/1962",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 6
+  },
+  {
+    "id": "c7",
+    "nome_completo": "Djalma Gramilo Sodré",
+    "nascimento": "15/02/1964",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 7
+  },
+  {
+    "id": "c8",
+    "nome_completo": "Paulo Renato Sodré",
+    "nascimento": "19/06/1965",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 8
+  },
+  {
+    "id": "c9",
+    "nome_completo": "Ronaldo Gramilo Sodré",
+    "nascimento": "16/12/1966",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 9
+  },
+  {
+    "id": "c10",
+    "nome_completo": "Júlio César Gramilo Sodré",
+    "nascimento": "09/01/1968",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 10
+  },
+  {
+    "id": "c11",
+    "nome_completo": "Cristina Margarete Gramilo Sodré",
+    "nascimento": "02/08/1969",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 11
+  },
+  {
+    "id": "c12",
+    "nome_completo": "Sinara Magali Sodré",
+    "nascimento": "20/12/1971",
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré",
+      "Atanagilda Odete dos Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 12
+  },
+  {
+    "id": "f4a",
+    "nome_completo": "Ana Lúcia Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "f4b",
+    "nome_completo": "Arlindo Sodré Filho",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "f4c",
+    "nome_completo": "Sandro Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "z1",
+    "nome_completo": "Josenilda Sudré Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z2",
+    "nome_completo": "Joselita Sudré Santos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z3",
+    "nome_completo": "José Carlos Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z4",
+    "nome_completo": "Jorge Luiz Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z5",
+    "nome_completo": "Jailson Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z6",
+    "nome_completo": "João Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z7",
+    "nome_completo": "Jacyara Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z8",
+    "nome_completo": "Jânio Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z9",
+    "nome_completo": "Juscileide Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Sudré = erro cartorário.",
+    "geracao": 4
+  },
+  {
+    "id": "z10",
+    "nome_completo": "Manoelito Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "z11",
+    "nome_completo": "Joselito Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b1",
+    "nome_completo": "Eustázio Bispo Filho",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b2",
+    "nome_completo": "Creuza Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b3",
+    "nome_completo": "Tereza Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b4",
+    "nome_completo": "Cláudio Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b5",
+    "nome_completo": "Rita Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b6",
+    "nome_completo": "Rogério Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b7",
+    "nome_completo": "Lúcia Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b8",
+    "nome_completo": "Geraldo Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b9",
+    "nome_completo": "Givanildo Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "b10",
+    "nome_completo": "Nádia Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4
+  },
+  {
+    "id": "6",
+    "nome_completo": "José Gramilo Sodré Filho",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "José Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Receita Federal (CNPJ 35.723.982/0001-24)",
+    "confiabilidade": "confirmada",
+    "notas": "CNPJ ativo em Manoel Vitorino/BA.",
+    "geracao": 4
+  },
+  {
+    "id": "7",
+    "nome_completo": "Ivan Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Listagem web (Jequié/BA)",
+    "confiabilidade": "provável",
+    "notas": "Parentesco a confirmar."
+  },
+  {
+    "id": "8",
+    "nome_completo": "Walter Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Deezer (compositor)",
+    "confiabilidade": "confirmada",
+    "notas": "Parentesco a confirmar."
+  },
+  {
+    "id": "9",
+    "nome_completo": "Jailson Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Deezer (compositor)",
+    "confiabilidade": "confirmada",
+    "notas": "Parentesco a confirmar."
+  },
+  {
+    "id": "10",
+    "nome_completo": "Ticiane Sena de Santana Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "TJBA (Agravo 0015000-35.2017.8.05.0000)",
+    "confiabilidade": "confirmada",
+    "notas": "Possível nora/parente de Atanagilda."
+  },
+  {
+    "id": "fs1",
+    "nome_completo": "Esmeraldo Vaz Sodré",
+    "nascimento": "~1850 (?)",
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Florinda de Andrade",
+    "fonte": "FamilySearch — Brazil, Bahia, Civil Registration + Catholic Church Records",
+    "confiabilidade": "confirmada",
+    "notas": "Pai de Olímpio, Luiz Vaz, Anizio e Maria do Carmo. Amargosa/BA."
+  },
+  {
+    "id": "fs2",
+    "nome_completo": "Olímpio Sodré",
+    "nascimento": "18/11/1913, Amargosa/BA",
+    "falecimento": null,
+    "pais": [
+      "Esmeraldo Vaz Sodré",
+      "Florinda de Andrade"
+    ],
+    "conjuge": null,
+    "fonte": "FamilySearch — Catholic Church Records, batismo 14/11/1914, Amargosa",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs3",
+    "nome_completo": "Luiz Vaz Sodré",
+    "nascimento": "~1870, Bahia",
+    "falecimento": null,
+    "pais": [
+      "Esmeraldo Vaz Sodré",
+      "Florinda de Andrade"
+    ],
+    "conjuge": null,
+    "fonte": "FamilySearch — Catholic Church Records, batismo 09/1890",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs4",
+    "nome_completo": "Maria do Carmo Sodré",
+    "nascimento": "~1930, Amargosa/BA",
+    "falecimento": null,
+    "pais": [
+      "Esmeraldo Vaz Sodré",
+      "Florinda de Andrade"
+    ],
+    "conjuge": null,
+    "casamento": "15/02/1950, Amargosa/Tapera/BA",
+    "fonte": "FamilySearch — Civil Registration",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs5",
+    "nome_completo": "Horácio Vaz Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Adelina Maria de Jesus",
+    "filhos": "Amélia Vaz Padri",
+    "fonte": "FamilySearch — Civil Registration, Bahia",
+    "confiabilidade": "confirmada",
+    "notas": "Grafia alt: Horacio Vay Sodré. Sobrenome Vaz Sodré = mesmo ramo."
+  },
+  {
+    "id": "fs6",
+    "nome_completo": "José Virgílio Vaz Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "FamilySearch — Catholic Church Records (Bahia)",
+    "confiabilidade": "confirmada",
+    "notas": "Registro parcial. Vaz Sodré = mesmo ramo de Horácio e Luiz."
+  },
+  {
+    "id": "fs7",
+    "nome_completo": "Quintino Sodré Tolentino",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "FamilySearch — Catholic Church Records (Bahia)",
+    "confiabilidade": "confirmada",
+    "notas": "Grafia alt: Tollentino. Registro parcial."
+  },
+  {
+    "id": "fs8",
+    "nome_completo": "Floriaco Ferreira Sodré",
+    "nascimento": "~1890, Amargosa/BA",
+    "falecimento": null,
+    "pais": [
+      null,
+      "Maria Lucinda de Jesus"
+    ],
+    "conjuge": null,
+    "casamento": "09/02/1912, Amargosa/BA",
+    "fonte": "FamilySearch — Civil Registration",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs9",
+    "nome_completo": "João Gregorio Sodré",
+    "nascimento": "~1906",
+    "falecimento": null,
+    "pais": [
+      "Antonio Victor Sodré",
+      "Adelia Maria Sódre"
+    ],
+    "conjuge": "Maria Magdalena Lopes",
+    "casamento": "1933, Amargosa/Tapera/BA",
+    "fonte": "FamilySearch — Civil Registration",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs10",
+    "nome_completo": "Joselito Ribeiro Sodré",
+    "nascimento": "30/07/1953, Aiquara/BA",
+    "falecimento": "01/03/1995, São Paulo/SP",
+    "pais": null,
+    "conjuge": null,
+    "fonte": "FamilySearch — São Paulo Civil Registration",
+    "confiabilidade": "confirmada",
+    "notas": "Nasceu em Aiquara — possivelmente da mesma família."
+  },
+  {
+    "id": "fs11",
+    "nome_completo": "Luciana Caetana Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Manoel Caetano Sodré",
+      "Maria Paulina de Jesus"
+    ],
+    "conjuge": null,
+    "fonte": "FamilySearch — Civil Registration, Amargosa/Tapera/BA",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs12",
+    "nome_completo": "Clauderio Dino Sodré",
+    "nascimento": "~1913",
+    "falecimento": "15/12/1947, Santa Catarina",
+    "pais": null,
+    "conjuge": "Carolina Maria Sodré",
+    "filhos": "Francisco Sodré",
+    "fonte": "FamilySearch — SC Civil Registration",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "id": "fs13",
+    "nome_completo": "Francisco Ludgero Vaz Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Olympia Flavia de Miranda Sodré",
+    "filhos": "Jesuina Vaz Sodré",
+    "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935",
+    "confiabilidade": "confirmada",
+    "notas": "Pessoa DISTINTA de Francisco Gramilo Sodré. Ramo Vaz Sodré de Amargosa."
+  },
+  {
+    "id": "fs14",
+    "nome_completo": "Jesuina Vaz Sodré",
+    "nascimento": "19/01/1891, Amargosa/BA",
+    "falecimento": null,
+    "pais": [
+      "Francisco Ludgero Vaz Sodré",
+      "Olympia Flavia de Miranda Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "FamilySearch — Brazil, Baptisms, 1688-1935 (batismo 07/05/1893)",
+    "confiabilidade": "confirmada",
+    "notas": "Filha de Francisco Ludgero. Ramo Vaz Sodré."
+  },
+  {
+    "id": "b8",
+    "nome_completo": "Nilda Sodré Bispo de Souza",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": "Souza",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Nome de solteira: Sodré Bispo. Souza = sobrenome do marido.",
+    "geracao": 4,
+    "ordem_filho": 8
+  },
+  {
+    "id": "b9",
+    "nome_completo": "Antônio Carlos Bispo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 9
+  },
+  {
+    "id": "i1",
+    "nome_completo": "Etelvina",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 1
+  },
+  {
+    "id": "i2",
+    "nome_completo": "Carlos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 2
+  },
+  {
+    "id": "i3",
+    "nome_completo": "Francisco",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 3
+  },
+  {
+    "id": "i4",
+    "nome_completo": "Dutinha",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Apelido.",
+    "geracao": 4,
+    "ordem_filho": 4
+  },
+  {
+    "id": "i5",
+    "nome_completo": "Edvaldo",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 5
+  },
+  {
+    "id": "i6",
+    "nome_completo": "Lelinha",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Apelido.",
+    "geracao": 4,
+    "ordem_filho": 6
+  },
+  {
+    "id": "i7",
+    "nome_completo": "Maria",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Maximiliano",
+      "Isabel Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 7
+  },
+  {
+    "id": "e1",
+    "nome_completo": "Zeilde",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Elisa Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 1
+  },
+  {
+    "id": "e2",
+    "nome_completo": "Valdeci",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Elisa Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 2
+  },
+  {
+    "id": "e3",
+    "nome_completo": "Elizete",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Elisa Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 3
+  },
+  {
+    "nome_completo": "Etelvina Tezinha (Isabel Sodré × Maximiliano)",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [
+      "Isabel Sodré",
+      "Maximiliano"
+    ],
+    "conjuge": "",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "confirmada"
+  },
+  {
+    "nome_completo": "Valdivino (Isabel Sodré × Maximiliano)",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [
+      "Isabel Sodré",
+      "Maximiliano"
+    ],
+    "conjuge": "",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "confirmada"
+  }
 ]
