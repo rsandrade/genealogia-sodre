@@ -78,11 +78,6 @@ footer{text-align:center;padding:3.5rem 3.5rem 4.3rem;border-top:1px solid var(-
   .conexao-detail{grid-template-columns:1fr}
   footer{padding:2.5rem 1.2rem}
 }
-
-.site-nav{display:flex;gap:0.8rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
-.nav-btn{display:inline-block;padding:0.5rem 1.4rem;border-radius:var(--radius,6px);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.08em;transition:all 0.2s;border:1px solid var(--gold,#c9a84c);background:transparent;color:var(--parchment,#f5e6c8)}
-.nav-btn:hover{background:var(--gold,#c9a84c);color:var(--ink,#1a1a2e)}
-.nav-btn.active{background:var(--ink,#1a1a2e);color:var(--parchment,#f5e6c8);border-color:var(--ink,#1a1a2e);cursor:default;pointer-events:none}
 </style>
 </head>
 <body>
@@ -90,14 +85,13 @@ footer{text-align:center;padding:3.5rem 3.5rem 4.3rem;border-top:1px solid var(-
 <a class="back-link" href="index.html"><span class="arrow">←</span> Voltar à árvore</a>
 
 <header>
-<div class="header-ornament">Genealogia</div>
-<h1>Cidades &amp; <em>Personagens</em></h1>
-<p class="header-subtitle">Localidades e figuras-chave da genealogia Gramilo Sodré</p>
-<div class="site-nav">
-<a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
-<a href="knowledge-graph.html" class="nav-btn">🕸️ Grafo</a>
-<a href="cidades.html" class="nav-btn active">🗺️ Cidades e Contexto</a>
-</div>
+  <div class="header-ornament">Atlas Genealógico</div>
+  <h1>Cidades &amp; <em>Personagens</em></h1>
+  <p class="header-subtitle">Localidades e figuras-chave da genealogia Gramilo Sodré</p>
+  <nav style="margin-top: 1rem;">
+    <a href="index.html" style="display:inline-block;padding:0.4rem 1.2rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.1em;transition:background 0.2s;">← Árvore Genealógica</a>
+    <a href="knowledge-graph.html" style="display:inline-block;padding:0.4rem 1.2rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.1em;transition:background 0.2s;margin-left:0.5rem;">🕸️ Grafo Genealógico</a>
+  </nav>
 </header>
 
 <main>

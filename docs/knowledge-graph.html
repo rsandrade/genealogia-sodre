@@ -429,25 +429,19 @@ body.embedded .info-note{font-size:0.95rem}
   .page-header { padding:1.5rem 1rem 1.2rem; }
   .family-col { margin:0 0.4rem 1rem; }
 }
-
-.site-nav{display:flex;gap:0.8rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
-.nav-btn{display:inline-block;padding:0.5rem 1.4rem;border-radius:var(--radius,6px);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.08em;transition:all 0.2s;border:1px solid var(--gold,#c9a84c);background:transparent;color:var(--parchment,#f5e6c8)}
-.nav-btn:hover{background:var(--gold,#c9a84c);color:var(--ink,#1a1a2e)}
-.nav-btn.active{background:var(--ink,#1a1a2e);color:var(--parchment,#f5e6c8);border-color:var(--ink,#1a1a2e);cursor:default;pointer-events:none}
 </style>
 </head>
 <body>
 <script>if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');</script>
 
 <header class="page-header">
-<div class="header-ornament">Genealogia</div>
-<h1>Grafo <em>Gramilo Sodré</em></h1>
-<p class="page-subtitle">Rede genealógica — dados sincronizados em junho de 2026</p>
-<div class="site-nav">
-<a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
-<a href="knowledge-graph.html" class="nav-btn active">🕸️ Grafo</a>
-<a href="cidades.html" class="nav-btn">🗺️ Cidades e Contexto</a>
-</div>
+  <nav style="margin-bottom: 0.5rem;">
+    <a href="index.html" style="display:inline-block;padding:0.4rem 1.2rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.1em;transition:background 0.2s;">← Árvore Genealógica</a>
+    <a href="cidades.html" style="display:inline-block;padding:0.4rem 1.2rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.1em;transition:background 0.2s;margin-left:0.5rem;">🗺️ Cidades e Contexto</a>
+    
+  </nav>
+  <h1>Linhagem <em>Gramilo Sodré</em></h1>
+  <p class="page-subtitle">Rede genealógica — dados sincronizados em junho de 2026</p>
 </header>
 
 <div class="controls" id="controls"></div>
