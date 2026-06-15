@@ -55,34 +55,34 @@
 **Data do batismo:** 14/11/1914
 **Local:** Arraial do Conente, Freguesia de Amargosa/BA
 **Batizando:** Olímpio
-**Pai:** Euneraldo Sodré (transcrito como "Euneraldo Todré")
-**Mãe:** Alarinda de Andrade
+**Pai:** Esmeraldo Sodré (transcrito como "Euneraldo Todré")
+**Mãe:** Florinda de Andrade (transcrito como "Alarinda de Andrade")
 **PADRINHO:** Firmino Sodré (transcrito como "Firmino Sodre")
 **MADRINHA:** Laurinda Sodré (transcrito como "Leanrinda Lodre")
 **Vigário:** Contrano [?] Alves de Pereira
 
-**NOTA:** "Euneraldo" = provavelmente Everaldo ou Genivaldo. "Todré/Lodre" = Sodré (erro de OCR).
+**NOTA:** "Euneraldo" = **Esmeraldo** (confirmado pelo FamilySearch, ID 6DLV-ZG23). "Todré/Lodre" = Sodré (erro de OCR). "Alarinda" = Florinda (erro de OCR).
 
 **RELEVÂNCIA GENEALÓGICA:**
-- **Euneraldo Sodré + Alarinda de Andrade** = outro casal Sodré em Amargosa
+- **Esmeraldo Sodré + Florinda de Andrade** = outro casal Sodré em Amargosa
 - Firmino e Laurinda Sodré novamente como padrinhos — confirmando posição comunitária
 - A repetição de Firmino+Laurinda como casal de padrinhos em dois batismos do mesmo dia reforça que eram casados
 
 ---
 
-## 4. Registro de Batismo — Ismael, filho de Euneraldo Sodré
+## 4. Registro de Batismo — Ismael, filho de Esmeraldo Sodré
 
 **Data do batismo:** 14/11/1914
 **Local:** Matriz do Conente, Freguesia de Amargosa/BA
 **Batizando:** Ismael
 **Idade:** 30 meses (nasc. ~1912)
-**Pai:** Euneraldo Sodré (transcrito como "Ceneraldo Lodré")
+**Pai:** Esmeraldo Sodré (transcrito como "Ceneraldo Lodré")
 **Mãe:** Florinda de Andrade
 **Padrinho:** Nestor Ribeiro França
 **Madrinha:** Eufrosina Paz de Almeida (transcrito como "Euposina Paz")
 **Vigário:** José Francolino Alves de Allauri [?]
 
-**NOTA:** Possivelmente Ismael é irmão de Olímpio (mesmo dia de batismo, mesmos pais com variação de OCR). "Ceneraldo" = Euneraldo/Everaldo. "Lodré" = Sodré.
+**NOTA:** Possivelmente Ismael é irmão de Olímpio (mesmo dia de batismo, mesmos pais com variação de OCR). "Ceneraldo" = **Esmeraldo** (confirmado pelo FS). "Lodré" = Sodré.
 
 ---
 
@@ -171,7 +171,7 @@ As últimas páginas (p. 22-26) contêm registros da **Doutrina de São Miguel d
 
 1. **Firmino Vaz Sodré** era casado com **Laurinda Sodré** e residia em Amargosa/BA (1909-1914)
 2. Firmino e Laurinda Sodré eram **padrinhos prestigiosos** — batizaram pelo menos 2 crianças em 14/11/1914
-3. **Euneraldo/Everaldo Sodré** (casado com Alarinda/Florinda de Andrade) era outro Sodré em Amargosa (1914)
+3. **Esmeraldo Sodré** (casado com Florinda de Andrade) era outro Sodré em Amargosa (1914). Filhos: Olímpio (n. 1913) e Ismael (n. ~1912). Aparece como "Esmeraldo Vaz Sodré" no FS.
 4. **Manoel Caetano Sodré** (casado com Maria Paulina Joares) era pai de Antonia Sodré de Jesus em Amargosa (1941)
 5. **Francisco Eusébio dos Santos** era padrinho em Amargosa (1895) — possível parente de **Gervásio Eusébio dos Santos** (avô materno de Francisco Gramilo Sodré)
 6. A família **Eusébio dos Santos** estava estabelecida em Amargosa no final do séc. XIX
@@ -193,7 +193,7 @@ As últimas páginas (p. 22-26) contêm registros da **Doutrina de São Miguel d
 ## Pendências
 
 1. Confirmar se Firmino Vaz Sodré era neto/filho de **Tomaz Gramilo Sodré** (casamento 1891)
-2. Verificar se **Euneraldo/Everaldo Sodré** é parente de Firmino (irmão? primo?)
+2. Verificar se **Esmeraldo Vaz Sodré** é parente de Firmino (irmão? primo?) — ambos têm "Vaz Sodré"
 3. Investigar se **Francisco Eusébio dos Santos** é irmão de **Gervásio Eusébio dos Santos**
 4. Buscar certidão de nascimento de Firmino Vaz Sodré (para determinar filiação)
 5. Verificar ligação entre os Sampaio de Amargosa e Atanagilda Sodré Sampaio

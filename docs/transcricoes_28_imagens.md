@@ -11,8 +11,8 @@
 
 ### 📌 Registro 0019 — Batismos em Amargosa, 14/11/1914
 - **Inocência** — filha legítima de Manoel Martins dos Santos e Marcelina Maria de Jesus. Padrinhos: **Firmino Sodré** e **Laurinda Sodré** (transcrito como "Fermino Sodre" e "Leaurinda Sodri")
-- **Olímpio** — filho legítimo de **Euneraldo Sodré** (OCR de "Geraldo/Euneraldo Sodré") e **Alarinda de Andrade** (OCR de "Marinda/Florinda de Andrade"). Padrinhos: **Firmino Sodré** e **Laurinda Sodré** (transcrito como "Firmino Sodre" e "Leanrinda Lodre")
-- **Ismael** — filho legítimo de **Ceneraldo Sodré** (OCR de "Geraldo Sodré") e **Florinda de Andrade**. Padrinhos: Nestor Ribeiro França e Eufrosina Paz de Almeida
+- **Olímpio** — filho legítimo de **Esmeraldo Sodré** (OCR "Euneraldo/Ceneraldo Sodré", confirmado como Esmeraldo pelo FamilySearch) e **Florinda de Andrade** (OCR "Alarinda de Andrade"). Padrinhos: **Firmino Sodré** e **Laurinda Sodré** (transcrito como "Firmino Sodre" e "Leanrinda Lodre")
+- **Ismael** — filho legítimo de **Esmeraldo Sodré** (OCR "Ceneraldo Sodré") e **Florinda de Andrade**. Padrinhos: Nestor Ribeiro França e Eufrosina Paz de Almeida
 - **Gervásio** — início de registro (cortado)
 
 ### 📌 Registro 0014 — Casamento em Amargosa, 10/12/1941
@@ -61,7 +61,7 @@ As transcrições do modelo HWM (Brazilian 19th Century) apresentam erros sistem
 - **Sodré** → lido como "Sodre", "Todré", "Lodré", "Poda"
 - **Firmino** → lido como "Fermino", "Firmimo"
 - **Laurinda** → lido como "Leaurinda", "Leanrinda", "Laurinda Paz" (Vaz)
-- **Geraldo** → lido como "Euneraldo", "Ceneraldo"
+- **Esmeraldo** → confirmado como **Esmeraldo Vaz Sodré** pelo FamilySearch (OCR lê "Euneraldo", "Ceneraldo")
 - **Gervásio** → cortado/incompleto
 - **Conente/Corente** → Arraial do Conente, freguesia de Amargosa
 - **Vigário** → "José Francolino Alves d'Oliveira" (Francolino = Francolino)
