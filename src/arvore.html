@@ -93,6 +93,11 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .person,.section,.note-box,.child-card,.sibling-group{animation:fadeUp 0.5s ease both}
 @media(max-width:640px){header{padding:3.3rem 1.33rem 2.66rem}header h1{font-size:2rem}main{padding:2rem 1.33rem}.generation{gap:1.06rem}.person{min-width:277px;padding:1.33rem}.gen-label{display:none}.section{padding:1.5rem}.sibling-group{min-width:277px;max-width:381px;padding:1.06rem}.child-card{padding:0.67rem 0.93rem}.child-name{font-size:1.25rem}}
+
+.site-nav{display:flex;gap:0.8rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
+.nav-btn{display:inline-block;padding:0.5rem 1.4rem;border-radius:var(--radius,6px);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.08em;transition:all 0.2s;border:1px solid var(--gold,#c9a84c);background:transparent;color:var(--parchment,#f5e6c8)}
+.nav-btn:hover{background:var(--gold,#c9a84c);color:var(--ink,#1a1a2e)}
+.nav-btn.active{background:var(--ink,#1a1a2e);color:var(--parchment,#f5e6c8);border-color:var(--ink,#1a1a2e);cursor:default;pointer-events:none}
 </style>
 </head>
 <body>
@@ -107,9 +112,10 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Gerações</div></div>
 <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Ramos</div></div>
 </div>
-<div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
-<a href="knowledge-graph.html" style="display:inline-block;padding:0.6rem 1.8rem;background:var(--ink);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.1em;transition:background 0.2s;">🕸️ Grafo Genealógico</a>
-<a href="cidades.html" style="display:inline-block;padding:0.6rem 1.8rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.1em;transition:background 0.2s;">🗺️ Cidades e Contexto</a>
+<div class="site-nav">
+<a href="index.html" class="nav-btn active">🌳 Árvore Genealógica</a>
+<a href="knowledge-graph.html" class="nav-btn">🕸️ Grafo</a>
+<a href="cidades.html" class="nav-btn">🗺️ Cidades e Contexto</a>
 </div>
 
 </header>

@@ -78,16 +78,26 @@ footer{text-align:center;padding:3.5rem 3.5rem 4.3rem;border-top:1px solid var(-
   .conexao-detail{grid-template-columns:1fr}
   footer{padding:2.5rem 1.2rem}
 }
+
+.site-nav{display:flex;gap:0.8rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
+.nav-btn{display:inline-block;padding:0.5rem 1.4rem;border-radius:var(--radius,6px);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.08em;transition:all 0.2s;border:1px solid var(--gold,#c9a84c);background:transparent;color:var(--parchment,#f5e6c8)}
+.nav-btn:hover{background:var(--gold,#c9a84c);color:var(--ink,#1a1a2e)}
+.nav-btn.active{background:var(--ink,#1a1a2e);color:var(--parchment,#f5e6c8);border-color:var(--ink,#1a1a2e);cursor:default;pointer-events:none}
 </style>
 </head>
 <body>
 
-<a class="back-link" href="arvore.html"><span class="arrow">←</span> Voltar à árvore</a>
+<a class="back-link" href="index.html"><span class="arrow">←</span> Voltar à árvore</a>
 
 <header>
-  <div class="header-ornament">Atlas Genealógico</div>
-  <h1>Cidades &amp; <em>Personagens</em></h1>
-  <p class="header-subtitle">Localidades e figuras-chave da genealogia Gramilo Sodré</p>
+<div class="header-ornament">Genealogia</div>
+<h1>Cidades &amp; <em>Personagens</em></h1>
+<p class="header-subtitle">Localidades e figuras-chave da genealogia Gramilo Sodré</p>
+<div class="site-nav">
+<a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
+<a href="knowledge-graph.html" class="nav-btn">🕸️ Grafo</a>
+<a href="cidades.html" class="nav-btn active">🗺️ Cidades e Contexto</a>
+</div>
 </header>
 
 <main>
@@ -253,7 +263,7 @@ footer{text-align:center;padding:3.5rem 3.5rem 4.3rem;border-top:1px solid var(-
     Aiquara &amp; Amargosa, Bahia — pesquisa em andamento<br>
     Dados compilados em junho de 2026
   </p>
-  <a class="footer-back" href="arvore.html">← Voltar à árvore genealógica</a>
+  <a class="footer-back" href="index.html">← Voltar à árvore genealógica</a>
 </footer>
 
 </body>
