@@ -145,7 +145,7 @@
   },
   {
     "id": "f7",
-    "nome_completo": "José Gramilo Sodré",
+    "nome_completo": "José Gramilo Sodré (\"Zeca\")",
     "nascimento": null,
     "falecimento": null,
     "pais": [
@@ -212,7 +212,7 @@
     "conjuge": "Maximiliano",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Casada com Maximiliano. 7 filhos: Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria.",
+    "notas": "Casada com Maximiliano. 8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria. Maximiliano veio de Teófilo Otoni (MG) para Aiquara-BA.",
     "geracao": 3
   },
   {
@@ -997,7 +997,7 @@
   },
   {
     "id": "i1",
-    "nome_completo": "Etelvina",
+    "nome_completo": "Etelvina \"Tezinha\"",
     "nascimento": null,
     "falecimento": null,
     "pais": [
@@ -1008,7 +1008,8 @@
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
     "geracao": 4,
-    "ordem_filho": 1
+    "ordem_filho": 1,
+    "notas": ""
   },
   {
     "id": "i2",
@@ -1109,13 +1110,15 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Elisa Gramilo Sodré"
+      "Elisa Gramilo Sodré",
+      "Alfredo"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
     "geracao": 4,
-    "ordem_filho": 1
+    "ordem_filho": 1,
+    "notas": "✝ falecido"
   },
   {
     "id": "e2",
@@ -1123,7 +1126,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Elisa Gramilo Sodré"
+      "Elisa Gramilo Sodré",
+      "Alfredo"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1137,30 +1141,18 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Elisa Gramilo Sodré"
+      "Elisa Gramilo Sodré",
+      "Alfredo"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
     "geracao": 4,
-    "ordem_filho": 3
+    "ordem_filho": 3,
+    "notas": "mãe de Tânia Karla Sodré Bulhões"
   },
   {
-    "nome_completo": "Etelvina Tezinha (Isabel Sodré × Maximiliano)",
-    "nascimento": "",
-    "falecimento": "",
-    "pais": [
-      "Isabel Sodré",
-      "Maximiliano"
-    ],
-    "conjuge": "",
-    "fonte": "Memória oral (família, jun 2026)",
-    "confiabilidade": "confirmada",
-    "residencia": "Teófilo Otoni (Alcobaça, MG) → Aiquara-BA",
-    "notas": "Morava em Teófilo Otoni, Alcobaça (MG). Depois mudaram-se para Aiquara-BA."
-  },
-  {
-    "nome_completo": "Valdivino (Isabel Sodré × Maximiliano)",
+    "nome_completo": "Valdivino",
     "nascimento": "",
     "falecimento": "",
     "pais": [
@@ -1242,5 +1234,372 @@
     "fonte": "Memória oral (família, jun 2026)",
     "confiabilidade": "confirmada",
     "notas": "Filho do 2º casamento de Marcos. 1ª esposa: Veralúcia Sodré (n. 30/09/1955)"
+  },
+  {
+    "nome_completo": "Arlenô Gramilo Sodré",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "1º filho de Arlindo",
+    "id": "a92"
+  },
+  {
+    "nome_completo": "Marcelo Gramilo Sodré Neto",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "2º filho de Arlindo",
+    "id": "a93"
+  },
+  {
+    "nome_completo": "Antonio Cesar Silva Sodré",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "4º filho de Arlindo",
+    "id": "a94"
+  },
+  {
+    "nome_completo": "Luciane Silva Sodré",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "5ª filha de Arlindo",
+    "id": "a95"
+  },
+  {
+    "nome_completo": "Cristiane Silva Sodré",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "6ª filha de Arlindo",
+    "id": "a96"
+  },
+  {
+    "nome_completo": "Rita de Cássia Silva Sodré Figueredo",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "7ª filha de Arlindo",
+    "id": "a97"
+  },
+  {
+    "nome_completo": "Manoel Ailton Silva Sodré",
+    "pais": [
+      "Arlindo Gramilo Sodré",
+      "Noemia Rocha Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "8º filho de Arlindo",
+    "id": "a98"
+  },
+  {
+    "nome_completo": "Geni Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "Sobrenome casada: desconhecido",
+    "id": "a99"
+  },
+  {
+    "nome_completo": "Zenito Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a100"
+  },
+  {
+    "nome_completo": "Sinval Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a101"
+  },
+  {
+    "nome_completo": "Maria Helena Sodré Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a102"
+  },
+  {
+    "nome_completo": "Maiza Rosa Bispo Gouveia",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "5ª filha de Otávia · Rosa = homenagem à mãe",
+    "id": "a103"
+  },
+  {
+    "nome_completo": "Zélia Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "Sobrenome casada: desconhecido",
+    "id": "a104"
+  },
+  {
+    "nome_completo": "Juvenil Sodré Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a105"
+  },
+  {
+    "nome_completo": "Valdeck Bispo",
+    "pais": [
+      "Eustázio Eusébio Bispo",
+      "Otávia Rosa Sodré Bispo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a106"
+  },
+  {
+    "nome_completo": "Cleide",
+    "pais": [
+      "José Gramilo Sodré (\"Zeca\")"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a107"
+  },
+  {
+    "nome_completo": "Ione Rosa Sudré",
+    "pais": [
+      "José Gramilo Sodré (\"Zeca\")"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "Sudré = erro cartorário · ✝ falecida",
+    "id": "a108"
+  },
+  {
+    "nome_completo": "Maria Rita",
+    "pais": [
+      "José Gramilo Sodré (\"Zeca\")"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "id": "a109"
+  },
+  {
+    "nome_completo": "Amélia Vaz Padri",
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "notas": "Vaz Sodré · possivelmente mesma pessoa que Amélia na árvore",
+    "id": "a113"
+  },
+  {
+    "nome_completo": "Anizio Sodré",
+    "pais": [
+      "Esmeraldo Vaz Sodré",
+      "Florinda de Andrade"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "id": "a114"
+  },
+  {
+    "nome_completo": "Antonia Sodré de Jesus",
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "notas": "Vaz Sodré",
+    "id": "a115"
+  },
+  {
+    "nome_completo": "Edgard Sodré",
+    "pais": [
+      "Jerônimo Sodré Pereira",
+      "Francisca de Aragão"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "id": "a116"
+  },
+  {
+    "nome_completo": "Eduardo Sodré",
+    "pais": [
+      "Jerônimo Sodré Pereira"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "id": "a117"
+  },
+  {
+    "nome_completo": "Elisa Sodré Pereira",
+    "pais": [
+      "Jerônimo Sodré Pereira"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "notas": "bat. 1881, Salvador",
+    "id": "a118"
+  },
+  {
+    "nome_completo": "Henrique Sodré",
+    "pais": [
+      "Jerônimo Sodré Pereira"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "id": "a119"
+  },
+  {
+    "nome_completo": "Ismael Sodré",
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "notas": "Vaz Sodré",
+    "id": "a120"
+  },
+  {
+    "nome_completo": "José Henrique",
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 6,
+    "id": "a121"
+  },
+  {
+    "nome_completo": "José Lino Coutinho Sodré Pereira",
+    "pais": [
+      "Jerônimo Sodré Pereira"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "id": "a122"
+  },
+  {
+    "nome_completo": "José Sodré",
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "hipotética",
+    "geracao": 5,
+    "notas": "Vaz Sodré",
+    "id": "a123"
+  },
+  {
+    "nome_completo": "Sísio",
+    "pais": [
+      "Elisa Gramilo Sodré",
+      "Alfredo"
+    ],
+    "conjuge": null,
+    "fonte": "Árvore genealógica (site)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "notas": "4º filho de Elisa",
+    "id": "a124"
+  },
+  {
+    "id": "f10b",
+    "nome_completo": "Maximiliano",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": null,
+    "conjuge": "Isabel Gramilo Sodré",
+    "fonte": "Memória oral (família)",
+    "confiabilidade": "confirmada",
+    "geracao": 3,
+    "notas": "Veio de Teófilo Otoni (MG) para Aiquara-BA. 8 filhos com Isabel."
   }
 ]
