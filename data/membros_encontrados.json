@@ -3,7 +3,7 @@
     "id": "h1",
     "nome_completo": "Jerônimo Sodré Pereira",
     "nascimento": "Santarém, Portugal, séc. XVII",
-    "falecimento": "Bahia, séc. XVIII (~1661-1700)",
+    "falecimento": "Bahia, data incerta (séc. XVII/XVIII)",
     "pais": null,
     "conjuge": [
       "Francisca de Aragão",
@@ -11,7 +11,7 @@
     ],
     "fonte": "Ensaio genealógico (Parentesco.com.br, SODRE2.pdf)",
     "confiabilidade": "confirmada",
-    "notas": "Tronco baiano. 2ª esposa = irmã do Padre Antônio Vieira.",
+    "notas": "Tronco baiano. 2ª esposa = irmã do Padre Antônio Vieira. · NÃO conectar filhos do séc. XIX diretamente — provável homônimo",
     "geracao": 0
   },
   {
@@ -24,7 +24,7 @@
     "casamento": "~1891, Amargosa/BA",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "hipotética",
-    "notas": "Possível avô ou bisavô de Francisco. Sobrenome Gramilo Sodré = ramo direto.",
+    "notas": "Ancestral candidato da linha de Marcelo. Ligação com Teodora Julia da Cruz permanece hipotética. Tomaz associado a Antônia de Gramilo em 1825 = possível homônimo ou ancestral distinto. NÃO fundir sem documento.",
     "geracao": 1
   },
   {
@@ -72,7 +72,7 @@
     "conjuge": "Maria Aleluia dos Santos",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "provável",
-    "notas": "Pai de Atanagilda Odete dos Santos. Sobrenome Eusébio dos Santos aparece em Eustázio Bispo.",
+    "notas": "Avô materno. Confirmação por memória oral; documental pendente. Gervásio Barbosa dos Santos (FS) = possível homônimo, NÃO fundir sem documento.",
     "geracao": 2
   },
   {
@@ -129,7 +129,7 @@
     "conjuge": "Noemia Rocha Sodré",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Empresário. Pavimentação Sodré e Filhos, Jequié/BA.",
+    "notas": "Empresário. Pavimentação Sodré e Filhos, Jequié/BA. Lista de filhos possui duas camadas; reconciliação pendente. † 31/01/2025",
     "geracao": 3
   },
   {
@@ -155,7 +155,7 @@
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Apelido: Zeca. 11 filhos. Sudré = erro cartorário neste ramo.",
+    "notas": "Apelido: Zeca · Sudré = erro cartorário · lista de filhos pendente de reconciliação",
     "geracao": 3
   },
   {
@@ -170,7 +170,7 @@
     "conjuge": "Eustázio Eusébio Bispo",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "10 filhos. Sobrenome Bispo do marido.",
+    "notas": "10+ filhos · × Eustázio Eusébio Bispo · lista de filhos pendente de reconciliação",
     "geracao": 3
   },
   {
@@ -197,7 +197,7 @@
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "3 filhos: Zeilde, Valdeci, Elizete.",
+    "notas": "4 filhos: Zeilde ✝, Valdeci, Elizete, Sísio · × Alfredo",
     "geracao": 3
   },
   {
@@ -212,7 +212,7 @@
     "conjuge": "Maximiliano",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Casada com Maximiliano. 8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria. Maximiliano veio de Teófilo Otoni (MG) para Aiquara-BA.",
+    "notas": "8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria · × Maximiliano · Itororó-BA",
     "geracao": 3
   },
   {
@@ -851,7 +851,7 @@
     "filhos": "Amélia Vaz Padri",
     "fonte": "FamilySearch — Civil Registration, Bahia",
     "confiabilidade": "confirmada",
-    "notas": "Grafia alt: Horacio Vay Sodré. Sobrenome Vaz Sodré = mesmo ramo."
+    "notas": "Grafia alt: Horacio Vay Sodré. Sobrenome Vaz Sodré = mesmo agrupamento Vaz Sodré de Amargosa; conexão com Gramilo Sodré hipotética."
   },
   {
     "id": "fs6",
@@ -862,7 +862,7 @@
     "conjuge": null,
     "fonte": "FamilySearch — Catholic Church Records (Bahia)",
     "confiabilidade": "confirmada",
-    "notas": "Registro parcial. Vaz Sodré = mesmo ramo de Horácio e Luiz."
+    "notas": "Registro parcial. Vaz Sodré = mesmo agrupamento Vaz Sodré de Amargosa; conexão com Gramilo Sodré hipotética de Horácio e Luiz."
   },
   {
     "id": "fs7",
@@ -965,7 +965,7 @@
     "notas": "Filha de Francisco Ludgero. Ramo Vaz Sodré."
   },
   {
-    "id": "b8",
+    "id": "b8b",
     "nome_completo": "Nilda Sodré Bispo de Souza",
     "nascimento": null,
     "falecimento": null,
@@ -981,7 +981,7 @@
     "ordem_filho": 8
   },
   {
-    "id": "b9",
+    "id": "b9b",
     "nome_completo": "Antônio Carlos Bispo",
     "nascimento": null,
     "falecimento": null,
@@ -1156,7 +1156,7 @@
     "nascimento": "",
     "falecimento": "",
     "pais": [
-      "Isabel Sodré",
+      "Isabel Gramilo Sodré",
       "Maximiliano"
     ],
     "conjuge": "",

@@ -239,3 +239,31 @@ A certidão de nascimento de Francisco no **cartório de Ibicuí** pode revelar 
 - `docs/transcricoes_28_imagens.md` — transcrições completas
 - `relatorio_genealogia_gramilo_sodre.md` — relatório principal
 - `docs/relatorio_genealogia_fs.md` — relatório FS
+---
+
+## 🔄 AUDITORIA GPT-5.5 (2026-06-15)
+
+Revisão por GPT-5.5 identificou 22 inconsistências. 14 correções aplicadas:
+
+### CRÍTICAS (corrigidas)
+1. IDs duplicados b8/b9 → b8b/b9b
+2. Tomaz: CONF→hipotética; homônimo 1825 separado
+3. Alice: "irmã de Maria Aleluia" → "irmã de Atanagilda" (erro de geração)
+4. Jerônimo: filhos séc. XIX desconectados do tronco colonial
+5. Otávia: "10 filhos" → "10+ filhos, reconciliação pendente"
+6. José/Zeca: "11 filhos" → "reconciliação pendente"
+
+### MODERADAS (corrigidas)
+7. Elisa: 3→4 filhos (Sísio incluído)
+8. Isabel: nota completa com 8 filhos
+9. Arlindo: nota sobre listas sobrepostas
+10. Gervásio: nota sobre homônimo FS
+11. Vaz Sodré: "mesmo ramo" → "conexão hipotética"
+12. Isabel Sodré → Isabel Gramilo Sodré (padronização)
+13. Jerônimo: data falecimento corrigida
+14. Teodora: CONF→hipotética
+
+### PENDENTES
+- Reconciliação completa de filhos de Otávia e José
+- Verificar "7º filho" de Marcelo e Rita
+- IDs temporários para registros sem ID
