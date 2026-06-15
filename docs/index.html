@@ -10,7 +10,11 @@
 :root{--parchment:#f5efe6;--parchment-deep:#e8dcc8;--ink:#2c1810;--ink-light:#5a3e2b;--ink-muted:#8b7355;--gold:#b8860b;--gold-light:#d4a843;--gold-glow:rgba(184,134,11,0.15);--confirmed:#2d6a4f;--confirmed-bg:rgba(45,106,79,0.08);--probable:#b8860b;--probable-bg:rgba(184,134,11,0.08);--hypothetical:#9b2226;--hypothetical-bg:rgba(155,34,38,0.08);--fs-accent:#6a4c93;--fs-bg:rgba(106,76,147,0.08);--line:#c9b896;--line-faint:rgba(201,184,150,0.4);--shadow:rgba(44,24,16,0.08);--radius:3px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Source Sans 3',sans-serif;background:var(--parchment);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;font-size:22.5px}
+body.embedded{min-height:auto}
+body.embedded header,body.embedded footer{display:none}
+body.embedded main{padding-top:2rem}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;z-index:9999}
+body.embedded::after{display:none}
 header{padding:6.9rem 3.5rem 5.2rem;text-align:center;position:relative;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(232,220,200,0.5) 0%,transparent 100%)}
 header::before{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:80px;height:4px;background:var(--gold)}
 .header-ornament{font-family:'Cormorant Garamond',serif;font-size:1.48rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1.3rem}
@@ -27,7 +31,8 @@ main{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem}
 .tree{display:flex;flex-direction:column;align-items:center}
 .generation{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;width:100%;position:relative;padding:1.33rem 0}
 .gen-label{position:absolute;left:-0.6rem;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:center;font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--line);white-space:nowrap}
-.person{background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:1.73rem 1.86rem;min-width:338px;max-width:442px;position:relative;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow)}
+.person{background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:1.73rem 1.86rem;min-width:338px;max-width:442px;position:relative;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow);white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
+.person *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
 .person:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
 .person.confirmed{border-left:3px solid var(--confirmed)}
 .person.probable{border-left:3px solid var(--probable)}
@@ -60,9 +65,11 @@ main{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem}
 .cousin-tier::-webkit-scrollbar{height:8px}
 .cousin-tier::-webkit-scrollbar-track{background:var(--parchment-deep);border-radius:3px}
 .cousin-tier::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
-.sibling-group{flex:0 0 auto;min-width:311px;max-width:484px;background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:1rem;box-shadow:0 1px 3px var(--shadow);transition:transform 0.25s ease,box-shadow 0.25s ease}
+.sibling-group{flex:0 0 auto;min-width:311px;max-width:484px;background:#fffcf7;border:1px solid var(--line-faint);border-radius:var(--radius);padding:1rem;box-shadow:0 1px 3px var(--shadow);transition:transform 0.25s ease,box-shadow 0.25s ease;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
+.sibling-group *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
 .sibling-group:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
 .sibling-group-header{font-family:'Playfair Display',serif;font-size:1.48rem;font-weight:700;color:var(--ink);line-height:1.2;text-align:center;margin-bottom:0.27rem}
+.couple-amp{color:var(--gold);white-space:nowrap}
 .sibling-group-sub{font-size:0.85rem;color:var(--ink-muted);font-style:italic;text-align:center;margin-bottom:1.04rem;padding-bottom:0.87rem;border-bottom:1px solid var(--line-faint)}
 .sibling-group-children{display:flex;flex-direction:column;gap:0.6rem}
 .child-card{background:var(--parchment);border:1px solid var(--line-faint);border-radius:var(--radius);padding:0.87rem 1.2rem;transition:transform 0.25s ease,box-shadow 0.25s ease;box-shadow:0 1px 3px var(--shadow)}
@@ -89,15 +96,20 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </style>
 </head>
 <body>
+<script>if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');</script>
 
 <header>
 <div class="header-ornament">Genealogia</div>
 <h1>Família <em>Gramilo Sodré</em></h1>
 <p class="header-subtitle">Aiquara &amp; Amargosa, Bahia — séculos XVIII a XXI</p>
 <div class="stats-row">
-<div class="stat-item"><div class="stat-num">97</div><div class="stat-label">Pessoas</div></div>
+<div class="stat-item"><div class="stat-num">99</div><div class="stat-label">Pessoas</div></div>
 <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Gerações</div></div>
 <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Ramos</div></div>
+</div>
+<div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+<a href="knowledge-graph.html" style="display:inline-block;padding:0.6rem 1.8rem;background:var(--ink);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.1em;transition:background 0.2s;">🕸️ Grafo Genealógico</a>
+<a href="cidades.html" style="display:inline-block;padding:0.6rem 1.8rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.1em;transition:background 0.2s;">🗺️ Cidades e Contexto</a>
 </div>
 
 </header>
@@ -127,7 +139,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="cousin-tier">
 
 <div class="sibling-group">
-<div class="sibling-group-header">Francisco Maria Sodré Pereira (coronel) &amp; Maria Ana de Meneses</div>
+<div class="sibling-group-header">Francisco Maria Sodré Pereira (coronel) <span class="couple-amp">&amp;</span><br>Maria Ana de Meneses</div>
 <div class="sibling-group-sub">Cachoeira da Bahia · Fonte: MemPalace / registros históricos</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-name">Francisco Pereira Sodré (Barão de Alagoinhas)</div><div class="child-note">n. 26/04/1818, Cachoeira · f. 1882</div></div>
@@ -138,7 +150,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Barão de Alagoinhas &amp; Cora César Coutinho</div>
+<div class="sibling-group-header">Francisco Pereira Sodré, Barão de Alagoinhas <span class="couple-amp">&amp;</span><br>Cora César Coutinho</div>
 <div class="sibling-group-sub">Cachoeira/Iguape, BA · Casam. 10/02/1834 · Fonte: MemPalace</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-name">Maria Leopoldina Sodré Muniz</div><div class="child-note"></div></div>
@@ -164,7 +176,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="cousin-tier">
 
 <div class="sibling-group">
-<div class="sibling-group-header">Manuel Sodré &amp; Maria Gramilo</div>
+<div class="sibling-group-header">Manuel Sodré <span class="couple-amp">&amp;</span><br>Maria Gramilo</div>
 <div class="sibling-group-sub">Bahia colonial · Fonte: FamilySearch (batch 33S7-9PXT-3J1)</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-name">Eduardo Sodré</div><div class="child-note">padrinho: Francisco Sodré · madrinha: Maria Pereira</div></div>
@@ -173,7 +185,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Antônio Pereira &amp; Isabel Gramilo</div>
+<div class="sibling-group-header">Antônio Pereira <span class="couple-amp">&amp;</span><br>Isabel Gramilo</div>
 <div class="sibling-group-sub">Bahia colonial · mesma época e local</div>
 <div class="sibling-group-children">
 <div class="child-card probable"><div class="child-name">Filhos: informação pendente</div></div>
@@ -189,10 +201,11 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="cousin-tier">
 
 <div class="sibling-group">
-<div class="sibling-group-header">Esmeraldo Vaz Sodré &amp; Florinda de Andrade</div>
-<div class="sibling-group-sub">Amargosa/BA · Fonte: FamilySearch</div>
+<div class="sibling-group-header">Esmeraldo/Euneraldo Vaz Sodré <span class="couple-amp">&amp;</span><br>Florinda de Andrade</div>
+<div class="sibling-group-sub">Amargosa/BA · Fonte: FamilySearch + transcrições paroquiais HWM (1914) · relação com Gramilo Sodré ainda não confirmada</div>
 <div class="sibling-group-children">
-<div class="child-card confirmed"><div class="child-name">Olímpio Sodré</div><div class="child-note">n. 18/11/1913, Amargosa</div></div>
+<div class="child-card confirmed"><div class="child-name">Olímpio Sodré</div><div class="child-note">n. 18/11/1913, Amargosa · bat. 14/11/1914; padrinhos Firmino Sodré + Laurinda Sodré</div></div>
+<div class="child-card confirmed"><div class="child-name">Ismael Sodré</div><div class="child-note">bat. 14/11/1914, 30 meses; leitura HWM: pai Ceneraldo/Euneraldo Lodré, mãe Florinda de Andrade</div></div>
 <div class="child-card confirmed"><div class="child-name">Luiz Vaz Sodré</div><div class="child-note">n. ~1870, Bahia</div></div>
 <div class="child-card probable"><div class="child-name">Anizio</div><div class="child-note">informação parcial</div></div>
 <div class="child-card confirmed"><div class="child-name">Maria do Carmo Sodré</div><div class="child-note">casam. 15/02/1950, Amargosa/Tapera</div></div>
@@ -200,18 +213,37 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Horácio Vaz Sodré &amp; Adelina Maria de Jesus</div>
-<div class="sibling-group-sub">Amargosa/BA · Fonte: FamilySearch</div>
+<div class="sibling-group-header">Horácio Vaz Sodré <span class="couple-amp">&amp;</span><br>Adelina Maria de Jesus</div>
+<div class="sibling-group-sub">Amargosa/BA · Fonte: FamilySearch · registrado em Guarani (Ibicuí histórico)</div>
 <div class="sibling-group-children">
-<div class="child-card confirmed"><div class="child-name">Amélia Vaz Padri</div><div class="child-note"></div></div>
+<div class="child-card confirmed"><div class="child-name">Maria Amélia Vaz Sodré</div><div class="child-note">nascida em Guarani (Ibicuí) · IDs FS: X9YZ-WQXX, X9YD-5VDV</div></div>
 </div>
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">José Virgílio Vaz Sodré</div>
-<div class="sibling-group-sub">Amargosa/BA · Fonte: FamilySearch · registro parcial</div>
+<div class="sibling-group-header">Firmino Vaz Sodré <span class="couple-amp">&amp;</span><br>Laurinda Sodré</div>
+<div class="sibling-group-sub">Amargosa/BA · Fonte: transcrições paroquiais HWM (1909–1914) + APEB · relação com Tomaz/Marcelo ainda não confirmada</div>
 <div class="sibling-group-children">
-<div class="child-card probable"><div class="child-name">Filhos: informação pendente</div></div>
+<div class="child-card confirmed"><div class="child-name">José Sodré</div><div class="child-note">bat. 31/01/1909, Arraial do Conente; pais lidos como Firmimo Vaz Poda + Laurinda Paz (normalizado: Firmino Vaz Sodré + Laurinda Vaz/Sodré)</div></div>
+<div class="child-card probable"><div class="child-name">Padrinhos em 1914</div><div class="child-note">Firmino Sodré + Laurinda Sodré aparecem juntos como padrinhos de Inocência e Olímpio</div></div>
+</div>
+</div>
+
+<div class="sibling-group">
+<div class="sibling-group-header">Manoel Caetano Sodré <span class="couple-amp">&amp;</span><br>Maria Paulina Joares</div>
+<div class="sibling-group-sub">Amargosa/BA · Fonte: casamento paroquial de Antonia Sodré de Jesus (01/12/1941) · relação com Firmino/Gramilo ainda não confirmada</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed"><div class="child-name">Antonia Sodré de Jesus</div><div class="child-note">casou com Vicente Maciel de Almeida em 01/12/1941; pai lido como Manoel Caetano Jodré (Sodré)</div></div>
+</div>
+</div>
+
+<div class="sibling-group">
+<div class="sibling-group-header">José Virgílio Vaz Sodré <span class="couple-amp">&amp;</span><br>Laurinda Amena Vaz Sodré</div>
+<div class="sibling-group-sub">Conceição do Almeida/BA · n. ~1855 · registrado em Guarani (Ibicuí histórico) · Fonte: FamilySearch (OCR: "Vaz Podré")</div>
+<div class="sibling-group-children">
+<div class="child-card confirmed"><div class="child-name">José Virgílio Vaz Sodré Jr.</div><div class="child-note">filho de José Virgílio + Laurinda</div></div>
+<div class="child-card probable"><div class="child-name">Amélia</div><div class="child-note">filha de José Virgílio + Laurinda</div></div>
+<div class="child-card probable"><div class="child-name">José Henrique</div><div class="child-note">filho de José Virgílio + Laurinda</div></div>
 </div>
 </div>
 
@@ -243,7 +275,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="cousin-tier">
 
 <div class="sibling-group">
-<div class="sibling-group-header">Marcelo Gramilo Sodré &amp; Rita Rosa Sodré</div>
+<div class="sibling-group-header">Marcelo Gramilo Sodré <span class="couple-amp">&amp;</span><br>Rita Rosa Sodré</div>
 <div class="sibling-group-sub">Avós paternos · Montes Claros/MG → Aiquara/BA · 6 filhos<br>Marcelo: n. 16/01/1897 · casam. 09/02/1924 &nbsp;|&nbsp; Rita Rosa: n. 22/05/1901</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-name">Francisco Gramilo Sodré</div></div>
@@ -256,10 +288,10 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Gervásio Eusébio dos Santos &amp; Maria Aleluia dos Santos</div>
-<div class="sibling-group-sub">Avós maternos · Amargosa/Aiquara, BA<br>Gervásio: n. 09/11/1914 · bat. 14/11/1914, Amargosa/BA</div>
+<div class="sibling-group-header">Gervásio Eusébio dos Santos <span class="couple-amp">&amp;</span><br>Maria Aleluia dos Santos</div>
+<div class="sibling-group-sub">Avós maternos · confirmação oral<br>Nota documental: Francisco Eusébio dos Santos aparece como padrinho em Amargosa (08/12/1895), indicando família Eusébio dos Santos na região; parentesco com Gervásio ainda precisa de confirmação</div>
 <div class="sibling-group-children">
-<div class="child-card probable"><div class="child-name">Atanagilda Odete dos Santos</div></div>
+<div class="child-card confirmed"><div class="child-name">Atanagilda Odete dos Santos</div><div class="child-note">filiação confirmada por informação oral</div></div>
 </div>
 </div>
 
@@ -272,7 +304,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="cousin-tier">
 
 <div class="sibling-group">
-<div class="sibling-group-header">Francisco Gramilo Sodré &amp; Atanagilda Odete dos Santos</div>
+<div class="sibling-group-header">Francisco Gramilo Sodré <span class="couple-amp">&amp;</span><br>Atanagilda Odete dos Santos</div>
 <div class="sibling-group-sub">Fazenda Santa Terezinha, Aiquara/BA · 12 filhos<br>Francisco: n. 09/03/1925, Ibitupa/BA · bat. 17/05/1925 · casam. 26/12/1953 &nbsp;|&nbsp; Atanagilda: n. 17/04/1933 · bat. 25/06/1933 · casam. 26/12/1953</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Atanagilda Sodré Sampaio</div><div class="child-note">n. 11/04/1954</div></div>
@@ -291,7 +323,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Arlindo Gramilo Sodré &amp; Noemia Rocha Sodré</div>
+<div class="sibling-group-header">Arlindo Gramilo Sodré <span class="couple-amp">&amp;</span><br>Noemia Rocha Sodré</div>
 <div class="sibling-group-sub">Pavimentação Sodré e Filhos, Jequié/BA · 8 filhos</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-num">1º</div><div class="child-name">Arlenô Gramilo Sodré</div><div class="child-note"></div></div>
@@ -322,7 +354,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Otávia Rosa Sodré &amp; Eustázio Eusébio Bispo</div>
+<div class="sibling-group-header">Otávia Rosa Sodré <span class="couple-amp">&amp;</span><br>Eustázio Eusébio Bispo</div>
 <div class="sibling-group-sub">Aiquara/BA · 10 filhos</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Geni Bispo</div><div class="child-note">Sobrenome casada: desconhecido</div></div>
@@ -349,7 +381,7 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 </div>
 
 <div class="sibling-group">
-<div class="sibling-group-header">Isabel Gramilo Sodré &amp; Maximiliano</div>
+<div class="sibling-group-header">Isabel Gramilo Sodré <span class="couple-amp">&amp;</span><br>Maximiliano</div>
 <div class="sibling-group-sub">8 filhos</div>
 <div class="sibling-group-children">
 <div class="child-card confirmed"><div class="child-num">1ª</div><div class="child-name">Etelvina "Tezinha"</div><div class="child-note">Teófilo Otoni (MG) → Aiquara</div></div>
@@ -375,11 +407,10 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <p class="footer-text">
 Árvore genealógica da família <strong>Gramilo Sodré</strong><br>
 Aiquara &amp; Amargosa, Bahia — pesquisa em andamento<br>
-Dados compilados em junho de 2026<br>
 <em>Nota:</em> «Sudré» é erro cartorário conhecido — a grafia correta é «Sodré»<br>
-<em>Nota:</em> Sobrenome «Gramilo» tem origem em Penedono, Viseu, Portugal
+<em>Nota:</em> Sobrenome «Gramilo» tem origem em Penedono, Viseu, Portugal<br>
+<a href="cidades.html" style="color:var(--gold)">🗺️ Cidades e Contexto Histórico</a>
 </p>
-<p class="footer-date">última atualização: 12 de junho de 2026</p>
 </footer>
 
 <script>
