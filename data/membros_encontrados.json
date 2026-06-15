@@ -239,10 +239,10 @@
       "Francisco Gramilo Sodré",
       "Atanagilda Odete dos Santos"
     ],
-    "conjuge": null,
+    "conjuge": "Magnaldo Reis Andrade (1ª esposa dele)",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Mãe de Ricardo Sodré Andrade.",
+    "notas": "n. 30/09/1955 · 1ª esposa de Magnaldo Reis Andrade",
     "geracao": 4,
     "ordem_filho": 2
   },
@@ -1169,5 +1169,77 @@
     "conjuge": "",
     "fonte": "Memória oral (família, jun 2026)",
     "confiabilidade": "confirmada"
+  },
+  {
+    "nome_completo": "Alice dos Santos",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [
+      "Gervásio Eusébio dos Santos",
+      "Maria Aleluia dos Santos"
+    ],
+    "conjuge": "Marcos Freire de Andrade (1ª esposa)",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "confirmada",
+    "notas": "Irmã de Maria Aleluia dos Santos"
+  },
+  {
+    "nome_completo": "Marcos Freire de Andrade",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [],
+    "conjuge": "1) Alice dos Santos; 2) Florença Reis Andrade",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "confirmada",
+    "notas": "2 casamentos"
+  },
+  {
+    "nome_completo": "Florença Reis Andrade",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [],
+    "conjuge": "Marcos Freire de Andrade (2ª esposa)",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "confirmada",
+    "notas": ""
+  },
+  {
+    "nome_completo": "Magno Reis Andrade",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [
+      "Marcos Freire de Andrade",
+      "Florença Reis Andrade"
+    ],
+    "conjuge": "",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "provável",
+    "notas": "Filho do 2º casamento de Marcos"
+  },
+  {
+    "nome_completo": "Iêda Reis Andrade",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [
+      "Marcos Freire de Andrade",
+      "Florença Reis Andrade"
+    ],
+    "conjuge": "",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "provável",
+    "notas": "Filha do 2º casamento de Marcos"
+  },
+  {
+    "nome_completo": "Magnaldo Reis Andrade",
+    "nascimento": "",
+    "falecimento": "",
+    "pais": [
+      "Marcos Freire de Andrade",
+      "Florença Reis Andrade"
+    ],
+    "conjuge": "Veralúcia Sodré (1ª esposa)",
+    "fonte": "Memória oral (família, jun 2026)",
+    "confiabilidade": "confirmada",
+    "notas": "Filho do 2º casamento de Marcos. 1ª esposa: Veralúcia Sodré (n. 30/09/1955)"
   }
 ]
