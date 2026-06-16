@@ -18,7 +18,7 @@
 - **Sogra:** Maria Aleluia dos Santos
 - **Nº de filhos:** 12 (informação oral)
 
-### 6 irmãos de Francisco (filhos de Marcelo + Rita Rosa)
+### 7 irmãos de Francisco (filhos de Marcelo + Rita Rosa)
 
 - **Francisco Gramilo Sodré** — 12 filhos com Atanagilda
 - **Arlindo Gramilo Sodré** — casou com Noemia Rocha Sodré; 3 filhos
@@ -26,6 +26,7 @@
 - **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
 - **Elisa Gramilo Sodré** — 3 filhos (Zeilde, Valdeci, Elizete)
 - **Isabel Gramilo Sodré** — casada com Maximiliano; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré
+- **Jovina Gramilo Sodré** — casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha)
 
 ### Avós paternos prováveis
 

@@ -21,13 +21,14 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 ### G2: Avós maternos
 - **Gervásio Eusébio dos Santos** + **Maria Aleluia dos Santos**
 
-### G3: 6 irmãos (filhos de Marcelo + Rita Rosa)
+### G3: 7 irmãos (filhos de Marcelo + Rita Rosa)
 1. **Francisco Gramilo Sodré** — casou Atanagilda Odete dos Santos; 12 filhos
 2. **Arlindo Gramilo Sodré** — casou Noemia Rocha Sodré; 3 filhos
 3. **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
 4. **Otávia Rosa Sodré Bispo** — casou Eustázio Eusébio Bispo; 10 filhos
 5. **Elisa Gramilo Sodré** — 3 filhos (Zeilde, Valdeci, Elizete)
 6. **Isabel Gramilo Sodré** — casada com Maximiliano; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré
+7. **Jovina Gramilo Sodré** — casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha)
 
 ### G4: 12 filhos de Francisco + Atanagilda (com datas)
 1. Atanagilda Sodré Sampaio (11/04/1954)

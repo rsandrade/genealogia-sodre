@@ -48,7 +48,7 @@
     "conjuge": "Rita Rosa Sodré",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Pai de Francisco, Arlindo, José, Otávia, Elisa e Isabel. Origem mineira.",
+    "notas": "Pai de Francisco, Arlindo, José, Otávia, Elisa, Isabel e Jovina. Origem mineira.",
     "geracao": 2
   },
   {
@@ -60,7 +60,7 @@
     "conjuge": "Marcelo Gramilo Sodré",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "Apelido: Roxa. Mãe dos 6 irmãos Gramilo Sodré.",
+    "notas": "Apelido: Roxa. Mãe dos 7 irmãos Gramilo Sodré.",
     "geracao": 2
   },
   {
@@ -213,6 +213,21 @@
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
     "notas": "8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria · × Maximiliano · Itororó-BA",
+    "geracao": 3
+  },
+  {
+    "id": "f11",
+    "nome_completo": "Jovina Gramilo Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Marcelo Gramilo Sodré",
+      "Rita Rosa Sodré"
+    ],
+    "conjuge": "Manezinho",
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "notas": "Casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha). Nome provável: Jovina Gramilo Sodré.",
     "geracao": 3
   },
   {
