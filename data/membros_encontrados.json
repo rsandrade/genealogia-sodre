@@ -197,7 +197,7 @@
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "4 filhos: Zeilde ✝, Valdeci, Elizete, Sísio · × Alfredo",
+    "notas": "3 filhos: Elizabete (adotiva, mais velha), Zeilde ✝, Valdeci (apelido: Sísio) · × Alfredo",
     "geracao": 3
   },
   {
@@ -1137,22 +1137,7 @@
   },
   {
     "id": "e2",
-    "nome_completo": "Valdeci",
-    "nascimento": null,
-    "falecimento": null,
-    "pais": [
-      "Elisa Gramilo Sodré",
-      "Alfredo"
-    ],
-    "conjuge": null,
-    "fonte": "Memória oral (Ricardo Sodré Andrade)",
-    "confiabilidade": "confirmada",
-    "geracao": 4,
-    "ordem_filho": 2
-  },
-  {
-    "id": "e3",
-    "nome_completo": "Elizete",
+    "nome_completo": "Valdeci (apelido: Sísio)",
     "nascimento": null,
     "falecimento": null,
     "pais": [
@@ -1164,7 +1149,23 @@
     "confiabilidade": "confirmada",
     "geracao": 4,
     "ordem_filho": 3,
-    "notas": "mãe de Tânia Karla Sodré Bulhões"
+    "notas": "apelido: Sísio · pai de Alfredo Neto"
+  },
+  {
+    "id": "e3",
+    "nome_completo": "Elizabete",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Elisa Gramilo Sodré",
+      "Alfredo"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "confiabilidade": "confirmada",
+    "geracao": 4,
+    "ordem_filho": 1,
+    "notas": "filha adotiva (mais velha) · mãe de Cesar e de Tânia Karla Sodré Bulhões"
   },
   {
     "nome_completo": "Valdivino",
@@ -1590,17 +1591,30 @@
     "id": "a123"
   },
   {
-    "nome_completo": "Sísio",
+    "nome_completo": "Alfredo Neto",
     "pais": [
-      "Elisa Gramilo Sodré",
-      "Alfredo"
+      "Valdeci (Sísio)",
+      null
     ],
     "conjuge": null,
-    "fonte": "Árvore genealógica (site)",
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jun 2026)",
     "confiabilidade": "confirmada",
-    "geracao": 4,
-    "notas": "4º filho de Elisa",
+    "geracao": 5,
+    "notas": "Filho de Valdeci (Sísio) · neto de Elisa Gramilo Sodré × Alfredo",
     "id": "a124"
+  },
+  {
+    "nome_completo": "Cesar",
+    "pais": [
+      "Elizabete",
+      null
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jun 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "notas": "Filho de Elizabete · neto adotivo de Alfredo",
+    "id": "a125"
   },
   {
     "id": "f10b",

@@ -532,13 +532,14 @@ const P = {
   zeca:          {n:'José Gramilo Sudré (Zeca)',d:'',c:'confirmed',sp:null,note:'9 filhos · Sudré = erro cartorário'},
   otavia:        {n:'Otávia Rosa Sodré Bispo',d:'',c:'confirmed',sp:'eustaquio',note:'10 filhos'},
   eustaquio:     {n:'Eustáquio Eusébio Bispo',d:'',c:'confirmed',sp:'otavia',note:'10 filhos'},
-  elisa:         {n:'Elisa Gramilo Sodré',d:'',c:'confirmed',sp:'alfredo',note:'4 filhos'},
-  alfredo:       {n:'Alfredo',d:'',c:'confirmed',sp:'elisa',note:'4 filhos'},
+  elisa:         {n:'Elisa Gramilo Sodré',d:'',c:'confirmed',sp:'alfredo',note:'3 filhos (Elizabete adotiva, Zeilde, Valdeci/Sísio)'},
+  alfredo:       {n:'Alfredo',d:'',c:'confirmed',sp:'elisa',note:'3 filhos (Elizabete adotiva)'},
   zeilde:        {n:'Zeilde',d:'✝',c:'confirmed',sp:null,note:'falecido'},
-  valdeci:       {n:'Valdeci',d:'',c:'confirmed',sp:null,note:''},
-  elizete:       {n:'Elizete',d:'',c:'confirmed',sp:null,note:'mãe de Tânia Karla Sodré Bulhões'},
-  sisio:         {n:'Sísio',d:'',c:'confirmed',sp:null,note:''},
-  tania_karla:   {n:'Tânia Karla Sodré Bulhões',d:'',c:'confirmed',sp:null,note:'Filha de Elizete · neta de Elisa Gramilo Sodré'},
+  valdeci:       {n:'Valdeci (apelido: Sísio)',d:'',c:'confirmed',sp:null,note:'pai de Alfredo Neto'},
+  elizabete:     {n:'Elizabete',d:'',c:'confirmed',sp:null,note:'filha adotiva (mais velha) · mãe de Cesar'},
+  alfredo_neto:  {n:'Alfredo Neto',d:'',c:'confirmed',sp:null,note:'Filho de Valdeci (Sísio)'},
+  cesar:         {n:'Cesar',d:'',c:'confirmed',sp:null,note:'Filho de Elizabete'},
+  tania_karla:   {n:'Tânia Karla Sodré Bulhões',d:'',c:'confirmed',sp:null,note:'Filha de Elizabete · neta de Elisa Gramilo Sodré'},
   isabel:        {n:'Isabel Gramilo Sodré',d:'',c:'confirmed',sp:'maximiliano',note:'8 filhos · Itororó-BA'},
   maximiliano:   {n:'Maximiliano',d:'',c:'confirmed',sp:'isabel',note:'8 filhos · Itororó-BA · veio de Teófilo Otoni (MG) → Aiquara'},
   jovina:        {n:'Jovina Gramilo Sodré',d:'',c:'confirmed',sp:'manezinho',note:'Fazenda Babilônia (limítrofe com Fazenda Santa Terezinha)'},
@@ -583,7 +584,7 @@ const SOBRINHOS = {
   arlindo: ['Arlenô Gramilo Sodré','Marcelo Gramilo Sodré Neto','Arlindo Gramilo Sodré Filho','Antonio Cesar Silva Sodré','Luciane Silva Sodré','Cristiane Silva Sodré','Rita de Cássia Silva Sodré Figueredo','Manoel Ailton Silva Sodré'],
   zeca:    ['José Gramilo Sodré Filho','Walter Gramilo Sodré','Jailson Gramilo Sodré','Ivan Gramilo Sodré','Manoelito Gramilo Sodré','Joselito Gramilo Sodré','Cleide','Ione Rosa Sudré','Maria Rita'],
   otavia:  ['Geni Bispo','Zenito Bispo','Sinval Bispo','Maria Helena Sodré Bispo','Maiza Rosa Bispo Gouveia','Zélia Bispo','Juvenil Sodré Bispo','Nilda Sodré Bispo de Souza','Antônio Carlos Bispo','Valdeck Bispo'],
-  elisa:   ['Zeilde','Valdeci','Elizete','Sísio','Tânia Karla'],
+  elisa:   ['Zeilde','Valdeci (Sísio)','Elizabete','Tânia Karla','Cesar','Alfredo Neto'],
 };
 
 // Families: each is a couple + children + optional link to descendant section
@@ -643,7 +644,7 @@ const SECTIONS = [
       { couple:[{id:'arlindo'},{id:'noemia'}], sobrinhos:'arlindo' },
       { couple:[{id:'zeca'}], sobrinhos:'zeca' },
       { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
-      { couple:[{id:'elisa'},{id:'alfredo'}], children:[{id:'zeilde'},{id:'valdeci'},{id:'elizete'},{id:'sisio'},{id:'tania_karla'}] },
+      { couple:[{id:'elisa'},{id:'alfredo'}], children:[{id:'elizabete'},{id:'zeilde'},{id:'valdeci'},{id:'tania_karla'},{id:'cesar'},{id:'alfredo_neto'}] },
       { couple:[{id:'erotildes'},{id:'etelvina_t'}],
         children:[{id:'admilson'}]
       },
