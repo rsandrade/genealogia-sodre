@@ -25,7 +25,7 @@
 - **José Gramilo Sodré** ("Zeca") — 9 filhos (todos com "Sudré" = erro cartorário)
 - **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
 - **Elisa Gramilo Sodré** — 3 filhos (Zeilde, Valdeci, Elizete)
-- **Isabel Gramilo Sodré** — casada com Maximiliano; 7 filhos (Etelvina, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria)
+- **Isabel Gramilo Sodré** — casada com Maximiliano; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré
 
 ### Avós paternos prováveis
 
