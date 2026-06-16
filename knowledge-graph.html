@@ -254,7 +254,7 @@ body::before {
 }
 .person-spouse strong { color:var(--ink-soft); font-style:normal; }
 
-/* Escala embutida: aproxima o KG da proporção visual da arvore.html */
+/* Escala embutida: aproxima o KG da proporção visual da index.html */
 body.embedded{font-size:22.5px}
 body.embedded .tree-wrap{max-width:1200px;margin:0 auto;padding:2rem 0 3rem}
 body.embedded .section-scroll{padding:1.73rem 2.5rem 0.7rem}
@@ -429,14 +429,25 @@ body.embedded .info-note{font-size:0.95rem}
   .page-header { padding:1.5rem 1rem 1.2rem; }
   .family-col { margin:0 0.4rem 1rem; }
 }
+
+/* Unified Navigation Component */
+.main-nav{display:flex;gap:0.5rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap}
+.nav-btn{display:inline-block;padding:0.6rem 1.5rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.08em;text-decoration:none;transition:all 0.2s;border:1px solid transparent}
+.nav-btn:hover{background:var(--ink);color:var(--parchment);border-color:var(--ink);transform:translateY(-1px);box-shadow:0 4px 12px rgba(44,24,16,0.15)}
+.nav-btn.active{background:var(--ink);color:var(--parchment);border-color:var(--ink);font-weight:600;cursor:default;pointer-events:none}
 </style>
 </head>
 <body>
 <script>if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');</script>
 
 <header class="page-header">
-  <h1>Linhagem <em>Gramilo Sodré</em></h1>
-  <p class="page-subtitle">Rede genealógica — dados sincronizados em junho de 2026</p>
+<h1>Grafo <em>Gramilo Sodré</em></h1>
+<p class="page-subtitle">Rede genealógica — dados sincronizados em junho de 2026</p>
+<div class="main-nav">
+<a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
+<a href="knowledge-graph.html" class="nav-btn active">🕸️ Grafo</a>
+<a href="cidades.html" class="nav-btn">🗺️ Cidades e Contexto</a>
+</div>
 </header>
 
 <div class="controls" id="controls"></div>
@@ -460,7 +471,8 @@ body.embedded .info-note{font-size:0.95rem}
 
 <footer class="page-footer">
   <p>114 pessoas · 7 gerações · MemPalace + HTML sincronizados<br>
-  Jerônimo I (1631–1711) ≠ Jerônimo II (filho do Barão) · Lacuna documental entre Jerônimo I e Tomaz (~1860)</p>
+  Jerônimo I (1631–1711) ≠ Jerônimo II (filho do Barão) · Lacuna documental entre Jerônimo I e Tomaz (~1860)<br>
+  <a href="cidades.html" style="color:var(--gold)">🗺️ Cidades e Contexto Histórico</a></p>
 </footer>
 
 <script>
@@ -472,7 +484,7 @@ const P = {
   maria_azevedo: {n:'Maria de Azevedo',d:'',c:'historical',sp:'jeronimo_i',note:'2ª esposa de Jerônimo I'},
   coronel:       {n:'Francisco Maria Sodré Pereira',d:'',c:'barao',sp:'meneses',note:'Coronel · Filho de Francisco Álvaro'},
   meneses:       {n:'Maria Ana de Meneses',d:'',c:'barao',sp:'coronel',note:'Esposa do coronel'},
-  barao:         {n:'Barão de Alagoinhas',d:'1818–1882',c:'barao',sp:'cora',note:'Francisco Pereira Sodré · Cachoeira/BA'},
+  barao:         {n:'Francisco Pereira Sodré, Barão de Alagoinhas',d:'1818–1882',c:'barao',sp:'cora',note:'Cachoeira/BA · Título: Barão com honra de Grandeza (1879)'},
   cora:          {n:'Cora César Coutinho',d:'1819–1880',c:'barao',sp:'barao',note:'Baronesa · casam. 1834'},
   jeronimo_ii:   {n:'Jerônimo Sodré Pereira II',d:'~1835',c:'barao',sp:null,note:'Filho do Barão · Médico, Deputado · ≠ patriarca'},
   conselheiro:   {n:'Francisco Maria Sodré Pereira',d:'1836–1903',c:'barao',sp:null,note:'Conselheiro · Filho do Barão · Deputado federal BA 1891–1902'},
@@ -520,9 +532,35 @@ const P = {
   zeca:          {n:'José Gramilo Sodré (Zeca)',d:'',c:'confirmed',sp:null,note:'9 filhos'},
   otavia:        {n:'Otávia Rosa Sodré Bispo',d:'',c:'confirmed',sp:'eustaquio',note:'10 filhos'},
   eustaquio:     {n:'Eustáquio Eusébio Bispo',d:'',c:'confirmed',sp:'otavia',note:'10 filhos'},
-  elisa:         {n:'Elisa Gramilo Sodré',d:'',c:'confirmed',sp:null,note:'3 filhos'},
-  isabel:        {n:'Isabel Gramilo Sodré',d:'',c:'confirmed',sp:'maximiliano',note:'7 filhos'},
-  maximiliano:   {n:'Maximiliano',d:'',c:'confirmed',sp:'isabel',note:'7 filhos'},
+  elisa:         {n:'Elisa Gramilo Sodré',d:'',c:'confirmed',sp:'alfredo',note:'4 filhos'},
+  alfredo:       {n:'Alfredo',d:'',c:'confirmed',sp:'elisa',note:'4 filhos'},
+  zeilde:        {n:'Zeilde',d:'✝',c:'confirmed',sp:null,note:'1ª filha de Elisa+Alfredo · falecido'},
+  valdeci:       {n:'Valdeci',d:'',c:'confirmed',sp:null,note:'2º filho de Elisa+Alfredo'},
+  elizete:       {n:'Elizete',d:'',c:'confirmed',sp:null,note:'3ª filha de Elisa+Alfredo · mãe de Tânia Karla Sodré Bulhões'},
+  sisio:         {n:'Sísio',d:'',c:'confirmed',sp:null,note:'4º filho de Elisa+Alfredo'},
+  tania_karla:   {n:'Tânia Karla Sodré Bulhões',d:'',c:'confirmed',sp:null,note:'Filha de Elizete · neta de Elisa Gramilo Sodré'},
+  isabel:        {n:'Isabel Gramilo Sodré',d:'',c:'confirmed',sp:'maximiliano',note:'8 filhos · Itororó-BA'},
+  maximiliano:   {n:'Maximiliano',d:'',c:'confirmed',sp:'isabel',note:'8 filhos · Itororó-BA · veio de Teófilo Otoni (MG) → Aiquara'},
+  etelvina_t:    {n:'Etelvina "Tezinha"',d:'',c:'confirmed',sp:null,note:'1ª filha de Isabel+Maximiliano'},
+  valdivino:     {n:'Valdivino',d:'',c:'confirmed',sp:null,note:'2º filho de Isabel+Maximiliano'},
+  carlos_im:     {n:'Carlos',d:'',c:'confirmed',sp:null,note:'3º filho de Isabel+Maximiliano'},
+  francisco_im:  {n:'Francisco',d:'',c:'confirmed',sp:null,note:'4º filho de Isabel+Maximiliano'},
+  dutinha:       {n:'Dutinha',d:'',c:'confirmed',sp:null,note:'5ª filha de Isabel+Maximiliano · apelido'},
+  edvaldo:       {n:'Edvaldo',d:'',c:'confirmed',sp:null,note:'6º filho de Isabel+Maximiliano'},
+  lelinha:       {n:'Lelinha',d:'',c:'confirmed',sp:null,note:'7ª filha de Isabel+Maximiliano · apelido'},
+  maria_im:      {n:'Maria',d:'',c:'confirmed',sp:null,note:'8ª filha de Isabel+Maximiliano · mãe de Simone · filhas em Salvador/BA e São Paulo/SP'},
+  simone:        {n:'Simone',d:'',c:'confirmed',sp:null,note:'Filha de Maria · neta de Isabel Gramilo Sodré · Salvador/BA'},
+  alice_santos:  {n:'Alice dos Santos',d:'',c:'confirmed',sp:'marcos_andrade',note:'Irmã de Maria Aleluia · 1ª esposa de Marcos Freire de Andrade · Filhos: Marcos, Marlice, Janete, Marcus Marquinhos, Lígia'},
+  marcos_m:      {n:'Marcos',d:'',c:'confirmed',sp:null,note:'Filho de Marcos×Alice'},
+  marlice:       {n:'Marlice',d:'',c:'confirmed',sp:null,note:'Filha de Marcos×Alice'},
+  janete:        {n:'Janete',d:'',c:'confirmed',sp:null,note:'Filha de Marcos×Alice'},
+  marcus:        {n:'Marcus "Marquinhos"',d:'',c:'confirmed',sp:null,note:'Filho de Marcos×Alice'},
+  ligia:         {n:'Lígia',d:'',c:'confirmed',sp:null,note:'Filha de Marcos×Alice'},
+  marcos_andrade:{n:'Marcos Freire de Andrade',d:'',c:'confirmed',sp:'alice_santos',note:'2 casamentos'},
+  florenca:      {n:'Florença Reis Andrade',d:'',c:'probable',sp:'marcos_andrade',note:'2ª esposa de Marcos'},
+  magno:         {n:'Magno Reis Andrade',d:'',c:'probable',sp:null,note:'Filho de Marcos × Florença'},
+  ieda:          {n:'Iêda Reis Andrade',d:'',c:'probable',sp:null,note:'Filha de Marcos × Florença'},
+  magnaldo:      {n:'Magnaldo Reis Andrade',d:'',c:'confirmed',sp:'veralucia',note:'casou com Veralúcia Sodré · separaram ~1990 · Filho de Marcos × Florença'},
   atanagilda_f:  {n:'Atanagilda Sodré Sampaio',d:'1954',c:'filho',sp:null,note:'n. 11/04/1954'},
   veralucia:     {n:'Veralúcia Sodré',d:'1955',c:'filho',sp:null,note:'n. 30/09/1955'},
   luiz_carlos:   {n:'Luiz Carlos Sudré',d:'1957',c:'filho',sp:null,note:'n. 30/03/1957 · Sudré = erro cartorário'},
@@ -542,7 +580,6 @@ const SOBRINHOS = {
   zeca:    ['José Gramilo Sodré Filho','Walter Gramilo Sodré','Jailson Gramilo Sodré','Ivan Gramilo Sodré','Manoelito Gramilo Sodré','Joselito Gramilo Sodré','Cleide','Ione Rosa Sudré','Maria Rita'],
   otavia:  ['Geni Bispo','Zenito Bispo','Sinval Bispo','Maria Helena Sodré Bispo','Maiza Rosa Bispo Gouveia','Zélia Bispo','Juvenil Sodré Bispo','Nilda Sodré Bispo de Souza','Antônio Carlos Bispo','Valdeck Bispo'],
   elisa:   ['Zeilde','Valdeci','Elizete'],
-  isabel:  ['Etelvina','Carlos','Francisco','Dutinha','Edvaldo','Lelinha','Maria'],
 };
 
 // Families: each is a couple + children + optional link to descendant section
@@ -603,7 +640,9 @@ const SECTIONS = [
       { couple:[{id:'zeca'}], sobrinhos:'zeca' },
       { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
       { couple:[{id:'elisa'}], sobrinhos:'elisa' },
-      { couple:[{id:'isabel'},{id:'maximiliano'}], sobrinhos:'isabel' },
+      { couple:[{id:'isabel'},{id:'maximiliano'}],
+        children:[{id:'etelvina_t'},{id:'valdivino'},{id:'carlos_im'},{id:'francisco_im'},{id:'dutinha'},{id:'edvaldo'},{id:'lelinha'},{id:'maria_im'}]
+      },
     ]
   },
 ];
