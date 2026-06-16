@@ -24,7 +24,7 @@
 - **Arlindo Gramilo Sodré** — casou com Noemia Rocha Sodré; 3 filhos
 - **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
 - **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
-- **Elisa Gramilo Sodré** — 3 filhos: Elizabete (adotiva, mais velha · mãe de Cesar), Zeilde ✝, Valdeci (apelido: Sísio · pai de Alfredo Neto)
+- **Elisa Gramilo Sodré** — 3 filhos: Elizabete (adotiva, mais velha · mãe de Cesar), Zeilde ✝, Valdeci (apelido: Sísio · mãe de Alfredo Neto)
 - **Isabel Gramilo Sodré** — casada com Maximiliano; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré
 - **Jovina Gramilo Sodré** — casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha)
 
