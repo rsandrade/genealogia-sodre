@@ -541,7 +541,9 @@ const P = {
   tania_karla:   {n:'Tânia Karla Sodré Bulhões',d:'',c:'confirmed',sp:null,note:'Filha de Elizete · neta de Elisa Gramilo Sodré'},
   isabel:        {n:'Isabel Gramilo Sodré',d:'',c:'confirmed',sp:'maximiliano',note:'8 filhos · Itororó-BA'},
   maximiliano:   {n:'Maximiliano',d:'',c:'confirmed',sp:'isabel',note:'8 filhos · Itororó-BA · veio de Teófilo Otoni (MG) → Aiquara'},
-  etelvina_t:    {n:'Etelvina "Tezinha"',d:'',c:'confirmed',sp:null,note:'1ª filha de Isabel+Maximiliano'},
+  etelvina_t:    {n:'Etelvina Rosa Souza ("Tezinha")',d:'',c:'confirmed',sp:'erotildes',note:'1ª filha de Isabel+Maximiliano · × Erotildes Ribeiro Sodré'},
+  erotildes:     {n:'Erotildes Ribeiro Sodré',d:'',c:'confirmed',sp:'etelvina_t',note:'× Etelvina Tezinha'},
+  admilson:      {n:'Admilson Ribeiro Sodré',d:'',c:'confirmed',sp:null,note:'Filho de Erotildes×Etelvina'},
   valdivino:     {n:'Valdivino',d:'',c:'confirmed',sp:null,note:'2º filho de Isabel+Maximiliano'},
   carlos_im:     {n:'Carlos',d:'',c:'confirmed',sp:null,note:'3º filho de Isabel+Maximiliano'},
   francisco_im:  {n:'Francisco',d:'',c:'confirmed',sp:null,note:'4º filho de Isabel+Maximiliano'},
@@ -640,6 +642,9 @@ const SECTIONS = [
       { couple:[{id:'zeca'}], sobrinhos:'zeca' },
       { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
       { couple:[{id:'elisa'}], sobrinhos:'elisa' },
+      { couple:[{id:'erotildes'},{id:'etelvina_t'}],
+        children:[{id:'admilson'}]
+      },
       { couple:[{id:'isabel'},{id:'maximiliano'}],
         children:[{id:'etelvina_t'},{id:'valdivino'},{id:'carlos_im'},{id:'francisco_im'},{id:'dutinha'},{id:'edvaldo'},{id:'lelinha'},{id:'maria_im'}]
       },
