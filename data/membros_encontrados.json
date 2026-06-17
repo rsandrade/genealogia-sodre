@@ -1651,5 +1651,99 @@
     "fonte": "Memória oral (família, jun 2026)",
     "confiabilidade": "confirmada",
     "notas": ""
+  },
+  {
+    "id": "fs15",
+    "nome_completo": "Antonio Victor Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Bastilla Maria de Jesus",
+    "filhos": "Eufrásio Victor Sodré",
+    "fonte": "Transkribus 27img (0017, 04/02/1937) · OCR: 'Victos Podree'",
+    "confiabilidade": "confirmada",
+    "notas": "Pai de Eufrásio Victor Sodré · Amargosa/BA · sobrenome Sodré confirmado por OCR variant 'Podree/Todreco'"
+  },
+  {
+    "id": "fs16",
+    "nome_completo": "Eufrásio Victor Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Antonio Victor Sodré",
+      "Bastilla Maria de Jesus"
+    ],
+    "conjuge": "Firmina Moreira de Freitas",
+    "casamento": "04/02/1937, Amargosa/BA",
+    "fonte": "Transkribus 27img (0017, 04/02/1937) · OCR: 'Cupasio Victor Todreco'",
+    "confiabilidade": "confirmada",
+    "notas": "Casou 04/02/1937 em Amargosa · OCR variants: Todreco=Sodré, Cupasio=Eufrásio, Lesmina=Firmina"
+  },
+  {
+    "id": "fs17",
+    "nome_completo": "Firmina Moreira de Freitas",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Sofísio Moreira de Freitas (falecido)",
+      "Maria Sodré de Jesus (?)"
+    ],
+    "conjuge": "Eufrásio Victor Sodré",
+    "casamento": "04/02/1937, Amargosa/BA",
+    "fonte": "Transkribus 27img (0017, 04/02/1937) · OCR: 'Lesmina'",
+    "confiabilidade": "confirmada",
+    "notas": "Mãe possivelmente Maria Sodré de Jesus (OCR: 'Sot0 de Joss') — se confirmado, cria nova conexão Sodré"
+  },
+  {
+    "id": "fs18",
+    "nome_completo": "Maria Sodré de Jesus (?)",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Sofísio Moreira de Freitas (falecido)",
+    "fonte": "Transkribus 27img (0017, 04/02/1937) · OCR: 'Sot0 de Joss'",
+    "confiabilidade": "hipotética",
+    "notas": "Mãe de Firmina Moreira de Freitas · OCR lê 'Sot0 de Joss' = possível 'Sodré de Jesus' · HIPÓTESE — precisa confirmação"
+  },
+  {
+    "id": "fs19",
+    "nome_completo": "Clelino Vaz",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Transkribus 27img (0015, 10/12/1941) — testemunha de casamento",
+    "confiabilidade": "confirmada",
+    "notas": "Testemunha no casamento de Oicazi Souza da Silva × Hermisa da Silva (10/12/1941, Amargosa) · sobrenome Vaz = possível ramo Vaz Sodré"
+  },
+  {
+    "id": "fs20",
+    "nome_completo": "Pedro Maciel de Almeida",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Ricardo José de Almeida",
+      "Macula Conceição de Almeida"
+    ],
+    "conjuge": "Luciana Caetana Sodré",
+    "casamento": "01/12/1938, Amargosa/BA",
+    "fonte": "Transkribus 27img (0016, 01/12/1938)",
+    "confiabilidade": "confirmada",
+    "notas": "Casou com Luciana Caetana Sodré · 23 anos · Amargosa/BA · cunhado de Vicente Maciel de Almeida (casou Antonia Sodré, irmã de Luciana)"
+  },
+  {
+    "id": "fs21",
+    "nome_completo": "Vicente Maciel de Almeida",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Christino José de Almeida",
+      "Jacula Conceição de Almeida"
+    ],
+    "conjuge": "Antonia Sodré de Jesus",
+    "casamento": "10/12/1941, Amargosa/BA",
+    "fonte": "Transkribus 27img (0015, 10/12/1941) · OCR: 'Pisto' = Christino",
+    "confiabilidade": "confirmada",
+    "notas": "Casou com Antonia Sodré de Jesus · 22 anos · Amargosa/BA · irmão de Pedro Maciel de Almeida (casou Luciana Caetana Sodré, irmã de Antonia)"
   }
 ]

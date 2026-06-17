@@ -54,19 +54,25 @@ Ver detalhes completos em:
 - `docs/transcricoes_amargosa.md` — transcrições de registros paroquiais de Amargosa/BA (HWM, 12/06/2026)
 - `data/membros_encontrados.json` — dados estruturados (56 membros)
 
-### Novos dados comprovados (transcrições Amargosa, 12/06/2026)
+### Novos dados comprovados (transcrições Amargosa, 12/06/2026 + 17/06/2026)
 1. **Firmino Vaz Sodré** + **Laurinda Sodré** — casal confirmado em registros paroquiais (batismo do filho José, 31/01/1909; padrinhos em 14/11/1914)
 2. **Euneraldo/Everaldo Sodré** + **Florinda de Andrade** — outro casal Sodré em Amargosa (1914)
-3. **Manoel Caetano Sodré** + **Maria Paulina Joares** — pais de Antonia Sodré de Jesus, Amargosa (casamento 1941)
-4. **Francisco Eusébio dos Santos** — padrinho em Amargosa (1895), possível irmão de **Gervásio Eusébio dos Santos** (avô materno)
-5. **Geruásio José Sampaio** — em Amargosa (1895), possível ligação com Atanagilda Sodré Sampaio
+3. **Manoel Caetano Sodré** + **Maria Paulina de Jesus** — pais de Antonia Sodré de Jesus e Luciana Caetana Sodré, Amargosa (casamentos 1938 e 1941)
+4. **Antonio Victor Sodré** + **Bastilla Maria de Jesus** — pais de Eufrásio Victor Sodré (casamento 04/02/1937, Amargosa)
+5. **Eufrásio Victor Sodré** casou **Firmina Moreira de Freitas** (04/02/1937) — mãe da noiva: Maria Sodré de Jesus (?) (OCR: "Sot0 de Joss") — HIPÓTESE
+6. **Vicente Maciel de Almeida** casou **Antonia Sodré de Jesus** (10/12/1941) — irmão de **Pedro Maciel de Almeida** que casou **Luciana Caetana Sodré** (01/12/1938) — duas irmãs Sodré casaram dois irmãos Maciel de Almeida
+7. **Clelino Vaz** — testemunha de casamento em Amargosa (10/12/1941) — sobrenome Vaz = possível ramo Vaz Sodré
+8. **Francisco Eusébio dos Santos** — padrinho em Amargosa (1895), possível irmão de **Gervásio Eusébio dos Santos** (avô materno)
+9. **Geruásio José Sampaio** — em Amargosa (1895), possível ligação com Atanagilda Sodré Sampaio
 
 ### Pendências principais
 1. Investigar conexão "Vaz Sodré" (Amargosa/FS) com o ramo Gramilo Sodré
 2. Confirmar parentesco Eusébio (Gervásio ↔ Eustázio Bispo) ← Francisco Eusébio dos Santos (1895) pode ser o elo
 3. Solicitar inventários APEB (comarca de Amargosa)
 4. Contactar cartório de Aiquara — (73) 3244-2321
-5. Confirmar sobrenomes de casada de Elisa e Isabel
-6. Confirmar se Firmino Vaz Sodré era neto/filho de Tomaz Gramilo Sodré (casamento 1891)
-7. Verificar se Euneraldo Sodré é parente de Firmino (irmão? primo?)
-8. Buscar certidão de nascimento de Firmino Vaz Sodré (filiação)
+5. Confirmar se Firmino Vaz Sodré era neto/filho de Tomaz Gramilo Sodré (casamento 1891)
+6. Verificar se Euneraldo Sodré é parente de Firmino (irmão? primo?)
+7. Buscar certidão de nascimento de Firmino Vaz Sodré (filiação)
+8. **Confirmar se "Maria Sodré de Jesus" (mãe de Firmina Moreira de Freitas) é realmente Sodré** — OCR ambíguo
+9. **Investigar ligação Clelino Vaz ↔ ramo Vaz Sodré** (Firmino, Esmeraldo, Horácio)
+10. **Confirmar relação Antonio Victor Sodré ↔ outros Sodré de Amargosa** (Manoel Caetano, Firmino, Esmeraldo)

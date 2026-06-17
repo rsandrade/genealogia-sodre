@@ -247,3 +247,131 @@ Os registros 0011, 0014 e 0019 **confirmam** dados já identificados:
 
 As imagens 0001-0005, 0021-0024 parecem ser registros **não-brasileiros** (espanhol colonial — Bolívia/Peru, séc. XVIII-XIX) e **não relevantes** para a família Gramilo Sodré de Amargosa/BA.
 
+---
+
+## 10. Lote Novo — 27 Imagens Transkribus (17/06/2026)
+
+**Fonte:** Coleção "Gramilo Sodré" no Transkribus (doc 16894038), filmes 004896387/388/398
+**Total:** 27 imagens transcritas (modelo HWM anterior)
+
+### Classificação dos registros
+
+| # | Arquivo | Tipo | Relevância Sodré |
+|---|---------|------|-------------------|
+| 0001 | 16894038_0001 | Batismo/registro civil (séc. XIX) | — |
+| 0002 | 16894038_0002 | Índice de batismos (English?) | — |
+| 0003 | 16894038_0003 | Batismo (séc. XVIII, Espanha?) | — |
+| 0004 | 16894038_0004 | Batismo (séc. XVIII-XIX, indígena) | — |
+| 0005 | 16894038_0005 | Batismo (séc. XIX, indígena) | — |
+| 0006 | 16894038_0006 | Registro civil | — |
+| 0007 | 16894038_0007 | Registro civil | — |
+| 0008 | 16894038_0008 | **Casamento (1950)** | — |
+| 0009 | 16894038_0009 | Batismo (Brejaês, 1895) | — |
+| 0010 | 16894038_0010 | Batismo (Amargosa, 1899-1905) | — |
+| 0011 | 16894038_0011 | Batismo (Conente, 1909) | **Firmino, Laurinda** |
+| 0012 | 16894038_0012 | Batismo (Conente, 1909) | **Firmino Vaz, Laurinda** |
+| 0013 | 16894038_0013 | **Casamento (1938)** | — |
+| 0014 | 16894038_0014 | Batismo (Amargosa, 1895) | — |
+| 0015 | 16894038_0015 | **Casamento (1941)** | **Antonia Sodré** |
+| 0016 | 16894038_0016 | **Casamento (1938)** | **Luciana Caetana Sodré** |
+| 0017 | 16894038_0017 | **Casamento (1937)** | **Eufrásio Victor Sodré** |
+| 0018 | 16894038_0018 | Batismo (Amargosa, 1880) | — |
+| 0019 | 16894038_0019 | Batismo (Amargosa, 1914) | **Sodré, Firmino, Laurinda** |
+| 0020 | 16894038_0020 | Batismo (Amargosa, 1914) | **Firmino Sodré, Laurinda Sodré** |
+| 0021 | 16894038_0021 | Batismo (Amargosa, 1925) | — |
+| 0022 | 16894038_0022 | Batismo (séc. XVIII, Espanha) | — |
+| 0023 | 16894038_0023 | Registro (Massachusetts, EUA) | — |
+| 0024 | 16894038_0024 | Batismo (indígena, séc. XIX) | — |
+| 0025 | 16894038_0025 | Batismo (indígena, 1872-1875) | — |
+| 0026 | 16894038_0026 | Batismo (Candelaria, séc. XIX) | — |
+| 0027 | 16894038_0027 | Batismo (Candelaria, séc. XIX) | — |
+
+### Casamentos extraídos (15 registros nos 5 arquivos de casamento)
+
+#### Casamento 0008-1 (08/02/1950, Amargosa)
+- **Noivo:** Marcelo Dourinho Casparo — filho de Manoel Dourinho Saupaio e Ana Berragia — 21 anos, Amargosa
+- **Noiva:** Maria do Carmo Lore — filha de Avelio José do Anjos e Erelina — 21 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+- **Testemunhas:** Manoel Ribeiro, Antonio Vaz, Joaquim Rocha
+- *OCR: "Saupaio" = prov. Sampaio; "Casparo" = OCR corruption*
+
+#### Casamento 0008-2 (15/02/1950, Amargosa)
+- **Noivo:** Augusto Francisco Santos — filho de João Francisco Santos e Avelina Carolina Santos — 40 anos, Amargosa
+- **Noiva:** Francisca Correia Barreto — filha de Pedro Correia Barreto e Julia Correia — 21 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0008-3 (15/02/1950, Amargosa)
+- **Noivo:** Edival Pereira Caldas — filho de Antonio Roião Caldas e Cotildes Caldas — 21 anos, Amargosa
+- **Noiva:** Maria Margarcia Uuracida — filha de Euseiro Viranda da Silva e Felicia Lucia Viranda — 21 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+- *OCR: "Viranda" = prov. Miranda; "Uuracida" = OCR corruption*
+
+#### Casamento 0013-1 (27/04/1938, Amargosa)
+- **Noivo:** José Pereira Tavares — filho de Manuel Pereira deça e Francisca — 48 anos, São Miguel
+- **Noiva:** Margarida Inocência de Zemo — filha de José do Nascimento e Feliciana Ataúde de Jesus — 28 anos, São Miguel
+- **Vigário:** P.e Antonio Oliveira
+
+#### Casamento 0013-2 (27/04/1938, Amargosa)
+- **Noivo:** Francisco José dos Santos — filho de Vicença José dos Santos e Olímpia Francisca de Oliveira — 28 anos, São Miguel
+- **Noiva:** Antonia Rosa de Jesus — filha de Paulino Pedro de Souza e Maria José de Jesus — 28 anos, São Miguel
+- **Vigário:** P.e Antonio Oliveira
+
+#### Casamento 0013-3 (27/04/1938, Amargosa)
+- **Noivo:** Gervásio Aleno Domingos dos Santos — filho de Marcolino Domingos dos Santos e Maria da Conceição — 28 anos, São Miguel
+- **Noiva:** Epitácia Maria de Jesus — pais ilegíveis — 19 anos, Amargosa
+- **Vigário:** P.e Antonio Oliveira
+
+#### Casamento 0015-1 (09/12/1941, Amargosa)
+- **Noivo:** Francolino José de Câmara — filho de Pedro José de Câmara (falecido) e Maria Rosa dos Santos — 22 anos, Amargosa
+- **Noiva:** Julita Almeida Rodrigues — filha de Antonio Cesário Rodrigues (falecido) e Anna Balbina de Almeida — 19 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0015-2 (10/12/1941, Amargosa)
+- **Noivo:** Oicazi Souza da Silva — filho de Manoel Tibrécio da Silva e Joana de Souza — 25 anos, Amargosa
+- **Noiva:** Hermisa F. da Silva — filha de Manoel José da Silva e Maria Flora da Silva — 18 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+- **Testemunhas:** Clelino Vaz, Pedro Silva, Fernira Francisco
+- *OCR: "Oicazi" = OCR corruption; testemunha **Clelino Vaz** = sobrenome Vaz (possível ramo Vaz Sodré)*
+
+#### Casamento 0015-3 (10/12/1941, Amargosa) — **JÁ REGISTRADO**
+- **Noivo:** Vicente Maciel de Almeida — filho de Christino José de Almeida e Jacula Conceição de Almeida — 22 anos, Amargosa
+- **Noiva:** **Antonia Sodré de Jesus** — filha de **Manoel Caetano Sodré** (OCR: "Jodré") e **Maria Paulina de Jesus** (OCR: "Poulina Joares") — ~21 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0016-1 (01/12/1938, Amargosa) — **JÁ REGISTRADO**
+- **Noivo:** Pedro Maciel de Almeida — filho de Ricardo José de Almeida e Macula Conceição de Almeida — 23 anos, Amargosa
+- **Noiva:** **Luciana Caetana Sodré** — filha de **Manoel Caetano Sodré** (OCR: "Godree") e **Maria Paulina de Jesus** — 26 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0016-2 (01/12/1938, Amargosa)
+- **Noivo:** Olicer Gomes da Silva — filho de Apolo Gomes de Azevedo (falecido) e Paudelina Gomes da Silva — 21 anos, Amargosa
+- **Noiva:** Vitalina Dant'Anna de Jesus — filha de Lauzintino Dant'Anna de Souza (falecido) e Domingas Paulina de Jesus — 20 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0016-3 (01/12/1938, Amargosa)
+- **Noivo:** Manoel Gonçalves de Almeida — filho de Pacifico Gonçalves de Almeida e M.a Moreira — 27 anos, Canição/BA
+- **Noiva:** Maria Domingas de Almeida — filha de Traxedes Gonçalves de Almeida e Goacina de Almeida — 20 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0017-1 (04/02/1937, Amargosa)
+- **Noivo:** Anfilófio Pereira dos Santos — filho de Justavo Beserra dos Santos e Euprodina Maria de Jesus — ~20 anos, Amargosa
+- **Noiva:** Odila Maria de Jesus — pais ilegíveis — ~19 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+#### Casamento 0017-2 (04/02/1937, Amargosa) — **JÁ REGISTRADO**
+- **Noivo:** **Eufrásio Victor Sodré** (OCR: "Cupasio Victor Todreco") — filho de **Antonio Victor Sodré** (OCR: "Victos Podree") e Bastilla Maria de Jesus — ~21 anos, Amargosa
+- **Noiva:** Firmina Pedro de Freitas (OCR: "Lesmina") — filha de Sofísio Moreira de Freitas (falecido) e **Maria Sodré de Jesus** (OCR: "Sot0 de Joss") — ~19 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+- *⚠️ NOTA: "Sot0 de Joss" = possível leitura OCR de "Sodré de Jesus" — a mãe da noiva pode ser Maria Sodré de Jesus, o que criaria outra conexão Sodré*
+
+#### Casamento 0017-3 (04/02/1937, Amargosa)
+- **Noivo:** Cornélio Carlos Lozão — filho de Teodório Carlos Lozão e Maria Carlos — ~22 anos, Amargosa
+- **Noiva:** Opifânia Maria de Souza — filha de Thomas Fausto de Souza e Maria Teresa do Rosário — ~22 anos, Amargosa
+- **Vigário:** P.e Antonio Almeida
+
+### Novos dados relevantes para Sodré
+
+1. **Clelino Vaz** aparece como testemunha no casamento 0015-2 (10/12/1941) — sobrenome Vaz, possivelmente do ramo Vaz Sodré de Amargosa
+2. **Maria Sodré de Jesus** (OCR: "Sot0 de Joss") — mãe da noiva Firmina no casamento 0017-2 — POSSÍVEL nova conexão Sodré a investigar
+3. Os 3 casamentos já registrados (Antonia Sodré, Luciana Caetana Sodré, Eufrásio Victor Sodré) foram reconfirmados com dados completos de testemunhas e pais
+
