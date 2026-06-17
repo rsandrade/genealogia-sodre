@@ -117,6 +117,9 @@ Todos registrados com "Sudré" (erro cartorário):
 - Sobrenome **"Vaz Sodré"** em Horácio, José Virgílio e Luiz → provável ramo comum
 - **Esmeraldo Sodré** = parente de Francisco Gramilo Sodré? (mesmo sobrenome + Amargosa) → investigar
 - **Eustázio Eusébio Bispo** ↔ **Gervásio Eusébio dos Santos** → sobrenome "Eusébio" sugere parentesco
+- **Antonio Victor Sodré** (pais de Eufrásio) → outro Sodré em Amargosa, possível parente de Manoel Caetano e Firmino
+- **Clelino Vaz** — testemunha de casamento (10/12/1941), sobrenome Vaz = possível ramo Vaz Sodré
+- **Duas irmãs Sodré (Antonia + Luciana) casaram dois irmãos Maciel de Almeida (Vicente + Pedro)**
 
 ---
 
@@ -195,6 +198,13 @@ Ramo Vaz Sodré (Amargosa, FamilySearch) — conexão a investigar:
 └── Horácio Vaz Sodré + Adelina Maria de Jesus
 └── José Virgílio Vaz Sodré
 └── Francisco Ludgero Vaz Sodré + Olympia Flavia de Miranda Sodré (≠ Francisco Gramilo)
+
+Outros Sodré documentados em Amargosa (Transkribus 27img, 17/06/2026):
+└── Antonio Victor Sodré + Bastilla Maria de Jesus
+    └── Eufrásio Victor Sodré × Firmina Moreira de Freitas (04/02/1937)
+└── Manoel Caetano Sodré + Maria Paulina de Jesus
+    ├── Antonia Sodré de Jesus × Vicente Maciel de Almeida (10/12/1941)
+    └── Luciana Caetana Sodré × Pedro Maciel de Almeida (01/12/1938)
 ```
 
 ⚠️ Conexões entre os ramos acima são HIPOTÉTICAS, exceto onde indicado "confirmada".

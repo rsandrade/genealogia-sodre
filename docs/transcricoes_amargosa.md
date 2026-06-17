@@ -88,7 +88,7 @@
 
 ## 5. Registro de Casamento — Vicente Maciel de Almeida × Antonia Sodré de Jesus
 
-**Data do casamento:** 01/12/1941
+**Data do casamento:** 10/12/1941
 **Local:** Freguesia de Amargosa/BA
 **Noivo:** Vicente Maciel de Almeida
 - Natural desta Freguesia

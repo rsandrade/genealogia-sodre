@@ -938,9 +938,11 @@
       "Manoel Caetano Sodré",
       "Maria Paulina de Jesus"
     ],
-    "conjuge": null,
-    "fonte": "FamilySearch — Civil Registration, Amargosa/Tapera/BA",
-    "confiabilidade": "confirmada"
+    "conjuge": "Pedro Maciel de Almeida",
+    "casamento": "01/12/1938, Amargosa/BA",
+    "fonte": "FamilySearch — Civil Registration + Transkribus 27img (0016, 01/12/1938), Amargosa/Tapera/BA",
+    "confiabilidade": "confirmada",
+    "notas": "Irmã de Antonia Sodré de Jesus · 26 anos no casamento · cunhada de Vicente Maciel de Almeida"
   },
   {
     "id": "fs12",
@@ -1496,12 +1498,13 @@
   },
   {
     "nome_completo": "Antonia Sodré de Jesus",
-    "pais": null,
-    "conjuge": null,
-    "fonte": "Árvore genealógica (site)",
-    "confiabilidade": "hipotética",
+    "pais": ["Manoel Caetano Sodré","Maria Paulina de Jesus"],
+    "conjuge": "Vicente Maciel de Almeida",
+    "casamento": "10/12/1941, Amargosa/BA",
+    "fonte": "Transkribus 27img (0015, 10/12/1941) + FamilySearch",
+    "confiabilidade": "confirmada",
     "geracao": 5,
-    "notas": "Vaz Sodré",
+    "notas": "Casou Vicente Maciel de Almeida (22 anos) · irmã de Luciana Caetana Sodré · OCR: 'Jodré' = Sodré",
     "id": "a115"
   },
   {
@@ -1658,11 +1661,11 @@
     "nascimento": null,
     "falecimento": null,
     "pais": null,
-    "conjuge": "Bastilla Maria de Jesus",
-    "filhos": "Eufrásio Victor Sodré",
-    "fonte": "Transkribus 27img (0017, 04/02/1937) · OCR: 'Victos Podree'",
+    "conjuge": ["Bastilla Maria de Jesus", "Adelia Maria Sódre (?)"],
+    "filhos": ["Eufrásio Victor Sodré", "João Gregorio Sodré (?)"],
+    "fonte": "Transkribus 27img (0017, 04/02/1937) · OCR: 'Victos Podree' · FamilySearch (fs9: pai de João Gregorio)",
     "confiabilidade": "confirmada",
-    "notas": "Pai de Eufrásio Victor Sodré · Amargosa/BA · sobrenome Sodré confirmado por OCR variant 'Podree/Todreco'"
+    "notas": "Pai de Eufrásio Victor Sodré (com Bastilla) · provavelmente o MESMO Antonio Victor Sodré do FS (pai de João Gregorio com Adelia Maria Sódre) · se confirmado, teve 2 esposas"
   },
   {
     "id": "fs16",

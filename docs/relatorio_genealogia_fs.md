@@ -193,6 +193,13 @@ Outros registros FS (Amargosa):
 └── Floriaco Ferreira Sodré (n.~1890, mãe: Maria Lucinda de Jesus)
 └── Joselito Ribeiro Sodré (n.1953 Aiquara, f.1995 SP)
 └── Clauderio Dino Sodré (n.~1913, f.1947 SC)
+
+Transkribus 27img (17/06/2026) — novos Sodré confirmados:
+└── [Antonio Victor Sodré + Bastilla Maria de Jesus] → Eufrásio Victor Sodré × Firmina Moreira de Freitas (04/02/1937)
+└── [Manoel Caetano Sodré + Maria Paulina de Jesus]
+    ├── Antonia Sodré de Jesus × Vicente Maciel de Almeida (10/12/1941)
+    └── Luciana Caetana Sodré × Pedro Maciel de Almeida (01/12/1938)
+└── Clelino Vaz — testemunha (10/12/1941), sobrenome Vaz = possível Vaz Sodré
 ```
 
 ⚠️ Conexões entre os ramos são HIPOTÉTICAS.
