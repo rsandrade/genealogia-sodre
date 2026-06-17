@@ -146,6 +146,9 @@ body::before {
 }
 .family-col *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
 .family-col:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
+.subfamilies-wrap{margin-top:1rem;padding-top:0.8rem;border-top:1px dashed var(--line-faint);display:flex;flex-direction:column;gap:0.8rem}
+.subfamilies-wrap .family-col{min-width:auto;max-width:100%;margin:0;padding:0.8rem;background:var(--parchment);border:1px solid var(--line-faint);border-radius:3px}
+.subfamilies-wrap .family-col:hover{transform:none;box-shadow:none}
 .family-header{
   font-family:'Playfair Display',serif;
   font-size:1.48rem;
@@ -524,11 +527,11 @@ const P = {
   luciana_caetana:{n:'Luciana Caetana Sodré',d:'cas. 01/12/1938',c:'confirmed',sp:'pedro_maciel',note:'Filha de Manoel Caetano Sodré + Maria Paulina de Jesus · casou Pedro Maciel de Almeida (23 anos) · FamilySearch · irmã de Antonia Sodré'},
   vicente_miel:  {n:'Vicente Maciel de Almeida',d:'cas. 10/12/1941',c:'confirmed',sp:'antonia_sodre',note:'Filho de Christino José de Almeida + Jacula Conceição de Almeida · 22 anos · irmão de Pedro Maciel de Almeida'},
   pedro_maciel:  {n:'Pedro Maciel de Almeida',d:'cas. 01/12/1938',c:'confirmed',sp:'luciana_caetana',note:'Filho de Ricardo José de Almeida + Macula Conceição de Almeida · 23 anos · irmão de Vicente Maciel de Almeida'},
-  eufrasio_vs:   {n:'Eufrásio Victor Sodré',d:'cas. 04/02/1937',c:'confirmed',sp:'firmina_mf',note:'Filho de Antonio Victor Sodré + Bastilla Maria de Jesus · casou Firmina Moreira de Freitas · Amargosa/BA · OCR: Cupasio Victor Todreco'},
-  antonio_victor:{n:'Antonio Victor Sodré',d:'',c:'confirmed',sp:'bastilla_mj',note:'Pai de Eufrásio Victor Sodré (com Bastilla) e possivelmente de João Gregorio Sodré (com Adelia Maria Sódre, FS fs9) · Amargosa/BA · OCR: Victos Podree · se confirmado, teve 2 esposas'},
+  eufrasio_vs:   {n:'Eufrásio Victor Sodré',d:'cas. 04/02/1937',c:'confirmed',sp:'firmina_mf',note:'Filho de Antonio Victor Sodré + Bastilla Maria de Jesus · casou Firmina Moreira de Freitas · Amargosa/BA'},
+  antonio_victor:{n:'Antonio Victor Sodré',d:'',c:'confirmed',sp:'bastilla_mj',note:'Pai de Eufrásio Victor Sodré (com Bastilla) e possivelmente de João Gregorio Sodré (com Adelia Maria Sódre, FS fs9) · Amargosa/BA · se confirmado, teve 2 esposas'},
   bastilla_mj:   {n:'Bastilla Maria de Jesus',d:'',c:'confirmed',sp:'antonio_victor',note:'Mãe de Eufrásio Victor Sodré'},
-  firmina_mf:    {n:'Firmina Moreira de Freitas',d:'cas. 04/02/1937',c:'confirmed',sp:'eufrasio_vs',note:'Esposa de Eufrásio Victor Sodré · OCR: Lesmina · mãe: Maria Sodré de Jesus (?) — HIPÓTESE'},
-  maria_sodre_j: {n:'Maria Sodré de Jesus (?)',d:'',c:'hypothetical',sp:null,note:'Mãe de Firmina Moreira de Freitas · OCR: Sot0 de Joss = possível Sodré de Jesus · HIPÓTESE — precisa confirmação'},
+  firmina_mf:    {n:'Firmina Moreira de Freitas',d:'cas. 04/02/1937',c:'confirmed',sp:'eufrasio_vs',note:'Esposa de Eufrásio Victor Sodré · mãe: Maria Sodré de Jesus (?) — HIPÓTESE'},
+  maria_sodre_j: {n:'Maria Sodré de Jesus (?)',d:'',c:'hypothetical',sp:null,note:'Mãe de Firmina Moreira de Freitas · HIPÓTESE — precisa confirmação'},
   clelino_vaz:   {n:'Clelino Vaz',d:'',c:'confirmed',sp:null,note:'Testemunha no casamento 10/12/1941 Amargosa · sobrenome Vaz = possível ramo Vaz Sodré'},
   joao_gregorio:{n:'João Gregorio Sodré',d:'n. ~1906 · cas. 1933',c:'confirmed',sp:null,note:'Filho de Antonio Victor Sodré + Adelia Maria Sódre · casou Maria Magdalena Lopes · Amargosa/Tapera · FS fs9 · se Antonio Victor é o mesmo pai de Eufrásio, então são meio-irmãos'},
   francisco_eus: {n:'Francisco Eusébio dos Santos',d:'ativo 1895',c:'materno',sp:null,note:'Padrinho em batismo em Brejaês, Amargosa (08/12/1895) · possível irmão/parente de Gervásio Eusébio dos Santos — precisa confirmação'},
@@ -657,11 +660,11 @@ const SECTIONS = [
       { couple:[{id:'zeca'}], sobrinhos:'zeca' },
       { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
       { couple:[{id:'elisa'},{id:'alfredo'}], children:[{id:'elizabete'},{id:'zeilde'},{id:'valdeci'},{id:'tania_karla'},{id:'cesar'},{id:'alfredo_neto'}] },
-      { couple:[{id:'erotildes'},{id:'etelvina_t'}],
-        children:[{id:'admilson'}]
-      },
       { couple:[{id:'isabel'},{id:'maximiliano'}],
-        children:[{id:'etelvina_t'},{id:'valdivino'},{id:'carlos_im'},{id:'francisco_im'},{id:'dutinha'},{id:'edvaldo'},{id:'lelinha'},{id:'maria_im'}]
+        children:[{id:'etelvina_t'},{id:'valdivino'},{id:'carlos_im'},{id:'francisco_im'},{id:'dutinha'},{id:'edvaldo'},{id:'lelinha'},{id:'maria_im'}],
+        subfamilies:[
+          { couple:[{id:'erotildes'},{id:'etelvina_t'}], children:[{id:'admilson'}] }
+        ]
       },
       { couple:[{id:'jovina'},{id:'manezinho'}] },
     ]
@@ -741,6 +744,28 @@ function render() {
           childList.appendChild(el2);
         });
         col.appendChild(childList);
+      }
+
+      // Subfamilies (nested couples within a family — e.g. child + spouse)
+      if (fam.subfamilies && fam.subfamilies.length > 0) {
+        const subWrap = document.createElement('div');
+        subWrap.className = 'subfamilies-wrap';
+        fam.subfamilies.forEach(sub => {
+          const subCol = document.createElement('div');
+          subCol.className = 'family-col sub-family';
+          subCol.appendChild(makeFamilyHeader(sub));
+          subCol.appendChild(makeFamilySub(sub));
+          if (sub.children && sub.children.length > 0) {
+            const subChildList = document.createElement('div');
+            subChildList.className = 'children-list vertical';
+            sub.children.forEach(ch => {
+              subChildList.appendChild(makeChildCard(ch.id));
+            });
+            subCol.appendChild(subChildList);
+          }
+          subWrap.appendChild(subCol);
+        });
+        col.appendChild(subWrap);
       }
 
       scroll.appendChild(col);
