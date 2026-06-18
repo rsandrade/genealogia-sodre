@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualização em Rede — Família Gramilo Sodré</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+<script src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.min.js"></script>
+<script src="https://unpkg.com/cola.js@5.1.2/dist/cola.min.js"></script>
+<script src="https://unpkg.com/cytoscape-cola@2.5.0/cytoscape-cola.min.js"></script>
+<style>
+:root {
+  --parchment: #f4ece1;
+  --parchment-deep: #e8dcc8;
+  --ink: #1a1008;
+  --ink-soft: #3d2e1a;
+  --ink-muted: #7a6b55;
+  --gold: #9e7c2e;
+  --gold-light: #c4a44e;
+  --confirmed: #2d5a3d;
+  --probable: #b8860b;
+  --hypothetical: #8b2e2e;
+  --barao: #4a3478;
+  --colonial: #2a5a8a;
+  --materno: #7a5a10;
+  --historical: #9e7c2e;
+  --border-line: #c9b896;
+  --card-bg: #fffcf5;
+  --shadow: 0 4px 20px rgba(26,16,8,0.15);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'EB Garamond', Georgia, serif;
+  background:var(--parchment);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+body::before {
+  content:'';
+  position:fixed; inset:0; pointer-events:none; opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px; z-index:9999;
+}
+.page-header {
+  text-align:center; padding:2rem 1.5rem 1.2rem;
+  border-bottom:2px solid var(--gold); position:relative;
+  background:linear-gradient(180deg, rgba(232,220,200,0.6) 0%, transparent 100%);
+}
+.page-header::after { content:'✦'; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%); background:var(--parchment); padding:0 1rem; color:var(--gold); font-size:1.4rem; }
+.page-header h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:700; line-height:1.15; }
+.page-header h1 em { font-style:italic; font-weight:400; color:var(--gold); }
+.page-subtitle { font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:var(--ink-muted); margin-top:0.3rem; }
+.main-nav { display:flex; gap:0.4rem; justify-content:center; flex-wrap:wrap; margin:1rem 0 0.5rem; }
+.nav-btn { display:inline-block; padding:0.5rem 1.2rem; background:var(--gold); color:var(--parchment); border-radius:3px; font-family:'Cormorant Garamond',serif; font-size:1rem; letter-spacing:0.05em; text-decoration:none; transition:all 0.2s; border:1px solid transparent; }
+.nav-btn:hover { background:var(--ink); color:var(--parchment); border-color:var(--ink); transform:translateY(-1px); box-shadow:0 4px 12px rgba(44,24,16,0.15); }
+.nav-btn.active { background:var(--ink); color:var(--parchment); border-color:var(--ink); font-weight:600; cursor:default; pointer-events:none; }
+.controls { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:0.8rem 1rem; background:rgba(232,220,200,0.4); border-bottom:1px solid var(--border-line); }
+.ctrl-btn { font-family:'EB Garamond',serif; font-size:0.85rem; padding:0.35rem 0.8rem; border:1px solid var(--border-line); border-radius:3px; background:var(--parchment-deep); color:var(--ink-soft); cursor:pointer; transition:all 0.2s; }
+.ctrl-btn:hover { background:var(--gold-light); color:#fff; border-color:var(--gold); }
+.ctrl-btn.active { background:var(--gold); color:#fff; border-color:var(--gold); }
+.search-box { flex:1; max-width:300px; min-width:180px; }
+.search-box input { width:100%; padding:0.4rem 0.7rem; border:1px solid var(--border-line); border-radius:3px; background:#fffcf5; font-family:'EB Garamond',serif; font-size:0.9rem; color:var(--ink); }
+.search-box input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 2px rgba(158,124,46,0.2); }
+.legend { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:0.5rem 1rem; border-bottom:1px solid var(--border-line); font-size:0.75rem; }
+.legend-item { display:flex; align-items:center; gap:0.25rem; color:var(--ink-muted); white-space:nowrap; }
+.legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
+#cy { width:100%; height:calc(100vh - 220px); min-height:500px; position:relative; }
+@media (max-width:768px) { #cy { height:calc(100vh - 260px); } }
+.info-panel {
+  position:fixed; bottom:1rem; right:1rem; left:1rem; max-height:45vh;
+  background:#fffcf5; border:2px solid var(--gold); border-radius:5px;
+  padding:1.2rem 1.5rem; box-shadow:var(--shadow); z-index:100;
+  display:none; overflow-y:auto; font-size:0.9rem;
+  animation:slideUp 0.3s ease;
+}
+@media (min-width:900px) { .info-panel { left:auto; right:1.5rem; bottom:1.5rem; width:380px; max-height:60vh; } }
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.info-panel.open { display:block; }
+.info-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.8rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border-line); }
+.info-name { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--ink); line-height:1.2; }
+.info-close { cursor:pointer; color:var(--ink-muted); font-size:1.3rem; line-height:1; padding:0 0.3rem; }
+.info-close:hover { color:var(--ink); }
+.info-meta { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.6rem; font-size:0.75rem; }
+.info-badge { padding:0.15rem 0.5rem; border-radius:2px; background:var(--parchment-deep); color:var(--ink-soft); font-family:'Cormorant Garamond',serif; }
+.info-badge.confirmed { background:rgba(45,90,61,0.15); color:var(--confirmed); border:1px solid var(--confirmed); }
+.info-badge.probable { background:rgba(184,134,11,0.15); color:var(--probable); border:1px solid var(--probable); }
+.info-badge.hypothetical { background:rgba(139,46,46,0.15); color:var(--hypothetical); border:1px solid var(--hypothetical); border-style:dashed; }
+.info-badge.barao { background:rgba(74,52,120,0.15); color:var(--barao); border:1px solid var(--barao); }
+.info-badge.colonial { background:rgba(42,90,138,0.15); color:var(--colonial); border:1px solid var(--colonial); }
+.info-badge.materno { background:rgba(122,90,16,0.15); color:var(--materno); border:1px solid var(--materno); }
+.info-badge.historical { background:rgba(158,124,46,0.15); color:var(--historical); border:1px solid var(--historical); }
+.info-section { margin-top:0.7rem; }
+.info-section-title { font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--gold); margin-bottom:0.3rem; padding-bottom:0.2rem; border-bottom:1px dotted var(--border-line); }
+.info-rel { font-size:0.82rem; color:var(--ink-soft); padding:0.15rem 0; line-height:1.5; }
+.info-rel .rel-type { font-weight:600; color:var(--gold); }
+.info-rel .rel-target { color:var(--ink); }
+.info-note { font-size:0.78rem; color:var(--ink-muted); font-style:italic; margin-top:0.4rem; padding-left:0.5rem; border-left:2px solid var(--border-line); }
+.page-footer { text-align:center; padding:1.5rem 1rem; border-top:1px solid var(--border-line); margin-top:1rem; }
+.page-footer p { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--ink-muted); font-size:0.85rem; line-height:1.6; }
+.loading-overlay { position:fixed; inset:0; background:rgba(244,236,225,0.95); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1000; font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--ink-muted); transition:opacity 0.3s, visibility 0.3s; }
+.loading-overlay.hidden { opacity:0; visibility:hidden; }
+.spinner { width:40px; height:40px; border:3px solid var(--border-line); border-top-color:var(--gold); border-radius:50%; animation:spin 1s linear infinite; margin-bottom:1rem; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.toast { position:fixed; bottom:1rem; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--parchment); padding:0.6rem 1.2rem; border-radius:3px; font-size:0.85rem; z-index:1001; opacity:0; transition:opacity 0.3s; pointer-events:none; }
+.toast.show { opacity:1; }
+</style>
+</head>
+<body>
+<script>if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');</script>
+
+<header class="page-header">
+<h1>Visualização em <em>Rede</em> — Gramilo Sodré</h1>
+<p class="page-subtitle">Grafo interativo de entidades e relacionamentos — dados sincronizados em junho de 2026</p>
+<div class="main-nav">
+<a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
+<a href="knowledge-graph.html" class="nav-btn">📋 Grafo Familiar</a>
+<a href="kg-network.html" class="nav-btn active">🕸️ Visualização em Rede</a>
+<a href="cidades.html" class="nav-btn">🗺️ Cidades e Contexto</a>
+</div>
+</header>
+
+<div class="controls">
+<div class="search-box"><input type="text" id="searchInput" placeholder="Buscar por nome..." autocomplete="off"></div>
+<button type="button" class="ctrl-btn active" id="btnHierarchical" data-layout="hierarchical">📊 Hierárquico (geração)</button>
+<button type="button" class="ctrl-btn" id="btnForce" data-layout="force">🔮 Livre (force-directed)</button>
+<button type="button" class="ctrl-btn" id="btnReset" data-layout="reset">🔄 Reset zoom</button>
+<button type="button" class="ctrl-btn" id="btnFit" data-layout="fit">🎯 Ajustar tudo</button>
+</div>
+
+<div class="legend" id="legend"></div>
+
+<div id="cy"></div>
+
+<div class="loading-overlay" id="loadingOverlay">
+<div class="spinner"></div>
+Carregando rede genealógica...
+</div>
+
+<div class="info-panel" id="infoPanel" role="dialog" aria-label="Detalhes da pessoa">
+<div class="info-header">
+<h3 class="info-name" id="infoName"></h3>
+<button class="info-close" id="infoClose" aria-label="Fechar">&times;</button>
+</div>
+<div class="info-meta" id="infoMeta"></div>
+<div id="infoBody"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer class="page-footer">
+<p>~120 entidades · 7 gerações · MemPalace + HTML + FamilySearch + APEB sincronizados<br>
+<a href="cidades.html" style="color:var(--gold)">🗺️ Cidades e Contexto Histórico</a></p>
+</footer>
+
+<script src="kg-network-data.js"></script>
+<script src="kg-network-logic.js"></script>
+</body>
+</html>
