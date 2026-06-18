@@ -659,7 +659,11 @@ const SECTIONS = [
       { couple:[{id:'arlindo'},{id:'noemia'}], sobrinhos:'arlindo' },
       { couple:[{id:'zeca'}], sobrinhos:'zeca' },
       { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
-      { couple:[{id:'elisa'},{id:'alfredo'}], children:[{id:'elizabete'},{id:'zeilde'},{id:'valdeci'},{id:'tania_karla'},{id:'cesar'},{id:'alfredo_neto'}] },
+      { couple:[{id:'elisa'},{id:'alfredo'}], children:[{id:'elizabete'},{id:'zeilde'},{id:'valdeci'}],
+        subfamilies:[
+          { couple:[{id:'elizabete'}], children:[{id:'cesar'},{id:'tania_karla'}] },
+          { couple:[{id:'valdeci'}], children:[{id:'alfredo_neto'}] }
+        ] },
       { couple:[{id:'isabel'},{id:'maximiliano'}],
         children:[{id:'etelvina_t'},{id:'valdivino'},{id:'carlos_im'},{id:'francisco_im'},{id:'dutinha'},{id:'edvaldo'},{id:'lelinha'},{id:'maria_im'}],
         subfamilies:[
