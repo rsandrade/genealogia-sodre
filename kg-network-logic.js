@@ -10,6 +10,18 @@ if (typeof cytoscape !== 'undefined') {
 }
 
 const CATEGORY_COLORS = {
+  historical: '#f5e6c8',      // light gold/parchment
+  barao: '#e8e0f0',           // light purple
+  colonial: '#dce8f5',        // light blue
+  confirmed: '#e0f0e8',       // light green
+  materno: '#f5efe0',         // light amber
+  hypothetical: '#f5e0e0',    // light red
+  probable: '#f5efe0',        // light amber
+  filho: '#e0f0e8',           // light green
+  sobrinho: '#e0f0e8'         // light green
+};
+
+const CATEGORY_BORDER_COLORS = {
   historical: '#9e7c2e',
   barao: '#4a3478',
   colonial: '#2a5a8a',
@@ -51,9 +63,9 @@ function initCy() {
           'text-wrap': 'wrap',
           'text-max-width': '140px',
           'background-color': 'data(categoryColor)',
-          'border-width': 2,
-          'border-color': '#1a1008',
-          'border-opacity': 0.3,
+          'border-width': 3,
+          'border-color': 'data(categoryBorderColor)',
+          'border-opacity': 1,
           'width': 'label',
           'height': 'label',
           'padding': '10px 12px',
@@ -142,12 +154,13 @@ function initCy() {
 
   // Assign category colors to nodes
   cy.nodes().forEach(n => {
-    const cat = n.data('category');
-    n.data('categoryColor', CATEGORY_COLORS[cat] || '#7a6b55');
-    // Build search index
-    const label = n.data('label').toLowerCase();
-    if (!searchIndex.has(label)) searchIndex.set(label, []);
-    searchIndex.get(label).push(n.id());
+  const cat = n.data('category');
+  n.data('categoryColor', CATEGORY_COLORS[cat] || '#f4ece1');
+  n.data('categoryBorderColor', CATEGORY_BORDER_COLORS[cat] || '#7a6b55');
+  // Build search index
+  const label = n.data('label').toLowerCase();
+  if (!searchIndex.has(label)) searchIndex.set(label, []);
+  searchIndex.get(label).push(n.id());
   });
 
   // Event: tap node -> show info panel
