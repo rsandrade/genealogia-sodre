@@ -25,7 +25,7 @@
 - **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
 - **Otávia Rosa Sodré Bispo** — casou com Eustázio Eusébio Bispo; 10 filhos
 - **Elisa Gramilo Sodré** — 3 filhos: Elizabete (adotiva, mais velha · mãe de Cesar), Zeilde ✝, Valdeci (apelido: Sísio · mãe de Alfredo Neto)
-- **Isabel Gramilo Sodré** — casada com Maximiliano; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré
+- **Isabel Rosa Sodré** — casada com Maximiano José de Souza; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina (nascida em Aiquara/BA) casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré (nascido em Aiquara/BA). Avós paternos de Admilson: Manuel Ribeiro Sodré e Mariana Rosa de Jesus
 - **Jovina Gramilo Sodré** — casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha)
 
 ### Avós paternos prováveis
@@ -172,7 +172,7 @@ Jerônimo Sodré Pereira (BA, séc. XVIII)
             ├── José "Zeca" Gramilo Sodré [9 filhos c/ Sudré = erro cartorário]
             ├── Otávia Rosa Sodré Bispo + Eustázio Eusébio Bispo [10 filhos]
             ├── Elisa Gramilo Sodré [3 filhos: Elizabete (adotiva), Zeilde ✝, Valdeci (Sísio)]
-            └── Isabel Gramilo Sodré [casada com Maximiliano; 7 filhos]
+            └── Isabel Rosa Sodré [casada com Maximiano José de Souza; 8 filhos]
 
 Gervásio Eusébio dos Santos + Maria Aleluia dos Santos (avós maternos)
 └── Atanagilda Odete dos Santos ← casou com Francisco

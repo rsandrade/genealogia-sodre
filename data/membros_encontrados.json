@@ -202,17 +202,17 @@
   },
   {
     "id": "f10",
-    "nome_completo": "Isabel Gramilo Sodré",
+    "nome_completo": "Isabel Rosa Sodré",
     "nascimento": null,
     "falecimento": null,
     "pais": [
       "Marcelo Gramilo Sodré",
       "Rita Rosa Sodré"
     ],
-    "conjuge": "Maximiliano",
+    "conjuge": "Maximiano José de Souza",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "confirmada",
-    "notas": "8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria · × Maximiliano · Itororó-BA",
+    "notas": "8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria · × Maximiano José de Souza · Itororó-BA",
     "geracao": 3
   },
   {
@@ -1015,18 +1015,18 @@
   {
     "id": "i1",
     "nome_completo": "Etelvina Rosa Souza (\"Tezinha\")",
-    "nascimento": null,
+    "nascimento": "Aiquara/BA",
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": "Erotildes Ribeiro Sodré",
-    "fonte": "Memória oral (Ricardo Sodré Andrade)",
+    "fonte": "Memória oral (Ricardo Sodré Andrade); certidão de nascimento de Admilson",
     "confiabilidade": "confirmada",
     "geracao": 4,
     "ordem_filho": 1,
-    "notas": "× Erotildes Ribeiro Sodré"
+    "notas": "× Erotildes Ribeiro Sodré · nascida em Aiquara/BA (certidão de Admilson: 'Etelvina Rosa Souza')"
   },
   {
     "id": "i2",
@@ -1034,8 +1034,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1049,8 +1049,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1064,8 +1064,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1080,8 +1080,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1095,8 +1095,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1111,8 +1111,8 @@
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Maximiliano",
-      "Isabel Gramilo Sodré"
+      "Maximiano José de Souza",
+      "Isabel Rosa Sodré"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
@@ -1174,8 +1174,8 @@
     "nascimento": "",
     "falecimento": "",
     "pais": [
-      "Isabel Gramilo Sodré",
-      "Maximiliano"
+      "Isabel Rosa Sodré",
+      "Maximiano José de Souza"
     ],
     "conjuge": "",
     "fonte": "Memória oral (família, jun 2026)",
@@ -1621,39 +1621,42 @@
   },
   {
     "id": "f10b",
-    "nome_completo": "Maximiliano",
+    "nome_completo": "Maximiano José de Souza",
     "nascimento": "",
     "falecimento": "",
     "pais": null,
-    "conjuge": "Isabel Gramilo Sodré",
+    "conjuge": "Isabel Rosa Sodré",
     "fonte": "Memória oral (família)",
     "confiabilidade": "confirmada",
     "geracao": 3,
-    "notas": "Veio de Teófilo Otoni (MG) para Aiquara-BA. 8 filhos com Isabel."
+    "notas": "Veio de Teófilo Otoni (MG) para Aiquara-BA. 8 filhos com Isabel Rosa Sodré."
   },
   {
     "id": "11",
     "nome_completo": "Erotildes Ribeiro Sodré",
     "nascimento": null,
     "falecimento": null,
-    "pais": [],
+    "pais": [
+      "Manuel Ribeiro Sodré",
+      "Mariana Rosa de Jesus"
+    ],
     "conjuge": "Etelvina Rosa Souza (\"Tezinha\")",
-    "fonte": "Memória oral (família, jun 2026)",
+    "fonte": "Certidão de nascimento de Admilson; memória oral (família, jun 2026)",
     "confiabilidade": "confirmada",
-    "notas": ""
+    "notas": "Avós paternos de Admilson confirmados na certidão: Manuel Ribeiro Sodré e Mariana Rosa de Jesus"
   },
   {
     "id": "12",
     "nome_completo": "Admilson Ribeiro Sodré",
-    "nascimento": null,
+    "nascimento": "Aiquara/BA",
     "falecimento": null,
     "pais": [
       "Erotildes Ribeiro Sodré",
       "Etelvina Rosa Souza (\"Tezinha\")"
     ],
-    "fonte": "Memória oral (família, jun 2026)",
+    "fonte": "Certidão de nascimento; memória oral (família, jun 2026)",
     "confiabilidade": "confirmada",
-    "notas": ""
+    "notas": "Nascido em Aiquara/BA. Avós paternos: Manuel Ribeiro Sodré e Mariana Rosa de Jesus."
   },
   {
     "id": "fs15",

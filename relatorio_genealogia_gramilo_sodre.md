@@ -27,7 +27,7 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 3. **José "Zeca" Gramilo Sodré** — 9 filhos (Sudré = erro cartorário)
 4. **Otávia Rosa Sodré Bispo** — casou Eustázio Eusébio Bispo; 10 filhos
 5. **Elisa Gramilo Sodré** — 3 filhos: Elizabete (adotiva, mais velha · mãe de Cesar), Zeilde ✝, Valdeci (apelido: Sísio · mãe de Alfredo Neto)
-6. **Isabel Gramilo Sodré** — casada com Maximiliano; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré
+6. **Isabel Rosa Sodré** — casada com Maximiano José de Souza; 8 filhos (Etelvina "Tezinha", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria). Etelvina (nascida em Aiquara/BA) casou com Erotildes Ribeiro Sodré; filho: Admilson Ribeiro Sodré (nascido em Aiquara/BA). Avós paternos de Admilson: Manuel Ribeiro Sodré e Mariana Rosa de Jesus
 7. **Jovina Gramilo Sodré** — casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha)
 
 ### G4: 12 filhos de Francisco + Atanagilda (com datas)
