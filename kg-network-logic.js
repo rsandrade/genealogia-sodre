@@ -3,6 +3,12 @@ let cy = null;
 let currentLayout = 'hierarchical';
 let searchIndex = new Map();
 
+// Register Cytoscape extensions (needed for CDN loads)
+if (typeof cytoscape !== 'undefined') {
+  if (typeof window.coseBilkent !== 'undefined') cytoscape.use(window.coseBilkent);
+  if (typeof window.cola !== 'undefined' && typeof window.cytoscapeCola !== 'undefined') cytoscape.use(window.cytoscapeCola);
+}
+
 const CATEGORY_COLORS = {
   historical: '#9e7c2e',
   barao: '#4a3478',
@@ -202,8 +208,10 @@ function initCy() {
   // Hide loading
   document.getElementById('loadingOverlay').classList.add('hidden');
 
-  // Initial layout
-  runLayout('hierarchical');
+  // Initial layout - use grid first to avoid stack, then hierarchical
+  cy.layout({ name: 'grid', fit: true, padding: 80, rows: Math.ceil(Math.sqrt(cy.nodes().length)) }).run();
+  // Then apply hierarchical after a short delay
+  setTimeout(() => runLayout('hierarchical'), 300);
 }
 
 function runLayout(type) {
@@ -216,45 +224,83 @@ function runLayout(type) {
 
   if (type === 'hierarchical') {
     currentLayout = 'hierarchical';
-    cy.layout({
-      name: 'cose-bilkent',
-      animate: true,
-      animationDuration: 800,
-      fit: true,
-      padding: 80,
-      // Hierarchical options
-      nodeDimensionsIncludeLabels: true,
-      randomize: false,
-      idealEdgeLength: 120,
-      nodeRepulsion: 4500,
-      edgeElasticity: 0.45,
-      nestingFactor: 0.1,
-      gravity: 0.25,
-      numIter: 2500,
-      tile: true,
-      tilingPaddingVertical: 60,
-      tilingPaddingHorizontal: 60,
-      gravityRange: 3.8,
-      gravityCompound: 1.5,
-      gravityRangeCompound: 3.8,
-      initialEnergyOnIncremental: 0.5
-    }).run();
-    showToast('Layout hierárquico por geração aplicado');
+    try {
+      cy.layout({
+        name: 'cose-bilkent',
+        animate: true,
+        animationDuration: 800,
+        fit: true,
+        padding: 80,
+        nodeDimensionsIncludeLabels: true,
+        randomize: false,
+        idealEdgeLength: 120,
+        nodeRepulsion: 4500,
+        edgeElasticity: 0.45,
+        nestingFactor: 0.1,
+        gravity: 0.25,
+        numIter: 2500,
+        tile: true,
+        tilingPaddingVertical: 60,
+        tilingPaddingHorizontal: 60,
+        gravityRange: 3.8,
+        gravityCompound: 1.5,
+        gravityRangeCompound: 3.8,
+        initialEnergyOnIncremental: 0.5
+      }).run();
+      showToast('Layout hierárquico por geração aplicado');
+    } catch (err) {
+      console.warn('cose-bilkent failed, falling back to cose:', err);
+      // Fallback to built-in cose
+      cy.layout({
+        name: 'cose',
+        animate: true,
+        animationDuration: 800,
+        fit: true,
+        padding: 80,
+        nodeDimensionsIncludeLabels: true,
+        idealEdgeLength: 100,
+        nodeRepulsion: 4000,
+        edgeElasticity: 0.45,
+        nestingFactor: 0.1,
+        gravity: 0.25,
+        numIter: 2500
+      }).run();
+      showToast('Layout hierárquico (fallback cose) aplicado');
+    }
   } else if (type === 'force') {
     currentLayout = 'force';
-    cy.layout({
-      name: 'cola',
-      animate: true,
-      animationDuration: 1000,
-      fit: true,
-      padding: 80,
-      nodeSpacing: 80,
-      edgeLength: 100,
-      convergenceThreshold: 0.01,
-      maxSimulationTime: 3000,
-      ungrabifyWhileSimulating: false
-    }).run();
-    showToast('Layout livre (force-directed) aplicado');
+    try {
+      cy.layout({
+        name: 'cola',
+        animate: true,
+        animationDuration: 1000,
+        fit: true,
+        padding: 80,
+        nodeSpacing: 80,
+        edgeLength: 100,
+        convergenceThreshold: 0.01,
+        maxSimulationTime: 3000,
+        ungrabifyWhileSimulating: false
+      }).run();
+      showToast('Layout livre (force-directed) aplicado');
+    } catch (err) {
+      console.warn('cola failed, falling back to cose:', err);
+      cy.layout({
+        name: 'cose',
+        animate: true,
+        animationDuration: 1000,
+        fit: true,
+        padding: 80,
+        nodeDimensionsIncludeLabels: true,
+        idealEdgeLength: 100,
+        nodeRepulsion: 4000,
+        edgeElasticity: 0.45,
+        nestingFactor: 0.1,
+        gravity: 0.25,
+        numIter: 2500
+      }).run();
+      showToast('Layout livre (fallback cose) aplicado');
+    }
   } else if (type === 'reset') {
     cy.animate({ zoom: 1, pan: { x: 0, y: 0 } }, { duration: 500 });
     showToast('Zoom e pan resetados');
