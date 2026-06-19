@@ -1,6 +1,6 @@
 // ============ LÓGICA DO GRAFO ============
 let cy = null;
-let currentLayout = 'hierarchical';
+let currentLayout = 'timeline';
 let searchIndex = new Map();
 
 // Register Cytoscape extensions (needed for CDN loads)
@@ -22,15 +22,15 @@ if (typeof cytoscape !== 'undefined') {
 }
 
 const CATEGORY_COLORS = {
-  historical: '#f5e6c8',      // light gold/parchment
-  barao: '#e8e0f0',           // light purple
-  colonial: '#dce8f5',        // light blue
-  confirmed: '#e0f0e8',       // light green
-  materno: '#f5efe0',         // light amber
-  hypothetical: '#f5e0e0',    // light red
-  probable: '#f5efe0',        // light amber
-  filho: '#e0f0e8',           // light green
-  sobrinho: '#e0f0e8'         // light green
+  historical: '#f5e6c8',
+  barao: '#e8e0f0',
+  colonial: '#dce8f5',
+  confirmed: '#e0f0e8',
+  materno: '#f5efe0',
+  hypothetical: '#f5e0e0',
+  probable: '#f5efe0',
+  filho: '#e0f0e8',
+  sobrinho: '#e0f0e8'
 };
 
 const CATEGORY_BORDER_COLORS = {
@@ -56,6 +56,33 @@ const CATEGORY_LABELS = {
   filho: 'Filhos (G4+)',
   sobrinho: 'Sobrinhos/Netos'
 };
+
+// Parse birth year from dates string
+function parseBirthYear(dates) {
+  if (!dates) return null;
+  // Formats: "1631–1711", "1818–1882", "~1860", "1897–1976", "1925–1999", "1933–?", "bat. 1881", "ativo 1909–1914", "n. 18/11/1913", "cas. 10/12/1941"
+  const str = dates.trim();
+  if (!str) return null;
+  
+  // Try to find first 4-digit year
+  const yearMatch = str.match(/(\d{4})/);
+  if (yearMatch) {
+    return parseInt(yearMatch[1], 10);
+  }
+  return null;
+}
+
+// Parse death year for lifespan
+function parseDeathYear(dates) {
+  if (!dates) return null;
+  const str = dates.trim();
+  // Look for second year or year after dash
+  const years = str.match(/(\d{4})/g);
+  if (years && years.length >= 2) {
+    return parseInt(years[1], 10);
+  }
+  return null;
+}
 
 function initCy() {
   cy = cytoscape({
@@ -219,7 +246,7 @@ function initCy() {
   });
 
   // Layout buttons
-  document.getElementById('btnHierarchical').addEventListener('click', () => runLayout('hierarchical'));
+  document.getElementById('btnTimeline').addEventListener('click', () => runLayout('timeline'));
   document.getElementById('btnForce').addEventListener('click', () => runLayout('force'));
   document.getElementById('btnReset').addEventListener('click', () => runLayout('reset'));
   document.getElementById('btnFit').addEventListener('click', () => runLayout('fit'));
@@ -233,18 +260,10 @@ function initCy() {
   // Hide loading
   document.getElementById('loadingOverlay').classList.add('hidden');
 
-  // Initial layout - use circle first to spread nodes, then hierarchical
-  cy.layout({ 
-    name: 'circle', 
-    fit: true, 
-    padding: 150,
-    radius: Math.max(400, cy.nodes().length * 10),
-    startAngle: 1.5 * Math.PI,
-    counterclockwise: false
-  }).run();
-  // Then apply hierarchical after a short delay
-  setTimeout(() => runLayout('hierarchical'), 500);
+  // Initial layout - timeline by birth date
+  runTimelineLayout();
 }
+
 function runLayout(type) {
   if (!cy) return;
 
@@ -253,14 +272,9 @@ function runLayout(type) {
     btn.classList.toggle('active', btn.dataset.layout === type);
   });
 
-  if (type === 'hierarchical') {
-    currentLayout = 'hierarchical';
-    // First: manually position by generation (grid per generation)
-    positionByGeneration();
-    // Then: run cose to refine
-    setTimeout(() => {
-      runCoseLayout('hierarchical');
-    }, 100);
+  if (type === 'timeline') {
+    currentLayout = 'timeline';
+    runTimelineLayout();
   } else if (type === 'force') {
     currentLayout = 'force';
     runCoseLayout('force');
@@ -273,75 +287,144 @@ function runLayout(type) {
   }
 }
 
-function positionByGeneration() {
-  // Group nodes by generation
-  const byGen = {};
+function runTimelineLayout() {
+  // 1. Extract birth years for all nodes
+  const nodeData = [];
   cy.nodes().forEach(n => {
-    const gen = n.data('generation') || 5;
-    if (!byGen[gen]) byGen[gen] = [];
-    byGen[gen].push(n);
-  });
-
-  const generations = Object.keys(byGen).map(Number).sort((a,b) => a-b);
-  const genCount = generations.length;
-  const centerX = cy.width() / 2;
-  const centerY = cy.height() / 2;
-  const ySpacing = Math.max(180, cy.height() / (genCount + 1));
-  const xSpacing = 200;
-
-  generations.forEach((gen, genIdx) => {
-    const nodes = byGen[gen];
-    const y = centerY - (genCount - 1) * ySpacing / 2 + genIdx * ySpacing;
-    const totalWidth = (nodes.length - 1) * xSpacing;
-    const startX = centerX - totalWidth / 2;
+    const birthYear = parseBirthYear(n.data('dates'));
+    const deathYear = parseDeathYear(n.data('dates'));
+    const generation = n.data('generation') || 5;
+    const label = n.data('label');
+    const width = n.width() || 140;
     
-    nodes.forEach((n, i) => {
-      n.position({ x: startX + i * xSpacing, y });
+    nodeData.push({
+      node: n,
+      birthYear: birthYear,
+      deathYear: deathYear,
+      generation: generation,
+      label: label,
+      width: width
     });
   });
+
+  // 2. Sort by birth year (oldest first), then by generation
+  nodeData.sort((a, b) => {
+    // Nodes with dates first
+    if (a.birthYear !== null && b.birthYear === null) return -1;
+    if (a.birthYear === null && b.birthYear !== null) return 1;
+    // Then by birth year
+    if (a.birthYear !== null && b.birthYear !== null) {
+      if (a.birthYear !== b.birthYear) return a.birthYear - b.birthYear;
+    }
+    // Then by generation
+    return a.generation - b.generation;
+  });
+
+  // 3. Assign vertical positions based on birth year (timeline)
+  // Find year range
+  const yearsWithDates = nodeData.filter(d => d.birthYear !== null);
+  let minYear = 1630, maxYear = 2020;
+  if (yearsWithDates.length > 0) {
+    minYear = Math.min(...yearsWithDates.map(d => d.birthYear));
+    maxYear = Math.max(...yearsWithDates.map(d => d.birthYear));
+  }
+  const yearSpan = maxYear - minYear;
+
+  const centerX = cy.width() / 2;
+  const topMargin = 100;
+  const bottomMargin = 100;
+  const availableHeight = cy.height() - topMargin - bottomMargin;
+
+  // 4. Position nodes in a grid-like timeline layout
+  // Group by approximate year buckets (20-year buckets)
+  const bucketSize = 20;
+  const buckets = new Map();
   
-  cy.fit(null, 100);
+  nodeData.forEach(d => {
+    let bucketKey;
+    if (d.birthYear !== null) {
+      bucketKey = Math.floor(d.birthYear / bucketSize) * bucketSize;
+    } else {
+      // Nodes without dates: place at bottom by generation
+      bucketKey = 9999 + d.generation;
+    }
+    if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
+    buckets.get(bucketKey).push(d);
+  });
+
+  // Sort buckets
+  const sortedBuckets = Array.from(buckets.entries()).sort((a, b) => a[0] - b[0]);
+
+  // 5. Position each bucket vertically
+  const bucketCount = sortedBuckets.length;
+  const bucketHeight = availableHeight / Math.max(1, bucketCount - 1);
+
+  sortedBuckets.forEach((bucket, bucketIdx) => {
+    const [yearKey, nodes] = bucket;
+    const y = topMargin + bucketIdx * bucketHeight;
+    
+    // Distribute nodes horizontally within bucket
+    const nodeCount = nodes.length;
+    const minNodeWidth = 140;
+    const spacing = 40;
+    const totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
+    let startX = centerX - totalWidth / 2;
+    
+    // If too wide, scale down spacing
+    if (totalWidth > cy.width() * 0.9) {
+      const scale = (cy.width() * 0.9) / totalWidth;
+      const newSpacing = spacing * scale;
+      totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * newSpacing;
+      startX = centerX - totalWidth / 2;
+    }
+
+    let currentX = startX;
+    nodes.forEach((d, i) => {
+      d.node.position({ x: currentX + d.width / 2, y });
+      currentX += d.width + (i < nodeCount - 1 ? spacing : 0);
+    });
+  });
+
+  // 6. Fit and animate
+  cy.fit(null, 80);
+  
+  // 7. Run cose to refine while keeping timeline structure
+  setTimeout(() => {
+    runCoseLayoutRefined();
+  }, 100);
+  
+  showToast('Linha do tempo por data de nascimento aplicada');
 }
 
-function runCoseLayout(mode) {
-  const isHierarchical = mode === 'hierarchical';
-  
+function runCoseLayoutRefined() {
   try {
     const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
-    console.log(`Running ${layoutName} for ${mode} mode`);
+    console.log(`Running ${layoutName} for timeline refinement`);
     
     cy.layout({
       name: layoutName,
       animate: true,
-      animationDuration: isHierarchical ? 1500 : 1200,
+      animationDuration: 1500,
       fit: true,
-      padding: 120,
+      padding: 100,
       nodeDimensionsIncludeLabels: true,
       randomize: false,
-      idealEdgeLength: isHierarchical ? 160 : 140,
-      nodeRepulsion: isHierarchical ? 10000 : 12000,
-      nodeOverlap: 60,
-      edgeElasticity: isHierarchical ? 0.25 : 0.2,
+      idealEdgeLength: 180,
+      nodeRepulsion: 15000,
+      nodeOverlap: 80,
+      edgeElasticity: 0.2,
       nestingFactor: 0.05,
-      gravity: isHierarchical ? 0.35 : 0.15,
-      numIter: 4000,
-      initialTemp: 2000,
-      coolingFactor: 0.95,
+      gravity: 0.1,
+      numIter: 5000,
+      initialTemp: 2500,
+      coolingFactor: 0.93,
       minTemp: 1,
-      // cose-bilkent specific
-      tile: isHierarchical,
-      tilingPaddingVertical: isHierarchical ? 120 : 0,
-      tilingPaddingHorizontal: isHierarchical ? 100 : 0,
-      gravityRange: isHierarchical ? 5.0 : 3.0,
-      gravityCompound: 1.5,
-      gravityRangeCompound: isHierarchical ? 5.0 : 3.0,
-      initialEnergyOnIncremental: 0.3
+      tile: false
     }).run();
     
-    showToast(`Layout ${isHierarchical ? 'hierárquico' : 'livre'} aplicado (${layoutName})`);
+    showToast('Refinamento aplicado');
   } catch (err) {
-    console.warn(`${layoutName} failed, falling back to cose:`, err);
-    // Ultra-aggressive cose fallback
+    console.warn(`${layoutName} failed:`, err);
     cy.layout({
       name: 'cose',
       animate: true,
@@ -349,18 +432,18 @@ function runCoseLayout(mode) {
       fit: true,
       padding: 150,
       nodeDimensionsIncludeLabels: true,
-      idealEdgeLength: isHierarchical ? 180 : 160,
-      nodeRepulsion: 20000,
-      nodeOverlap: 80,
-      edgeElasticity: 0.15,
+      idealEdgeLength: 180,
+      nodeRepulsion: 25000,
+      nodeOverlap: 100,
+      edgeElasticity: 0.1,
       nestingFactor: 0.05,
-      gravity: isHierarchical ? 0.4 : 0.1,
-      numIter: 5000,
-      initialTemp: 3000,
-      coolingFactor: 0.93,
+      gravity: 0.05,
+      numIter: 6000,
+      initialTemp: 3500,
+      coolingFactor: 0.92,
       minTemp: 1
     }).run();
-    showToast(`Layout ${isHierarchical ? 'hierárquico' : 'livre'} aplicado (cose ultra)`);
+    showToast('Refinamento aplicado (cose ultra)');
   }
 }
 
