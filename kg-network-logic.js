@@ -314,10 +314,11 @@ function runTimelineLayout() {
     if (a.birthYear !== null && b.birthYear !== null) {
       if (a.birthYear !== b.birthYear) return a.birthYear - b.birthYear;
     }
+    // Both null: sort by generation (older generations first)
     return a.generation - b.generation;
   });
 
-  // 3. Assign vertical positions based on birth year (timeline)
+  // 3. Assign vertical positions: prefer birth year, fallback to generation
   const yearsWithDates = nodeData.filter(d => d.birthYear !== null);
   let minYear = 1630, maxYear = 2020;
   if (yearsWithDates.length > 0) {
@@ -330,19 +331,54 @@ function runTimelineLayout() {
   const bottomMargin = 100;
   const availableHeight = cy.height() - topMargin - bottomMargin;
 
-  // 4. Position nodes in timeline buckets (20-year buckets)
+  // 4. Build buckets: 20-year buckets for dated nodes, generation buckets for undated
   const bucketSize = 20;
   const buckets = new Map();
+  const generationBuckets = new Map(); // generation -> nodes without dates
   
   nodeData.forEach(d => {
-    let bucketKey;
     if (d.birthYear !== null) {
-      bucketKey = Math.floor(d.birthYear / bucketSize) * bucketSize;
+      const bucketKey = Math.floor(d.birthYear / bucketSize) * bucketSize;
+      if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
+      buckets.get(bucketKey).push(d);
     } else {
-      bucketKey = 9999 + d.generation;
+      // Undated: group by generation
+      if (!generationBuckets.has(d.generation)) generationBuckets.set(d.generation, []);
+      generationBuckets.get(d.generation).push(d);
     }
+  });
+
+  // 5. Merge generation buckets into timeline at appropriate positions
+  // Find where each generation would fit based on dated siblings/cousins
+  const genToYear = new Map();
+  nodeData.forEach(d => {
+    if (d.birthYear !== null) {
+      if (!genToYear.has(d.generation) || d.birthYear < genToYear.get(d.generation)) {
+        genToYear.set(d.generation, d.birthYear);
+      }
+    }
+  });
+
+  // Assign undated nodes to buckets based on their generation's typical year
+  generationBuckets.forEach((nodes, gen) => {
+    let estYear = genToYear.get(gen);
+    if (estYear === undefined) {
+      // No dated nodes in this generation: estimate from adjacent generations
+      const datedGens = Array.from(genToYear.keys()).sort((a, b) => a - b);
+      if (datedGens.length > 0) {
+        // Find closest generation with dates
+        let closest = datedGens[0];
+        for (const g of datedGens) {
+          if (Math.abs(g - gen) < Math.abs(closest - gen)) closest = g;
+        }
+        estYear = genToYear.get(closest) + (gen - closest) * 25; // ~25 years per generation
+      } else {
+        estYear = 1900 + gen * 25; // fallback
+      }
+    }
+    const bucketKey = Math.floor(estYear / bucketSize) * bucketSize;
     if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
-    buckets.get(bucketKey).push(d);
+    buckets.get(bucketKey).push(...nodes);
   });
 
   const sortedBuckets = Array.from(buckets.entries()).sort((a, b) => a[0] - b[0]);
@@ -364,7 +400,7 @@ function runTimelineLayout() {
       totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * newSpacing;
       startX = centerX - totalWidth / 2;
     }
-
+    
     let currentX = startX;
     nodes.forEach((d, i) => {
       d.node.position({ x: currentX + d.width / 2, y });
@@ -373,10 +409,10 @@ function runTimelineLayout() {
       currentX += d.width + (i < nodeCount - 1 ? spacing : 0);
     });
   });
-
+  
   cy.fit(null, 80);
   
-  // 5. Run force-directed with differentiated edge weights
+  // 6. Run force-directed with differentiated edge weights
   setTimeout(() => {
     runPhysicsLayout();
   }, 100);
@@ -388,15 +424,26 @@ function runPhysicsLayout() {
   // Force-directed layout with differentiated edge weights
   // Edge weights: casamento=10 (forte atração), filiação=5, irmandade=2, outros=0.5
   
-  // First, assign weights to edges based on type
+  // First, assign weights and ideal lengths to edges based on type
   cy.edges().forEach(e => {
     const type = e.data('type');
     let weight = 1;
-    if (type === 'casou_com') weight = 10;      // Casamento: atração muito forte
-    else if (type === 'pai_de' || type === 'mae_de') weight = 5;  // Filiação: atração forte
-    else if (type === 'irmao_de') weight = 2;   // Irmandade: atração média
-    else weight = 0.5;                           // Outros: fraca
+    let idealLen = 180;
+    if (type === 'casou_com') {
+      weight = 10;      // Casamento: atração muito forte
+      idealLen = 80;    // Cônjuges grudados
+    } else if (type === 'pai_de' || type === 'mae_de') {
+      weight = 5;       // Filiação: atração forte
+      idealLen = 160;   // Pais acima dos filhos
+    } else if (type === 'irmao_de') {
+      weight = 1.5;     // Irmandade: atração leve (queremos repulsão horizontal)
+      idealLen = 280;   // Irmãos bem espaçados horizontalmente
+    } else {
+      weight = 0.5;     // Outros: fraca
+      idealLen = 180;
+    }
     e.data('physicsWeight', weight);
+    e.data('idealLen', idealLen);
   });
 
   try {
@@ -412,7 +459,7 @@ function runPhysicsLayout() {
       nodeDimensionsIncludeLabels: true,
       randomize: false,
       // Physics parameters
-      idealEdgeLength: 180,
+      idealEdgeLength: (edge) => edge.data('idealLen') || 180,
       nodeRepulsion: 15000,      // Repulsão forte entre nós não conectados
       nodeOverlap: 100,          // Penalidade máxima para sobreposição
       edgeElasticity: (edge) => {
@@ -444,7 +491,7 @@ function runPhysicsLayout() {
       fit: true,
       padding: 200,
       nodeDimensionsIncludeLabels: true,
-      idealEdgeLength: 200,
+      idealEdgeLength: (edge) => edge.data('idealLen') || 200,
       nodeRepulsion: 30000,
       nodeOverlap: 120,
       edgeElasticity: (edge) => {
@@ -466,6 +513,27 @@ function runPhysicsLayout() {
 function runCoseLayout(mode) {
   const isForce = mode === 'force';
   
+  // Ensure edge weights are assigned
+  cy.edges().forEach(e => {
+    if (!e.data('physicsWeight')) {
+      const type = e.data('type');
+      let weight = 1;
+      let idealLen = 180;
+      if (type === 'casou_com') { weight = 10; idealLen = 80; }
+      else if (type === 'pai_de' || type === 'mae_de') { weight = 5; idealLen = 160; }
+      else if (type === 'irmao_de') { weight = 1.5; idealLen = 280; }
+      else { weight = 0.5; idealLen = 180; }
+      e.data('physicsWeight', weight);
+      e.data('idealLen', idealLen);
+    }
+  });
+
+  // For 'force' mode: first position by generation (like timeline) to give structure
+  // then run force-directed. This prevents random scatter breaking family clusters.
+  if (isForce) {
+    runGenerationPreLayout();
+  }
+
   try {
     const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
     console.log(`Running ${layoutName} for ${mode} mode`);
@@ -477,16 +545,19 @@ function runCoseLayout(mode) {
       fit: true,
       padding: 150,
       nodeDimensionsIncludeLabels: true,
-      randomize: isForce,
-      idealEdgeLength: isForce ? 160 : 180,
-      nodeRepulsion: isForce ? 12000 : 15000,
-      nodeOverlap: 80,
-      edgeElasticity: 0.2,
+      randomize: false,  // Never randomize - use current positions (pre-layout or existing)
+      idealEdgeLength: (edge) => edge.data('idealLen') || (isForce ? 160 : 180),
+      nodeRepulsion: isForce ? 15000 : 15000,
+      nodeOverlap: 100,
+      edgeElasticity: (edge) => {
+        const w = edge.data('physicsWeight') || 1;
+        return 0.05 / w;
+      },
       nestingFactor: 0.05,
-      gravity: isForce ? 0.1 : 0.05,
-      numIter: isForce ? 5000 : 4000,
-      initialTemp: 2500,
-      coolingFactor: 0.93,
+      gravity: isForce ? 0.03 : 0.05,
+      numIter: isForce ? 6000 : 4000,
+      initialTemp: isForce ? 3000 : 2500,
+      coolingFactor: 0.92,
       minTemp: 1,
       tile: false
     }).run();
@@ -501,10 +572,13 @@ function runCoseLayout(mode) {
       fit: true,
       padding: 200,
       nodeDimensionsIncludeLabels: true,
-      idealEdgeLength: 180,
+      idealEdgeLength: (edge) => edge.data('idealLen') || 180,
       nodeRepulsion: 25000,
       nodeOverlap: 100,
-      edgeElasticity: 0.1,
+      edgeElasticity: (edge) => {
+        const w = edge.data('physicsWeight') || 1;
+        return 0.05 / w;
+      },
       nestingFactor: 0.05,
       gravity: 0.05,
       numIter: 6000,
@@ -514,6 +588,58 @@ function runCoseLayout(mode) {
     }).run();
     showToast('Layout aplicado (cose ultra)');
   }
+}
+
+// Pre-layout: position nodes by generation (vertical) + horizontal spread
+// Gives force-directed a structured starting point so family clusters stay together
+function runGenerationPreLayout() {
+  const nodeData = [];
+  cy.nodes().forEach(n => {
+    const generation = n.data('generation') || 5;
+    const label = n.data('label');
+    const width = n.width() || 140;
+    nodeData.push({ node: n, generation, label, width });
+  });
+
+  // Group by generation
+  const genBuckets = new Map();
+  nodeData.forEach(d => {
+    if (!genBuckets.has(d.generation)) genBuckets.set(d.generation, []);
+    genBuckets.get(d.generation).push(d);
+  });
+
+  const sortedGens = Array.from(genBuckets.keys()).sort((a, b) => a - b);
+  const centerX = cy.width() / 2;
+  const topMargin = 100;
+  const bottomMargin = 100;
+  const availableHeight = cy.height() - topMargin - bottomMargin;
+  const genCount = sortedGens.length;
+  const genHeight = availableHeight / Math.max(1, genCount - 1);
+
+  sortedGens.forEach((gen, idx) => {
+    const nodes = genBuckets.get(gen);
+    const y = topMargin + idx * genHeight;
+    
+    const nodeCount = nodes.length;
+    const spacing = 40;
+    const totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
+    let startX = centerX - totalWidth / 2;
+    
+    if (totalWidth > cy.width() * 0.9) {
+      const scale = (cy.width() * 0.9) / totalWidth;
+      const newSpacing = spacing * scale;
+      totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * newSpacing;
+      startX = centerX - totalWidth / 2;
+    }
+    
+    let currentX = startX;
+    nodes.forEach((d, i) => {
+      d.node.position({ x: currentX + d.width / 2, y });
+      currentX += d.width + (i < nodeCount - 1 ? spacing : 0);
+    });
+  });
+  
+  cy.fit(null, 80);
 }
 
 function renderLegend() {
@@ -575,17 +701,29 @@ function showInfoPanel(node) {
     html += '</div>';
   }
 
-  // Siblings (shared parents)
-  const siblings = new Set();
+  // Siblings — via shared parents (pai_de/mae_de)
+  const siblingsFromParents = new Set();
   parentEdges.forEach(e => {
     const parent = e.source();
     parent.outgoers('edge[type="pai_de"], edge[type="mae_de"]').forEach(sib => {
-      if (sib.id() !== data.id) siblings.add(sib);
+      if (sib.id() !== data.id) siblingsFromParents.add(sib);
     });
   });
-  if (siblings.size > 0) {
-    html += `<div class="info-section"><div class="info-section-title">👫 Irmãos (${siblings.size})</div>`;
-    siblings.forEach(sib => {
+
+  // Siblings — via explicit 'irmao_de' edges
+  const siblingEdges = edges.filter(e => e.data('type') === 'irmao_de');
+  const siblingsFromEdges = new Set();
+  siblingEdges.forEach(e => {
+    const other = e.source().id() === data.id ? e.target() : e.source();
+    siblingsFromEdges.add(other);
+  });
+
+  // Combine both sources
+  const allSiblings = new Set([...siblingsFromParents, ...siblingsFromEdges]);
+
+  if (allSiblings.size > 0) {
+    html += `<div class="info-section"><div class="info-section-title">👫 Irmãos (${allSiblings.size})</div>`;
+    allSiblings.forEach(sib => {
       html += `<div class="info-rel"><span class="rel-target">${sib.data('label')}</span></div>`;
     });
     html += '</div>';
