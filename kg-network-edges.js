@@ -1,18 +1,18 @@
 const EDGES_DATA = [
   {
     "data": {
-      "id": "e_jeronimo_i_francisca_casou_com_0",
-      "source": "jeronimo_i",
-      "target": "francisca",
+      "id": "e_francisca_jeronimo_i_casou_com_0",
+      "source": "francisca",
+      "target": "jeronimo_i",
       "type": "casou_com",
       "label": "∞"
     }
   },
   {
     "data": {
-      "id": "e_maria_azevedo_jeronimo_i_casou_com_1",
-      "source": "maria_azevedo",
-      "target": "jeronimo_i",
+      "id": "e_jeronimo_i_maria_azevedo_casou_com_1",
+      "source": "jeronimo_i",
+      "target": "maria_azevedo",
       "type": "casou_com",
       "label": "∞"
     }
@@ -55,9 +55,9 @@ const EDGES_DATA = [
   },
   {
     "data": {
-      "id": "e_tomaz_teodora_casou_com_6",
-      "source": "tomaz",
-      "target": "teodora",
+      "id": "e_teodora_tomaz_casou_com_6",
+      "source": "teodora",
+      "target": "tomaz",
       "type": "casou_com",
       "label": "∞"
     }
@@ -73,9 +73,9 @@ const EDGES_DATA = [
   },
   {
     "data": {
-      "id": "e_francisco_atanagilda_casou_com_8",
-      "source": "francisco",
-      "target": "atanagilda",
+      "id": "e_atanagilda_francisco_casou_com_8",
+      "source": "atanagilda",
+      "target": "francisco",
       "type": "casou_com",
       "label": "∞"
     }
@@ -100,9 +100,9 @@ const EDGES_DATA = [
   },
   {
     "data": {
-      "id": "e_horacio_vs_adelina_mj_casou_com_11",
-      "source": "horacio_vs",
-      "target": "adelina_mj",
+      "id": "e_adelina_mj_horacio_vs_casou_com_11",
+      "source": "adelina_mj",
+      "target": "horacio_vs",
       "type": "casou_com",
       "label": "∞"
     }
@@ -181,18 +181,18 @@ const EDGES_DATA = [
   },
   {
     "data": {
-      "id": "e_otavia_eustaquio_casou_com_20",
-      "source": "otavia",
-      "target": "eustaquio",
+      "id": "e_eustaquio_otavia_casou_com_20",
+      "source": "eustaquio",
+      "target": "otavia",
       "type": "casou_com",
       "label": "∞"
     }
   },
   {
     "data": {
-      "id": "e_elisa_alfredo_casou_com_21",
-      "source": "elisa",
-      "target": "alfredo",
+      "id": "e_alfredo_elisa_casou_com_21",
+      "source": "alfredo",
+      "target": "elisa",
       "type": "casou_com",
       "label": "∞"
     }
@@ -217,9 +217,9 @@ const EDGES_DATA = [
   },
   {
     "data": {
-      "id": "e_etelvina_t_erotildes_casou_com_24",
-      "source": "etelvina_t",
-      "target": "erotildes",
+      "id": "e_erotildes_etelvina_t_casou_com_24",
+      "source": "erotildes",
+      "target": "etelvina_t",
       "type": "casou_com",
       "label": "∞"
     }

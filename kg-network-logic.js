@@ -309,34 +309,28 @@ function runTimelineLayout() {
 
   // 2. Sort by birth year (oldest first), then by generation
   nodeData.sort((a, b) => {
-    // Nodes with dates first
     if (a.birthYear !== null && b.birthYear === null) return -1;
     if (a.birthYear === null && b.birthYear !== null) return 1;
-    // Then by birth year
     if (a.birthYear !== null && b.birthYear !== null) {
       if (a.birthYear !== b.birthYear) return a.birthYear - b.birthYear;
     }
-    // Then by generation
     return a.generation - b.generation;
   });
 
   // 3. Assign vertical positions based on birth year (timeline)
-  // Find year range
   const yearsWithDates = nodeData.filter(d => d.birthYear !== null);
   let minYear = 1630, maxYear = 2020;
   if (yearsWithDates.length > 0) {
     minYear = Math.min(...yearsWithDates.map(d => d.birthYear));
     maxYear = Math.max(...yearsWithDates.map(d => d.birthYear));
   }
-  const yearSpan = maxYear - minYear;
 
   const centerX = cy.width() / 2;
   const topMargin = 100;
   const bottomMargin = 100;
   const availableHeight = cy.height() - topMargin - bottomMargin;
 
-  // 4. Position nodes in a grid-like timeline layout
-  // Group by approximate year buckets (20-year buckets)
+  // 4. Position nodes in timeline buckets (20-year buckets)
   const bucketSize = 20;
   const buckets = new Map();
   
@@ -345,17 +339,13 @@ function runTimelineLayout() {
     if (d.birthYear !== null) {
       bucketKey = Math.floor(d.birthYear / bucketSize) * bucketSize;
     } else {
-      // Nodes without dates: place at bottom by generation
       bucketKey = 9999 + d.generation;
     }
     if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
     buckets.get(bucketKey).push(d);
   });
 
-  // Sort buckets
   const sortedBuckets = Array.from(buckets.entries()).sort((a, b) => a[0] - b[0]);
-
-  // 5. Position each bucket vertically
   const bucketCount = sortedBuckets.length;
   const bucketHeight = availableHeight / Math.max(1, bucketCount - 1);
 
@@ -363,14 +353,11 @@ function runTimelineLayout() {
     const [yearKey, nodes] = bucket;
     const y = topMargin + bucketIdx * bucketHeight;
     
-    // Distribute nodes horizontally within bucket
     const nodeCount = nodes.length;
-    const minNodeWidth = 140;
     const spacing = 40;
     const totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
     let startX = centerX - totalWidth / 2;
     
-    // If too wide, scale down spacing
     if (totalWidth > cy.width() * 0.9) {
       const scale = (cy.width() * 0.9) / totalWidth;
       const newSpacing = spacing * scale;
@@ -381,56 +368,138 @@ function runTimelineLayout() {
     let currentX = startX;
     nodes.forEach((d, i) => {
       d.node.position({ x: currentX + d.width / 2, y });
+      // Store original Y for physics constraint
+      d.node.data('timelineY', y);
       currentX += d.width + (i < nodeCount - 1 ? spacing : 0);
     });
   });
 
-  // 6. Fit and animate
   cy.fit(null, 80);
   
-  // 7. Run cose to refine while keeping timeline structure
+  // 5. Run force-directed with differentiated edge weights
   setTimeout(() => {
-    runCoseLayoutRefined();
+    runPhysicsLayout();
   }, 100);
   
-  showToast('Linha do tempo por data de nascimento aplicada');
+  showToast('Linha do tempo com física aplicada');
 }
 
-function runCoseLayoutRefined() {
+function runPhysicsLayout() {
+  // Force-directed layout with differentiated edge weights
+  // Edge weights: casamento=10 (forte atração), filiação=5, irmandade=2, outros=0.5
+  
+  // First, assign weights to edges based on type
+  cy.edges().forEach(e => {
+    const type = e.data('type');
+    let weight = 1;
+    if (type === 'casou_com') weight = 10;      // Casamento: atração muito forte
+    else if (type === 'pai_de' || type === 'mae_de') weight = 5;  // Filiação: atração forte
+    else if (type === 'irmao_de') weight = 2;   // Irmandade: atração média
+    else weight = 0.5;                           // Outros: fraca
+    e.data('physicsWeight', weight);
+  });
+
   try {
     const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
-    console.log(`Running ${layoutName} for timeline refinement`);
+    console.log(`Running ${layoutName} with physics weights`);
     
     cy.layout({
       name: layoutName,
       animate: true,
-      animationDuration: 1500,
+      animationDuration: 2000,
       fit: true,
-      padding: 100,
+      padding: 150,
       nodeDimensionsIncludeLabels: true,
       randomize: false,
+      // Physics parameters
       idealEdgeLength: 180,
-      nodeRepulsion: 15000,
+      nodeRepulsion: 15000,      // Repulsão forte entre nós não conectados
+      nodeOverlap: 100,          // Penalidade máxima para sobreposição
+      edgeElasticity: (edge) => {
+        // Elasticidade inversa ao peso: casamentos mais rígidos
+        const w = edge.data('physicsWeight') || 1;
+        return 0.05 / w;  // Casamento (10) = 0.005 (muito rígido), filiação (5) = 0.01
+      },
+      nestingFactor: 0.05,
+      gravity: 0.02,             // Gravidade muito baixa para manter timeline Y
+      numIter: 6000,
+      initialTemp: 3000,
+      coolingFactor: 0.92,
+      minTemp: 1,
+      tile: false,
+      // cose-bilkent specific
+      gravityRange: 2.0,
+      gravityCompound: 1.0,
+      initialEnergyOnIncremental: 0.2
+    }).run();
+    
+    showToast('Física aplicada: casamentos rígidos, filiação forte, repulsão entre núcleos');
+  } catch (err) {
+    console.warn(`${layoutName} failed:`, err);
+    // Ultra-aggressive cose fallback
+    cy.layout({
+      name: 'cose',
+      animate: true,
+      animationDuration: 2500,
+      fit: true,
+      padding: 200,
+      nodeDimensionsIncludeLabels: true,
+      idealEdgeLength: 200,
+      nodeRepulsion: 30000,
+      nodeOverlap: 120,
+      edgeElasticity: (edge) => {
+        const w = edge.data('physicsWeight') || 1;
+        return 0.05 / w;
+      },
+      nestingFactor: 0.05,
+      gravity: 0.01,
+      numIter: 8000,
+      initialTemp: 4000,
+      coolingFactor: 0.9,
+      minTemp: 1
+    }).run();
+    showToast('Física aplicada (cose ultra)');
+  }
+}
+
+// Keep the old function for 'force' button
+function runCoseLayout(mode) {
+  const isForce = mode === 'force';
+  
+  try {
+    const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
+    console.log(`Running ${layoutName} for ${mode} mode`);
+    
+    cy.layout({
+      name: layoutName,
+      animate: true,
+      animationDuration: isForce ? 2000 : 1500,
+      fit: true,
+      padding: 150,
+      nodeDimensionsIncludeLabels: true,
+      randomize: isForce,
+      idealEdgeLength: isForce ? 160 : 180,
+      nodeRepulsion: isForce ? 12000 : 15000,
       nodeOverlap: 80,
       edgeElasticity: 0.2,
       nestingFactor: 0.05,
-      gravity: 0.1,
-      numIter: 5000,
+      gravity: isForce ? 0.1 : 0.05,
+      numIter: isForce ? 5000 : 4000,
       initialTemp: 2500,
       coolingFactor: 0.93,
       minTemp: 1,
       tile: false
     }).run();
     
-    showToast('Refinamento aplicado');
+    showToast(`Layout ${isForce ? 'livre' : 'refinado'} aplicado (${layoutName})`);
   } catch (err) {
     console.warn(`${layoutName} failed:`, err);
     cy.layout({
       name: 'cose',
       animate: true,
-      animationDuration: 1800,
+      animationDuration: 2000,
       fit: true,
-      padding: 150,
+      padding: 200,
       nodeDimensionsIncludeLabels: true,
       idealEdgeLength: 180,
       nodeRepulsion: 25000,
@@ -443,7 +512,7 @@ function runCoseLayoutRefined() {
       coolingFactor: 0.92,
       minTemp: 1
     }).run();
-    showToast('Refinamento aplicado (cose ultra)');
+    showToast('Layout aplicado (cose ultra)');
   }
 }
 
