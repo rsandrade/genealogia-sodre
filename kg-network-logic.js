@@ -221,8 +221,15 @@ function initCy() {
   // Hide loading
   document.getElementById('loadingOverlay').classList.add('hidden');
 
-  // Initial layout - use grid first to avoid stack, then hierarchical
-  cy.layout({ name: 'grid', fit: true, padding: 80, rows: Math.ceil(Math.sqrt(cy.nodes().length)) }).run();
+  // Initial layout - use circle first to spread nodes, then hierarchical
+  cy.layout({ 
+    name: 'circle', 
+    fit: true, 
+    padding: 120,
+    radius: Math.max(300, cy.nodes().length * 8),
+    startAngle: 1.5 * Math.PI,
+    counterclockwise: false
+  }).run();
   // Then apply hierarchical after a short delay
   setTimeout(() => runLayout('hierarchical'), 300);
 }
@@ -236,49 +243,54 @@ function runLayout(type) {
   });
 
   if (type === 'hierarchical') {
-    currentLayout = 'hierarchical';
     try {
       cy.layout({
         name: 'cose-bilkent',
         animate: true,
-        animationDuration: 800,
+        animationDuration: 1000,
         fit: true,
-        padding: 80,
+        padding: 100,
+        // Hierarchical options - better separation
         nodeDimensionsIncludeLabels: true,
         randomize: false,
-        idealEdgeLength: 120,
-        nodeRepulsion: 4500,
-        edgeElasticity: 0.45,
+        idealEdgeLength: 140,
+        nodeRepulsion: 6000,
+        nodeOverlap: 40,
+        edgeElasticity: 0.35,
         nestingFactor: 0.1,
-        gravity: 0.25,
-        numIter: 2500,
+        gravity: 0.3,
+        numIter: 3000,
         tile: true,
-        tilingPaddingVertical: 60,
-        tilingPaddingHorizontal: 60,
-        gravityRange: 3.8,
+        tilingPaddingVertical: 80,
+        tilingPaddingHorizontal: 80,
+        gravityRange: 4.0,
         gravityCompound: 1.5,
-        gravityRangeCompound: 3.8,
+        gravityRangeCompound: 4.0,
         initialEnergyOnIncremental: 0.5
       }).run();
       showToast('Layout hierárquico por geração aplicado');
     } catch (err) {
       console.warn('cose-bilkent failed, falling back to cose:', err);
-      // Fallback to built-in cose
+      // Fallback to built-in cose with better separation
       cy.layout({
         name: 'cose',
         animate: true,
-        animationDuration: 800,
+        animationDuration: 1200,
         fit: true,
-        padding: 80,
+        padding: 100,
         nodeDimensionsIncludeLabels: true,
-        idealEdgeLength: 100,
-        nodeRepulsion: 4000,
-        edgeElasticity: 0.45,
+        idealEdgeLength: 140,
+        nodeRepulsion: 8000,
+        nodeOverlap: 40,
+        edgeElasticity: 0.3,
         nestingFactor: 0.1,
-        gravity: 0.25,
-        numIter: 2500
+        gravity: 0.3,
+        numIter: 3000,
+        initialTemp: 1000,
+        coolingFactor: 0.95,
+        minTemp: 1
       }).run();
-      showToast('Layout hierárquico (fallback cose) aplicado');
+      showToast('Layout hierárquico (fallback cose otimizado) aplicado');
     }
   } else if (type === 'force') {
     currentLayout = 'force';
@@ -301,18 +313,22 @@ function runLayout(type) {
       cy.layout({
         name: 'cose',
         animate: true,
-        animationDuration: 1000,
+        animationDuration: 1200,
         fit: true,
-        padding: 80,
+        padding: 100,
         nodeDimensionsIncludeLabels: true,
-        idealEdgeLength: 100,
-        nodeRepulsion: 4000,
-        edgeElasticity: 0.45,
+        idealEdgeLength: 140,
+        nodeRepulsion: 8000,
+        nodeOverlap: 40,
+        edgeElasticity: 0.3,
         nestingFactor: 0.1,
-        gravity: 0.25,
-        numIter: 2500
+        gravity: 0.3,
+        numIter: 3000,
+        initialTemp: 1000,
+        coolingFactor: 0.95,
+        minTemp: 1
       }).run();
-      showToast('Layout livre (fallback cose) aplicado');
+      showToast('Layout livre (fallback cose otimizado) aplicado');
     }
   } else if (type === 'reset') {
     cy.animate({ zoom: 1, pan: { x: 0, y: 0 } }, { duration: 500 });
