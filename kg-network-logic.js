@@ -5,8 +5,20 @@ let searchIndex = new Map();
 
 // Register Cytoscape extensions (needed for CDN loads)
 if (typeof cytoscape !== 'undefined') {
-  if (typeof window.coseBilkent !== 'undefined') cytoscape.use(window.coseBilkent);
-  if (typeof window.cola !== 'undefined' && typeof window.cytoscapeCola !== 'undefined') cytoscape.use(window.cytoscapeCola);
+  let extCount = 0;
+  if (typeof window.coseBilkent !== 'undefined') {
+    cytoscape.use(window.coseBilkent);
+    extCount++;
+    console.log('cose-bilkent registered');
+  }
+  if (typeof window.cola !== 'undefined' && typeof window.cytoscapeCola !== 'undefined') {
+    cytoscape.use(window.cytoscapeCola);
+    extCount++;
+    console.log('cola registered');
+  }
+  if (extCount === 0) {
+    console.warn('No Cytoscape extensions loaded from CDN - using built-in cose only');
+  }
 }
 
 const CATEGORY_COLORS = {
@@ -225,15 +237,14 @@ function initCy() {
   cy.layout({ 
     name: 'circle', 
     fit: true, 
-    padding: 120,
-    radius: Math.max(300, cy.nodes().length * 8),
+    padding: 150,
+    radius: Math.max(400, cy.nodes().length * 10),
     startAngle: 1.5 * Math.PI,
     counterclockwise: false
   }).run();
   // Then apply hierarchical after a short delay
-  setTimeout(() => runLayout('hierarchical'), 300);
+  setTimeout(() => runLayout('hierarchical'), 500);
 }
-
 function runLayout(type) {
   if (!cy) return;
 
@@ -243,99 +254,113 @@ function runLayout(type) {
   });
 
   if (type === 'hierarchical') {
-    try {
-      cy.layout({
-        name: 'cose-bilkent',
-        animate: true,
-        animationDuration: 1000,
-        fit: true,
-        padding: 100,
-        // Hierarchical options - better separation
-        nodeDimensionsIncludeLabels: true,
-        randomize: false,
-        idealEdgeLength: 140,
-        nodeRepulsion: 6000,
-        nodeOverlap: 40,
-        edgeElasticity: 0.35,
-        nestingFactor: 0.1,
-        gravity: 0.3,
-        numIter: 3000,
-        tile: true,
-        tilingPaddingVertical: 80,
-        tilingPaddingHorizontal: 80,
-        gravityRange: 4.0,
-        gravityCompound: 1.5,
-        gravityRangeCompound: 4.0,
-        initialEnergyOnIncremental: 0.5
-      }).run();
-      showToast('Layout hierárquico por geração aplicado');
-    } catch (err) {
-      console.warn('cose-bilkent failed, falling back to cose:', err);
-      // Fallback to built-in cose with better separation
-      cy.layout({
-        name: 'cose',
-        animate: true,
-        animationDuration: 1200,
-        fit: true,
-        padding: 100,
-        nodeDimensionsIncludeLabels: true,
-        idealEdgeLength: 140,
-        nodeRepulsion: 8000,
-        nodeOverlap: 40,
-        edgeElasticity: 0.3,
-        nestingFactor: 0.1,
-        gravity: 0.3,
-        numIter: 3000,
-        initialTemp: 1000,
-        coolingFactor: 0.95,
-        minTemp: 1
-      }).run();
-      showToast('Layout hierárquico (fallback cose otimizado) aplicado');
-    }
+    currentLayout = 'hierarchical';
+    // First: manually position by generation (grid per generation)
+    positionByGeneration();
+    // Then: run cose to refine
+    setTimeout(() => {
+      runCoseLayout('hierarchical');
+    }, 100);
   } else if (type === 'force') {
     currentLayout = 'force';
-    try {
-      cy.layout({
-        name: 'cola',
-        animate: true,
-        animationDuration: 1000,
-        fit: true,
-        padding: 80,
-        nodeSpacing: 80,
-        edgeLength: 100,
-        convergenceThreshold: 0.01,
-        maxSimulationTime: 3000,
-        ungrabifyWhileSimulating: false
-      }).run();
-      showToast('Layout livre (force-directed) aplicado');
-    } catch (err) {
-      console.warn('cola failed, falling back to cose:', err);
-      cy.layout({
-        name: 'cose',
-        animate: true,
-        animationDuration: 1200,
-        fit: true,
-        padding: 100,
-        nodeDimensionsIncludeLabels: true,
-        idealEdgeLength: 140,
-        nodeRepulsion: 8000,
-        nodeOverlap: 40,
-        edgeElasticity: 0.3,
-        nestingFactor: 0.1,
-        gravity: 0.3,
-        numIter: 3000,
-        initialTemp: 1000,
-        coolingFactor: 0.95,
-        minTemp: 1
-      }).run();
-      showToast('Layout livre (fallback cose otimizado) aplicado');
-    }
+    runCoseLayout('force');
   } else if (type === 'reset') {
     cy.animate({ zoom: 1, pan: { x: 0, y: 0 } }, { duration: 500 });
     showToast('Zoom e pan resetados');
   } else if (type === 'fit') {
     cy.fit(null, 80);
     showToast('Ajustado para mostrar todos os nós');
+  }
+}
+
+function positionByGeneration() {
+  // Group nodes by generation
+  const byGen = {};
+  cy.nodes().forEach(n => {
+    const gen = n.data('generation') || 5;
+    if (!byGen[gen]) byGen[gen] = [];
+    byGen[gen].push(n);
+  });
+
+  const generations = Object.keys(byGen).map(Number).sort((a,b) => a-b);
+  const genCount = generations.length;
+  const centerX = cy.width() / 2;
+  const centerY = cy.height() / 2;
+  const ySpacing = Math.max(180, cy.height() / (genCount + 1));
+  const xSpacing = 200;
+
+  generations.forEach((gen, genIdx) => {
+    const nodes = byGen[gen];
+    const y = centerY - (genCount - 1) * ySpacing / 2 + genIdx * ySpacing;
+    const totalWidth = (nodes.length - 1) * xSpacing;
+    const startX = centerX - totalWidth / 2;
+    
+    nodes.forEach((n, i) => {
+      n.position({ x: startX + i * xSpacing, y });
+    });
+  });
+  
+  cy.fit(null, 100);
+}
+
+function runCoseLayout(mode) {
+  const isHierarchical = mode === 'hierarchical';
+  
+  try {
+    const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
+    console.log(`Running ${layoutName} for ${mode} mode`);
+    
+    cy.layout({
+      name: layoutName,
+      animate: true,
+      animationDuration: isHierarchical ? 1500 : 1200,
+      fit: true,
+      padding: 120,
+      nodeDimensionsIncludeLabels: true,
+      randomize: false,
+      idealEdgeLength: isHierarchical ? 160 : 140,
+      nodeRepulsion: isHierarchical ? 10000 : 12000,
+      nodeOverlap: 60,
+      edgeElasticity: isHierarchical ? 0.25 : 0.2,
+      nestingFactor: 0.05,
+      gravity: isHierarchical ? 0.35 : 0.15,
+      numIter: 4000,
+      initialTemp: 2000,
+      coolingFactor: 0.95,
+      minTemp: 1,
+      // cose-bilkent specific
+      tile: isHierarchical,
+      tilingPaddingVertical: isHierarchical ? 120 : 0,
+      tilingPaddingHorizontal: isHierarchical ? 100 : 0,
+      gravityRange: isHierarchical ? 5.0 : 3.0,
+      gravityCompound: 1.5,
+      gravityRangeCompound: isHierarchical ? 5.0 : 3.0,
+      initialEnergyOnIncremental: 0.3
+    }).run();
+    
+    showToast(`Layout ${isHierarchical ? 'hierárquico' : 'livre'} aplicado (${layoutName})`);
+  } catch (err) {
+    console.warn(`${layoutName} failed, falling back to cose:`, err);
+    // Ultra-aggressive cose fallback
+    cy.layout({
+      name: 'cose',
+      animate: true,
+      animationDuration: 1800,
+      fit: true,
+      padding: 150,
+      nodeDimensionsIncludeLabels: true,
+      idealEdgeLength: isHierarchical ? 180 : 160,
+      nodeRepulsion: 20000,
+      nodeOverlap: 80,
+      edgeElasticity: 0.15,
+      nestingFactor: 0.05,
+      gravity: isHierarchical ? 0.4 : 0.1,
+      numIter: 5000,
+      initialTemp: 3000,
+      coolingFactor: 0.93,
+      minTemp: 1
+    }).run();
+    showToast(`Layout ${isHierarchical ? 'hierárquico' : 'livre'} aplicado (cose ultra)`);
   }
 }
 
