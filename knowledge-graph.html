@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Linhagem — Família Gramilo Sodré</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<title>Grafo — Família Gramilo Sodré</title>
 <style>
+/* System font fallback — no external font loading */
 :root {
   --parchment: #f4ece1;
   --parchment-deep: #e8dcc8;
@@ -18,31 +18,19 @@
   --confirmed-bg: #e8f0eb;
   --hypothetical: #8b2e2e;
   --hypothetical-bg: #f5e8e8;
-  --barao: #4a3478;
-  --barao-bg: #ede8f4;
-  --colonial: #2a5a8a;
-  --colonial-bg: #e4eff8;
-  --materno: #7a5a10;
-  --materno-bg: #f7f0e0;
-  --filho-bg: #eaf5ed;
   --border-line: #c9b896;
   --card-shadow: 0 2px 8px rgba(26,16,8,0.12);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  font-family:'EB Garamond', Georgia, serif;
+  font-family:Georgia,serif;
   background:var(--parchment);
   color:var(--ink);
   min-height:100vh;
-  font-size:23.04px;
   -webkit-font-smoothing:antialiased;
 }
-body.embedded{min-height:auto;padding-bottom:1rem}
-body.embedded .page-header,body.embedded .page-footer{display:none}
-body.embedded::before{display:none}
 body::before {
-  content:'';
-  position:fixed; inset:0; pointer-events:none; opacity:0.03;
+  content:''; position:fixed; inset:0; pointer-events:none; opacity:0.03;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:200px; z-index:9999;
 }
@@ -57,261 +45,34 @@ body::before {
   background:var(--parchment); padding:0 1rem; color:var(--gold); font-size:1.4rem;
 }
 .page-header h1 {
-  font-family:'Cormorant Garamond',serif;
+  font-family:Georgia,serif;
   font-size:clamp(1.8rem,4vw,3rem); font-weight:700; line-height:1.15;
 }
 .page-header h1 em { font-style:italic; font-weight:400; color:var(--gold); }
 .page-subtitle {
-  font-family:'Cormorant Garamond',serif; font-size:1.15rem;
+  font-family:Georgia,serif; font-size:1.15rem;
   font-style:italic; color:var(--ink-muted); margin-top:0.4rem;
 }
 
-/* ── Controls ── */
-.controls {
-  display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;
-  padding:1.2rem 1rem 0.4rem;
-}
-.ctrl-btn {
-  font-family:'EB Garamond',serif; font-size:0.9rem;
-  padding:0.35rem 0.9rem; border:1px solid var(--border-line);
-  border-radius:3px; background:var(--parchment-deep);
-  color:var(--ink-soft); cursor:pointer; transition:all 0.2s;
-}
-.ctrl-btn:hover { background:var(--gold-light); color:#fff; border-color:var(--gold); }
-.ctrl-btn.active { background:var(--gold); color:#fff; border-color:var(--gold); }
+.main-nav{display:flex;gap:0.5rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap}
+.nav-btn{display:inline-block;padding:0.6rem 1.5rem;background:var(--gold);color:var(--parchment);border-radius:3px;font-family:Georgia,serif;font-size:1.1rem;letter-spacing:0.08em;text-decoration:none;transition:all 0.2s;border:1px solid transparent}
+.nav-btn:hover{background:var(--ink);color:var(--parchment);border-color:var(--ink);transform:translateY(-1px);box-shadow:0 4px 12px rgba(44,24,16,0.15)}
+.nav-btn.active{background:var(--ink);color:var(--parchment);border-color:var(--ink);font-weight:600;cursor:default;pointer-events:none}
 
-.legend {
-  display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
-  padding:0.4rem 1rem 1rem; border-bottom:1px solid var(--border-line);
-}
-.legend-item { display:flex; align-items:center; gap:0.3rem; font-size:0.8rem; color:var(--ink-muted); }
-.legend-dot { width:10.8px; height:10.8px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
-
-/* ── Main tree ── */
-.tree-wrap {
-  padding:2rem 0 3rem;
-}
-.section-scroll{
-  width:100%;
-  overflow-x:auto;
-  overflow-y:hidden;
-  padding:1.73rem 1rem 0.7rem;
-  scrollbar-width:thin;
-  scrollbar-color:var(--border-line) var(--parchment-deep);
-  -webkit-overflow-scrolling:touch;
-  cursor:grab;
-  -webkit-user-select:none;
-  user-select:none;
-  white-space:nowrap;
-}
-.section-scroll::-webkit-scrollbar{height:8px}
-.section-scroll::-webkit-scrollbar-track{background:var(--parchment-deep);border-radius:3px}
-.section-scroll::-webkit-scrollbar-thumb{background:var(--border-line);border-radius:3px}
-.section-scroll.dragging{cursor:grabbing;scrollbar-color:var(--gold) var(--parchment-deep)}
-.section-scroll.dragging *{cursor:grabbing!important}
-.section-scroll.dragging::-webkit-scrollbar-thumb{background:var(--gold)}
-
-/* ── Section (branch group) ── */
-.section {
-  margin-bottom:2.5rem; position:relative; text-align:center;
-}
-.section-title {
-  font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700;
-  color:var(--ink-soft); padding:0.5rem 0; margin-bottom:0.8rem;
-  border-bottom:1px solid var(--border-line); letter-spacing:0.04em;
-}
-.section-title em { font-weight:400; font-style:italic; color:var(--ink-muted); }
-
-/* ── Family column: mesmo tratamento visual da árvore direta ── */
-.family-col {
-  display:inline-flex;
-  flex-direction:column;
-  align-items:stretch;
-  vertical-align:top;
-  flex:0 0 auto;
-  min-width:311px;
-  max-width:484px;
-  margin:0 0.95rem 1.9rem;
-  background:#fffcf7;
-  border:1px solid var(--border-line);
-  border-radius:3px;
-  padding:1rem;
-  box-shadow:0 1px 3px rgba(44,24,16,0.08);
-  transition:transform 0.25s ease,box-shadow 0.25s ease;
-  white-space:normal;
-  overflow-wrap:break-word;
-  word-break:normal;
-  hyphens:auto;
-  box-sizing:border-box;
-}
-.family-col *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
-.family-col:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
-.subfamilies-wrap{margin-top:1rem;padding-top:0.8rem;border-top:1px dashed var(--line-faint);display:flex;flex-direction:column;gap:0.8rem}
-.subfamilies-wrap .family-col{min-width:auto;max-width:100%;margin:0;padding:0.8rem;background:var(--parchment);border:1px solid var(--line-faint);border-radius:3px}
-.subfamilies-wrap .family-col:hover{transform:none;box-shadow:none}
-.family-header{
-  font-family:'Playfair Display',serif;
-  font-size:1.48rem;
-  font-weight:700;
-  color:var(--ink);
-  line-height:1.2;
-  text-align:center;
-  margin-bottom:0.27rem;
-}
-.family-header-person{cursor:pointer;border-bottom:1px dotted transparent;transition:color .2s,border-color .2s}
-.couple-amp{color:var(--gold);white-space:nowrap}
-.family-header-person:hover{color:var(--gold);border-color:var(--gold)}
-.family-sub{
-  font-size:0.85rem;
-  color:var(--ink-muted);
-  font-style:italic;
-  text-align:center;
-  margin-bottom:1.04rem;
-  padding-bottom:0.87rem;
-  border-bottom:1px solid var(--border-line);
-}
-.family-couple{display:none}
-.children-list {
-  display:flex;
-  flex-direction:column;
-  gap:0.6rem;
-  justify-content:flex-start;
-  padding:0;
-  border-top:0;
-  margin-top:0;
-  width:100%;
-}
-.children-list.vertical{flex-direction:column;align-items:stretch}
-.child-card{
+/* f3 chart container */
+#FamilyChart {
+  width:100%; min-height:80vh; position:relative;
   background:var(--parchment);
-  border:1px solid var(--border-line);
-  border-radius:3px;
-  padding:0.87rem 1.2rem;
-  box-shadow:0 1px 3px rgba(44,24,16,0.08);
-  transition:transform .25s ease,box-shadow .25s ease;
-  cursor:pointer;
+  overflow:auto;
 }
-.child-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,24,16,0.12)}
-.child-card.cat-confirmed,.child-card.cat-filho,.child-card.cat-sobrinho{border-left:3px solid var(--confirmed)}
-.child-card.cat-materno{border-left:3px solid var(--materno)}
-.child-card.cat-hypothetical{border-left:3px solid var(--hypothetical)}
-.child-card.cat-historical{border-left:3px solid var(--gold)}
-.child-card.cat-barao{border-left:3px solid var(--barao)}
-.child-card.cat-colonial{border-left:3px solid var(--colonial)}
-.child-name{
-  font-family:'Playfair Display',serif;
-  font-size:1.01rem;
-  font-weight:700;
-  color:var(--ink);
-  line-height:1.2;
+.f3, .f3 > svg, #FamilyChart > svg, .main_svg {
+  width:100% !important;
+  height:80vh !important;
+  background:var(--parchment);
 }
-.child-note{
-  font-size:1.08rem;
-  color:var(--ink-muted);
-  font-style:italic;
-  margin-top:0.17rem;
-}
+#htmlSvg { width:100% !important; height:80vh !important; }
 
-/* ── Person cards ── */
-.person {
-  position:relative; border:1px solid var(--border-line); border-radius:4px;
-  padding:0.72rem 1.02rem; min-width:172.8px; max-width:244.8px;
-  cursor:pointer; transition:all 0.2s ease;
-  box-shadow:var(--card-shadow);
-  white-space:normal; overflow-wrap:break-word; word-break:normal; hyphens:auto; box-sizing:border-box;
-}
-.person *{max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;hyphens:auto;box-sizing:border-box}
-.person:hover {
-  transform:translateY(-2px);
-  box-shadow:0 4px 16px rgba(26,16,8,0.2); z-index:10;
-}
-.person.selected { outline:2px solid var(--gold); outline-offset:2px; }
-
-.person.cat-historical { background:linear-gradient(135deg,#f7f0e3,#f0e8d5); border-color:var(--gold); }
-.person.cat-historical .person-name { color:var(--gold); }
-.person.cat-barao { background:var(--barao-bg); border-color:var(--barao); }
-.person.cat-barao .person-name { color:var(--barao); }
-.person.cat-colonial { background:var(--colonial-bg); border-color:var(--colonial); }
-.person.cat-colonial .person-name { color:var(--colonial); }
-.person.cat-hypothetical { background:var(--hypothetical-bg); border-color:var(--hypothetical); border-style:dashed; }
-.person.cat-hypothetical .person-name { color:var(--hypothetical); }
-.person.cat-confirmed { background:var(--confirmed-bg); border-color:var(--confirmed); }
-.person.cat-confirmed .person-name { color:var(--confirmed); }
-.person.cat-materno { background:var(--materno-bg); border-color:var(--materno); }
-.person.cat-materno .person-name { color:var(--materno); }
-.person.cat-filho { background:var(--filho-bg); border-color:#8aba9a; }
-.person.cat-filho .person-name { color:var(--confirmed); }
-.person.cat-sobrinho { background:#f4f8f5; border-color:#b0c8b5; min-width:129.6px; max-width:187.2px; }
-.person.cat-sobrinho .person-name { color:#4a7a5a; font-size:0.82rem; }
-
-.person-name {
-  font-family:'Cormorant Garamond',serif; font-weight:700;
-  font-size:0.9rem; line-height:1.2;
-}
-.person-dates {
-  font-size:0.72rem; color:var(--ink-muted); margin-top:0.1rem; font-style:italic;
-}
-.person-spouse {
-  font-size:0.68rem; color:var(--ink-muted); margin-top:0.1rem;
-  font-style:italic;
-}
-.person-spouse strong { color:var(--ink-soft); font-style:normal; }
-
-/* Escala embutida: aproxima o KG da proporção visual da index.html */
-body.embedded{font-size:22.5px}
-body.embedded .tree-wrap{max-width:1200px;margin:0 auto;padding:2rem 0 3rem}
-body.embedded .section-scroll{padding:1.73rem 2.5rem 0.7rem}
-body.embedded .section{margin-bottom:3.5rem}
-body.embedded .section-title{font-size:1.45rem;margin-bottom:1.2rem}
-body.embedded .family-col{min-width:360px;max-width:520px;margin:0 1.05rem 2rem;padding:1.05rem}
-body.embedded .family-header{font-size:1.48rem}
-body.embedded .family-sub{font-size:0.85rem;margin-bottom:1.04rem;padding-bottom:0.87rem}
-body.embedded .child-card{padding:0.87rem 1.2rem}
-body.embedded .child-name{font-size:1.01rem}
-body.embedded .child-note{font-size:1.08rem}
-body.embedded .family-couple{gap:0.65rem}
-body.embedded .person{min-width:310px;max-width:440px;padding:1.45rem 1.65rem}
-body.embedded .person.cat-sobrinho{min-width:230px;max-width:330px}
-body.embedded .person-name{font-size:1.45rem;line-height:1.2}
-body.embedded .person.cat-sobrinho .person-name{font-size:1.12rem}
-body.embedded .person-dates{font-size:1rem;margin-top:0.25rem}
-body.embedded .person-spouse{font-size:0.95rem;margin-top:0.25rem}
-body.embedded .children-list{gap:0.6rem;padding-top:0}
-body.embedded .descent-tree{min-width:1680px}
-body.embedded .descent-couple{flex:1 0 700px;max-width:760px;gap:0.85rem}
-body.embedded .descent-row-spacer,
-body.embedded .descent-arrow-row .descent-row-spacer,
-body.embedded .descent-labels-row .descent-row-spacer,
-body.embedded .descent-converge-center{flex-basis:12rem}
-body.embedded .controls{padding:1.2rem 1rem 0.8rem}
-body.embedded .ctrl-btn{font-size:1rem;padding:0.5rem 1rem}
-body.embedded .legend-item{font-size:0.95rem}
-body.embedded .info-panel{font-size:1rem;max-width:520px}
-body.embedded .info-panel h3{font-size:1.4rem}
-body.embedded .info-rel{font-size:0.95rem}
-body.embedded .info-note{font-size:0.95rem}
-
-/* ── Descendant link arrow ── */
-.desc-link {
-  text-align:center; padding:0.3rem 0; color:var(--gold); font-size:0.85rem;
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-}
-.desc-link::before { content:'↓ '; }
-.desc-link a {
-  color:var(--gold); text-decoration:none; border-bottom:1px dotted var(--gold);
-  cursor:pointer;
-}
-.desc-link a:hover { color:var(--ink-soft); border-bottom-style:solid; }
-
-/* ── Connector lines between families ── */
-.connector {
-  display:flex; align-items:center; gap:0.5rem; margin:0.5rem 0;
-  color:var(--ink-muted); font-family:'Cormorant Garamond',serif;
-  font-size:0.8rem; font-style:italic;
-}
-.connector-arrow { font-size:1.2rem; color:var(--gold); }
-
-/* ── Info Panel ── */
+/* Info panel */
 .info-panel {
   position:fixed; bottom:1.5rem; right:1.5rem;
   background:#fffcf5; border:2px solid var(--gold); border-radius:5px;
@@ -320,7 +81,7 @@ body.embedded .info-note{font-size:0.95rem}
   z-index:100; display:none; font-size:0.9rem;
 }
 .info-panel h3 {
-  font-family:'Cormorant Garamond',serif; font-size:1.15rem;
+  font-family:Georgia,serif; font-size:1.15rem;
   color:var(--ink); margin-bottom:0.5rem; padding-bottom:0.4rem;
   border-bottom:1px solid var(--border-line);
 }
@@ -330,142 +91,963 @@ body.embedded .info-note{font-size:0.95rem}
 .info-close { position:absolute; top:6px; right:10px; cursor:pointer; color:var(--ink-muted); font-size:1.3rem; line-height:1; }
 .info-close:hover { color:var(--ink); }
 
+/* Controls */
+.controls {
+  display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;
+  padding:1.2rem 1rem 0.4rem;
+}
+.ctrl-btn {
+  font-family:Georgia,serif; font-size:0.9rem;
+  padding:0.35rem 0.9rem; border:1px solid var(--border-line);
+  border-radius:3px; background:var(--parchment-deep);
+  color:var(--ink-soft); cursor:pointer; transition:all 0.2s;
+}
+.ctrl-btn:hover { background:var(--gold-light); color:#fff; border-color:var(--gold); }
+.ctrl-btn.active { background:var(--gold); color:#fff; border-color:var(--gold); }
+
+/* Legend */
+.legend {
+  display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;
+  padding:0.4rem 1rem 1rem; border-bottom:1px solid var(--border-line);
+}
+.legend-item { display:flex; align-items:center; gap:0.3rem; font-size:0.8rem; color:var(--ink-muted); }
+.legend-dot { width:10.8px; height:10.8px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
+
+/* Override f3 styles to match parchment theme */
+.f3 .card_cont {
+  border:1px solid var(--border-line) !important;
+  border-radius:3px !important;
+  background:#fffcf5 !important;
+  box-shadow:var(--card-shadow) !important;
+  cursor:pointer !important;
+}
+.f3 .card_cont:hover {
+  transform:translateY(-2px) !important;
+  box-shadow:0 4px 16px rgba(26,16,8,0.2) !important;
+}
+.f3 .card .card-label {
+  font-family:Georgia,serif !important;
+}
+.f3 .card-female .card_cont { border-color:#9b6b7b !important; background:#fcf5f7 !important; }
+.f3 .card-male .card_cont { border-color:#5a7a9a !important; background:#f3f7fb !important; }
+.f3 .card-male-other-spouse .card_cont, .f3 .card-female-other-spouse .card_cont {
+  border-color:var(--gold) !important;
+}
+.f3 .card_family_link { stroke:var(--gold) !important; }
+.f3 .line { stroke:#c9b896 !important; }
+.f3 .card-edit-info { display:none !important; }
+
 .page-footer {
   text-align:center; padding:2rem 1rem; border-top:1px solid var(--border-line); margin-top:1rem;
 }
-.page-footer p { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--ink-muted); font-size:0.9rem; line-height:1.6; }
+.page-footer p { font-family:Georgia,serif; font-style:italic; color:var(--ink-muted); font-size:0.9rem; line-height:1.6; }
+.page-footer a { color:var(--gold); text-decoration:none; }
+.f3 {
+  --female-color: rgb(196, 138, 146);
+  --male-color: rgb(120, 159, 172);
+  --genderless-color: lightgray;
+  --background-color: rgb(33, 33, 33);
+  --text-color: #fff;
 
-@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-.section { animation:fadeIn 0.4s ease both; }
-.section:nth-child(2) { animation-delay:0.05s; }
-.section:nth-child(3) { animation-delay:0.1s; }
-.section:nth-child(4) { animation-delay:0.15s; }
-.section:nth-child(5) { animation-delay:0.2s; }
-
-/* ── Descent tree (ascendentes) ── */
-.descent-section .section-scroll{
-  overflow-x:auto;overflow-y:hidden;
-}
-.descent-tree {
-  display:flex; flex-direction:column; gap:0; justify-content:center; align-items:center;
-  padding:1rem 0; min-width:max-content;
-}
-.descent-level-row {
-  display:flex; gap:0; align-items:flex-start; justify-content:center; width:100%;
-}
-.descent-couple {
-  display:flex; gap:0.7rem; align-items:flex-start; justify-content:center;
-  flex:1 0 560px; max-width:720px;
-}
-.descent-row-spacer {
-  flex:0 0 7rem;
-}
-.descent-arrow-row {
-  display:flex; align-items:center; justify-content:center; width:100%;
-}
-.descent-arrow-row .descent-arrow {
-  flex:1; text-align:center;
-}
-.descent-arrow-row .descent-row-spacer {
-  flex:0 0 7rem;
-}
-.descent-converge-center {
-  flex:0 0 7rem; display:flex; align-items:center; justify-content:center;
-}
-.converge-symbol {
-  font-size:1.8rem; color:var(--gold); font-style:italic;
-  font-family:'Cormorant Garamond',serif;
-}
-.descent-labels-row {
-  display:flex; align-items:center; justify-content:center; width:100%; margin-bottom:0.3rem;
-}
-.descent-labels-row .descent-branch-label {
-  flex:1; text-align:center;
-}
-.descent-labels-row .descent-row-spacer {
-  flex:0 0 7rem;
-}
-.descent-placeholder {
-  border:2px dashed var(--border-line) !important;
-  background:transparent !important;
-  min-height:4.2rem;
-  opacity:0.65;
-}
-.descent-branch {
-  display:flex; flex-direction:column; align-items:center; gap:0;
-  min-width:230.4px;
-}
-.descent-branch-label {
-  font-family:'Cormorant Garamond',serif; font-size:0.75rem;
-  text-transform:uppercase; letter-spacing:0.12em; color:var(--ink-muted);
-  padding:0.15rem 0.5rem;
-  border-radius:2px; background:var(--parchment-deep); margin-bottom:0.5rem;
-}
-.descent-level {
-  display:flex; gap:0.4rem; align-items:flex-start; justify-content:center;
-  padding:0; position:relative;
-}
-.descent-arrow {
-  text-align:center; color:var(--gold); font-size:0.9rem; padding:0.2rem 0;
-  font-family:'Cormorant Garamond',serif; font-style:italic;
-}
-.descent-arrow::before { content:'↓'; }
-.descent-converge {
-  display:flex; align-items:center; gap:1.5rem; padding:0.5rem 0;
-}
-.descent-converge-line {
-  width:2rem; height:1px; border-top:2px dotted var(--gold);
-}
-.descent-siblings-link {
-  text-align:center; padding:0.3rem 0;
-}
-.descent-siblings-link a {
-  font-family:'Cormorant Garamond',serif; font-size:0.8rem;
-  font-style:italic; color:var(--gold); text-decoration:none;
-  border-bottom:1px dotted var(--gold); cursor:pointer;
-}
-.descent-siblings-link a:hover { color:var(--ink-soft); border-bottom-style:solid; }
-
-@media(max-width:768px) {
-  .person { min-width:144px; max-width:208.8px; padding:0.576rem 0.792rem; }
-  .person-name { font-size:0.82rem; }
-  .page-header { padding:1.5rem 1rem 1.2rem; }
-  .family-col { margin:0 0.4rem 1rem; }
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Unified Navigation Component */
-.main-nav{display:flex;gap:0.5rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap}
-.nav-btn{display:inline-block;padding:0.6rem 1.5rem;background:var(--gold);color:var(--parchment);border-radius:var(--radius);font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.08em;text-decoration:none;transition:all 0.2s;border:1px solid transparent}
-.nav-btn:hover{background:var(--ink);color:var(--parchment);border-color:var(--ink);transform:translateY(-1px);box-shadow:0 4px 12px rgba(44,24,16,0.15)}
-.nav-btn.active{background:var(--ink);color:var(--parchment);border-color:var(--ink);font-weight:600;cursor:default;pointer-events:none}
+.f3 * {
+  box-sizing: border-box;
+}
+
+.f3 .cursor-pointer {
+  cursor: pointer;
+}
+.f3 svg.main_svg {
+  width: 100%;
+  height: 100%;
+}
+.f3 svg.main_svg text {
+  fill: currentColor;
+}
+.f3 rect.card-female, .f3 .card-female .card-body-rect, .f3 .card-female .text-overflow-mask {
+  fill: var(--female-color);
+}
+.f3 rect.card-male, .f3 .card-male .card-body-rect, .f3 .card-male .text-overflow-mask {
+  fill: var(--male-color);
+}
+.f3 .card-genderless .card-body-rect, .f3 .card-genderless .text-overflow-mask {
+  fill: var(--genderless-color);
+}
+.f3 .card_add .card-body-rect {
+  fill: #3b5560;
+  stroke-width: 4px;
+  stroke: #fff;
+  cursor: pointer;
+}
+.f3 g.card_add text {
+  fill: #fff;
+}
+.f3 .card-main-outline {
+  stroke: currentColor;
+  stroke-width: 3px;
+}
+.f3 .card_family_tree rect {
+  transition: 0.3s;
+}
+.f3 .card_family_tree:hover rect {
+  transform: scale(1.1);
+}
+.f3 .card_add_relative {
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s;
+}
+.f3 .card_add_relative circle {
+  fill: rgba(0, 0, 0, 0);
+}
+.f3 .card_add_relative:hover {
+  color: black;
+}
+.f3 .card_edit.pencil_icon {
+  color: #fff;
+  transition: 0.3s;
+}
+.f3 .card_edit.pencil_icon:hover {
+  color: black;
+}
+.f3 .card_break_link, .f3 .link_upper, .f3 .link_lower, .f3 .link_particles {
+  transform-origin: 50% 50%;
+  transition: 1s;
+}
+.f3 .card_break_link {
+  color: #fff;
+}
+.f3 .card_break_link.closed .link_upper {
+  transform: translate(-140.5px, 655.6px);
+}
+.f3 .card_break_link.closed .link_upper g {
+  transform: rotate(-58deg);
+}
+.f3 .card_break_link.closed .link_particles {
+  transform: scale(0);
+}
+.f3 .input-field input {
+  height: 2.5rem !important;
+}
+.f3 .input-field > label:not(.label-icon).active {
+  -webkit-transform: translateY(-8px) scale(0.8);
+  transform: translateY(-8px) scale(0.8);
+}
+.f3.f3-cont {
+  width:100%;
+  height:900px;
+  max-height:70vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+.f3 {
+  position: relative;
+  display: flex;
+}
+
+
+
+
+/* form-info */
+.f3-form input[type="text"],
+.f3-form textarea,
+.f3-form select {
+  width: 100%;
+  padding: 8px 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  background: var(--background-color);
+  color: currentColor;
+}
+
+.f3-form input[type="text"]:focus,
+.f3-form textarea:focus,
+.f3-form select:focus {
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.f3-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.f3-form button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.f3-cancel-btn {
+  background-color: #ccc;
+}
+
+.f3-form .f3-delete-btn {
+  background-color: transparent;
+  border: 1px solid #f44336;
+  color: #f44336;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.f3-delete-btn:hover {
+  background-color: #da190b;
+  border-color: #da190b;
+  color: #fff;
+}
+
+.f3-delete-btn:disabled {
+  opacity: 0.5;
+  background-color: transparent;
+  color: #f44336;
+  cursor: not-allowed;
+}
+
+.f3-form .f3-remove-relative-btn {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  color: currentColor;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.f3-remove-relative-btn:hover, .f3-remove-relative-btn.active {
+  background-color: var(--text-color);
+  border-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.f3-radio-group {
+  margin: 15px 0;
+}
+
+.f3-radio-group label {
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.f3-radio-group input[type="radio"] {
+  margin-right: 5px;
+}
+
+.f3-info-field-label, .f3-form-field label {
+  font-weight: bold;
+  font-size: 12px;
+  display: block;
+  opacity: 0.8;
+}
+
+.f3-info-field-value {
+  font-weight: normal;
+  display: block;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 1px;
+  margin-bottom: 10px;
+  min-height: 18px;
+}
+
+.f3-form-buttons {
+  text-align: right;
+}
+
+.f3-form-title {
+  text-align: center;
+}
+
+.f3-form.non-editable .f3-form-buttons,
+.f3-form.non-editable .f3-delete-btn,
+.f3-form.non-editable .f3-remove-relative-btn,
+.f3-form.non-editable .f3-link-existing-relative {
+  display: none;
+}
+
+.f3-close-btn {
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-size: 30px;
+  color: var(--text-color);
+}
+
+.f3-edit-btn {
+  position: relative;
+  top: -1px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.f3-add-relative-btn {
+  cursor: pointer;
+  width: 27px;
+  height: 27px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+/* card-html */
+
+.f3 div.card {
+  cursor: pointer;
+  color: var(--text-color);
+  position: relative;
+  line-height: 1.2;
+}
+
+.f3 div.card-image-circle {
+  border-radius: 50%;
+  padding: 5px;
+  width: 90px;
+  height: 90px;
+}
+
+.f3 div.card-image-circle div.card-label {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  max-width: 150%;
+  min-height: 22px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+.f3 div.card-image-circle img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.f3 div.card-image-circle svg {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.f3 div.card-image-circle img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.f3 div.card-rect {
+  padding: 5px;
+  border-radius: 3px;
+  width: 120px;
+  min-height: 70px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.f3 div.card-image-rect {
+  width: 200px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.f3 div.card-image-rect .person-icon {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.f3 div.card-image-rect img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.f3 div.card-image-rect svg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 7px;
+}
+
+.f3 div.card-image-rect div.card-label {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.f3 div.mini-tree {
+  text-align: right;
+  position: absolute;
+  top: -15px;
+  right: -2px;
+  z-index: -1;
+}
+.f3 div.mini-tree svg {
+  width: 55px;
+}
+
+.f3 .f3-card-duplicate-tag {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: rgb(255, 251, 220);
+  background-color: rgba(255, 251, 220, 0);
+  border-radius: 50%;
+  padding: 2px;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.f3 .f3-card-duplicate-hover div.card-inner {
+  transform: translate(0, -2px);
+  outline: 4px solid rgb(255, 251, 220);
+}
+
+.f3 .f3-card-duplicate-hover .f3-card-duplicate-tag {
+  background-color: rgba(255, 251, 220, .8);
+  color: #000;
+}
+
+.f3 .f3-remove-relative-active .card {
+  background-color: var(--background-color);
+}
+
+.f3 .f3-remove-relative-active .card-inner {
+  transition: border 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  opacity: .75;
+}
+
+.f3 .f3-remove-relative-active .card:hover .card-inner {
+  opacity: .25;
+}
+
+.f3 .f3-remove-relative-active .card-male.card-depth--1:hover .card-inner {
+  transform: translate(-8px, -8px);
+}
+
+.f3 .f3-remove-relative-active .card.card-female.card-depth--1:hover .card-inner {
+  transform: translate(8px, -8px);
+}
+
+.f3 .f3-remove-relative-active .card.card-female.card-depth-0:hover .card-inner {
+  transform: translate(8px, 0);
+}
+
+.f3 .f3-remove-relative-active .card.card-male.card-depth-0:hover .card-inner {
+  transform: translate(-8px, 0);
+}
+
+.f3 .f3-remove-relative-active .card.card-depth-1:hover .card-inner {
+  transform: translate(0, 8px);
+}
+
+.f3 .f3-remove-relative-active .card.card-main .card-inner {
+  transform: translate(0, 0)!important;
+  opacity: 1!important;
+}
+
+
+
+.f3 div.card > div {
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.8);
+}
+
+.f3 .card-inner {
+  outline: 0px solid rgba(255, 255, 255, 1);
+  transition: outline 0.5s ease-in-out;
+}
+
+.f3 div.card-female .card-inner, .f3 div.card-female .person-icon svg {
+  background-color: var(--female-color);
+}
+.f3 div.card-male .card-inner, .f3 div.card-male .person-icon svg {
+  background-color: var(--male-color);
+}
+.f3 div.card-genderless .card-inner, .f3 div.card-genderless .person-icon svg {
+  background-color: var(--genderless-color);
+}
+
+.f3 div.card-new-rel .card-inner, .f3 div.card-new-rel .person-icon svg {
+  background-color: var(--background-color);
+}
+
+.f3 div.card-to-add .card-inner {
+  background-color: var(--background-color);
+  border: 1px solid;
+}
+
+.f3 div.card-to-add .card-inner .card-label {
+  margin: 0 auto;
+}
+
+.f3 div.card-to-add .person-icon {
+  display: none;
+}
+
+.f3 div.card-new-rel .card-inner {
+  border-width: 1px;
+  border-style: dashed;
+  outline: 0px !important;
+}
+.f3 div.card-new-rel.card-female .card-inner, .f3 div.card-to-add.card-female .card-inner {
+  border-color: var(--female-color);
+  color: var(--female-color);
+}
+.f3 div.card-new-rel.card-male .card-inner, .f3 div.card-to-add.card-male .card-inner {
+  color: var(--male-color);
+  border-color: var(--male-color);
+}
+
+.f3 div.card-unknown .card-inner {
+  background-color: var(--background-color);
+  border: 1px solid;
+}
+
+.f3 div.card-unknown .card-inner .card-label {
+  margin: 0 auto;
+}
+
+.f3 div.card-unknown .person-icon {
+  display: none;
+}
+
+.f3 div.card-new-rel .card-inner {
+  border-width: 1px;
+  border-style: dashed;
+  outline: 0px !important;
+}
+.f3 div.card-new-rel.card-female .card-inner, .f3 div.card-unknown.card-female .card-inner {
+  border-color: var(--female-color);
+  color: var(--female-color);
+}
+.f3 div.card-new-rel.card-male .card-inner, .f3 div.card-unknown.card-male .card-inner {
+  color: var(--male-color);
+  border-color: var(--male-color);
+}
+
+.f3 div.card:hover > div {
+  transform: translate(0, -2px);
+}
+.f3 div.card-main .card-inner, .f3 div.card:hover .card-inner {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.8);
+}
+
+.f3 div.card-main .card-inner {
+  outline: 4px solid rgba(220, 220, 220, 1);
+}
+
+.f3 div.card-inner.f3-path-to-main {
+  outline: 4px solid rgba(255, 255, 255, 1);
+}
+
+.f3 .link {
+  transition: stroke-width 0.2s ease-in-out;
+}
+
+.f3 .link.f3-path-to-main {
+  stroke-width: 4px;
+}
+
+
+
+
+
+.f3-form-cont {
+  position: relative;
+  z-index: 6;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--background-color);
+  overflow: auto;
+  flex: 0 0 auto;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.f3-form-cont.opened {
+  width: 350px;
+}
+
+.f3-form {
+  padding: 20px;
+}
+
+.f3-form hr {
+  border-style: solid; 
+  border-width: thin 0 0 0;
+  opacity: 0.15;
+}
+
+.f3-nav-cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+}
+
+.f3-history-controls {
+  padding: 8px 5px 7px 9px;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+.f3-back-button, .f3-forward-button {
+  width: 30px;
+  height: 30px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  margin-right: 10px;
+  color: currentColor;
+}
+
+.f3-history-controls svg {
+  height: 100%;
+}
+
+.f3-back-button.disabled, .f3-forward-button.disabled {
+  opacity: 0.5;
+}
+
+.f3-modal {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.f3-modal-content {
+  position: relative;
+  background-color: var(--background-color);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 90%;
+}
+
+.f3-modal-close {
+  color: #aaa;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.f3-modal-close:hover,
+.f3-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+.f3-popup {
+  position: fixed;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+}
+
+.f3-popup-content {
+  position: relative;
+  background-color: var(--background-color);
+  border: 1px solid #888;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.f3-popup-nav {
+  height: 20px;
+}
+
+.f3-popup-content-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.f3-popup-close {
+  color: #aaa;
+  position: absolute;
+  z-index: 4;
+  right: 6px;
+  top: 1px;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.f3-popup-close:hover,
+.f3-popup-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+
+.f3-btn {
+  position: relative;
+  cursor: pointer;
+  padding: 5px 10px;
+
+  overflow: hidden;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  
+  background-color: var(--text-color);
+  color: var(--background-color);
+  
+  transition: background-color .3s;
+  font-size: 14px;
+}
+
+.f3-btn:hover, .f3-btn:focus {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.f3-female-bg {
+  background-color: var(--female-color);
+}
+
+.f3-male-bg {
+  background-color: var(--male-color);
+}
+
+.f3-genderless-bg {
+  background-color: var(--genderless-color);
+}
+
+.f3-female-color {
+  color: var(--female-color);
+}
+
+.f3-male-color {
+  color: var(--male-color);
+}
+
+.f3-genderless-color {
+  color: var(--genderless-color);
+}
+
+.f3-autocomplete-cont {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  font-size: 14px;
+  width: 200px;
+}
+
+.f3-autocomplete input {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 10px;
+  width: 100%;
+}
+.f3-autocomplete input:focus {
+  outline: none;
+}
+
+.f3-autocomplete-toggle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease-in-out;
+  width: 20px;
+}
+
+.f3-autocomplete-items {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  overflow-y: auto;
+  max-height: 0;
+  background-color: var(--background-color);
+  transition: max-height 0.3s ease-in-out;
+}
+
+.f3-autocomplete.active .f3-autocomplete-items {
+  max-height: 300px;
+}
+
+.f3-autocomplete-item > div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--background-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.f3-autocomplete-item > div:hover, .f3-autocomplete-item.f3-selected > div {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.f3-autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+.f3-kinship-info {
+  padding: 10px 20px;
+}
+
+.f3-kinship-info .f3-info-field {
+  color:#b3b01e
+}
+
+.f3-kinship-info-icon {
+  cursor:pointer;
+  display:inline-block;
+  width:18px;
+  height:18px;
+  color:#04a4f4;
+  position:relative;
+  top:4px;
+  left:2px;
+}
+
+.f3-kinship-info .f3 {
+  width:100%;
+  height: 100%;
+  position:relative;
+  background-color:rgb(33,33,33);
+  color:#fff;
+}
+
+.f3 .f3-kinship-info .card-kinship-self {
+  min-height: 0px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--background-color) !important;
+  border: solid 3px;
+  color: #437fae;
+  font-weight: bold;
+}
+
+.f3 .f3-kinship-info .card-kinship-self.f3-real-label {
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.f3 .f3-kinship-info .card-kinship-rel {
+  min-height: 0px;
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #1d3456 !important;
+  font-weight: bold;
+}
+
+.f3 .f3-kinship-info .card-kinship-default {
+  min-height: 0px;
+  width: 150px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: var(--background-color) !important;
+  border: solid 1px;
+}
+
+.f3-kinship-labels-toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  font-size: 12px;
+}
+
+.f3-kinship-labels-toggle label {
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 2px 5px;
+}
+
+.f3-kinship-labels-toggle input[type="checkbox"] {
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 </style>
 </head>
 <body>
-<script>if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');</script>
 
 <header class="page-header">
 <h1>Grafo <em>Gramilo Sodré</em></h1>
-<p class="page-subtitle">Rede genealógica — dados sincronizados em junho de 2026</p>
+<p class="page-subtitle">Árvore genealógica interativa — biblioteca family-chart (D3.js) — dados sincronizados em junho de 2026</p>
 <div class="main-nav">
-<a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
-<a href="knowledge-graph.html" class="nav-btn active">🕸️ Grafo</a>
-<a href="kg-network.html" class="nav-btn">🌐 Visualização em Rede</a>
-<a href="cidades.html" class="nav-btn">🗺️ Cidades e Contexto</a>
+  <a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
+  <a href="knowledge-graph.html" class="nav-btn active">🕸️ Grafo</a>
+  <a href="kg-network.html" class="nav-btn">🌐 Visualização em Rede</a>
+  <a href="cidades.html" class="nav-btn">🗺️ Cidades e Contexto</a>
 </div>
 </header>
 
 <div class="controls" id="controls"></div>
 
 <div class="legend">
-  <div class="legend-item"><div class="legend-dot" style="background:#9e7c2e"></div> Histórico</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#4a3478"></div> Ramo Barão</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#2a5a8a"></div> Elo colonial</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#5a7a9a"></div> Homem</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#9b6b7b"></div> Mulher</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#9e7c2e"></div> Casamento</div>
   <div class="legend-item"><div class="legend-dot" style="background:#2d5a3d"></div> Confirmado</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#7a5a10"></div> Materno</div>
   <div class="legend-item"><div class="legend-dot" style="background:#8b2e2e;border-style:dashed"></div> Hipotético</div>
 </div>
 
-<div class="tree-wrap" id="treeWrap"></div>
+<div id="FamilyChart"></div>
 
 <div class="info-panel" id="infoPanel">
   <span class="info-close" onclick="closeInfo()">&times;</span>
@@ -474,687 +1056,2951 @@ body.embedded .info-note{font-size:0.95rem}
 </div>
 
 <footer class="page-footer">
-  <p>114 pessoas · 7 gerações · MemPalace + HTML sincronizados<br>
+  <p>161 pessoas · 7 gerações · visualização com family-chart (D3.js)<br>
   Jerônimo I (1631–1711) ≠ Jerônimo II (filho do Barão) · Lacuna documental entre Jerônimo I e Tomaz (~1860)<br>
-  <a href="cidades.html" style="color:var(--gold)">🗺️ Cidades e Contexto Histórico</a></p>
+  <a href="cidades.html">🗺️ Cidades e Contexto Histórico</a></p>
 </footer>
 
+<script src="vendor/d3.v7.min.js"></script>
+<script src="vendor/family-chart.min.js"></script>
 <script>
 // ── Data ──
-const P = {
-  fernando:      {n:'Dom Fernando Sodré Pereira',d:'',c:'historical',sp:null,note:'Pai de Jerônimo I'},
-  jeronimo_i:    {n:'Jerônimo Sodré Pereira I',d:'1631–1711',c:'historical',sp:'francisca',note:'Águas Belas, Lisboa → Salvador/BA · ≠ Jerônimo II'},
-  francisca:     {n:'Dona Francisca de Aragão',d:'',c:'historical',sp:'jeronimo_i',note:'1ª esposa de Jerônimo I'},
-  maria_azevedo: {n:'Maria de Azevedo',d:'',c:'historical',sp:'jeronimo_i',note:'2ª esposa de Jerônimo I'},
-  coronel:       {n:'Francisco Maria Sodré Pereira',d:'',c:'barao',sp:'meneses',note:'Coronel · Filho de Francisco Álvaro'},
-  meneses:       {n:'Maria Ana de Meneses',d:'',c:'barao',sp:'coronel',note:'Esposa do coronel'},
-  barao:         {n:'Francisco Pereira Sodré, Barão de Alagoinhas',d:'1818–1882',c:'barao',sp:'cora',note:'Cachoeira/BA · Título: Barão com honra de Grandeza (1879)'},
-  cora:          {n:'Cora César Coutinho',d:'1819–1880',c:'barao',sp:'barao',note:'Baronesa · casam. 1834'},
-  jeronimo_ii:   {n:'Jerônimo Sodré Pereira II',d:'~1835',c:'barao',sp:null,note:'Filho do Barão · Médico, Deputado · ≠ patriarca'},
-  conselheiro:   {n:'Francisco Maria Sodré Pereira',d:'1836–1903',c:'barao',sp:null,note:'Conselheiro · Filho do Barão · Deputado federal BA 1891–1902'},
-  jose_lino:     {n:'José Lino Coutinho Sodré Pereira',d:'',c:'barao',sp:null,note:'Filho do Barão'},
-  elisa_barao:   {n:'Elisa Sodré Pereira',d:'bat. 1881',c:'barao',sp:null,note:'Filha do Barão'},
-  manuel:        {n:'Manuel Sodré',d:'',c:'colonial',sp:'maria_gramilo',note:'Elo colonial Sodré–Gramilo'},
-  maria_gramilo: {n:'Maria Gramilo',d:'',c:'colonial',sp:'manuel',note:'Elo colonial Sodré–Gramilo'},
-  eduardo:       {n:'Eduardo Sodré',d:'',c:'colonial',sp:null,note:'Filho de Manuel + Maria'},
-  antonio_p:     {n:'Antônio Pereira',d:'',c:'colonial',sp:'isabel_g',note:'Elo colonial'},
-  isabel_g:      {n:'Isabel Gramilo',d:'',c:'colonial',sp:'antonio_p',note:'Elo colonial'},
-  tomaz:         {n:'Tomaz Gramilo Sodré',d:'~1860',c:'hypothetical',sp:'teodora',note:'Amargosa/BA · ~4-6 gerações entre Jerônimo I e Tomaz'},
-  teodora:       {n:'Teodora Julia da Cruz',d:'',c:'hypothetical',sp:'tomaz',note:'Esposa de Tomaz'},
-  marcelo:       {n:'Marcelo Gramilo Sodré',d:'1897–1976',c:'confirmed',sp:'rita_rosa',note:'Casam. 09/02/1924 · Montes Claros/MG · 7 filhos'},
-  rita_rosa:     {n:'Rita Rosa Sodré',d:'1901–1992',c:'confirmed',sp:'marcelo',note:'7 filhos'},
-  francisco:     {n:'Francisco Gramilo Sodré',d:'1925–1999',c:'confirmed',sp:'atanagilda',note:'Bat. 17/05/1925 · Casam. 26/12/1953 · Ibitupa/BA'},
-  atanagilda:    {n:'Atanagilda Odete dos Santos',d:'1933–?',c:'confirmed',sp:'francisco',note:'Bat. 25/06/1933 · Casam. 26/12/1953 · óbito: data incorreta, aguardando confirmação'},
-  gervasio:      {n:'Gervásio Eusébio dos Santos',d:'',c:'materno',sp:'maria_aleluia',note:'Pai de Atanagilda Odete dos Santos · confirmação oral · possível parente de Francisco Eusébio dos Santos (padrinho em Amargosa, 1895), precisa confirmação documental'},
-  maria_aleluia: {n:'Maria Aleluia dos Santos',d:'',c:'materno',sp:'gervasio',note:'Avó materna · confirmação oral'},
-
-  // Ramos documentados em Amargosa — fatos paroquiais, sem ligação direta confirmada ao tronco Gramilo
-  francisco_lud: {n:'Francisco Ludgero Vaz Sodré',d:'',c:'confirmed',sp:'olympia_f',note:'Ramo Vaz Sodré de Amargosa · casou com Olympia Flavia de Miranda Sodré · pessoa distinta de Francisco Gramilo Sodré · possível elo H4, precisa confirmação'},
-  olympia_f:     {n:'Olympia Flavia de Miranda Sodré',d:'',c:'confirmed',sp:'francisco_lud',note:'Esposa de Francisco Ludgero Vaz Sodré · ramo Vaz Sodré de Amargosa'},
-  horacio_vs:    {n:'Horácio Vaz Sodré',d:'',c:'confirmed',sp:'adelina_mj',note:'Ramo Vaz Sodré de Amargosa · 11 registros de inventário no APEB · hipótese H4 como possível elo, precisa confirmação'},
-  adelina_mj:    {n:'Adelina Maria de Jesus',d:'',c:'confirmed',sp:'horacio_vs',note:'Esposa de Horácio Vaz Sodré'},
-  amelia_vaz:    {n:'Amélia Vaz Padri',d:'',c:'confirmed',sp:null,note:'Filha registrada no ramo Horácio Vaz Sodré + Adelina Maria de Jesus'},
-  firmino_vs:    {n:'Firmino Vaz Sodré',d:'ativo 1909–1914',c:'confirmed',sp:'laurinda_s',note:'Amargosa/BA · batismo do filho José (31/01/1909) + padrinho em 1914 · relação com Tomaz/Marcelo ainda não confirmada'},
-  laurinda_s:    {n:'Laurinda Sodré',d:'ativa 1909–1914',c:'confirmed',sp:'firmino_vs',note:'Esposa de Firmino · mãe de José · madrinha junto com Firmino em 1914'},
-  jose_firmino:  {n:'José Sodré',d:'bat. 31/01/1909',c:'confirmed',sp:null,note:'Filho de Firmino Vaz Sodré + Laurinda Sodré · Arraial do Conente, Amargosa'},
-  esmeraldo_vs:  {n:'Esmeraldo Vaz Sodré',d:'ativo 1912–1914',c:'confirmed',sp:'florinda_a',note:'Amargosa/BA · pai de Olímpio, Ismael e Anizio · OCR lê "Euneraldo/Ceneraldo" · confirmado pelo FamilySearch (ID 6DLV-ZG23) · possível parente de Firmino Vaz Sodré (mesmo sobrenome Vaz Sodré)'},
-  florinda_a:    {n:'Florinda de Andrade',d:'ativa 1912–1914',c:'confirmed',sp:'esmeraldo_vs',note:'Esposa de Esmeraldo Vaz Sodré · mãe de Olímpio, Ismael e Anizio · OCR lê "Alarinda" · confirmada pelo FamilySearch'},
-  olimpio_s:     {n:'Olímpio Sodré',d:'n. 18/11/1913 · bat. 14/11/1914',c:'confirmed',sp:null,note:'Filho de Esmeraldo Vaz Sodré + Florinda de Andrade · padrinhos: Firmino + Laurinda · Amargosa/BA · confirmado pelo FamilySearch'},
-  ismael_s:      {n:'Ismael Sodré',d:'bat. 14/11/1914',c:'confirmed',sp:null,note:'~30 meses no batismo · filho de Esmeraldo Vaz Sodré + Florinda de Andrade · Amargosa/BA'},
-  anizio_s:      {n:'Anizio Sodré',d:'',c:'confirmed',sp:null,note:'Filho de Esmeraldo Vaz Sodré + Florinda de Andrade · FamilySearch'},
-  manoel_caetano:{n:'Manoel Caetano Sodré',d:'ativo 1938–1941',c:'confirmed',sp:'maria_paulina',note:'Pai de Antonia Sodré de Jesus e Luciana Caetana Sodré · casamentos 1938 e 1941 · Amargosa/BA · relação com Firmino/Gramilo ainda não confirmada'},
-  maria_paulina: {n:'Maria Paulina de Jesus',d:'ativa 1938–1941',c:'confirmed',sp:'manoel_caetano',note:'Mãe de Antonia e Luciana · OCR lê "Joares/Podré" · FamilySearch registra "de Jesus"'},
-  antonia_sodre: {n:'Antonia Sodré de Jesus',d:'cas. 10/12/1941',c:'confirmed',sp:'vicente_miel',note:'Filha de Manoel Caetano Sodré + Maria Paulina de Jesus · casou Vicente Maciel de Almeida (22 anos) · Amargosa/BA'},
-  luciana_caetana:{n:'Luciana Caetana Sodré',d:'cas. 01/12/1938',c:'confirmed',sp:'pedro_maciel',note:'Filha de Manoel Caetano Sodré + Maria Paulina de Jesus · casou Pedro Maciel de Almeida (23 anos) · FamilySearch · irmã de Antonia Sodré'},
-  vicente_miel:  {n:'Vicente Maciel de Almeida',d:'cas. 10/12/1941',c:'confirmed',sp:'antonia_sodre',note:'Filho de Christino José de Almeida + Jacula Conceição de Almeida · 22 anos · irmão de Pedro Maciel de Almeida'},
-  pedro_maciel:  {n:'Pedro Maciel de Almeida',d:'cas. 01/12/1938',c:'confirmed',sp:'luciana_caetana',note:'Filho de Ricardo José de Almeida + Macula Conceição de Almeida · 23 anos · irmão de Vicente Maciel de Almeida'},
-  eufrasio_vs:   {n:'Eufrásio Victor Sodré',d:'cas. 04/02/1937',c:'confirmed',sp:'firmina_mf',note:'Filho de Antonio Victor Sodré + Bastilla Maria de Jesus · casou Firmina Moreira de Freitas · Amargosa/BA'},
-  antonio_victor:{n:'Antonio Victor Sodré',d:'',c:'confirmed',sp:'bastilla_mj',note:'Pai de Eufrásio Victor Sodré (com Bastilla) e possivelmente de João Gregorio Sodré (com Adelia Maria Sódre, FS fs9) · Amargosa/BA · se confirmado, teve 2 esposas'},
-  bastilla_mj:   {n:'Bastilla Maria de Jesus',d:'',c:'confirmed',sp:'antonio_victor',note:'Mãe de Eufrásio Victor Sodré'},
-  firmina_mf:    {n:'Firmina Moreira de Freitas',d:'cas. 04/02/1937',c:'confirmed',sp:'eufrasio_vs',note:'Esposa de Eufrásio Victor Sodré · mãe: Maria Sodré de Jesus (?) — HIPÓTESE'},
-  maria_sodre_j: {n:'Maria Sodré de Jesus (?)',d:'',c:'hypothetical',sp:null,note:'Mãe de Firmina Moreira de Freitas · HIPÓTESE — precisa confirmação'},
-  clelino_vaz:   {n:'Clelino Vaz',d:'',c:'confirmed',sp:null,note:'Testemunha no casamento 10/12/1941 Amargosa · sobrenome Vaz = possível ramo Vaz Sodré'},
-  joao_gregorio:{n:'João Gregorio Sodré',d:'n. ~1906 · cas. 1933',c:'confirmed',sp:null,note:'Filho de Antonio Victor Sodré + Adelia Maria Sódre · casou Maria Magdalena Lopes · Amargosa/Tapera · FS fs9 · se Antonio Victor é o mesmo pai de Eufrásio, então são meio-irmãos'},
-  francisco_eus: {n:'Francisco Eusébio dos Santos',d:'ativo 1895',c:'materno',sp:null,note:'Padrinho em batismo em Brejaês, Amargosa (08/12/1895) · possível irmão/parente de Gervásio Eusébio dos Santos — precisa confirmação'},
-  geruasio_samp: {n:'Geruásio José Sampaio',d:'ativo 1895',c:'hypothetical',sp:null,note:'Pai em batismo de Maria, Brejaês/Amargosa (08/12/1895) · possível pista para o sobrenome Sampaio — precisa investigação'},
-
-  arlindo:       {n:'Arlindo Gramilo Sodré',d:'† 31/01/2025',c:'confirmed',sp:'noemia',note:'8 filhos'},
-  noemia:        {n:'Noemia Rocha Sodré',d:'',c:'confirmed',sp:'arlindo',note:'8 filhos'},
-  zeca:          {n:'José Gramilo Sudré (Zeca)',d:'',c:'confirmed',sp:null,note:'9 filhos · Sudré = erro cartorário'},
-  otavia:        {n:'Otávia Rosa Sodré Bispo',d:'',c:'confirmed',sp:'eustaquio',note:'10 filhos'},
-  eustaquio:     {n:'Eustáquio Eusébio Bispo',d:'',c:'confirmed',sp:'otavia',note:'10 filhos'},
-  elisa:         {n:'Elisa Gramilo Sodré',d:'',c:'confirmed',sp:'alfredo',note:'3 filhos (Elizabete adotiva, Zeilde, Valdeci/Sísio)'},
-  alfredo:       {n:'Alfredo Fernandes',d:'',c:'confirmed',sp:'elisa',note:'3 filhos (Elizabete adotiva)'},
-  zeilde:        {n:'Zeilde',d:'✝',c:'confirmed',sp:null,note:'falecido'},
-  valdeci:       {n:'Valdeci (apelido: Sísio)',d:'',c:'confirmed',sp:null,note:'mãe de Alfredo Neto'},
-  elizabete:     {n:'Elizabete',d:'',c:'confirmed',sp:null,note:'filha adotiva (mais velha) · mãe de Cesar'},
-  alfredo_neto:  {n:'Alfredo Neto',d:'',c:'confirmed',sp:null,note:'Filho de Valdeci (Sísio) · neto de Elisa Gramilo Sodré'},
-  cesar:         {n:'Cesar',d:'',c:'confirmed',sp:null,note:'Filho de Elizabete'},
-  tania_karla:   {n:'Tânia Karla Sodré Bulhões',d:'',c:'confirmed',sp:null,note:'Filha de Elizabete · neta de Elisa Gramilo Sodré'},
-  isabel:        {n:'Isabel Rosa Sodré',d:'',c:'confirmed',sp:'maximiliano',note:'8 filhos · Itororó-BA'},
-  maximiliano:   {n:'Maximiano José de Souza',d:'',c:'confirmed',sp:'isabel',note:'8 filhos · Itororó-BA · veio de Teófilo Otoni (MG) → Aiquara'},
-  jovina:        {n:'Jovina Gramilo Sodré',d:'',c:'confirmed',sp:'manezinho',note:'Fazenda Babilônia (limítrofe com Fazenda Santa Terezinha)'},
-  manezinho:     {n:'Manezinho',d:'',c:'confirmed',sp:'jovina',note:'Dono da Fazenda Babilônia'},
-  etelvina_t:    {n:'Etelvina Rosa Souza ("Tezinha")',d:'',c:'confirmed',sp:'erotildes',note:'× Erotildes Ribeiro Sodré · nascida em Aiquara/BA · Filho: Admilson Ribeiro Sodré'},
-  erotildes:     {n:'Erotildes Ribeiro Sodré',d:'',c:'confirmed',sp:'etelvina_t',note:'× Etelvina Tezinha · pais: Manuel Ribeiro Sodré e Mariana Rosa de Jesus'},
-  admilson:      {n:'Admilson Ribeiro Sodré',d:'',c:'confirmed',sp:null,note:'Filho de Erotildes×Etelvina · nascido em Aiquara/BA'},
-  valdivino:     {n:'Valdivino',d:'',c:'confirmed',sp:null,note:''},
-  carlos_im:     {n:'Carlos',d:'',c:'confirmed',sp:null,note:''},
-  francisco_im:  {n:'Francisco',d:'',c:'confirmed',sp:null,note:''},
-  dutinha:       {n:'Dutinha',d:'',c:'confirmed',sp:null,note:'Apelido'},
-  edvaldo:       {n:'Edvaldo',d:'',c:'confirmed',sp:null,note:''},
-  lelinha:       {n:'Lelinha',d:'',c:'confirmed',sp:null,note:'Apelido'},
-  maria_im:      {n:'Maria',d:'',c:'confirmed',sp:null,note:'mãe de Simone · filhas em Salvador/BA e São Paulo/SP'},
-  simone:        {n:'Simone',d:'',c:'confirmed',sp:null,note:'Filha de Maria · neta de Isabel Rosa Sodré · Salvador/BA'},
-  alice_santos:  {n:'Alice dos Santos',d:'',c:'confirmed',sp:'marcos_andrade',note:'Irmã de Maria Aleluia · 1ª esposa de Marcos Freire de Andrade · Filhos: Marcos, Marlice, Janete, Marcus Marquinhos, Lígia'},
-  marcos_m:      {n:'Marcos',d:'',c:'confirmed',sp:null,note:'Filho de Marcos×Alice'},
-  marlice:       {n:'Marlice',d:'',c:'confirmed',sp:null,note:'Filha de Marcos×Alice'},
-  janete:        {n:'Janete',d:'',c:'confirmed',sp:null,note:'Filha de Marcos×Alice'},
-  marcus:        {n:'Marcus "Marquinhos"',d:'',c:'confirmed',sp:null,note:'Filho de Marcos×Alice'},
-  ligia:         {n:'Lígia',d:'',c:'confirmed',sp:null,note:'Filha de Marcos×Alice'},
-  marcos_andrade:{n:'Marcos Freire de Andrade',d:'',c:'confirmed',sp:'alice_santos',note:'2 casamentos'},
-  florenca:      {n:'Florença Reis Andrade',d:'',c:'probable',sp:'marcos_andrade',note:'2ª esposa de Marcos'},
-  magno:         {n:'Magno Reis Andrade',d:'',c:'probable',sp:null,note:'Filho de Marcos × Florença'},
-  ieda:          {n:'Iêda Reis Andrade',d:'',c:'probable',sp:null,note:'Filha de Marcos × Florença'},
-  magnaldo:      {n:'Magnaldo Reis Andrade',d:'',c:'confirmed',sp:'veralucia',note:'casou com Veralúcia Sodré · separaram ~1990 · Filho de Marcos × Florença'},
-  atanagilda_f:  {n:'Atanagilda Sodré Sampaio',d:'1954',c:'filho',sp:null,note:'n. 11/04/1954'},
-  veralucia:     {n:'Veralúcia Sodré',d:'1955',c:'filho',sp:null,note:'n. 30/09/1955'},
-  luiz_carlos:   {n:'Luiz Carlos Sudré',d:'1957',c:'filho',sp:null,note:'n. 30/03/1957 · Sudré = erro cartorário'},
-  francisco_f:   {n:'Francisco Gramilo Sodré Filho',d:'1959',c:'filho',sp:null,note:'n. 26/07/1959 · Professor, PMA'},
-  angelica:      {n:'Angélica Maria Sodré Costa',d:'1961',c:'filho',sp:null,note:'n. 02/03/1961'},
-  rita_cassia:   {n:'Rita de Cássia Sodré',d:'1962',c:'filho',sp:null,note:'n. 09/10/1962'},
-  djalma:        {n:'Djalma Gramilo Sodré',d:'1964',c:'filho',sp:null,note:'n. 15/02/1964'},
-  paulo_renato:  {n:'Paulo Renato Sodré',d:'1965',c:'filho',sp:null,note:'n. 19/06/1965'},
-  ronaldo:       {n:'Ronaldo Gramilo Sodré',d:'1966',c:'filho',sp:null,note:'n. 16/12/1966'},
-  julio:         {n:'Júlio César Gramilo Sodré',d:'1968',c:'filho',sp:null,note:'n. 09/01/1968'},
-  cristina:      {n:'Cristina Maria Gramilo Sodré',d:'1969',c:'filho',sp:null,note:'n. 02/08/1969'},
-  sinara:        {n:'Sinara Magali Sodré',d:'1971',c:'filho',sp:null,note:'n. 20/12/1971'},
-};
-
-const SOBRINHOS = {
-  arlindo: ['Arlenô Gramilo Sodré','Marcelo Gramilo Sodré Neto','Arlindo Gramilo Sodré Filho','Antonio Cesar Silva Sodré','Luciane Silva Sodré','Cristiane Silva Sodré','Rita de Cássia Silva Sodré Figueredo','Manoel Ailton Silva Sodré'],
-  zeca:    ['José Gramilo Sodré Filho','Walter Gramilo Sodré','Jailson Gramilo Sodré','Ivan Gramilo Sodré','Manoelito Gramilo Sodré','Joselito Gramilo Sodré','Cleide','Ione Rosa Sudré','Maria Rita'],
-  otavia:  ['Geni Bispo','Zenito Bispo','Sinval Bispo','Maria Helena Sodré Bispo','Maiza Rosa Bispo Gouveia','Zélia Bispo','Juvenil Sodré Bispo','Nilda Sodré Bispo de Souza','Antônio Carlos Bispo','Valdeck Bispo'],
-  elisa:   ['Zeilde','Valdeci (Sísio)','Elizabete','Tânia Karla','Cesar','Alfredo Neto'],
-};
-
-// Families: each is a couple + children + optional link to descendant section
-const SECTIONS = [
-  {
-    id:'trunk', title:'Tronco histórico', em:'séc. XVII–XIX', filter:'historical',
-    families:[
-      { couple:[{id:'fernando'},{id:'jeronimo_i'}], children:[], link:{to:'barao',label:'(descendente)'} },
-      { couple:[{id:'jeronimo_i'},{id:'francisca'}], children:[] },
-      { couple:[{id:'jeronimo_i'},{id:'maria_azevedo'}], children:[] },
-    ]
-  },
-  {
-    id:'colonial', title:'Elo colonial', em:'Sodré–Gramilo', filter:'colonial',
-    families:[
-      { couple:[{id:'manuel'},{id:'maria_gramilo'}], children:[{id:'eduardo'}] },
-      { couple:[{id:'antonio_p'},{id:'isabel_g'}], children:[] },
-    ]
-  },
-  {
-    id:'barao', title:'Ramo Barão de Alagoinhas', em:'nobreza baiana, séc. XIX', filter:'barao',
-    families:[
-      { couple:[{id:'coronel'},{id:'meneses'}], children:[{id:'barao'}] },
-      { couple:[{id:'barao'},{id:'cora'}], children:[{id:'jeronimo_ii'},{id:'conselheiro'},{id:'jose_lino'},{id:'elisa_barao'}] },
-    ]
-  },
-  {
-    id:'amargosa', title:'Ramos documentados em Amargosa', em:'paroquiais 1895–1941 · conexão com Gramilo ainda em confirmação', filter:'amargosa',
-    families:[
-      { couple:[{id:'francisco_lud'},{id:'olympia_f'}], children:[] },
-      { couple:[{id:'horacio_vs'},{id:'adelina_mj'}], children:[{id:'amelia_vaz'}] },
-      { couple:[{id:'firmino_vs'},{id:'laurinda_s'}], children:[{id:'jose_firmino'}] },
-      { couple:[{id:'esmeraldo_vs'},{id:'florinda_a'}], children:[{id:'olimpio_s'},{id:'ismael_s'},{id:'anizio_s'}] },
-      { couple:[{id:'manoel_caetano'},{id:'maria_paulina'}], children:[{id:'antonia_sodre'},{id:'luciana_caetana'}] },
-      { couple:[{id:'antonio_victor'},{id:'bastilla_mj'}], children:[{id:'eufrasio_vs'},{id:'joao_gregorio'}] },
-      { couple:[{id:'eufrasio_vs'},{id:'firmina_mf'}], children:[] },
-      { couple:[{id:'vicente_miel'},{id:'antonia_sodre'}], children:[] },
-      { couple:[{id:'pedro_maciel'},{id:'luciana_caetana'}], children:[] },
-      { couple:[{id:'francisco_eus'}], children:[] },
-      { couple:[{id:'geruasio_samp'}], children:[] },
-      { couple:[{id:'maria_sodre_j'}], children:[] },
-      { couple:[{id:'clelino_vaz'}], children:[] },
-    ]
-  },
-  {
-    id:'ascendentes', title:'Ascendentes diretos', em:'ramos paterno e materno convergem em Francisco & Atanagilda', filter:'confirmed',
-    type:'descent-tree'
-  },
-  {
-    id:'francisco', title:'Francisco & Atanagilda', em:'12 filhos', filter:'confirmed',
-    families:[
-      {
-        couple:[{id:'francisco'},{id:'atanagilda'}],
-        children:[{id:'atanagilda_f'},{id:'veralucia'},{id:'luiz_carlos'},{id:'francisco_f'},{id:'angelica'},{id:'rita_cassia'},{id:'djalma'},{id:'paulo_renato'},{id:'ronaldo'},{id:'julio'},{id:'cristina'},{id:'sinara'}],
-        childColumns:3
-      },
-    ]
-  },
-  {
-    id:'irmaos', title:'Irmãos de Francisco e seus filhos', em:'sobrinhos', filter:'confirmed',
-    families:[
-      { couple:[{id:'arlindo'},{id:'noemia'}], sobrinhos:'arlindo' },
-      { couple:[{id:'zeca'}], sobrinhos:'zeca' },
-      { couple:[{id:'otavia'},{id:'eustaquio'}], sobrinhos:'otavia' },
-      { couple:[{id:'elisa'},{id:'alfredo'}], children:[{id:'elizabete'},{id:'zeilde'},{id:'valdeci'}],
-        subfamilies:[
-          { couple:[{id:'elizabete'}], children:[{id:'cesar'},{id:'tania_karla'}] },
-          { couple:[{id:'valdeci'}], children:[{id:'alfredo_neto'}] }
-        ] },
-      { couple:[{id:'isabel'},{id:'maximiliano'}],
-        children:[{id:'etelvina_t'},{id:'valdivino'},{id:'carlos_im'},{id:'francisco_im'},{id:'dutinha'},{id:'edvaldo'},{id:'lelinha'},{id:'maria_im'}],
-        subfamilies:[
-          { couple:[{id:'erotildes'},{id:'etelvina_t'}], children:[{id:'admilson'}] }
-        ]
-      },
-      { couple:[{id:'jovina'},{id:'manezinho'}] },
-    ]
-  },
+const F3_DATA = [
+    {
+        "id": "h1",
+        "data": {
+            "first name": "Jerônimo",
+            "last name": "Sodré Pereira",
+            "gender": "M",
+            "nome completo": "Jerônimo Sodré Pereira",
+            "birthday": "Santarém, Portugal, séc. XVII",
+            "confiabilidade": "confirmada",
+            "notas": "Tronco baiano. 2ª esposa = irmã do Padre Antônio Vieira. · NÃO conectar filhos do séc. XIX diretamente — provável homônimo"
+        },
+        "rels": {
+            "children": [
+                "a116",
+                "a117",
+                "a118",
+                "a119",
+                "a122"
+            ]
+        }
+    },
+    {
+        "id": "1",
+        "data": {
+            "first name": "Tomaz",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Tomaz Gramilo Sodré",
+            "confiabilidade": "hipotética",
+            "notas": "Ancestral candidato da linha de Marcelo. Ligação com Teodora Julia da Cruz permanece hipotética. Tomaz associado a Antônia de Gramilo em 1825 = possível homônimo ou ancestral distinto. NÃO fundir sem "
+        },
+        "rels": {
+            "spouses": [
+                "2"
+            ]
+        }
+    },
+    {
+        "id": "2",
+        "data": {
+            "first name": "Teodora",
+            "last name": "Julia da Cruz",
+            "gender": "F",
+            "nome completo": "Teodora Julia da Cruz",
+            "confiabilidade": "hipotética"
+        },
+        "rels": {
+            "spouses": [
+                "1"
+            ]
+        }
+    },
+    {
+        "id": "gp1",
+        "data": {
+            "first name": "Marcelo",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Marcelo Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Pai de Francisco, Arlindo, José, Otávia, Elisa, Isabel e Jovina. Origem mineira."
+        },
+        "rels": {
+            "spouses": [
+                "gp2"
+            ],
+            "children": [
+                "3",
+                "f2",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11"
+            ]
+        }
+    },
+    {
+        "id": "gp2",
+        "data": {
+            "first name": "Rita",
+            "last name": "Rosa Sodré",
+            "gender": "F",
+            "nome completo": "Rita Rosa Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Apelido: Roxa. Mãe dos 7 irmãos Gramilo Sodré."
+        },
+        "rels": {
+            "spouses": [
+                "gp1"
+            ],
+            "children": [
+                "3",
+                "f2",
+                "f7",
+                "f8",
+                "f9",
+                "f10",
+                "f11"
+            ]
+        }
+    },
+    {
+        "id": "gm1",
+        "data": {
+            "first name": "Gervásio",
+            "last name": "Eusébio dos Santos",
+            "gender": "M",
+            "nome completo": "Gervásio Eusébio dos Santos",
+            "confiabilidade": "provável",
+            "notas": "Avô materno. Confirmação por memória oral; documental pendente. Gervásio Barbosa dos Santos (FS) = possível homônimo, NÃO fundir sem documento."
+        },
+        "rels": {
+            "spouses": [
+                "gm2"
+            ],
+            "children": [
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "gm2",
+        "data": {
+            "first name": "Maria",
+            "last name": "Aleluia dos Santos",
+            "gender": "F",
+            "nome completo": "Maria Aleluia dos Santos",
+            "confiabilidade": "provável",
+            "notas": "Mãe de Atanagilda Odete dos Santos."
+        },
+        "rels": {
+            "spouses": [
+                "gm1"
+            ],
+            "children": [
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "3",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Francisco Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Propriedade: Fazenda Santa Terezinha, Aiquara/BA. 12 filhos."
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ],
+            "spouses": [
+                "4"
+            ],
+            "children": [
+                "c1",
+                "c2",
+                "c3",
+                "c4",
+                "c5",
+                "c6",
+                "c7",
+                "c8",
+                "c9",
+                "c10",
+                "c11",
+                "c12"
+            ]
+        }
+    },
+    {
+        "id": "4",
+        "data": {
+            "first name": "Atanagilda",
+            "last name": "Odete dos Santos",
+            "gender": "F",
+            "nome completo": "Atanagilda Odete dos Santos",
+            "confiabilidade": "confirmada",
+            "notas": "Mãe de 12 filhos. Nascida Santos, adotou Sodré ao casar."
+        },
+        "rels": {
+            "parents": [
+                "gm1",
+                "gm2"
+            ],
+            "spouses": [
+                "3"
+            ],
+            "children": [
+                "c1",
+                "c2",
+                "c3",
+                "c4",
+                "c5",
+                "c6",
+                "c7",
+                "c8",
+                "c9",
+                "c10",
+                "c11",
+                "c12"
+            ]
+        }
+    },
+    {
+        "id": "f2",
+        "data": {
+            "first name": "Arlindo",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Arlindo Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Empresário. Pavimentação Sodré e Filhos, Jequié/BA. Lista de filhos possui duas camadas; reconciliação pendente. † 31/01/2025"
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ],
+            "spouses": [
+                "f3"
+            ],
+            "children": [
+                "f4a",
+                "f4b",
+                "f4c",
+                "a92",
+                "a93",
+                "a94",
+                "a95",
+                "a96",
+                "a97",
+                "a98"
+            ]
+        }
+    },
+    {
+        "id": "f3",
+        "data": {
+            "first name": "Noemia",
+            "last name": "Rocha Sodré",
+            "gender": "F",
+            "nome completo": "Noemia Rocha Sodré",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "spouses": [
+                "f2"
+            ],
+            "children": [
+                "f4a",
+                "f4b",
+                "f4c",
+                "a92",
+                "a93",
+                "a94",
+                "a95",
+                "a96",
+                "a97",
+                "a98"
+            ]
+        }
+    },
+    {
+        "id": "f7",
+        "data": {
+            "first name": "José",
+            "last name": "Gramilo Sudré (\"Zeca\")",
+            "gender": "M",
+            "nome completo": "José Gramilo Sudré (\"Zeca\")",
+            "confiabilidade": "confirmada",
+            "notas": "Apelido: Zeca · Sudré = erro cartorário · lista de filhos pendente de reconciliação"
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ]
+        }
+    },
+    {
+        "id": "f8",
+        "data": {
+            "first name": "Otávia",
+            "last name": "Rosa Sodré Bispo",
+            "gender": "F",
+            "nome completo": "Otávia Rosa Sodré Bispo",
+            "confiabilidade": "confirmada",
+            "notas": "10+ filhos · × Eustázio Eusébio Bispo · lista de filhos pendente de reconciliação"
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ],
+            "spouses": [
+                "f8c"
+            ],
+            "children": [
+                "b1",
+                "b2",
+                "b3",
+                "b4",
+                "b5",
+                "b6",
+                "b7",
+                "b8",
+                "b9",
+                "b10",
+                "b8b",
+                "b9b",
+                "a99",
+                "a100",
+                "a101",
+                "a102",
+                "a103",
+                "a104",
+                "a105",
+                "a106"
+            ]
+        }
+    },
+    {
+        "id": "f8c",
+        "data": {
+            "first name": "Eustázio",
+            "last name": "Eusébio Bispo",
+            "gender": "M",
+            "nome completo": "Eustázio Eusébio Bispo",
+            "confiabilidade": "confirmada",
+            "notas": "Sobrenome Eusébio — possível parentesco com Gervásio Eusébio dos Santos."
+        },
+        "rels": {
+            "spouses": [
+                "f8"
+            ],
+            "children": [
+                "b1",
+                "b2",
+                "b3",
+                "b4",
+                "b5",
+                "b6",
+                "b7",
+                "b8",
+                "b9",
+                "b10",
+                "b8b",
+                "b9b",
+                "a99",
+                "a100",
+                "a101",
+                "a102",
+                "a103",
+                "a104",
+                "a105",
+                "a106"
+            ]
+        }
+    },
+    {
+        "id": "f9",
+        "data": {
+            "first name": "Elisa",
+            "last name": "Gramilo Sodré",
+            "gender": "F",
+            "nome completo": "Elisa Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "3 filhos: Elizabete (adotiva, mais velha), Zeilde ✝, Valdeci (apelido: Sísio) · × Alfredo"
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ],
+            "children": [
+                "e1",
+                "e2",
+                "e3"
+            ]
+        }
+    },
+    {
+        "id": "f10",
+        "data": {
+            "first name": "Isabel",
+            "last name": "Rosa Sodré",
+            "gender": "F",
+            "nome completo": "Isabel Rosa Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "8 filhos: Etelvina \"Tezinha\", Valdivino, Carlos, Francisco, Dutinha, Edvaldo, Lelinha, Maria · × Maximiano José de Souza · Itororó-BA"
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ],
+            "spouses": [
+                "f10b"
+            ],
+            "children": [
+                "i1",
+                "i2",
+                "i3",
+                "i4",
+                "i5",
+                "i6",
+                "i7",
+                "auto_84"
+            ]
+        }
+    },
+    {
+        "id": "f11",
+        "data": {
+            "first name": "Jovina",
+            "last name": "Gramilo Sodré",
+            "gender": "F",
+            "nome completo": "Jovina Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Casada com Manezinho, dono da Fazenda Babilônia (limítrofe com a Fazenda Santa Terezinha). Nome provável: Jovina Gramilo Sodré."
+        },
+        "rels": {
+            "parents": [
+                "gp1",
+                "gp2"
+            ]
+        }
+    },
+    {
+        "id": "c1",
+        "data": {
+            "first name": "Atanagilda",
+            "last name": "Sodré Sampaio",
+            "gender": "F",
+            "nome completo": "Atanagilda Sodré Sampaio",
+            "birthday": "11/04/1954",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c2",
+        "data": {
+            "first name": "Veralúcia",
+            "last name": "Sodré",
+            "gender": "F",
+            "nome completo": "Veralúcia Sodré",
+            "birthday": "30/09/1955",
+            "confiabilidade": "confirmada",
+            "notas": "n. 30/09/1955 · 1ª esposa de Magnaldo Reis Andrade"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ],
+            "spouses": [
+                "auto_90"
+            ]
+        }
+    },
+    {
+        "id": "c3",
+        "data": {
+            "first name": "Luiz",
+            "last name": "Carlos Sudré",
+            "gender": "M",
+            "nome completo": "Luiz Carlos Sudré",
+            "birthday": "30/03/1957",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c4",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Gramilo Sodré Filho",
+            "gender": "M",
+            "nome completo": "Francisco Gramilo Sodré Filho",
+            "birthday": "26/07/1959",
+            "confiabilidade": "confirmada",
+            "notas": "Professor de Informática, PMA."
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c5",
+        "data": {
+            "first name": "Angélica",
+            "last name": "Maria Sodré Costa",
+            "gender": "F",
+            "nome completo": "Angélica Maria Sodré Costa",
+            "birthday": "02/03/1961",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c6",
+        "data": {
+            "first name": "Rita",
+            "last name": "de Cássia Sodré",
+            "gender": "F",
+            "nome completo": "Rita de Cássia Sodré",
+            "birthday": "09/10/1962",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c7",
+        "data": {
+            "first name": "Djalma",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Djalma Gramilo Sodré",
+            "birthday": "15/02/1964",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c8",
+        "data": {
+            "first name": "Paulo",
+            "last name": "Renato Sodré",
+            "gender": "M",
+            "nome completo": "Paulo Renato Sodré",
+            "birthday": "19/06/1965",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c9",
+        "data": {
+            "first name": "Ronaldo",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Ronaldo Gramilo Sodré",
+            "birthday": "16/12/1966",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c10",
+        "data": {
+            "first name": "Júlio",
+            "last name": "César Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Júlio César Gramilo Sodré",
+            "birthday": "09/01/1968",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c11",
+        "data": {
+            "first name": "Cristina",
+            "last name": "Margarete Gramilo Sodré",
+            "gender": "F",
+            "nome completo": "Cristina Margarete Gramilo Sodré",
+            "birthday": "02/08/1969",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "c12",
+        "data": {
+            "first name": "Sinara",
+            "last name": "Magali Sodré",
+            "gender": "F",
+            "nome completo": "Sinara Magali Sodré",
+            "birthday": "20/12/1971",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "3",
+                "4"
+            ]
+        }
+    },
+    {
+        "id": "f4a",
+        "data": {
+            "first name": "Ana",
+            "last name": "Lúcia Sodré",
+            "gender": "F",
+            "nome completo": "Ana Lúcia Sodré",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "f4b",
+        "data": {
+            "first name": "Arlindo",
+            "last name": "Sodré Filho",
+            "gender": "M",
+            "nome completo": "Arlindo Sodré Filho",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "f4c",
+        "data": {
+            "first name": "Sandro",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Sandro Sodré",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "z1",
+        "data": {
+            "first name": "Josenilda",
+            "last name": "Sudré Bispo",
+            "gender": "F",
+            "nome completo": "Josenilda Sudré Bispo",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z2",
+        "data": {
+            "first name": "Joselita",
+            "last name": "Sudré Santos",
+            "gender": "F",
+            "nome completo": "Joselita Sudré Santos",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z3",
+        "data": {
+            "first name": "José",
+            "last name": "Carlos Sudré",
+            "gender": "M",
+            "nome completo": "José Carlos Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z4",
+        "data": {
+            "first name": "Jorge",
+            "last name": "Luiz Sudré",
+            "gender": "M",
+            "nome completo": "Jorge Luiz Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z5",
+        "data": {
+            "first name": "Jailson",
+            "last name": "Sudré",
+            "gender": "M",
+            "nome completo": "Jailson Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z6",
+        "data": {
+            "first name": "João",
+            "last name": "Sudré",
+            "gender": "M",
+            "nome completo": "João Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z7",
+        "data": {
+            "first name": "Jacyara",
+            "last name": "Sudré",
+            "gender": "F",
+            "nome completo": "Jacyara Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z8",
+        "data": {
+            "first name": "Jânio",
+            "last name": "Sudré",
+            "gender": "M",
+            "nome completo": "Jânio Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z9",
+        "data": {
+            "first name": "Juscileide",
+            "last name": "Sudré",
+            "gender": "F",
+            "nome completo": "Juscileide Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário."
+        },
+        "rels": {}
+    },
+    {
+        "id": "z10",
+        "data": {
+            "first name": "Manoelito",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Manoelito Gramilo Sodré",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {}
+    },
+    {
+        "id": "z11",
+        "data": {
+            "first name": "Joselito",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Joselito Gramilo Sodré",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {}
+    },
+    {
+        "id": "b1",
+        "data": {
+            "first name": "Eustázio",
+            "last name": "Bispo Filho",
+            "gender": "M",
+            "nome completo": "Eustázio Bispo Filho",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b2",
+        "data": {
+            "first name": "Creuza",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Creuza Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b3",
+        "data": {
+            "first name": "Tereza",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Tereza Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b4",
+        "data": {
+            "first name": "Cláudio",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Cláudio Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b5",
+        "data": {
+            "first name": "Rita",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Rita Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b6",
+        "data": {
+            "first name": "Rogério",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Rogério Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b7",
+        "data": {
+            "first name": "Lúcia",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Lúcia Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b8",
+        "data": {
+            "first name": "Geraldo",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Geraldo Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b9",
+        "data": {
+            "first name": "Givanildo",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Givanildo Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b10",
+        "data": {
+            "first name": "Nádia",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Nádia Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "6",
+        "data": {
+            "first name": "José",
+            "last name": "Gramilo Sodré Filho",
+            "gender": "M",
+            "nome completo": "José Gramilo Sodré Filho",
+            "confiabilidade": "confirmada",
+            "notas": "CNPJ ativo em Manoel Vitorino/BA."
+        },
+        "rels": {}
+    },
+    {
+        "id": "7",
+        "data": {
+            "first name": "Ivan",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Ivan Gramilo Sodré",
+            "confiabilidade": "provável",
+            "notas": "Parentesco a confirmar."
+        },
+        "rels": {}
+    },
+    {
+        "id": "8",
+        "data": {
+            "first name": "Walter",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Walter Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Parentesco a confirmar."
+        },
+        "rels": {}
+    },
+    {
+        "id": "9",
+        "data": {
+            "first name": "Jailson",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Jailson Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Parentesco a confirmar."
+        },
+        "rels": {}
+    },
+    {
+        "id": "10",
+        "data": {
+            "first name": "Ticiane",
+            "last name": "Sena de Santana Sodré",
+            "gender": "M",
+            "nome completo": "Ticiane Sena de Santana Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Possível nora/parente de Atanagilda."
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs1",
+        "data": {
+            "first name": "Esmeraldo",
+            "last name": "Vaz Sodré",
+            "gender": "M",
+            "nome completo": "Esmeraldo Vaz Sodré",
+            "birthday": "~1850 (?)",
+            "confiabilidade": "confirmada",
+            "notas": "Pai de Olímpio, Luiz Vaz, Anizio e Maria do Carmo. Amargosa/BA."
+        },
+        "rels": {
+            "children": [
+                "fs2",
+                "fs3",
+                "fs4",
+                "a114"
+            ]
+        }
+    },
+    {
+        "id": "fs2",
+        "data": {
+            "first name": "Olímpio",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Olímpio Sodré",
+            "birthday": "18/11/1913",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "fs1"
+            ]
+        }
+    },
+    {
+        "id": "fs3",
+        "data": {
+            "first name": "Luiz",
+            "last name": "Vaz Sodré",
+            "gender": "M",
+            "nome completo": "Luiz Vaz Sodré",
+            "birthday": "~1870, Bahia",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "fs1"
+            ]
+        }
+    },
+    {
+        "id": "fs4",
+        "data": {
+            "first name": "Maria",
+            "last name": "do Carmo Sodré",
+            "gender": "F",
+            "nome completo": "Maria do Carmo Sodré",
+            "birthday": "~1930, Amargosa/BA",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "fs1"
+            ]
+        }
+    },
+    {
+        "id": "fs5",
+        "data": {
+            "first name": "Horácio",
+            "last name": "Vaz Sodré",
+            "gender": "M",
+            "nome completo": "Horácio Vaz Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Grafia alt: Horacio Vay Sodré. Sobrenome Vaz Sodré = mesmo agrupamento Vaz Sodré de Amargosa; conexão com Gramilo Sodré hipotética."
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs6",
+        "data": {
+            "first name": "José",
+            "last name": "Virgílio Vaz Sodré",
+            "gender": "M",
+            "nome completo": "José Virgílio Vaz Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Registro parcial. Vaz Sodré = mesmo agrupamento Vaz Sodré de Amargosa; conexão com Gramilo Sodré hipotética de Horácio e Luiz."
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs7",
+        "data": {
+            "first name": "Quintino",
+            "last name": "Sodré Tolentino",
+            "gender": "M",
+            "nome completo": "Quintino Sodré Tolentino",
+            "confiabilidade": "confirmada",
+            "notas": "Grafia alt: Tollentino. Registro parcial."
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs8",
+        "data": {
+            "first name": "Floriaco",
+            "last name": "Ferreira Sodré",
+            "gender": "M",
+            "nome completo": "Floriaco Ferreira Sodré",
+            "birthday": "~1890, Amargosa/BA",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs9",
+        "data": {
+            "first name": "João",
+            "last name": "Gregorio Sodré",
+            "gender": "M",
+            "nome completo": "João Gregorio Sodré",
+            "birthday": "~1906",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "fs15"
+            ]
+        }
+    },
+    {
+        "id": "fs10",
+        "data": {
+            "first name": "Joselito",
+            "last name": "Ribeiro Sodré",
+            "gender": "M",
+            "nome completo": "Joselito Ribeiro Sodré",
+            "birthday": "30/07/1953",
+            "confiabilidade": "confirmada",
+            "notas": "Nasceu em Aiquara — possivelmente da mesma família."
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs11",
+        "data": {
+            "first name": "Luciana",
+            "last name": "Caetana Sodré",
+            "gender": "F",
+            "nome completo": "Luciana Caetana Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Irmã de Antonia Sodré de Jesus · 26 anos no casamento · cunhada de Vicente Maciel de Almeida"
+        },
+        "rels": {
+            "spouses": [
+                "fs20"
+            ]
+        }
+    },
+    {
+        "id": "fs12",
+        "data": {
+            "first name": "Clauderio",
+            "last name": "Dino Sodré",
+            "gender": "M",
+            "nome completo": "Clauderio Dino Sodré",
+            "birthday": "~1913",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs13",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Ludgero Vaz Sodré",
+            "gender": "M",
+            "nome completo": "Francisco Ludgero Vaz Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Pessoa DISTINTA de Francisco Gramilo Sodré. Ramo Vaz Sodré de Amargosa."
+        },
+        "rels": {
+            "children": [
+                "fs14"
+            ]
+        }
+    },
+    {
+        "id": "fs14",
+        "data": {
+            "first name": "Jesuina",
+            "last name": "Vaz Sodré",
+            "gender": "F",
+            "nome completo": "Jesuina Vaz Sodré",
+            "birthday": "19/01/1891",
+            "confiabilidade": "confirmada",
+            "notas": "Filha de Francisco Ludgero. Ramo Vaz Sodré."
+        },
+        "rels": {
+            "parents": [
+                "fs13"
+            ]
+        }
+    },
+    {
+        "id": "b8b",
+        "data": {
+            "first name": "Nilda",
+            "last name": "Sodré Bispo de Souza",
+            "gender": "F",
+            "nome completo": "Nilda Sodré Bispo de Souza",
+            "confiabilidade": "confirmada",
+            "notas": "Nome de solteira: Sodré Bispo. Souza = sobrenome do marido."
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "b9b",
+        "data": {
+            "first name": "Antônio",
+            "last name": "Carlos Bispo",
+            "gender": "M",
+            "nome completo": "Antônio Carlos Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "i1",
+        "data": {
+            "first name": "Etelvina",
+            "last name": "Rosa Souza (\"Tezinha\")",
+            "gender": "F",
+            "nome completo": "Etelvina Rosa Souza (\"Tezinha\")",
+            "confiabilidade": "confirmada",
+            "notas": "× Erotildes Ribeiro Sodré · nascida em Aiquara/BA (certidão de Admilson: 'Etelvina Rosa Souza')"
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ],
+            "spouses": [
+                "11"
+            ],
+            "children": [
+                "12"
+            ]
+        }
+    },
+    {
+        "id": "i2",
+        "data": {
+            "first name": "Carlos",
+            "last name": "",
+            "gender": "M",
+            "nome completo": "Carlos",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ]
+        }
+    },
+    {
+        "id": "i3",
+        "data": {
+            "first name": "Francisco",
+            "last name": "",
+            "gender": "M",
+            "nome completo": "Francisco",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ]
+        }
+    },
+    {
+        "id": "i4",
+        "data": {
+            "first name": "Dutinha",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Dutinha",
+            "confiabilidade": "confirmada",
+            "notas": "Apelido."
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ]
+        }
+    },
+    {
+        "id": "i5",
+        "data": {
+            "first name": "Edvaldo",
+            "last name": "",
+            "gender": "M",
+            "nome completo": "Edvaldo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ]
+        }
+    },
+    {
+        "id": "i6",
+        "data": {
+            "first name": "Lelinha",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Lelinha",
+            "confiabilidade": "confirmada",
+            "notas": "Apelido."
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ]
+        }
+    },
+    {
+        "id": "i7",
+        "data": {
+            "first name": "Maria",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Maria",
+            "confiabilidade": "confirmada",
+            "notas": "filhas em Salvador/BA e São Paulo/SP"
+        },
+        "rels": {
+            "parents": [
+                "f10b",
+                "f10"
+            ],
+            "children": [
+                "simone"
+            ]
+        }
+    },
+    {
+        "id": "e1",
+        "data": {
+            "first name": "Zeilde",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Zeilde",
+            "confiabilidade": "confirmada",
+            "notas": "✝ falecido"
+        },
+        "rels": {
+            "parents": [
+                "f9"
+            ]
+        }
+    },
+    {
+        "id": "e2",
+        "data": {
+            "first name": "Valdeci",
+            "last name": "(apelido: Sísio)",
+            "gender": "F",
+            "nome completo": "Valdeci (apelido: Sísio)",
+            "confiabilidade": "confirmada",
+            "notas": "apelido: Sísio · mãe de Alfredo Neto"
+        },
+        "rels": {
+            "parents": [
+                "f9"
+            ]
+        }
+    },
+    {
+        "id": "e3",
+        "data": {
+            "first name": "Elizabete",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Elizabete",
+            "confiabilidade": "confirmada",
+            "notas": "filha adotiva (mais velha) · mãe de Cesar e de Tânia Karla Sodré Bulhões"
+        },
+        "rels": {
+            "parents": [
+                "f9"
+            ],
+            "children": [
+                "tania_karla",
+                "a125"
+            ]
+        }
+    },
+    {
+        "id": "auto_84",
+        "data": {
+            "first name": "Valdivino",
+            "last name": "",
+            "gender": "M",
+            "nome completo": "Valdivino",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f10",
+                "f10b"
+            ]
+        }
+    },
+    {
+        "id": "auto_85",
+        "data": {
+            "first name": "Alice",
+            "last name": "dos Santos",
+            "gender": "F",
+            "nome completo": "Alice dos Santos",
+            "confiabilidade": "confirmada",
+            "notas": "Irmã de Maria Aleluia dos Santos. 1ª esposa de Marcos Freire de Andrade. 5 filhos: Marcos, Marlice, Janete, Marcus \"Marquinhos\", Lígia."
+        },
+        "rels": {
+            "spouses": [
+                "auto_86"
+            ],
+            "children": [
+                "marcos_m",
+                "marlice",
+                "janete",
+                "marcus",
+                "ligia"
+            ]
+        }
+    },
+    {
+        "id": "auto_86",
+        "data": {
+            "first name": "Marcos",
+            "last name": "Freire de Andrade",
+            "gender": "M",
+            "nome completo": "Marcos Freire de Andrade",
+            "confiabilidade": "confirmada",
+            "notas": "2 casamentos"
+        },
+        "rels": {
+            "children": [
+                "marcos_m",
+                "marlice",
+                "janete",
+                "marcus",
+                "ligia",
+                "auto_88",
+                "auto_89",
+                "auto_90"
+            ],
+            "spouses": [
+                "auto_85",
+                "auto_87"
+            ]
+        }
+    },
+    {
+        "id": "auto_87",
+        "data": {
+            "first name": "Florença",
+            "last name": "Reis Andrade",
+            "gender": "F",
+            "nome completo": "Florença Reis Andrade",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "spouses": [
+                "auto_86"
+            ],
+            "children": [
+                "auto_88",
+                "auto_89",
+                "auto_90"
+            ]
+        }
+    },
+    {
+        "id": "auto_88",
+        "data": {
+            "first name": "Magno",
+            "last name": "Reis Andrade",
+            "gender": "M",
+            "nome completo": "Magno Reis Andrade",
+            "confiabilidade": "provável",
+            "notas": "Filho do 2º casamento de Marcos"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_87"
+            ]
+        }
+    },
+    {
+        "id": "auto_89",
+        "data": {
+            "first name": "Iêda",
+            "last name": "Reis Andrade",
+            "gender": "F",
+            "nome completo": "Iêda Reis Andrade",
+            "confiabilidade": "provável",
+            "notas": "Filha do 2º casamento de Marcos"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_87"
+            ]
+        }
+    },
+    {
+        "id": "auto_90",
+        "data": {
+            "first name": "Magnaldo",
+            "last name": "Reis Andrade",
+            "gender": "M",
+            "nome completo": "Magnaldo Reis Andrade",
+            "confiabilidade": "confirmada",
+            "notas": "Filho do 2º casamento de Marcos. 1ª esposa: Veralúcia Sodré (n. 30/09/1955)"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_87"
+            ],
+            "spouses": [
+                "c2"
+            ]
+        }
+    },
+    {
+        "id": "a92",
+        "data": {
+            "first name": "Arlenô",
+            "last name": "Gramilo Sodré",
+            "gender": "M",
+            "nome completo": "Arlenô Gramilo Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "1º filho de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a93",
+        "data": {
+            "first name": "Marcelo",
+            "last name": "Gramilo Sodré Neto",
+            "gender": "M",
+            "nome completo": "Marcelo Gramilo Sodré Neto",
+            "confiabilidade": "confirmada",
+            "notas": "2º filho de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a94",
+        "data": {
+            "first name": "Antonio",
+            "last name": "Cesar Silva Sodré",
+            "gender": "M",
+            "nome completo": "Antonio Cesar Silva Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "4º filho de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a95",
+        "data": {
+            "first name": "Luciane",
+            "last name": "Silva Sodré",
+            "gender": "F",
+            "nome completo": "Luciane Silva Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "5ª filha de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a96",
+        "data": {
+            "first name": "Cristiane",
+            "last name": "Silva Sodré",
+            "gender": "F",
+            "nome completo": "Cristiane Silva Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "6ª filha de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a97",
+        "data": {
+            "first name": "Rita",
+            "last name": "de Cássia Silva Sodré Figueredo",
+            "gender": "F",
+            "nome completo": "Rita de Cássia Silva Sodré Figueredo",
+            "confiabilidade": "confirmada",
+            "notas": "7ª filha de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a98",
+        "data": {
+            "first name": "Manoel",
+            "last name": "Ailton Silva Sodré",
+            "gender": "M",
+            "nome completo": "Manoel Ailton Silva Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "8º filho de Arlindo"
+        },
+        "rels": {
+            "parents": [
+                "f2",
+                "f3"
+            ]
+        }
+    },
+    {
+        "id": "a99",
+        "data": {
+            "first name": "Geni",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Geni Bispo",
+            "confiabilidade": "confirmada",
+            "notas": "Sobrenome casada: desconhecido"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a100",
+        "data": {
+            "first name": "Zenito",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Zenito Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a101",
+        "data": {
+            "first name": "Sinval",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Sinval Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a102",
+        "data": {
+            "first name": "Maria",
+            "last name": "Helena Sodré Bispo",
+            "gender": "F",
+            "nome completo": "Maria Helena Sodré Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a103",
+        "data": {
+            "first name": "Maiza",
+            "last name": "Rosa Bispo Gouveia",
+            "gender": "F",
+            "nome completo": "Maiza Rosa Bispo Gouveia",
+            "confiabilidade": "hipotética",
+            "notas": "5ª filha de Otávia · Rosa = possivel homenagem à mãe (não confirmado)"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a104",
+        "data": {
+            "first name": "Zélia",
+            "last name": "Bispo",
+            "gender": "F",
+            "nome completo": "Zélia Bispo",
+            "confiabilidade": "confirmada",
+            "notas": "Sobrenome casada: desconhecido"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a105",
+        "data": {
+            "first name": "Juvenil",
+            "last name": "Sodré Bispo",
+            "gender": "M",
+            "nome completo": "Juvenil Sodré Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a106",
+        "data": {
+            "first name": "Valdeck",
+            "last name": "Bispo",
+            "gender": "M",
+            "nome completo": "Valdeck Bispo",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "f8c",
+                "f8"
+            ]
+        }
+    },
+    {
+        "id": "a107",
+        "data": {
+            "first name": "Cleide",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Cleide",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a108",
+        "data": {
+            "first name": "Ione",
+            "last name": "Rosa Sudré",
+            "gender": "F",
+            "nome completo": "Ione Rosa Sudré",
+            "confiabilidade": "confirmada",
+            "notas": "Sudré = erro cartorário · ✝ falecida"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a109",
+        "data": {
+            "first name": "Maria",
+            "last name": "Rita",
+            "gender": "F",
+            "nome completo": "Maria Rita",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a113",
+        "data": {
+            "first name": "Amélia",
+            "last name": "Vaz Padri",
+            "gender": "F",
+            "nome completo": "Amélia Vaz Padri",
+            "confiabilidade": "hipotética",
+            "notas": "Vaz Sodré · possivelmente mesma pessoa que Amélia na árvore"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a114",
+        "data": {
+            "first name": "Anizio",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Anizio Sodré",
+            "confiabilidade": "confirmada"
+        },
+        "rels": {
+            "parents": [
+                "fs1"
+            ]
+        }
+    },
+    {
+        "id": "a115",
+        "data": {
+            "first name": "Antonia",
+            "last name": "Sodré de Jesus",
+            "gender": "F",
+            "nome completo": "Antonia Sodré de Jesus",
+            "confiabilidade": "confirmada",
+            "notas": "Casou Vicente Maciel de Almeida (22 anos) · irmã de Luciana Caetana Sodré · OCR: 'Jodré' = Sodré"
+        },
+        "rels": {
+            "spouses": [
+                "fs21"
+            ]
+        }
+    },
+    {
+        "id": "a116",
+        "data": {
+            "first name": "Edgard",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Edgard Sodré",
+            "confiabilidade": "hipotética"
+        },
+        "rels": {
+            "parents": [
+                "h1"
+            ]
+        }
+    },
+    {
+        "id": "a117",
+        "data": {
+            "first name": "Eduardo",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Eduardo Sodré",
+            "confiabilidade": "hipotética"
+        },
+        "rels": {
+            "parents": [
+                "h1"
+            ]
+        }
+    },
+    {
+        "id": "a118",
+        "data": {
+            "first name": "Elisa",
+            "last name": "Sodré Pereira",
+            "gender": "F",
+            "nome completo": "Elisa Sodré Pereira",
+            "confiabilidade": "hipotética",
+            "notas": "bat. 1881, Salvador"
+        },
+        "rels": {
+            "parents": [
+                "h1"
+            ]
+        }
+    },
+    {
+        "id": "a119",
+        "data": {
+            "first name": "Henrique",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Henrique Sodré",
+            "confiabilidade": "hipotética"
+        },
+        "rels": {
+            "parents": [
+                "h1"
+            ]
+        }
+    },
+    {
+        "id": "a120",
+        "data": {
+            "first name": "Ismael",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Ismael Sodré",
+            "confiabilidade": "hipotética",
+            "notas": "Vaz Sodré"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a121",
+        "data": {
+            "first name": "José",
+            "last name": "Henrique",
+            "gender": "M",
+            "nome completo": "José Henrique",
+            "confiabilidade": "hipotética"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a122",
+        "data": {
+            "first name": "José",
+            "last name": "Lino Coutinho Sodré Pereira",
+            "gender": "M",
+            "nome completo": "José Lino Coutinho Sodré Pereira",
+            "confiabilidade": "hipotética"
+        },
+        "rels": {
+            "parents": [
+                "h1"
+            ]
+        }
+    },
+    {
+        "id": "a123",
+        "data": {
+            "first name": "José",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "José Sodré",
+            "confiabilidade": "hipotética",
+            "notas": "Vaz Sodré"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a124",
+        "data": {
+            "first name": "Alfredo",
+            "last name": "Neto",
+            "gender": "M",
+            "nome completo": "Alfredo Neto",
+            "confiabilidade": "confirmada",
+            "notas": "Filho de Valdeci (Sísio) · neto de Elisa Gramilo Sodré × Alfredo Fernandes"
+        },
+        "rels": {}
+    },
+    {
+        "id": "a125",
+        "data": {
+            "first name": "Cesar",
+            "last name": "",
+            "gender": "M",
+            "nome completo": "Cesar",
+            "confiabilidade": "confirmada",
+            "notas": "Filho de Elizabete · neto adotivo de Alfredo Fernandes"
+        },
+        "rels": {
+            "parents": [
+                "e3"
+            ]
+        }
+    },
+    {
+        "id": "f10b",
+        "data": {
+            "first name": "Maximiano",
+            "last name": "José de Souza",
+            "gender": "M",
+            "nome completo": "Maximiano José de Souza",
+            "confiabilidade": "confirmada",
+            "notas": "Veio de Teófilo Otoni (MG) para Aiquara-BA. 8 filhos com Isabel Rosa Sodré."
+        },
+        "rels": {
+            "spouses": [
+                "f10"
+            ],
+            "children": [
+                "i1",
+                "i2",
+                "i3",
+                "i4",
+                "i5",
+                "i6",
+                "i7",
+                "auto_84"
+            ]
+        }
+    },
+    {
+        "id": "11",
+        "data": {
+            "first name": "Erotildes",
+            "last name": "Ribeiro Sodré",
+            "gender": "M",
+            "nome completo": "Erotildes Ribeiro Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Avós paternos de Admilson confirmados na certidão: Manuel Ribeiro Sodré e Mariana Rosa de Jesus"
+        },
+        "rels": {
+            "spouses": [
+                "i1"
+            ],
+            "children": [
+                "12"
+            ]
+        }
+    },
+    {
+        "id": "12",
+        "data": {
+            "first name": "Admilson",
+            "last name": "Ribeiro Sodré",
+            "gender": "M",
+            "nome completo": "Admilson Ribeiro Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Nascido em Aiquara/BA. Avós paternos: Manuel Ribeiro Sodré e Mariana Rosa de Jesus."
+        },
+        "rels": {
+            "parents": [
+                "11",
+                "i1"
+            ]
+        }
+    },
+    {
+        "id": "fs15",
+        "data": {
+            "first name": "Antonio",
+            "last name": "Victor Sodré",
+            "gender": "M",
+            "nome completo": "Antonio Victor Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Pai de Eufrásio Victor Sodré (com Bastilla) · provavelmente o MESMO Antonio Victor Sodré do FS (pai de João Gregorio com Adelia Maria Sódre) · se confirmado, teve 2 esposas"
+        },
+        "rels": {
+            "children": [
+                "fs9",
+                "fs16"
+            ]
+        }
+    },
+    {
+        "id": "fs16",
+        "data": {
+            "first name": "Eufrásio",
+            "last name": "Victor Sodré",
+            "gender": "M",
+            "nome completo": "Eufrásio Victor Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Casou 04/02/1937 em Amargosa · OCR variants: Todreco=Sodré, Cupasio=Eufrásio, Lesmina=Firmina"
+        },
+        "rels": {
+            "parents": [
+                "fs15"
+            ],
+            "spouses": [
+                "fs17"
+            ]
+        }
+    },
+    {
+        "id": "fs17",
+        "data": {
+            "first name": "Firmina",
+            "last name": "Moreira de Freitas",
+            "gender": "F",
+            "nome completo": "Firmina Moreira de Freitas",
+            "confiabilidade": "confirmada",
+            "notas": "Mãe possivelmente Maria Sodré de Jesus (OCR: 'Sot0 de Joss') — se confirmado, cria nova conexão Sodré"
+        },
+        "rels": {
+            "parents": [
+                "fs18"
+            ],
+            "spouses": [
+                "fs16"
+            ]
+        }
+    },
+    {
+        "id": "fs18",
+        "data": {
+            "first name": "Maria",
+            "last name": "Sodré de Jesus (?)",
+            "gender": "F",
+            "nome completo": "Maria Sodré de Jesus (?)",
+            "confiabilidade": "hipotética",
+            "notas": "Mãe de Firmina Moreira de Freitas · OCR lê 'Sot0 de Joss' = possível 'Sodré de Jesus' · HIPÓTESE — precisa confirmação"
+        },
+        "rels": {
+            "children": [
+                "fs17"
+            ]
+        }
+    },
+    {
+        "id": "fs19",
+        "data": {
+            "first name": "Clelino",
+            "last name": "Vaz",
+            "gender": "M",
+            "nome completo": "Clelino Vaz",
+            "confiabilidade": "confirmada",
+            "notas": "Testemunha no casamento de Oicazi Souza da Silva × Hermisa da Silva (10/12/1941, Amargosa) · sobrenome Vaz = possível ramo Vaz Sodré"
+        },
+        "rels": {}
+    },
+    {
+        "id": "fs20",
+        "data": {
+            "first name": "Pedro",
+            "last name": "Maciel de Almeida",
+            "gender": "M",
+            "nome completo": "Pedro Maciel de Almeida",
+            "confiabilidade": "confirmada",
+            "notas": "Casou com Luciana Caetana Sodré · 23 anos · Amargosa/BA · cunhado de Vicente Maciel de Almeida (casou Antonia Sodré, irmã de Luciana)"
+        },
+        "rels": {
+            "spouses": [
+                "fs11"
+            ]
+        }
+    },
+    {
+        "id": "fs21",
+        "data": {
+            "first name": "Vicente",
+            "last name": "Maciel de Almeida",
+            "gender": "M",
+            "nome completo": "Vicente Maciel de Almeida",
+            "confiabilidade": "confirmada",
+            "notas": "Casou com Antonia Sodré de Jesus · 22 anos · Amargosa/BA · irmão de Pedro Maciel de Almeida (casou Luciana Caetana Sodré, irmã de Antonia)"
+        },
+        "rels": {
+            "spouses": [
+                "a115"
+            ]
+        }
+    },
+    {
+        "id": "fernando",
+        "data": {
+            "first name": "Dom",
+            "last name": "Fernando Sodré Pereira",
+            "gender": "M",
+            "nome completo": "Dom Fernando Sodré Pereira",
+            "confiabilidade": "hipotética",
+            "notas": "Pai de Jerônimo I"
+        },
+        "rels": {
+            "children": [
+                "jeronimo_i"
+            ]
+        }
+    },
+    {
+        "id": "jeronimo_i",
+        "data": {
+            "first name": "Jerônimo",
+            "last name": "Sodré Pereira I",
+            "gender": "M",
+            "nome completo": "Jerônimo Sodré Pereira I",
+            "birthday": "1631–1711",
+            "confiabilidade": "confirmada",
+            "notas": "Águas Belas, Lisboa → Salvador/BA · ≠ Jerônimo II"
+        },
+        "rels": {
+            "parents": [
+                "fernando"
+            ],
+            "spouses": [
+                "francisca",
+                "maria_azevedo"
+            ]
+        }
+    },
+    {
+        "id": "francisca",
+        "data": {
+            "first name": "Dona",
+            "last name": "Francisca de Aragão",
+            "gender": "F",
+            "nome completo": "Dona Francisca de Aragão",
+            "confiabilidade": "confirmada",
+            "notas": "1ª esposa de Jerônimo I"
+        },
+        "rels": {
+            "spouses": [
+                "jeronimo_i"
+            ]
+        }
+    },
+    {
+        "id": "maria_azevedo",
+        "data": {
+            "first name": "Maria",
+            "last name": "de Azevedo",
+            "gender": "F",
+            "nome completo": "Maria de Azevedo",
+            "confiabilidade": "confirmada",
+            "notas": "2ª esposa de Jerônimo I"
+        },
+        "rels": {
+            "spouses": [
+                "jeronimo_i"
+            ]
+        }
+    },
+    {
+        "id": "coronel",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Maria Sodré Pereira",
+            "gender": "M",
+            "nome completo": "Francisco Maria Sodré Pereira",
+            "confiabilidade": "hipotética",
+            "notas": "Coronel · Filho de Francisco Álvaro"
+        },
+        "rels": {
+            "spouses": [
+                "meneses"
+            ],
+            "children": [
+                "barao"
+            ]
+        }
+    },
+    {
+        "id": "meneses",
+        "data": {
+            "first name": "Maria",
+            "last name": "Ana de Meneses",
+            "gender": "F",
+            "nome completo": "Maria Ana de Meneses",
+            "confiabilidade": "hipotética",
+            "notas": "Esposa do coronel"
+        },
+        "rels": {
+            "spouses": [
+                "coronel"
+            ],
+            "children": [
+                "barao"
+            ]
+        }
+    },
+    {
+        "id": "barao",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Pereira Sodré, Barão de Alagoinhas",
+            "gender": "M",
+            "nome completo": "Francisco Pereira Sodré, Barão de Alagoinhas",
+            "birthday": "1818–1882",
+            "confiabilidade": "confirmada",
+            "notas": "Cachoeira/BA · Título: Barão com honra de Grandeza (1879)"
+        },
+        "rels": {
+            "parents": [
+                "coronel",
+                "meneses"
+            ],
+            "spouses": [
+                "cora"
+            ],
+            "children": [
+                "jeronimo_ii",
+                "conselheiro",
+                "jose_lino_kg",
+                "elisa_barao"
+            ]
+        }
+    },
+    {
+        "id": "cora",
+        "data": {
+            "first name": "Cora",
+            "last name": "César Coutinho",
+            "gender": "F",
+            "nome completo": "Cora César Coutinho",
+            "birthday": "1819–1880",
+            "confiabilidade": "confirmada",
+            "notas": "Baronesa · casam. 1834"
+        },
+        "rels": {
+            "spouses": [
+                "barao"
+            ],
+            "children": [
+                "jeronimo_ii",
+                "conselheiro",
+                "jose_lino_kg",
+                "elisa_barao"
+            ]
+        }
+    },
+    {
+        "id": "jeronimo_ii",
+        "data": {
+            "first name": "Jerônimo",
+            "last name": "Sodré Pereira II",
+            "gender": "M",
+            "nome completo": "Jerônimo Sodré Pereira II",
+            "birthday": "~1835",
+            "confiabilidade": "hipotética",
+            "notas": "Filho do Barão · Médico, Deputado · ≠ patriarca"
+        },
+        "rels": {
+            "parents": [
+                "barao",
+                "cora"
+            ]
+        }
+    },
+    {
+        "id": "conselheiro",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Maria Sodré Pereira",
+            "gender": "M",
+            "nome completo": "Francisco Maria Sodré Pereira",
+            "birthday": "1836–1903",
+            "confiabilidade": "confirmada",
+            "notas": "Conselheiro · Filho do Barão · Deputado federal BA 1891–1902"
+        },
+        "rels": {
+            "parents": [
+                "barao",
+                "cora"
+            ]
+        }
+    },
+    {
+        "id": "jose_lino_kg",
+        "data": {
+            "first name": "José",
+            "last name": "Lino Coutinho Sodré Pereira",
+            "gender": "M",
+            "nome completo": "José Lino Coutinho Sodré Pereira",
+            "confiabilidade": "hipotética",
+            "notas": "Filho do Barão"
+        },
+        "rels": {
+            "parents": [
+                "barao",
+                "cora"
+            ]
+        }
+    },
+    {
+        "id": "elisa_barao",
+        "data": {
+            "first name": "Elisa",
+            "last name": "Sodré Pereira",
+            "gender": "F",
+            "nome completo": "Elisa Sodré Pereira",
+            "birthday": "bat. 1881",
+            "confiabilidade": "hipotética",
+            "notas": "Filha do Barão"
+        },
+        "rels": {
+            "parents": [
+                "barao",
+                "cora"
+            ]
+        }
+    },
+    {
+        "id": "manuel_col",
+        "data": {
+            "first name": "Manuel",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Manuel Sodré",
+            "confiabilidade": "hipotética",
+            "notas": "Elo colonial Sodré–Gramilo"
+        },
+        "rels": {
+            "spouses": [
+                "maria_gramilo"
+            ],
+            "children": [
+                "eduardo_col"
+            ]
+        }
+    },
+    {
+        "id": "maria_gramilo",
+        "data": {
+            "first name": "Maria",
+            "last name": "Gramilo",
+            "gender": "F",
+            "nome completo": "Maria Gramilo",
+            "confiabilidade": "hipotética",
+            "notas": "Elo colonial Sodré–Gramilo"
+        },
+        "rels": {
+            "spouses": [
+                "manuel_col"
+            ],
+            "children": [
+                "eduardo_col"
+            ]
+        }
+    },
+    {
+        "id": "eduardo_col",
+        "data": {
+            "first name": "Eduardo",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "Eduardo Sodré",
+            "confiabilidade": "hipotética",
+            "notas": "Filho de Manuel + Maria"
+        },
+        "rels": {
+            "parents": [
+                "manuel_col",
+                "maria_gramilo"
+            ]
+        }
+    },
+    {
+        "id": "antonio_p",
+        "data": {
+            "first name": "Antônio",
+            "last name": "Pereira",
+            "gender": "M",
+            "nome completo": "Antônio Pereira",
+            "confiabilidade": "hipotética",
+            "notas": "Elo colonial"
+        },
+        "rels": {
+            "spouses": [
+                "isabel_g"
+            ]
+        }
+    },
+    {
+        "id": "isabel_g",
+        "data": {
+            "first name": "Isabel",
+            "last name": "Gramilo",
+            "gender": "F",
+            "nome completo": "Isabel Gramilo",
+            "confiabilidade": "hipotética",
+            "notas": "Elo colonial"
+        },
+        "rels": {
+            "spouses": [
+                "antonio_p"
+            ]
+        }
+    },
+    {
+        "id": "francisco_eus",
+        "data": {
+            "first name": "Francisco",
+            "last name": "Eusébio dos Santos",
+            "gender": "M",
+            "nome completo": "Francisco Eusébio dos Santos",
+            "confiabilidade": "hipotética",
+            "notas": "Padrinho em batismo em Brejaês, Amargosa (08/12/1895) · possível parente de Gervásio"
+        },
+        "rels": {}
+    },
+    {
+        "id": "geruasio_samp",
+        "data": {
+            "first name": "Geruásio",
+            "last name": "José Sampaio",
+            "gender": "M",
+            "nome completo": "Geruásio José Sampaio",
+            "confiabilidade": "hipotética",
+            "notas": "Pai em batismo · possível pista para sobrenome Sampaio"
+        },
+        "rels": {}
+    },
+    {
+        "id": "firmino_vs",
+        "data": {
+            "first name": "Firmino",
+            "last name": "Vaz Sodré",
+            "gender": "M",
+            "nome completo": "Firmino Vaz Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Amargosa/BA · batismo do filho José (31/01/1909) · relação com Tomaz/Marcelo não confirmada"
+        },
+        "rels": {
+            "spouses": [
+                "laurinda_s"
+            ],
+            "children": [
+                "jose_firmino"
+            ]
+        }
+    },
+    {
+        "id": "laurinda_s",
+        "data": {
+            "first name": "Laurinda",
+            "last name": "Sodré",
+            "gender": "F",
+            "nome completo": "Laurinda Sodré",
+            "confiabilidade": "confirmada",
+            "notas": "Esposa de Firmino · mãe de José"
+        },
+        "rels": {
+            "spouses": [
+                "firmino_vs"
+            ],
+            "children": [
+                "jose_firmino"
+            ]
+        }
+    },
+    {
+        "id": "jose_firmino",
+        "data": {
+            "first name": "José",
+            "last name": "Sodré",
+            "gender": "M",
+            "nome completo": "José Sodré",
+            "birthday": "bat. 31/01/1909",
+            "confiabilidade": "confirmada",
+            "notas": "Filho de Firmino Vaz Sodré + Laurinda Sodré"
+        },
+        "rels": {
+            "parents": [
+                "firmino_vs",
+                "laurinda_s"
+            ]
+        }
+    },
+    {
+        "id": "simone",
+        "data": {
+            "first name": "Simone",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Simone",
+            "confiabilidade": "confirmada",
+            "notas": "Filha de Maria · neta de Isabel Rosa Sodré"
+        },
+        "rels": {
+            "parents": [
+                "i7"
+            ]
+        }
+    },
+    {
+        "id": "marcos_m",
+        "data": {
+            "first name": "Marcos",
+            "last name": "",
+            "gender": "M",
+            "nome completo": "Marcos",
+            "confiabilidade": "confirmada",
+            "notas": "Filho de Marcos×Alice"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_85"
+            ]
+        }
+    },
+    {
+        "id": "marlice",
+        "data": {
+            "first name": "Marlice",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Marlice",
+            "confiabilidade": "confirmada",
+            "notas": "Filha de Marcos×Alice"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_85"
+            ]
+        }
+    },
+    {
+        "id": "janete",
+        "data": {
+            "first name": "Janete",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Janete",
+            "confiabilidade": "confirmada",
+            "notas": "Filha de Marcos×Alice"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_85"
+            ]
+        }
+    },
+    {
+        "id": "marcus",
+        "data": {
+            "first name": "Marcus",
+            "last name": "Marquinhos",
+            "gender": "M",
+            "nome completo": "Marcus \"Marquinhos\"",
+            "confiabilidade": "confirmada",
+            "notas": "Filho de Marcos×Alice"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_85"
+            ]
+        }
+    },
+    {
+        "id": "ligia",
+        "data": {
+            "first name": "Lígia",
+            "last name": "",
+            "gender": "F",
+            "nome completo": "Lígia",
+            "confiabilidade": "confirmada",
+            "notas": "Filha de Marcos×Alice"
+        },
+        "rels": {
+            "parents": [
+                "auto_86",
+                "auto_85"
+            ]
+        }
+    },
+    {
+        "id": "tania_karla",
+        "data": {
+            "first name": "Tânia",
+            "last name": "Karla Sodré Bulhões",
+            "gender": "F",
+            "nome completo": "Tânia Karla Sodré Bulhões",
+            "confiabilidade": "confirmada",
+            "notas": "Filha de Elizabete"
+        },
+        "rels": {
+            "parents": [
+                "e3"
+            ]
+        }
+    }
 ];
 
-let activeFilter = null;
-let selectedId = null;
+// Build data index for info panel
+const dataMap = {};
+F3_DATA.forEach(d => dataMap[d.id] = d);
 
-function render() {
-  const wrap = document.getElementById('treeWrap');
-  wrap.innerHTML = '';
-  SECTIONS.forEach(sec => {
-    if (activeFilter && sec.filter !== activeFilter) return;
-    const el = document.createElement('div');
-    el.className = 'section' + (sec.type === 'descent-tree' ? ' descent-section' : '');
-    el.id = sec.id;
-    const title = document.createElement('div');
-    title.className = 'section-title';
-    title.innerHTML = sec.title + ' <em>' + sec.em + '</em>';
-    el.appendChild(title);
+// Create chart
+let f3Chart = null;
 
-    const scroll = document.createElement('div');
-    scroll.className = 'section-scroll';
-    el.appendChild(scroll);
+function initChart(rootId) {
+  const container = document.getElementById('FamilyChart');
+  container.innerHTML = '';
 
-    // Special rendering for descent-tree type
-    if (sec.type === 'descent-tree') {
-      renderDescentTree(scroll);
-      wrap.appendChild(el);
-      return;
-    }
+  f3Chart = f3.createChart('#FamilyChart', F3_DATA)
+    .setTransitionTime(500);
 
-    sec.families.forEach(fam => {
-      const col = document.createElement('div');
-      col.className = 'family-col';
+  // Custom card HTML — setCardHtml returns the cardHtml object, NOT the chart
+  const f3Card = f3Chart.setCardHtml(`
+    <div class="card_cont">
+      <div class="card_label">
+        <span class="card_first-name"></span>
+        <span class="card_last-name"></span>
+      </div>
+      <div class="card_birthday"></div>
+      <div class="card_confiabilidade"></div>
+    </div>
+  `);
 
-      const header = makeFamilyHeader(fam);
-      col.appendChild(header);
-      col.appendChild(makeFamilySub(fam));
+  f3Card.setCardDisplay([
+    [{field: 'first name'}, {field: 'last name'}],
+    [{field: 'birthday'}],
+    [{field: 'confiabilidade'}]
+  ]);
 
-      // Descendant link
-      if (fam.link) {
-        const dl = document.createElement('div');
-        dl.className = 'desc-link';
-        const a = document.createElement('a');
-        a.textContent = fam.link.label;
-        a.onclick = () => {
-          const target = document.getElementById(fam.link.to);
-          if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
-        };
-        dl.appendChild(a);
-        col.appendChild(dl);
-      }
-
-      // Children
-      if (fam.children && fam.children.length > 0) {
-        const childList = document.createElement('div');
-        childList.className = 'children-list vertical';
-        fam.children.forEach(ch => {
-          childList.appendChild(makeChildCard(ch.id));
-        });
-        col.appendChild(childList);
-      }
-
-      // Sobrinhos
-      if (fam.sobrinhos && SOBRINHOS[fam.sobrinhos]) {
-        const childList = document.createElement('div');
-        childList.className = 'children-list vertical';
-        SOBRINHOS[fam.sobrinhos].forEach(name => {
-          const el2 = document.createElement('div');
-          el2.className = 'child-card cat-sobrinho';
-          const nm = document.createElement('div');
-          nm.className = 'child-name';
-          nm.textContent = name;
-          el2.appendChild(nm);
-          childList.appendChild(el2);
-        });
-        col.appendChild(childList);
-      }
-
-      // Subfamilies (nested couples within a family — e.g. child + spouse)
-      if (fam.subfamilies && fam.subfamilies.length > 0) {
-        const subWrap = document.createElement('div');
-        subWrap.className = 'subfamilies-wrap';
-        fam.subfamilies.forEach(sub => {
-          const subCol = document.createElement('div');
-          subCol.className = 'family-col sub-family';
-          subCol.appendChild(makeFamilyHeader(sub));
-          subCol.appendChild(makeFamilySub(sub));
-          if (sub.children && sub.children.length > 0) {
-            const subChildList = document.createElement('div');
-            subChildList.className = 'children-list vertical';
-            sub.children.forEach(ch => {
-              subChildList.appendChild(makeChildCard(ch.id));
-            });
-            subCol.appendChild(subChildList);
-          }
-          subWrap.appendChild(subCol);
-        });
-        col.appendChild(subWrap);
-      }
-
-      scroll.appendChild(col);
-    });
-
-    wrap.appendChild(el);
+  // Click handler on the card (setOnCardClick is on the cardHtml object)
+  f3Card.setOnCardClick((d) => {
+    showInfo(d.data.id);
   });
 
-  renderControls();
-  enableDragScroll();
-  centerScrollableAreas();
+  // Set main person to Francisco Gramilo Sodré (id "3") — the root of the main tree
+  // Show more generations up (ancestry) and down (progeny) — must be set BEFORE updateMainId/updateTree
+  f3Chart.setAncestryDepth(5);
+  f3Chart.setProgenyDepth(5);
+  f3Chart.updateMainId('3');
+  f3Chart.updateTree({initial: true});
 }
 
-function makeFamilyHeader(fam) {
-  const header = document.createElement('div');
-  header.className = 'family-header';
-  fam.couple.forEach((c, i) => {
-    if (i > 0) {
-      const amp = document.createElement('span');
-      amp.className = 'couple-amp';
-      amp.textContent = ' &';
-      header.appendChild(amp);
-      header.appendChild(document.createElement('br'));
-    }
-    const person = P[c.id];
-    const span = document.createElement('span');
-    span.className = 'family-header-person';
-    span.textContent = person ? person.n : c.id;
-    span.onclick = (e) => { e.stopPropagation(); selectPerson(c.id); };
-    header.appendChild(span);
-  });
-  return header;
+function cardClickHandler({data}) {
+  showInfo(data.id || data.data['nome completo']);
 }
 
-function makeFamilySub(fam) {
-  const sub = document.createElement('div');
-  sub.className = 'family-sub';
-  const notes = fam.couple
-    .map(c => P[c.id])
-    .filter(Boolean)
-    .map(p => [p.d, p.note].filter(Boolean).join(' · '))
-    .filter(Boolean);
-  sub.textContent = notes.join(' | ') || 'Núcleo familiar / personagem documentado';
-  return sub;
-}
+function showInfo(id) {
+  const d = dataMap[id];
+  if (!d) return;
 
-function makeChildCard(id) {
-  const p = P[id];
-  const card = document.createElement('div');
-  card.className = 'child-card cat-' + (p ? p.c : 'confirmed');
-  card.onclick = (e) => { e.stopPropagation(); selectPerson(id); };
-  const name = document.createElement('div');
-  name.className = 'child-name';
-  name.textContent = p ? p.n : id;
-  card.appendChild(name);
-  if (p && (p.d || p.note)) {
-    const note = document.createElement('div');
-    note.className = 'child-note';
-    note.textContent = [p.d, p.note].filter(Boolean).join(' · ');
-    card.appendChild(note);
-  }
-  return card;
-}
-
-function enableDragScroll() {
-  document.querySelectorAll('.section-scroll').forEach(el => {
-    if (el.dataset.dragScrollReady === '1') return;
-    el.dataset.dragScrollReady = '1';
-    let down = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    let moved = false;
-    el.addEventListener('mousedown', e => {
-      down = true;
-      moved = false;
-      el.classList.add('dragging');
-      startX = e.pageX - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-    });
-    el.addEventListener('mouseleave', () => { down = false; el.classList.remove('dragging'); });
-    el.addEventListener('mouseup', () => { down = false; el.classList.remove('dragging'); });
-    el.addEventListener('mousemove', e => {
-      if (!down) return;
-      const x = e.pageX - el.offsetLeft;
-      const walk = x - startX;
-      if (Math.abs(walk) > 4) moved = true;
-      if (moved) e.preventDefault();
-      el.scrollLeft = scrollLeft - walk;
-    });
-    el.addEventListener('click', e => {
-      if (moved) {
-        e.preventDefault();
-        e.stopPropagation();
-        moved = false;
-      }
-    }, true);
-  });
-}
-
-function centerScrollableAreas() {
-  document.querySelectorAll('.section-scroll').forEach(el => {
-    if (el.scrollWidth > el.clientWidth) {
-      el.scrollLeft = Math.max(0, (el.scrollWidth - el.clientWidth) / 2);
-    }
-  });
-}
-
-// ── Descent tree: vertical chain of generations converging ──
-function renderDescentTree(container) {
-  const tree = document.createElement('div');
-  tree.className = 'descent-tree';
-
-  /* Layout: 3 aligned levels across both branches
-     Level 1 (avós):    Tomaz ∞ Teodora  |  ▒ ∞ ▒  (placeholders)
-     Level 2 (pais):    Marcelo ∞ Rita   |  Gervásio ∞ Maria Aleluia
-     Level 3 (filhos):  Francisco        |  Atanagilda
-  */
-
-  // Helper: create a placeholder card (dashed border, empty)
-  function makePlaceholder(label) {
-    const el = document.createElement('div');
-    el.className = 'person descent-placeholder';
-    const name = document.createElement('div');
-    name.className = 'person-name';
-    name.textContent = label || '?';
-    name.style.fontStyle = 'italic';
-    name.style.color = 'var(--ink-muted)';
-    el.appendChild(name);
-    return el;
-  }
-
-  // Helper: create a level row
-  function makeLevelRow() {
-    const row = document.createElement('div');
-    row.className = 'descent-level-row';
-    return row;
-  }
-
-  // Helper: create a couple (two cards + ∞)
-  function makeCouple(idA, idB, placeholderA, placeholderB) {
-    const wrap = document.createElement('div');
-    wrap.className = 'descent-couple';
-    if (idA) wrap.appendChild(makeCard(idA));
-    else if (placeholderA) wrap.appendChild(makePlaceholder(placeholderA));
-    const link = document.createElement('span');
-    link.className = 'couple-link';
-    link.textContent = '∞';
-    wrap.appendChild(link);
-    if (idB) wrap.appendChild(makeCard(idB));
-    else if (placeholderB) wrap.appendChild(makePlaceholder(placeholderB));
-    return wrap;
-  }
-
-  // ── LEVEL 1: Avós ──
-  const row1 = makeLevelRow();
-  // Paterno: Tomaz ∞ Teodora
-  row1.appendChild(makeCouple('tomaz', 'teodora'));
-  // Center spacer
-  const sp1 = document.createElement('div');
-  sp1.className = 'descent-row-spacer';
-  row1.appendChild(sp1);
-  // Materno: placeholders (avós desconhecidos)
-  row1.appendChild(makeCouple(null, null, 'Avô materno', 'Avó materna'));
-  tree.appendChild(row1);
-
-  // ── Arrow row 1 ──
-  const ar1 = document.createElement('div');
-  ar1.className = 'descent-arrow-row';
-  // Paterno arrow
-  const ar1p = document.createElement('div');
-  ar1p.className = 'descent-arrow';
-  ar1.appendChild(ar1p);
-  // Center spacer
-  const ar1s = document.createElement('div');
-  ar1s.className = 'descent-row-spacer';
-  ar1.appendChild(ar1s);
-  // Materno arrow
-  const ar1m = document.createElement('div');
-  ar1m.className = 'descent-arrow';
-  ar1.appendChild(ar1m);
-  tree.appendChild(ar1);
-
-  // ── LEVEL 2: Pais ──
-  const row2 = makeLevelRow();
-  // Paterno: Marcelo ∞ Rita Rosa
-  row2.appendChild(makeCouple('marcelo', 'rita_rosa'));
-  // Center spacer
-  const sp2 = document.createElement('div');
-  sp2.className = 'descent-row-spacer';
-  row2.appendChild(sp2);
-  // Materno: Gervásio ∞ Maria Aleluia
-  row2.appendChild(makeCouple('gervasio', 'maria_aleluia'));
-  tree.appendChild(row2);
-
-  // ── Arrow row 2 ──
-  const ar2 = document.createElement('div');
-  ar2.className = 'descent-arrow-row';
-  const ar2p = document.createElement('div');
-  ar2p.className = 'descent-arrow';
-  ar2.appendChild(ar2p);
-  const ar2s = document.createElement('div');
-  ar2s.className = 'descent-row-spacer';
-  ar2.appendChild(ar2s);
-  const ar2m = document.createElement('div');
-  ar2m.className = 'descent-arrow';
-  ar2.appendChild(ar2m);
-  tree.appendChild(ar2);
-
-  // ── LEVEL 3: Francisco & Atanagilda ──
-  const row3 = makeLevelRow();
-  // Paterno: Francisco
-  const fWrap = document.createElement('div');
-  fWrap.className = 'descent-couple';
-  fWrap.appendChild(makeCard('francisco'));
-  row3.appendChild(fWrap);
-  // Center: ∞ convergence
-  const converge = document.createElement('div');
-  converge.className = 'descent-converge-center';
-  const cInf = document.createElement('div');
-  cInf.textContent = '∞';
-  cInf.className = 'converge-symbol';
-  converge.appendChild(cInf);
-  row3.appendChild(converge);
-  // Materno: Atanagilda
-  const aWrap = document.createElement('div');
-  aWrap.className = 'descent-couple';
-  aWrap.appendChild(makeCard('atanagilda'));
-  row3.appendChild(aWrap);
-  tree.appendChild(row3);
-
-  // ── Branch labels ──
-  const labels = document.createElement('div');
-  labels.className = 'descent-labels-row';
-  const lp = document.createElement('div');
-  lp.className = 'descent-branch-label';
-  lp.textContent = 'Ramo paterno';
-  labels.appendChild(lp);
-  const ls = document.createElement('div');
-  ls.className = 'descent-row-spacer';
-  labels.appendChild(ls);
-  const lm = document.createElement('div');
-  lm.className = 'descent-branch-label';
-  lm.textContent = 'Ramo materno';
-  labels.appendChild(lm);
-  tree.insertBefore(labels, tree.firstChild);
-
-  // ── Link to siblings ──
-  const sibLink = document.createElement('div');
-  sibLink.className = 'descent-siblings-link';
-  const sibA = document.createElement('a');
-  sibA.textContent = '5 irmãos de Francisco';
-  sibA.onclick = () => {
-    const target = document.getElementById('irmaos');
-    if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
-  };
-  sibLink.appendChild(sibA);
-  tree.appendChild(sibLink);
-
-  // ── Link to children ──
-  const bottomLink = document.createElement('div');
-  bottomLink.className = 'desc-link';
-  bottomLink.style.paddingTop = '0.5rem';
-  const bottomA = document.createElement('a');
-  bottomA.textContent = '↓ Ver 12 filhos de Francisco & Atanagilda';
-  bottomA.onclick = () => {
-    const target = document.getElementById('francisco');
-    if (target) target.scrollIntoView({behavior:'smooth',block:'start'});
-  };
-  bottomLink.appendChild(bottomA);
-  tree.appendChild(bottomLink);
-
-  container.appendChild(tree);
-}
-
-function makeCard(id, showSpouse) {
-  const p = P[id];
-  if (!p) { const e = document.createElement('div'); e.textContent = id; return e; }
-  const el = document.createElement('div');
-  el.className = 'person cat-' + p.c;
-  el.dataset.id = id;
-  if (id === selectedId) el.classList.add('selected');
-  el.onclick = (ev) => { ev.stopPropagation(); selectPerson(id); };
-
-  const name = document.createElement('div');
-  name.className = 'person-name';
-  name.textContent = p.n;
-  el.appendChild(name);
-
-  if (p.d) {
-    const dates = document.createElement('div');
-    dates.className = 'person-dates';
-    dates.textContent = p.d;
-    el.appendChild(dates);
-  }
-
-  // Show spouse info on every person card
-  if (p.sp && P[p.sp]) {
-    const sp = document.createElement('div');
-    sp.className = 'person-spouse';
-    sp.innerHTML = '∞ <strong>' + P[p.sp].n + '</strong>';
-    el.appendChild(sp);
-  }
-
-  return el;
-}
-
-function selectPerson(id) {
-  selectedId = id;
-  const p = P[id];
-  if (!p) return;
-
-  document.querySelectorAll('.person.selected').forEach(el => el.classList.remove('selected'));
-  document.querySelectorAll('.person[data-id="' + id + '"]').forEach(el => el.classList.add('selected'));
-
-  const panel = document.getElementById('infoPanel');
-  document.getElementById('infoName').textContent = p.n + (p.d ? ' (' + p.d + ')' : '');
+  const name = d.data['nome completo'] || d.data['first name'] + ' ' + d.data['last name'];
+  const dates = d.data['birthday'] || '';
+  document.getElementById('infoName').textContent = name + (dates ? ' (' + dates + ')' : '');
 
   let html = '';
-  if (p.note) html += '<div class="info-note">' + p.note + '</div>';
 
-  // Spouse
-  if (p.sp && P[p.sp]) {
-    html += '<div class="info-rel"><span class="rel-type">casou com</span> ' + P[p.sp].n + '</div>';
+  // Confiabilidade
+  if (d.data['confiabilidade']) {
+    const confLabel = {
+      'confirmada': '✅ Confirmada',
+      'provável': '⚠️ Provável',
+      'hipotética': '❓ Hipotética'
+    };
+    html += '<div class="info-rel"><span class="rel-type">Confiabilidade:</span> ' + (confLabel[d.data['confiabilidade']] || d.data['confiabilidade']) + '</div>';
   }
 
-  // Children: find all sections/families where this id is in couple
-  SECTIONS.forEach(sec => {
-    sec.families.forEach(fam => {
-      const isInCouple = fam.couple.some(c => c.id === id);
-      if (isInCouple && fam.children && fam.children.length > 0) {
-        fam.children.forEach(ch => {
-          if (P[ch.id]) html += '<div class="info-rel"><span class="rel-type">pai/mãe de</span> ' + P[ch.id].n + '</div>';
-        });
-      }
-    });
-  });
+  // Notes
+  if (d.data['notas']) {
+    html += '<div class="info-note">' + d.data['notas'] + '</div>';
+  }
 
-  // Parents: find where this id is a child
-  SECTIONS.forEach(sec => {
-    sec.families.forEach(fam => {
-      if (fam.children && fam.children.some(c => c.id === id)) {
-        fam.couple.forEach(c => {
-          if (P[c.id]) html += '<div class="info-rel"><span class="rel-type">filho(a) de</span> ' + P[c.id].n + '</div>';
-        });
+  // Spouses
+  if (d.rels.spouses) {
+    d.rels.spouses.forEach(spId => {
+      const sp = dataMap[spId];
+      if (sp) {
+        html += '<div class="info-rel"><span class="rel-type">casou com</span> ' + (sp.data['nome completo'] || sp.data['first name'] + ' ' + sp.data['last name']) + '</div>';
       }
     });
-  });
+  }
+
+  // Parents
+  if (d.rels.parents) {
+    d.rels.parents.forEach(pId => {
+      const p = dataMap[pId];
+      if (p) {
+        html += '<div class="info-rel"><span class="rel-type">filho(a) de</span> ' + (p.data['nome completo'] || p.data['first name'] + ' ' + p.data['last name']) + '</div>';
+      }
+    });
+  }
+
+  // Children
+  if (d.rels.children) {
+    d.rels.children.forEach(cId => {
+      const c = dataMap[cId];
+      if (c) {
+        html += '<div class="info-rel"><span class="rel-type">pai/mãe de</span> ' + (c.data['nome completo'] || c.data['first name'] + ' ' + c.data['last name']) + '</div>';
+      }
+    });
+  }
 
   document.getElementById('infoBody').innerHTML = html;
-  panel.style.display = 'block';
+  document.getElementById('infoPanel').style.display = 'block';
 }
 
 function closeInfo() {
   document.getElementById('infoPanel').style.display = 'none';
-  selectedId = null;
-  document.querySelectorAll('.person.selected').forEach(el => el.classList.remove('selected'));
 }
 
+// Controls: filter by confiabilidade
+let activeFilter = null;
 function renderControls() {
   const ctrl = document.getElementById('controls');
   ctrl.innerHTML = '';
   const btns = [
-    {label:'Todos',filter:null},
-    {label:'Tronco histórico',filter:'historical'},
-    {label:'Ramo Barão',filter:'barao'},
-    {label:'Amargosa',filter:'amargosa'},
-    {label:'Ramo Marcelo',filter:'confirmed'},
-    {label:'Elo colonial',filter:'colonial'},
+    {label:'Todos', filter:null},
+    {label:'Confirmados', filter:'confirmada'},
+    {label:'Prováveis', filter:'provável'},
+    {label:'Hipotéticos', filter:'hipotética'},
   ];
   btns.forEach(b => {
     const btn = document.createElement('button');
     btn.className = 'ctrl-btn' + ((activeFilter === b.filter) ? ' active' : '');
     btn.textContent = b.label;
-    btn.onclick = () => { activeFilter = b.filter; render(); };
+    btn.onclick = () => { activeFilter = b.filter; filterData(); renderControls(); };
     ctrl.appendChild(btn);
   });
 }
 
+function filterData() {
+  if (!activeFilter) {
+    initChart();
+  } else {
+    const filtered = F3_DATA.filter(d => d.data['confiabilidade'] === activeFilter);
+    // Need to keep parents/spouses that are referenced
+    const keepIds = new Set(filtered.map(d => d.id));
+    // Also keep parents and spouses of kept people
+    filtered.forEach(d => {
+      if (d.rels.parents) d.rels.parents.forEach(p => keepIds.add(p));
+      if (d.rels.spouses) d.rels.spouses.forEach(s => keepIds.add(s));
+    });
+    const expanded = F3_DATA.filter(d => keepIds.has(d.id));
+    const container = document.getElementById('FamilyChart');
+    container.innerHTML = '';
+    f3Chart = f3.createChart('#FamilyChart', expanded).setTransitionTime(500);
+    const f3Card = f3Chart.setCardHtml(`
+      <div class="card_cont">
+        <div class="card_label">
+          <span class="card_first-name"></span>
+          <span class="card_last-name"></span>
+        </div>
+        <div class="card_birthday"></div>
+        <div class="card_confiabilidade"></div>
+      </div>
+    `);
+    f3Card.setCardDisplay([
+      [{field: 'first name'}, {field: 'last name'}],
+      [{field: 'birthday'}],
+      [{field: 'confiabilidade'}]
+    ]);
+    f3Card.setOnCardClick((d) => {
+      showInfo(d.data.id);
+    });
+    f3Chart.setAncestryDepth(5);
+    f3Chart.setProgenyDepth(5);
+    f3Chart.updateMainId('3');
+    f3Chart.updateTree({initial: true});
+  }
+}
+
 // Close info on outside click
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.person') && !e.target.closest('.info-panel')) closeInfo();
+  if (!e.target.closest('.card_cont') && !e.target.closest('.info-panel') && !e.target.closest('.ctrl-btn')) closeInfo();
 });
 
-render();
+// Initialize
+renderControls();
+initChart();
 </script>
 </body>
 </html>
