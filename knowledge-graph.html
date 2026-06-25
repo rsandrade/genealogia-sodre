@@ -3834,7 +3834,9 @@ function initChart(rootId) {
   container.className = 'f3';
 
   f3Chart = f3.createChart('#FamilyChart', F3_DATA)
-    .setTransitionTime(500);
+    .setTransitionTime(500)
+    .setCardXSpacing(200)
+    .setCardYSpacing(120);
 
   // Use SVG cards (default f3 rendering — more reliable than setCardHtml)
   const f3Card = f3Chart.setCardSvg();
@@ -3845,21 +3847,64 @@ function initChart(rootId) {
     showInfo(d.data.id);
   });
 
-  // Set main person to Francisco Gramilo Sodré (id "3") — the root of the main tree
-  // Show more generations up (ancestry) and down (progeny) — must be set BEFORE updateMainId/updateTree
-  f3Chart.setAncestryDepth(5);
-  f3Chart.setProgenyDepth(5);
+  // Set main person to Marcelo Gramilo Sodré (id "gp1") — root of the main tree
+  f3Chart.setAncestryDepth(0);
+  f3Chart.setProgenyDepth(1);
   
   // Apply parchment theme colors to SVG elements after each update
   // Must be set BEFORE updateTree so it runs on initial render
   f3Chart.setOnUpdate(applyParchmentTheme);
   
-  f3Chart.updateMainId('3');
+  f3Chart.updateMainId('gp1');
   f3Chart.updateTree({initial: true});
   
-  // Extra apply after initial render (belt and suspenders)
-  setTimeout(applyParchmentTheme, 100);
-  setTimeout(applyParchmentTheme, 500);
+  // Setup zoom/pan and fit tree to container
+  f3.handlers.setupZoom(f3Chart.svg, f3Chart.store);
+  setTimeout(() => { fitTreeToContainer(); applyParchmentTheme(); }, 200);
+  setTimeout(() => { fitTreeToContainer(); applyParchmentTheme(); }, 600);
+}
+
+function fitTreeToContainer() {
+  const svg = document.querySelector('.main_svg');
+  const cont = document.querySelector('#FamilyChart');
+  if (!svg || !cont) return;
+  
+  const cards = svg.querySelectorAll('.card');
+  if (cards.length === 0) return;
+  
+  const contRect = cont.getBoundingClientRect();
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  cards.forEach(c => {
+    const r = c.getBoundingClientRect();
+    if (r.width > 0 && r.height > 0) {
+      minX = Math.min(minX, r.left - contRect.left);
+      minY = Math.min(minY, r.top - contRect.top);
+      maxX = Math.max(maxX, r.right - contRect.left);
+      maxY = Math.max(maxY, r.bottom - contRect.top);
+    }
+  });
+  
+  if (minX === Infinity || maxX === -Infinity) return;
+  
+  const treeW = maxX - minX;
+  const treeH = maxY - minY;
+  const contW = cont.clientWidth;
+  const contH = cont.clientHeight;
+  
+  if (treeW <= 0 || treeH <= 0) return;
+  
+  const scale = Math.min(contW / treeW, contH / treeH) * 0.9;
+  if (scale <= 0 || !isFinite(scale)) return;
+  
+  // Calculate translation to center
+  const tx = (contW / 2) - ((minX + maxX) / 2) * scale;
+  const ty = (contH / 2) - ((minY + maxY) / 2) * scale;
+  
+  // Apply via d3 zoom transform
+  if (window.d3 && svg.__zoom !== undefined) {
+    const transform = d3.zoomIdentity.translate(tx, ty).scale(scale);
+    d3.select(svg).call(d3.zoom().transform, transform);
+  }
 }
 
 function applyParchmentTheme() {
@@ -4010,10 +4055,13 @@ function filterData() {
     f3Card.setOnCardClick((d) => {
       showInfo(d.data.id);
     });
-    f3Chart.setAncestryDepth(5);
+    f3Chart.setAncestryDepth(3);
     f3Chart.setProgenyDepth(5);
-    f3Chart.updateMainId('3');
+    f3Chart.updateMainId('gp1');
     f3Chart.updateTree({initial: true});
+    f3.handlers.setupZoom(f3Chart.svg, f3Chart.store);
+    setTimeout(() => { try { f3.handlers.treeFit(f3Chart.store, f3Chart.svg.node()); } catch(e) {} applyParchmentTheme(); }, 200);
+    setTimeout(() => { try { f3.handlers.treeFit(f3Chart.store, f3Chart.svg.node()); } catch(e) {} applyParchmentTheme(); }, 600);
   }
 }
 
