@@ -2151,15 +2151,18 @@ function initChart(rootId) {
     .setCardXSpacing(360)
     .setCardYSpacing(200);
 
-  // Use SVG cards with larger dimensions to show full names in 2 lines
+  // Use SVG cards with larger dimensions to show full names in 2-3 lines
   const f3Card = f3Chart.setCardSvg();
   f3Card.setCardDim({width: 220, height: 80});
-  // Custom display: line 1 = first name, line 2 = last name (skip if empty), line 3 = birthday
-  f3Card.setCardDisplay([
-    d => d['first name'] || '',
-    d => d['last name'] || '',
-    d => d['birthday'] || ''
-  ]);
+  // Custom display: line 1 = first name, line 2 = last name (skip if empty), line 3 = birthday (skip if empty)
+  f3Card.setCardDisplay((node) => {
+    const d = node.data;
+    const lines = [];
+    if (d['first name'] && d['first name'].trim()) lines.push(d['first name']);
+    if (d['last name'] && d['last name'].trim()) lines.push(d['last name']);
+    if (d['birthday'] && d['birthday'].trim()) lines.push(d['birthday']);
+    return lines;
+  });
   f3Card.setLinkBreak(true);
 
   // Click handler
@@ -2437,11 +2440,14 @@ function filterData() {
     f3Chart = f3.createChart('#FamilyChart', expanded).setTransitionTime(500);
     const f3Card = f3Chart.setCardSvg();
     f3Card.setCardDim({width: 220, height: 80});
-    f3Card.setCardDisplay([
-      d => d['first name'] || '',
-      d => d['last name'] || '',
-      d => d['birthday'] || ''
-    ]);
+    f3Card.setCardDisplay((node) => {
+      const d = node.data;
+      const lines = [];
+      if (d['first name'] && d['first name'].trim()) lines.push(d['first name']);
+      if (d['last name'] && d['last name'].trim()) lines.push(d['last name']);
+      if (d['birthday'] && d['birthday'].trim()) lines.push(d['birthday']);
+      return lines;
+    });
     f3Card.setLinkBreak(true);
     f3Card.setOnCardClick((d) => {
       showInfo(d.data.id);
