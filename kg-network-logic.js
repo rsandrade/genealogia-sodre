@@ -391,7 +391,7 @@ function runTimelineLayout() {
     
     const nodeCount = nodes.length;
     const spacing = 40;
-    const totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
+    let totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
     let startX = centerX - totalWidth / 2;
     
     if (totalWidth > cy.width() * 0.9) {
@@ -622,7 +622,7 @@ function runGenerationPreLayout() {
     
     const nodeCount = nodes.length;
     const spacing = 40;
-    const totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
+    let totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
     let startX = centerX - totalWidth / 2;
     
     if (totalWidth > cy.width() * 0.9) {
