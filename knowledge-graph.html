@@ -3836,12 +3836,13 @@ function initChart(rootId) {
 
   f3Chart = f3.createChart('#FamilyChart', F3_DATA)
     .setTransitionTime(500)
-    .setCardXSpacing(280)
-    .setCardYSpacing(150);
+    .setCardXSpacing(360)
+    .setCardYSpacing(200);
 
-  // Use SVG cards (default f3 rendering — more reliable than setCardHtml)
+  // Use SVG cards with larger dimensions to show full names
   const f3Card = f3Chart.setCardSvg();
-  f3Card.setCardDisplay([["first name", "last name"], ["birthday"], ["confiabilidade"]]);
+  f3Card.setCardDim({width: 220, height: 90});
+  f3Card.setCardDisplay([["nome completo"], ["birthday"], ["confiabilidade"]]);
 
   // Click handler
   f3Card.setOnCardClick((d) => {
@@ -3849,8 +3850,8 @@ function initChart(rootId) {
   });
 
   // Set main person to Marcelo Gramilo Sodré (id "gp1") — root of the main tree
-  f3Chart.setAncestryDepth(0);
-  f3Chart.setProgenyDepth(1);
+  f3Chart.setAncestryDepth(4);
+  f3Chart.setProgenyDepth(6);
   
   // Apply parchment theme colors to SVG elements after each update
   // Must be set BEFORE updateTree so it runs on initial render
@@ -3863,7 +3864,7 @@ function initChart(rootId) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       enableF3PanZoom(f3Chart);
-      centerF3Tree(f3Chart, {preferredScale: 1, fitWidth: false, centerMode: 'main'});
+      centerF3Tree(f3Chart, {preferredScale: 1, fitWidth: true, centerMode: 'main'});
       applyParchmentTheme();
     });
   });
@@ -4117,18 +4118,19 @@ function filterData() {
     container.innerHTML = '';
     f3Chart = f3.createChart('#FamilyChart', expanded).setTransitionTime(500);
     const f3Card = f3Chart.setCardSvg();
-    f3Card.setCardDisplay([["first name", "last name"], ["birthday"], ["confiabilidade"]]);
+    f3Card.setCardDim({width: 220, height: 90});
+    f3Card.setCardDisplay([["nome completo"], ["birthday"], ["confiabilidade"]]);
     f3Card.setOnCardClick((d) => {
       showInfo(d.data.id);
     });
-    f3Chart.setAncestryDepth(3);
-    f3Chart.setProgenyDepth(5);
+    f3Chart.setAncestryDepth(4);
+    f3Chart.setProgenyDepth(6);
     f3Chart.updateMainId('gp1');
     f3Chart.updateTree({initial: true});
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         enableF3PanZoom(f3Chart);
-        centerF3Tree(f3Chart, {preferredScale: 1, fitWidth: false, centerMode: 'main'});
+        centerF3Tree(f3Chart, {preferredScale: 1, fitWidth: true, centerMode: 'main'});
         applyParchmentTheme();
       });
     });
