@@ -113,29 +113,23 @@ body::before {
 .legend-item { display:flex; align-items:center; gap:0.3rem; font-size:0.8rem; color:var(--ink-muted); }
 .legend-dot { width:10.8px; height:10.8px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
 
-/* Override f3 styles to match parchment theme */
-.f3 .card_cont {
-  border:1px solid var(--border-line) !important;
-  border-radius:3px !important;
-  background:#fffcf5 !important;
-  box-shadow:var(--card-shadow) !important;
-  cursor:pointer !important;
-}
-.f3 .card_cont:hover {
-  transform:translateY(-2px) !important;
-  box-shadow:0 4px 16px rgba(26,16,8,0.2) !important;
-}
-.f3 .card .card-label {
-  font-family:Georgia,serif !important;
-}
-.f3 .card-female .card_cont { border-color:#9b6b7b !important; background:#fcf5f7 !important; }
-.f3 .card-male .card_cont { border-color:#5a7a9a !important; background:#f3f7fb !important; }
-.f3 .card-male-other-spouse .card_cont, .f3 .card-female-other-spouse .card_cont {
-  border-color:var(--gold) !important;
-}
-.f3 .card_family_link { stroke:var(--gold) !important; }
-.f3 .line { stroke:#c9b896 !important; }
-.f3 .card-edit-info { display:none !important; }
+/* f3 theme override moved to end of stylesheet */
+
+/* Force SVG card colors for parchment theme */
+.f3 .card-body-rect { fill: #fffcf5 !important; }
+.f3 .card-male .card-body-rect { fill: #dde8f0 !important; }
+.f3 .card-female .card-body-rect { fill: #f0dde5 !important; }
+.f3 .card-outline { fill: #fffcf5 !important; stroke: #c9b896 !important; stroke-width: 1px !important; }
+.f3 .card-main-outline { stroke: #9e7c2e !important; stroke-width: 2px !important; }
+.f3 .card text, .f3 .card tspan { fill: #1a1008 !important; font-family: Georgia, serif !important; }
+.f3 .card_add .card-body-rect { fill: #e8dcc8 !important; }
+.f3 .person-icon { fill: #7a6b55 !important; }
+.f3 .card_family_link { stroke: #9e7c2e !important; }
+.f3 .line { stroke: #c9b896 !important; }
+.f3 .card-edit-info { display: none !important; }
+.f3 .text-overflow-mask { fill: #fffcf5 !important; }
+.f3 .card-male .text-overflow-mask { fill: #dde8f0 !important; }
+.f3 .card-female .text-overflow-mask { fill: #f0dde5 !important; }
 
 .page-footer {
   text-align:center; padding:2rem 1rem; border-top:1px solid var(--border-line); margin-top:1rem;
@@ -1021,6 +1015,15 @@ body::before {
   margin-right: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+/* Override f3 CSS variables — must come AFTER f3 CSS to take effect */
+:root {
+  --background-color: #fffcf5;
+  --text-color: #1a1008;
+  --male-color: #5a7a9a;
+  --female-color: #9b6b7b;
+  --genderless-color: #7a6b55;
 }
 </style>
 </head>
@@ -3828,29 +3831,16 @@ let f3Chart = null;
 function initChart(rootId) {
   const container = document.getElementById('FamilyChart');
   container.innerHTML = '';
+  container.className = 'f3';
 
   f3Chart = f3.createChart('#FamilyChart', F3_DATA)
     .setTransitionTime(500);
 
-  // Custom card HTML — setCardHtml returns the cardHtml object, NOT the chart
-  const f3Card = f3Chart.setCardHtml(`
-    <div class="card_cont">
-      <div class="card_label">
-        <span class="card_first-name"></span>
-        <span class="card_last-name"></span>
-      </div>
-      <div class="card_birthday"></div>
-      <div class="card_confiabilidade"></div>
-    </div>
-  `);
+  // Use SVG cards (default f3 rendering — more reliable than setCardHtml)
+  const f3Card = f3Chart.setCardSvg();
+  f3Card.setCardDisplay([["first name", "last name"], ["birthday"], ["confiabilidade"]]);
 
-  f3Card.setCardDisplay([
-    [{field: 'first name'}, {field: 'last name'}],
-    [{field: 'birthday'}],
-    [{field: 'confiabilidade'}]
-  ]);
-
-  // Click handler on the card (setOnCardClick is on the cardHtml object)
+  // Click handler
   f3Card.setOnCardClick((d) => {
     showInfo(d.data.id);
   });
@@ -3859,8 +3849,57 @@ function initChart(rootId) {
   // Show more generations up (ancestry) and down (progeny) — must be set BEFORE updateMainId/updateTree
   f3Chart.setAncestryDepth(5);
   f3Chart.setProgenyDepth(5);
+  
+  // Apply parchment theme colors to SVG elements after each update
+  // Must be set BEFORE updateTree so it runs on initial render
+  f3Chart.setOnUpdate(applyParchmentTheme);
+  
   f3Chart.updateMainId('3');
   f3Chart.updateTree({initial: true});
+  
+  // Extra apply after initial render (belt and suspenders)
+  setTimeout(applyParchmentTheme, 100);
+  setTimeout(applyParchmentTheme, 500);
+}
+
+function applyParchmentTheme() {
+  document.querySelectorAll('.f3 .card-body-rect').forEach(el => {
+    const card = el.closest('.card');
+    if (card) {
+      if (card.classList.contains('card-female')) el.setAttribute('fill', '#f0dde5');
+      else if (card.classList.contains('card-male')) el.setAttribute('fill', '#dde8f0');
+      else el.setAttribute('fill', '#fffcf5');
+    }
+  });
+  document.querySelectorAll('.f3 .card-outline').forEach(el => {
+    el.setAttribute('fill', '#fffcf5');
+    el.setAttribute('stroke', '#c9b896');
+    el.setAttribute('stroke-width', '1');
+  });
+  document.querySelectorAll('.f3 .card-main-outline').forEach(el => {
+    el.setAttribute('stroke', '#9e7c2e');
+    el.setAttribute('stroke-width', '2');
+  });
+  document.querySelectorAll('.f3 .card text, .f3 .card tspan').forEach(el => {
+    el.setAttribute('fill', '#1a1008');
+  });
+  document.querySelectorAll('.f3 .text-overflow-mask').forEach(el => {
+    const card = el.closest('.card');
+    if (card) {
+      if (card.classList.contains('card-female')) el.setAttribute('fill', '#f0dde5');
+      else if (card.classList.contains('card-male')) el.setAttribute('fill', '#dde8f0');
+      else el.setAttribute('fill', '#fffcf5');
+    }
+  });
+  document.querySelectorAll('.f3 .person-icon').forEach(el => {
+    el.setAttribute('fill', '#7a6b55');
+  });
+  document.querySelectorAll('.f3 .line').forEach(el => {
+    el.setAttribute('stroke', '#c9b896');
+  });
+  document.querySelectorAll('.f3 .card_family_link').forEach(el => {
+    el.setAttribute('stroke', '#9e7c2e');
+  });
 }
 
 function cardClickHandler({data}) {
@@ -3966,21 +4005,8 @@ function filterData() {
     const container = document.getElementById('FamilyChart');
     container.innerHTML = '';
     f3Chart = f3.createChart('#FamilyChart', expanded).setTransitionTime(500);
-    const f3Card = f3Chart.setCardHtml(`
-      <div class="card_cont">
-        <div class="card_label">
-          <span class="card_first-name"></span>
-          <span class="card_last-name"></span>
-        </div>
-        <div class="card_birthday"></div>
-        <div class="card_confiabilidade"></div>
-      </div>
-    `);
-    f3Card.setCardDisplay([
-      [{field: 'first name'}, {field: 'last name'}],
-      [{field: 'birthday'}],
-      [{field: 'confiabilidade'}]
-    ]);
+    const f3Card = f3Chart.setCardSvg();
+    f3Card.setCardDisplay([["first name", "last name"], ["birthday"], ["confiabilidade"]]);
     f3Card.setOnCardClick((d) => {
       showInfo(d.data.id);
     });
