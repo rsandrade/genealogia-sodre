@@ -3827,6 +3827,7 @@ F3_DATA.forEach(d => dataMap[d.id] = d);
 
 // Create chart
 let f3Chart = null;
+let f3Zoom = null;
 
 function initChart(rootId) {
   const container = document.getElementById('FamilyChart');
@@ -3835,8 +3836,8 @@ function initChart(rootId) {
 
   f3Chart = f3.createChart('#FamilyChart', F3_DATA)
     .setTransitionTime(500)
-    .setCardXSpacing(200)
-    .setCardYSpacing(120);
+    .setCardXSpacing(280)
+    .setCardYSpacing(150);
 
   // Use SVG cards (default f3 rendering — more reliable than setCardHtml)
   const f3Card = f3Chart.setCardSvg();
@@ -3858,52 +3859,117 @@ function initChart(rootId) {
   f3Chart.updateMainId('gp1');
   f3Chart.updateTree({initial: true});
   
-  // Setup zoom/pan and fit tree to container
-  f3.handlers.setupZoom(f3Chart.svg, f3Chart.store);
-  setTimeout(() => { fitTreeToContainer(); applyParchmentTheme(); }, 200);
-  setTimeout(() => { fitTreeToContainer(); applyParchmentTheme(); }, 600);
+  // Enable pan/zoom and center tree — use requestAnimationFrame for correct timing
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      enableF3PanZoom(f3Chart);
+      centerF3Tree(f3Chart, {preferredScale: 1, fitWidth: false, centerMode: 'main'});
+      applyParchmentTheme();
+    });
+  });
+  setTimeout(() => { applyParchmentTheme(); }, 600);
 }
 
-function fitTreeToContainer() {
-  const svg = document.querySelector('.main_svg');
-  const cont = document.querySelector('#FamilyChart');
-  if (!svg || !cont) return;
+function enableF3PanZoom(f3Chart) {
+  const svgSel = d3.select('#FamilyChart svg.main_svg');
+  const svg = svgSel.node();
+  if (!svg) return null;
   
-  const cards = svg.querySelectorAll('.card');
-  if (cards.length === 0) return;
+  const viewSel = svgSel.select('g.view');
+  if (viewSel.empty()) return null;
   
-  const contRect = cont.getBoundingClientRect();
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  cards.forEach(c => {
-    const r = c.getBoundingClientRect();
-    if (r.width > 0 && r.height > 0) {
-      minX = Math.min(minX, r.left - contRect.left);
-      minY = Math.min(minY, r.top - contRect.top);
-      maxX = Math.max(maxX, r.right - contRect.left);
-      maxY = Math.max(maxY, r.bottom - contRect.top);
+  // Remove any CSS transform that competes with SVG transform
+  viewSel.style('transform', null);
+  
+  let zoom = svg.__zoomObj;
+  if (!zoom) {
+    zoom = d3.zoom()
+      .scaleExtent([0.3, 2.5])
+      .on('zoom', function(event) {
+        viewSel.style('transform', null).attr('transform', event.transform);
+      });
+    svg.__zoomObj = zoom;
+    svgSel.call(zoom);
+  } else {
+    zoom.scaleExtent([0.3, 2.5]);
+    svgSel.call(zoom);
+  }
+  
+  svgSel.on('dblclick.zoom', null);
+  svgSel.style('touch-action', 'none');
+  return zoom;
+}
+
+function centerF3Tree(f3Chart, options = {}) {
+  const {
+    padding = 40,
+    preferredScale = 1,
+    minReadableScale = 0.8,
+    maxInitialScale = 1.15,
+    fitWidth = false,
+    centerMode = 'main',
+    duration = 0
+  } = options;
+  
+  const svgSel = d3.select('#FamilyChart svg.main_svg');
+  const svg = svgSel.node();
+  if (!svg) return;
+  
+  const zoom = enableF3PanZoom(f3Chart);
+  if (!zoom) return;
+  
+  const cardsView = svg.querySelector('.cards_view');
+  if (!cardsView) return;
+  
+  let bbox;
+  try {
+    bbox = cardsView.getBBox();
+  } catch(e) { return; }
+  
+  if (!bbox || !isFinite(bbox.width) || bbox.width === 0) return;
+  
+  const svgRect = svg.getBoundingClientRect();
+  const svgW = svgRect.width || 1400;
+  const svgH = svgRect.height || 720;
+  
+  const fitScaleW = (svgW - padding * 2) / bbox.width;
+  const fitScaleH = (svgH - padding * 2) / bbox.height;
+  
+  let scale;
+  if (fitWidth) {
+    scale = Math.min(fitScaleW, fitScaleH, maxInitialScale);
+  } else {
+    scale = preferredScale;
+    scale = Math.min(scale, fitScaleH, maxInitialScale);
+    scale = Math.max(scale, minReadableScale);
+  }
+  
+  let targetCx, targetCy;
+  if (centerMode === 'main') {
+    const mainCard = svg.querySelector('.card-main') || svg.querySelector('.card-depth-0');
+    const mainCardCont = mainCard ? mainCard.closest('.card_cont') : null;
+    if (mainCardCont && mainCardCont.transform && mainCardCont.transform.baseVal.length) {
+      const matrix = mainCardCont.transform.baseVal.consolidate().matrix;
+      targetCx = matrix.e;
+      targetCy = matrix.f;
+    } else {
+      targetCx = bbox.x + bbox.width / 2;
+      targetCy = bbox.y + bbox.height / 2;
     }
-  });
+  } else {
+    targetCx = bbox.x + bbox.width / 2;
+    targetCy = bbox.y + bbox.height / 2;
+  }
   
-  if (minX === Infinity || maxX === -Infinity) return;
+  const tx = svgW / 2 - targetCx * scale;
+  const ty = svgH / 2 - targetCy * scale;
   
-  const treeW = maxX - minX;
-  const treeH = maxY - minY;
-  const contW = cont.clientWidth;
-  const contH = cont.clientHeight;
+  const transform = d3.zoomIdentity.translate(tx, ty).scale(scale);
   
-  if (treeW <= 0 || treeH <= 0) return;
-  
-  const scale = Math.min(contW / treeW, contH / treeH) * 0.9;
-  if (scale <= 0 || !isFinite(scale)) return;
-  
-  // Calculate translation to center
-  const tx = (contW / 2) - ((minX + maxX) / 2) * scale;
-  const ty = (contH / 2) - ((minY + maxY) / 2) * scale;
-  
-  // Apply via d3 zoom transform
-  if (window.d3 && svg.__zoom !== undefined) {
-    const transform = d3.zoomIdentity.translate(tx, ty).scale(scale);
-    d3.select(svg).call(d3.zoom().transform, transform);
+  if (duration > 0) {
+    svgSel.transition().duration(duration).call(zoom.transform, transform);
+  } else {
+    svgSel.call(zoom.transform, transform);
   }
 }
 
@@ -4059,9 +4125,13 @@ function filterData() {
     f3Chart.setProgenyDepth(5);
     f3Chart.updateMainId('gp1');
     f3Chart.updateTree({initial: true});
-    f3.handlers.setupZoom(f3Chart.svg, f3Chart.store);
-    setTimeout(() => { try { f3.handlers.treeFit(f3Chart.store, f3Chart.svg.node()); } catch(e) {} applyParchmentTheme(); }, 200);
-    setTimeout(() => { try { f3.handlers.treeFit(f3Chart.store, f3Chart.svg.node()); } catch(e) {} applyParchmentTheme(); }, 600);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        enableF3PanZoom(f3Chart);
+        centerF3Tree(f3Chart, {preferredScale: 1, fitWidth: false, centerMode: 'main'});
+        applyParchmentTheme();
+      });
+    });
   }
 }
 
