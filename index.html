@@ -79,6 +79,8 @@ main{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem}
 .child-num{font-family:'Cormorant Garamond',serif;font-size:1.04rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.17rem}
 .child-name{font-family:'Playfair Display',serif;font-size:1.01rem;font-weight:700;color:var(--ink);line-height:1.2}
 .child-note{font-size:1.08rem;color:var(--ink-muted);font-style:italic;margin-top:0.17rem}
+.child-card.grandchild{margin-left:2rem;border-left:3px solid var(--line-faint);font-size:0.95rem}
+.child-card.grandchild .child-name{font-size:0.93rem}
 .connector-tier-down{width:1px;height:2rem;background:var(--line);margin:0 auto}
 .cousin-bracket{position:relative;height:1.9rem;display:flex;align-items:flex-end;justify-content:center;width:100%;max-width:1200px}
 .cousin-bracket::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:var(--line)}
@@ -425,22 +427,10 @@ footer{text-align:center;padding:4.3rem 3.5rem;border-top:1px solid var(--line);
 <div class="sibling-group-sub">Conexão familiar Sodré · parentesco com o ramo Gramilo Sodré em investigação</div>
 <div class="sibling-group-children">
 <div class="child-card probable"><div class="child-name">Valdenor Gramilio Sodré</div></div>
-<div class="child-card probable"><div class="child-name">Valdomiro Gramilio Sodré</div><div class="child-note">pai de Valdemar</div></div>
-<div class="child-card probable"><div class="child-name">Deusdete Pereira Sodré</div><div class="child-note">pai de Abraão</div></div>
-</div>
-</div>
-
-<div class="sibling-group">
-<div class="sibling-group-header">Valdomiro Gramilio Sodré</div>
-<div class="sibling-group-children">
-<div class="child-card probable"><div class="child-name">Valdemar de Jesus Sodré</div></div>
-</div>
-</div>
-
-<div class="sibling-group">
-<div class="sibling-group-header">Deusdete Pereira Sodré</div>
-<div class="sibling-group-children">
-<div class="child-card probable"><div class="child-name">Abraão Pereira Sodré</div></div>
+<div class="child-card probable"><div class="child-name">Valdomiro Gramilio Sodré</div><div class="child-note">1 filho</div></div>
+<div class="child-card probable grandchild"><div class="child-name">Valdemar de Jesus Sodré</div><div class="child-note">filho de Valdomiro</div></div>
+<div class="child-card probable"><div class="child-name">Deusdete Pereira Sodré</div><div class="child-note">1 filho</div></div>
+<div class="child-card probable grandchild"><div class="child-name">Abraão Pereira Sodré</div><div class="child-note">filho de Deusdete</div></div>
 </div>
 </div>
 
