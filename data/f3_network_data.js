@@ -986,7 +986,7 @@ const F3_NETWORK_DATA = [
       "gender": "F",
       "nome completo": "Antenor Soares Pereira",
       "confiabilidade": "hipotética",
-      "notas": "Esposo de Carmelinda Sodré Pereira · pai de Deusdete Pereira Sodré · nome citado por Ricardo Andrade em jun 2026 (informação verbal, sem confirmação documental)"
+      "notas": "Esposo de Carmerina Sodré Pereira · pai de Deusdete Pereira Sodré · nome citado por Ricardo Andrade em jun 2026 (informação verbal, sem confirmação documental)"
     },
     "rels": {
       "spouses": [
@@ -1025,10 +1025,10 @@ const F3_NETWORK_DATA = [
   {
     "id": "carmelinda_sp",
     "data": {
-      "first name": "Carmelinda",
+      "first name": "Carmerina",
       "last name": "Sodré Pereira",
       "gender": "F",
-      "nome completo": "Carmelinda Sodré Pereira",
+      "nome completo": "Carmerina Sodré Pereira",
       "confiabilidade": "hipotética",
       "notas": "Esposa de Antenor Soares Pereira · mãe de Deusdete Pereira Sodré · sobrenome Sodré Pereira = mesmo agrupamento do Tronco Baiano do séc. XVIII (Jerônimo Sodré Pereira) — parentesco a confirmar · nome citado por Ricardo Andrade em jun 2026"
     },
@@ -1735,7 +1735,7 @@ const F3_NETWORK_DATA = [
       "gender": "M",
       "nome completo": "Deusdete Pereira Sodré",
       "confiabilidade": "provável",
-      "notas": "Filho de Antenor Soares Pereira × Carmelinda Sodré Pereira · confirmado em jun 2026. Provável irmão de Valdenor e Valdomiro Gramilio Sodré (hipótese de Ricardo), ambos passaram a receber estes mesmos pais como indicativo de irmandade. 4 ou 5 filhos (apenas Abraão confirmado — os demais a registrar). NÃO criar registros fictícios para os outros filhos."
+      "notas": "Filho de Antenor Soares Pereira × Carmerina Sodré Pereira · confirmado em jun 2026. Provável irmão de Valdenor e Valdomiro Gramilio Sodré (hipótese de Ricardo), ambos passaram a receber estes mesmos pais como indicativo de irmandade. 4 ou 5 filhos (apenas Abraão confirmado — os demais a registrar). NÃO criar registros fictícios para os outros filhos."
     },
     "rels": {
       "parents": [
@@ -1998,7 +1998,7 @@ const F3_NETWORK_DATA = [
       "gender": "M",
       "nome completo": "Valdenor Gramilio Sodré",
       "confiabilidade": "hipotética",
-      "notas": "Parentesco confirmado em jun 2026 por Ricardo Andrade: filho de Antenor Soares Pereira × Carmelinda Sodré Pereira (irmão de Deusdete Pereira Sodré, possivelmente também irmão de Valdomiro Gramilio Sodré). Sobrenome 'Gramilio' = grafia familiar para Gramilo/Gramilu (mesmo padrão que 'Sudré' = Sodré). NÃO conectar filhos do séc. XIX diretamente — provável homônimo. Sobrenome 'Gramilio' é grafia familiar (mesmo padrão de erro cartorário que 'Sudré' e 'Sodré'): possível homônimo ou variante de Gramilo · sem confirmação de pais · avô da prima de Ibitupan · voluntário para fundir com ramos oficiais"
+      "notas": "Parentesco confirmado em jun 2026 por Ricardo Andrade: filho de Antenor Soares Pereira × Carmerina Sodré Pereira (irmão de Deusdete Pereira Sodré, possivelmente também irmão de Valdomiro Gramilio Sodré). Sobrenome 'Gramilio' = grafia familiar para Gramilo/Gramilu (mesmo padrão que 'Sudré' = Sodré). NÃO conectar filhos do séc. XIX diretamente — provável homônimo. Sobrenome 'Gramilio' é grafia familiar (mesmo padrão de erro cartorário que 'Sudré' e 'Sodré'): possível homônimo ou variante de Gramilo · sem confirmação de pais · avô da prima de Ibitupan · voluntário para fundir com ramos oficiais"
     },
     "rels": {
       "parents": [
@@ -2015,7 +2015,7 @@ const F3_NETWORK_DATA = [
       "gender": "M",
       "nome completo": "Valdomiro Gramilio Sodré",
       "confiabilidade": "hipotética",
-      "notas": "Parentesco provável em jun 2026: Ricardo Andrade sugeriu irmandade com Deusdete Pereira Sodré e Valdenor Gramilio Sodré. Pais hipotéticos: Antenor Soares Pereira × Carmelinda Sodré Pereira. Pai de Valdemar de Jesus Sodré. Sobrenome 'Gramilio' = grafia familiar para Gramilo. Irmão de Valdenor Gramilio Sodré · 'Gramilio' = grafia familiar para Gramilo/Gramilu · sem confirmação de pais · pai de Valdemar de Jesus Sodré"
+      "notas": "Parentesco provável em jun 2026: Ricardo Andrade sugeriu irmandade com Deusdete Pereira Sodré e Valdenor Gramilio Sodré. Pais hipotéticos: Antenor Soares Pereira × Carmerina Sodré Pereira. Pai de Valdemar de Jesus Sodré. Sobrenome 'Gramilio' = grafia familiar para Gramilo. Irmão de Valdenor Gramilio Sodré · 'Gramilio' = grafia familiar para Gramilo/Gramilu · sem confirmação de pais · pai de Valdemar de Jesus Sodré"
     },
     "rels": {
       "parents": [
