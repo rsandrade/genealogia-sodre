@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Visualização em Rede — Família Gramilo Sodré</title>
+<title>Rede Genealógica — Família Gramilo Sodré</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
-<script src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.min.js"></script>
-<script src="https://unpkg.com/cola.js@5.1.2/dist/cola.min.js"></script>
-<script src="https://unpkg.com/cytoscape-cola@2.5.0/cytoscape-cola.min.js"></script>
+<script src="vendor/d3.v7.min.js"></script>
+<script src="vendor/family-chart.min.js"></script>
 <style>
 :root {
   --parchment: #f4ece1;
@@ -57,18 +55,55 @@ body::before {
 .nav-btn { display:inline-block; padding:0.5rem 1.2rem; background:var(--gold); color:var(--parchment); border-radius:3px; font-family:'Cormorant Garamond',serif; font-size:1rem; letter-spacing:0.05em; text-decoration:none; transition:all 0.2s; border:1px solid transparent; }
 .nav-btn:hover { background:var(--ink); color:var(--parchment); border-color:var(--ink); transform:translateY(-1px); box-shadow:0 4px 12px rgba(44,24,16,0.15); }
 .nav-btn.active { background:var(--ink); color:var(--parchment); border-color:var(--ink); font-weight:600; cursor:default; pointer-events:none; }
-.controls { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:0.8rem 1rem; background:rgba(232,220,200,0.4); border-bottom:1px solid var(--border-line); }
+
+.controls { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:0.8rem 1rem; background:rgba(232,220,200,0.4); border-bottom:1px solid var(--border-line); align-items:center; }
 .ctrl-btn { font-family:'EB Garamond',serif; font-size:0.85rem; padding:0.35rem 0.8rem; border:1px solid var(--border-line); border-radius:3px; background:var(--parchment-deep); color:var(--ink-soft); cursor:pointer; transition:all 0.2s; }
 .ctrl-btn:hover { background:var(--gold-light); color:#fff; border-color:var(--gold); }
 .ctrl-btn.active { background:var(--gold); color:#fff; border-color:var(--gold); }
 .search-box { flex:1; max-width:300px; min-width:180px; }
 .search-box input { width:100%; padding:0.4rem 0.7rem; border:1px solid var(--border-line); border-radius:3px; background:#fffcf5; font-family:'EB Garamond',serif; font-size:0.9rem; color:var(--ink); }
 .search-box input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 2px rgba(158,124,46,0.2); }
-.legend { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:0.5rem 1rem; border-bottom:1px solid var(--border-line); font-size:0.75rem; }
+
+.chip-bar { display:flex; gap:0.4rem; justify-content:center; flex-wrap:wrap; padding:0.5rem 1rem; border-bottom:1px solid var(--border-line); background:rgba(232,220,200,0.3); }
+.cat-chip { font-family:'EB Garamond',serif; font-size:0.78rem; padding:0.3rem 0.7rem; border:1px solid var(--border-line); border-radius:50px; background:var(--parchment); color:var(--ink-soft); cursor:pointer; transition:all 0.2s; display:inline-flex; gap:0.35rem; align-items:center; }
+.cat-chip:hover { background:var(--parchment-deep); }
+.cat-chip.active { background:var(--gold); color:#fff; border-color:var(--gold); font-weight:600; }
+.cat-chip .cat-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
+.cat-chip.cat-confirmada .cat-dot { background:rgba(45,90,61,0.5); border-color:var(--confirmed); }
+.cat-chip.cat-provavel .cat-dot { background:rgba(184,134,11,0.5); border-color:var(--probable); }
+.cat-chip.cat-hipotetica .cat-dot { background:rgba(139,46,46,0.5); border-color:var(--hypothetical); }
+.cat-chip.cat-barao .cat-dot { background:rgba(74,52,120,0.5); border-color:var(--barao); }
+.cat-chip.cat-colonial .cat-dot { background:rgba(42,90,138,0.5); border-color:var(--colonial); }
+.cat-chip.cat-materno .cat-dot { background:rgba(122,90,16,0.5); border-color:var(--materno); }
+.cat-chip.cat-historical .cat-dot { background:rgba(158,124,46,0.5); border-color:var(--historical); }
+
+#tree-chart { width:100%; height:calc(100vh - 280px); min-height:500px; position:relative; }
+@media (max-width:768px) { #tree-chart { height:calc(100vh - 320px); } }
+
+.legend { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:0.4rem 1rem; border-bottom:1px solid var(--border-line); font-size:0.72rem; background:rgba(232,220,200,0.2); }
 .legend-item { display:flex; align-items:center; gap:0.25rem; color:var(--ink-muted); white-space:nowrap; }
-.legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
-#cy { width:100%; height:calc(100vh - 220px); min-height:500px; position:relative; }
-@media (max-width:768px) { #cy { height:calc(100vh - 260px); } }
+.legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; border:1px solid rgba(0,0,0,0.12); }
+
+/* Match family-chart 0.9.0 styling */
+#tree-chart .card_cont { cursor:pointer; }
+#tree-chart g[id^="card-"] { cursor:pointer; }
+#tree-chart g[id^="card-"] rect.card-outline { stroke-linejoin:round; }
+#tree-chart text { font-family:'EB Garamond', Georgia, serif !important; fill:var(--ink) !important; }
+#tree-chart .node_card_bg { fill:var(--card-bg); }
+#tree-chart link { stroke:var(--border-line); stroke-width:1.5px; }
+
+/* Card colored borders by category */
+  #tree-chart .cat-barao .card-outline { stroke:#4a3478 !important; stroke-width:2.5px !important; }
+  #tree-chart .cat-colonial .card-outline { stroke:#2a5a8a !important; stroke-width:2.5px !important; }
+  #tree-chart .cat-historical .card-outline { stroke:#9e7c2e !important; stroke-width:2.5px !important; }
+  #tree-chart .cat-hipotetica .card-outline { stroke:#8b2e2e !important; stroke-width:2px !important; stroke-dasharray:4 2 !important; }
+  #tree-chart .cat-provavel .card-outline { stroke:#b8860b !important; stroke-width:2px !important; stroke-dasharray:4 2 !important; }
+  #tree-chart .cat-materno .card-outline { stroke:#7a5a10 !important; stroke-width:2px !important; }
+  #tree-chart .cat-confirmada .card-outline { stroke:#2d5a3d !important; stroke-width:2px !important; }
+
+  /* Hide virtual_root card */
+  #tree-chart #card-virtual_root { display: none !important; }
+
 .info-panel {
   position:fixed; bottom:1rem; right:1rem; left:1rem; max-height:45vh;
   background:#fffcf5; border:2px solid var(--gold); border-radius:5px;
@@ -81,25 +116,28 @@ body::before {
 .info-panel.open { display:block; }
 .info-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.8rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border-line); }
 .info-name { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--ink); line-height:1.2; }
-.info-close { cursor:pointer; color:var(--ink-muted); font-size:1.3rem; line-height:1; padding:0 0.3rem; }
+.info-close { cursor:pointer; color:var(--ink-muted); font-size:1.3rem; line-height:1; padding:0 0.3rem; background:none; border:none; }
 .info-close:hover { color:var(--ink); }
 .info-meta { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.6rem; font-size:0.75rem; }
 .info-badge { padding:0.15rem 0.5rem; border-radius:2px; background:var(--parchment-deep); color:var(--ink-soft); font-family:'Cormorant Garamond',serif; }
-.info-badge.confirmed { background:rgba(45,90,61,0.15); color:var(--confirmed); border:1px solid var(--confirmed); }
-.info-badge.probable { background:rgba(184,134,11,0.15); color:var(--probable); border:1px solid var(--probable); }
-.info-badge.hypothetical { background:rgba(139,46,46,0.15); color:var(--hypothetical); border:1px solid var(--hypothetical); border-style:dashed; }
+.info-badge.confirmada { background:rgba(45,90,61,0.15); color:var(--confirmed); border:1px solid var(--confirmed); }
+.info-badge.provavel { background:rgba(184,134,11,0.15); color:var(--probable); border:1px solid var(--probable); }
+.info-badge.hipotetica { background:rgba(139,46,46,0.15); color:var(--hypothetical); border:1px solid var(--hypothetical); border-style:dashed; }
 .info-badge.barao { background:rgba(74,52,120,0.15); color:var(--barao); border:1px solid var(--barao); }
 .info-badge.colonial { background:rgba(42,90,138,0.15); color:var(--colonial); border:1px solid var(--colonial); }
 .info-badge.materno { background:rgba(122,90,16,0.15); color:var(--materno); border:1px solid var(--materno); }
 .info-badge.historical { background:rgba(158,124,46,0.15); color:var(--historical); border:1px solid var(--historical); }
+
 .info-section { margin-top:0.7rem; }
 .info-section-title { font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:600; color:var(--gold); margin-bottom:0.3rem; padding-bottom:0.2rem; border-bottom:1px dotted var(--border-line); }
-.info-rel { font-size:0.82rem; color:var(--ink-soft); padding:0.15rem 0; line-height:1.5; }
-.info-rel .rel-type { font-weight:600; color:var(--gold); }
-.info-rel .rel-target { color:var(--ink); }
+.info-rel { font-size:0.82rem; color:var(--ink-soft); padding:0.15rem 0; line-height:1.5; cursor:pointer; }
+.info-rel:hover { color:var(--gold); }
+.info-rel .rel-type { font-weight:600; color:var(--gold); margin-right:0.3rem; }
 .info-note { font-size:0.78rem; color:var(--ink-muted); font-style:italic; margin-top:0.4rem; padding-left:0.5rem; border-left:2px solid var(--border-line); }
+
 .page-footer { text-align:center; padding:1.5rem 1rem; border-top:1px solid var(--border-line); margin-top:1rem; }
 .page-footer p { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--ink-muted); font-size:0.85rem; line-height:1.6; }
+
 .loading-overlay { position:fixed; inset:0; background:rgba(244,236,225,0.95); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1000; font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--ink-muted); transition:opacity 0.3s, visibility 0.3s; }
 .loading-overlay.hidden { opacity:0; visibility:hidden; }
 .spinner { width:40px; height:40px; border:3px solid var(--border-line); border-top-color:var(--gold); border-radius:50%; animation:spin 1s linear infinite; margin-bottom:1rem; }
@@ -112,11 +150,11 @@ body::before {
 <script>if(new URLSearchParams(location.search).get('embedded')==='1')document.body.classList.add('embedded');</script>
 
 <header class="page-header">
-<h1>Visualização em <em>Rede</em> — Gramilo Sodré</h1>
-<p class="page-subtitle">Grafo interativo de entidades e relacionamentos — dados sincronizados em junho de 2026</p>
+<h1><em>Rede</em> Genealógica — Gramilo Sodré</h1>
+<p class="page-subtitle">Árvore expandida com fragmentos coloniais & hipotéticos — dados sincronizados em junho de 2026</p>
 <div class="main-nav">
 <a href="index.html" class="nav-btn">🌳 Árvore Genealógica</a>
-<a href="knowledge-graph.html" class="nav-btn">🕸️ Grafo</a>
+<a href="knowledge-graph.html" class="nav-btn">🕸️ Árvore (cards)</a>
 <a href="kg-network.html" class="nav-btn active">🌐 Rede</a>
 <a href="cidades.html" class="nav-btn">🗺️ Cidades</a>
 </div>
@@ -124,15 +162,22 @@ body::before {
 
 <div class="controls">
 <div class="search-box"><input type="text" id="searchInput" placeholder="Buscar por nome..." autocomplete="off"></div>
-<button type="button" class="ctrl-btn active" id="btnTimeline" data-layout="timeline">📅 Linha do Tempo (nascimento)</button>
-<button type="button" class="ctrl-btn" id="btnForce" data-layout="force">🔮 Livre (force-directed)</button>
-<button type="button" class="ctrl-btn" id="btnReset" data-layout="reset">🔄 Reset zoom</button>
-<button type="button" class="ctrl-btn" id="btnFit" data-layout="fit">🎯 Ajustar tudo</button>
+<button type="button" class="ctrl-btn" id="btnReset">🔄 Reset zoom</button>
+<button type="button" class="ctrl-btn" id="btnFit">🎯 Ajustar tudo</button>
+<button type="button" class="ctrl-btn" id="btnCenter">📍 Foco Marcelo</button>
 </div>
 
-<div class="legend" id="legend"></div>
+<div class="chip-bar" id="chipBar">
+<span class="cat-chip cat-confirmada active" data-cat="confirmada"><span class="cat-dot"></span>Confirmada</span>
+<span class="cat-chip cat-provavel active" data-cat="provável"><span class="cat-dot"></span>Provável</span>
+<span class="cat-chip cat-hipotetica active" data-cat="hipotética"><span class="cat-dot"></span>Hipotética</span>
+<span class="cat-chip cat-barao active" data-cat="barao"><span class="cat-dot"></span>Barão Alagoinhas</span>
+<span class="cat-chip cat-colonial active" data-cat="colonial"><span class="cat-dot"></span>Colonial</span>
+<span class="cat-chip cat-historical active" data-cat="historical"><span class="cat-dot"></span>Histórico</span>
+<span class="cat-chip cat-materno active" data-cat="materno"><span class="cat-dot"></span>Materno</span>
+</div>
 
-<div id="cy"></div>
+<div id="tree-chart"></div>
 
 <div class="loading-overlay" id="loadingOverlay">
 <div class="spinner"></div>
@@ -150,11 +195,9 @@ Carregando rede genealógica...
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<footer class="page-footer">
-<p>161 pessoas · 7 gerações · dados sincronizados em junho de 2026</p>
-</footer>
+<footer class="page-footer" id="pageFooter"></footer>
 
-<script src="kg-network-data.js"></script>
+<script src="data/f3_network_data.js"></script>
 <script src="kg-network-logic.js"></script>
 </body>
 </html>

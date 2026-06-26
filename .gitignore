@@ -66,3 +66,6 @@ fs_v*_run*.log
 data/fs_*.json
 data/fs_*.txt
 data/fs_*.log
+node_modules/
+package-lock.json
+package.json

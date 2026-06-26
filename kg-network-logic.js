@@ -1,758 +1,604 @@
-// ============ LÓGICA DO GRAFO ============
-let cy = null;
-let currentLayout = 'timeline';
-let searchIndex = new Map();
+// kg-network-logic.js — Rede Genealógica com family-chart (cards)
+// Substitui a antiga visualização Cytoscape por árvore em cards com fragmentos coloniais
 
-// Register Cytoscape extensions (needed for CDN loads)
-if (typeof cytoscape !== 'undefined') {
-  let extCount = 0;
-  if (typeof window.coseBilkent !== 'undefined') {
-    cytoscape.use(window.coseBilkent);
-    extCount++;
-    console.log('cose-bilkent registered');
+(function () {
+  'use strict';
+
+  // ========== Data index ==========
+  const dataMap = {};
+  F3_NETWORK_DATA.forEach(d => { dataMap[d.id] = d; });
+
+  let f3Chart = null;
+  let f3Zoom = null;
+  let activeCategories = new Set(['confirmada', 'provável', 'hipotética', 'barao', 'colonial', 'historical', 'materno']);
+
+  // ========== Footer ==========
+  const totalPessoas = F3_NETWORK_DATA.filter(n => n.id !== 'virtual_root' && n.data.display !== 'none').length;
+  const totalFragmentos = (dataMap['virtual_root']?.rels?.children || []).length;
+  document.getElementById('pageFooter').innerHTML =
+    `<p>${totalPessoas} pessoas · ${totalFragmentos} fragmentos · Rede Genealógica Gramilo Sodré · LABHDUFBA</p>`;
+
+  // ========== Card display (5 lines, conditional) ==========
+  function cardLines(node) {
+    const d = node.data;
+    const lines = [];
+    // Line 1: First name (may include title like "Dom", "Barão")
+    const fn = (d['first name'] || '').trim();
+    const ln = (d['last name'] || '').trim();
+    if (fn) lines.push(fn);
+    if (ln) lines.push(ln);
+    // Line 2: birthday + place
+    const bd = (d['birthday'] || '').trim();
+    const bp = (d['place_birth'] || d['birth_place'] || '').trim();
+    if (bd || bp) {
+      let life = '';
+      if (bp) life += bp;
+      if (bd) life += (life ? ' · ' : '') + bd;
+      lines.push('⏎ ' + life);
+    }
+    // Line 3: deathday + place
+    const dd = (d['deathday'] || '').trim();
+    const dp = (d['place_death'] || d['death_place'] || '').trim();
+    if (dd || dp) {
+      let death = '';
+      if (dp) death += dp;
+      if (dd) death += (death ? ' · ' : '') + dd;
+      lines.push('✝ ' + death);
+    }
+    return lines.length > 0 ? lines : ['(sem dados)'];
   }
-  if (typeof window.cola !== 'undefined' && typeof window.cytoscapeCola !== 'undefined') {
-    cytoscape.use(window.cytoscapeCola);
-    extCount++;
-    console.log('cola registered');
+
+  // ========== Category class for card ==========
+  function getCategoryClass(node) {
+    const d = node.data;
+    const cat = d.categoria || '';
+    const conf = d.confiabilidade || '';
+    if (cat === 'barao') return 'cat-barao';
+    if (cat === 'colonial') return 'cat-colonial';
+    if (cat === 'historical') return 'cat-historical';
+    if (cat === 'materno') return 'cat-materno';
+    if (conf === 'hipotética') return 'cat-hipotetica';
+    if (conf === 'provável') return 'cat-provavel';
+    return 'cat-confirmada';
   }
-  if (extCount === 0) {
-    console.warn('No Cytoscape extensions loaded from CDN - using built-in cose only');
+
+  function getCategoryLabel(node) {
+    const d = node.data;
+    const cat = d.categoria || '';
+    const conf = d.confiabilidade || '';
+    if (cat === 'barao') return 'Barão Alagoinhas';
+    if (cat === 'colonial') return 'Colonial';
+    if (cat === 'historical') return 'Histórico';
+    if (cat === 'materno') return 'Materno';
+    if (conf === 'hipotética') return 'Hipotética';
+    if (conf === 'provável') return 'Provável';
+    return 'Confirmada';
   }
-}
 
-const CATEGORY_COLORS = {
-  historical: '#f5e6c8',
-  barao: '#e8e0f0',
-  colonial: '#dce8f5',
-  confirmed: '#e0f0e8',
-  materno: '#f5efe0',
-  hypothetical: '#f5e0e0',
-  probable: '#f5efe0',
-  filho: '#e0f0e8',
-  sobrinho: '#e0f0e8'
-};
+  // ========== Init chart ==========
+  function initChart(rootId) {
+    const container = document.getElementById('tree-chart');
+    container.innerHTML = '';
+    container.className = 'f3';
 
-const CATEGORY_BORDER_COLORS = {
-  historical: '#9e7c2e',
-  barao: '#4a3478',
-  colonial: '#2a5a8a',
-  confirmed: '#2d5a3d',
-  materno: '#7a5a10',
-  hypothetical: '#8b2e2e',
-  probable: '#b8860b',
-  filho: '#2d5a3d',
-  sobrinho: '#2d5a3d'
-};
+    f3Chart = f3.createChart('#tree-chart', F3_NETWORK_DATA);
+    f3Chart
+      .setTransitionTime(500)
+      .setCardXSpacing(400)
+      .setCardYSpacing(200);
 
-const CATEGORY_LABELS = {
-  historical: 'Histórico (tronco)',
-  barao: 'Ramo Barão de Alagoinhas',
-  colonial: 'Elo colonial Sodré–Gramilo',
-  confirmed: 'Confirmado (linha direta)',
-  materno: 'Ramo materno (Santos)',
-  hypothetical: 'Hipotético',
-  probable: 'Provável',
-  filho: 'Filhos (G4+)',
-  sobrinho: 'Sobrinhos/Netos'
-};
+    // Hide all virtual nodes using private_cards_config
+    f3Chart.setPrivateCardsConfig({
+      condition: (d) => d.id.startsWith('virtual')
+    });
 
-// Parse birth year from dates string
-function parseBirthYear(dates) {
-  if (!dates) return null;
-  // Formats: "1631–1711", "1818–1882", "~1860", "1897–1976", "1925–1999", "1933–?", "bat. 1881", "ativo 1909–1914", "n. 18/11/1913", "cas. 10/12/1941"
-  const str = dates.trim();
-  if (!str) return null;
-  
-  // Try to find first 4-digit year
-  const yearMatch = str.match(/(\d{4})/);
-  if (yearMatch) {
-    return parseInt(yearMatch[1], 10);
-  }
-  return null;
-}
+    // Disable auto-generated empty spouse cards (we don't want placeholder nodes)
+    f3Chart.setSingleParentEmptyCard(false);
 
-// Parse death year for lifespan
-function parseDeathYear(dates) {
-  if (!dates) return null;
-  const str = dates.trim();
-  // Look for second year or year after dash
-  const years = str.match(/(\d{4})/g);
-  if (years && years.length >= 2) {
-    return parseInt(years[1], 10);
-  }
-  return null;
-}
+    const f3Card = f3Chart.setCardSvg();
+    f3Card.setCardDim({ width: 280, height: 120 });
 
-function initCy() {
-  cy = cytoscape({
-    container: document.getElementById('cy'),
-    elements: [...NODES_DATA, ...EDGES_DATA],
-    style: [
-      {
-        selector: 'node',
-        style: {
-          'label': 'data(label)',
-          'font-family': 'Cormorant Garamond, serif',
-          'font-size': '13px',
-          'font-weight': 700,
-          'color': '#1a1008',
-          'text-valign': 'center',
-          'text-halign': 'center',
-          'text-wrap': 'wrap',
-          'text-max-width': '140px',
-          'background-color': 'data(categoryColor)',
-          'border-width': 3,
-          'border-color': 'data(categoryBorderColor)',
-          'border-opacity': 1,
-          'width': 'label',
-          'height': 'label',
-          'padding': '10px 12px',
-          'min-width': '120px',
-          'min-height': '50px',
-          'shape': 'round-rectangle',
-          'overlay-padding': '6px',
-          'z-index': 10
-        }
+    // Card display for SVG: array of functions, each returns one line (tspan)
+    // Note: SVG card_display functions receive the full TreeDatum (n.data has the person data)
+    f3Card.setCardDisplay([
+      (n) => {
+        const d = n.data;
+        const fn = (d['first name'] || '').trim();
+        const ln = (d['last name'] || '').trim();
+        return fn || ln || '(sem dados)';
       },
-      {
-        selector: 'node:selected',
-        style: {
-          'border-width': 4,
-          'border-color': '#9e7c2e',
-          'box-shadow': '0 0 20px rgba(158,124,46,0.6)',
-          'z-index': 100
-        }
+      (n) => {
+        const d = n.data;
+        const bd = (d['birthday'] || '').trim();
+        const bp = (d['place_birth'] || d['birth_place'] || '').trim();
+        if (!bd && !bp) return '';
+        let life = '';
+        if (bp) life += bp;
+        if (bd) life += (life ? ' · ' : '') + bd;
+        return '⏎ ' + life;
       },
-      {
-        selector: 'edge',
-        style: {
-          'width': 2,
-          'line-color': '#c9b896',
-          'target-arrow-shape': 'triangle',
-          'target-arrow-color': '#c9b896',
-          'curve-style': 'bezier',
-          'label': 'data(label)',
-          'font-family': 'Cormorant Garamond, serif',
-          'font-size': '11px',
-          'color': '#7a6b55',
-          'edge-text-rotation': 'autorotate',
-          'text-margin-y': -8,
-          'text-background-color': '#f4ece1',
-          'text-background-opacity': 0.9,
-          'text-background-padding': '3px',
-          'text-background-shape': 'round-rectangle'
-        }
-      },
-      {
-        selector: 'edge[type="casou_com"]',
-        style: {
-          'line-color': '#9e7c2e',
-          'target-arrow-color': '#9e7c2e',
-          'target-arrow-shape': 'none',
-          'line-style': 'solid',
-          'width': 3,
-          'label': '∞'
-        }
-      },
-      {
-        selector: 'edge[type="pai_de"], edge[type="mae_de"]',
-        style: {
-          'target-arrow-shape': 'triangle',
-          'target-arrow-color': '#2d5a3d',
-          'line-color': '#2d5a3d'
-        }
-      },
-      {
-        selector: '.faded',
-        style: {
-          'opacity': 0.15,
-          'text-opacity': 0.15
-        }
-      },
-      {
-        selector: '.highlight',
-        style: {
-          'border-width': 4,
-          'border-color': '#9e7c2e',
-          'z-index': 50
-        }
+      (n) => {
+        const d = n.data;
+        const dd = (d['deathday'] || '').trim();
+        const dp = (d['place_death'] || d['death_place'] || '').trim();
+        if (!dd && !dp) return '';
+        let death = '';
+        if (dp) death += dp;
+        if (dd) death += (death ? ' · ' : '') + dd;
+        return '✝ ' + death;
       }
-    ],
-    layout: { name: 'preset' },
-    wheelSensitivity: 0.15,
-    minZoom: 0.15,
-    maxZoom: 3,
-    zoomingEnabled: true,
-    userZoomingEnabled: true,
-    panningEnabled: true,
-    userPanningEnabled: true,
-    boxSelectionEnabled: true,
-    selectionType: 'single'
-  });
+    ]);
+    f3Card.setLinkBreak(true);
 
-  // Assign category colors to nodes
-  cy.nodes().forEach(n => {
-  const cat = n.data('category');
-  n.data('categoryColor', CATEGORY_COLORS[cat] || '#f4ece1');
-  n.data('categoryBorderColor', CATEGORY_BORDER_COLORS[cat] || '#7a6b55');
-  // Build search index
-  const label = n.data('label').toLowerCase();
-  if (!searchIndex.has(label)) searchIndex.set(label, []);
-  searchIndex.get(label).push(n.id());
-  });
+    // Click handler
+    f3Card.setOnCardClick((d) => {
+      if (d.data.id === 'virtual_root') return;
+      showInfo(d.data.id);
+    });
 
-  // Event: tap node -> show info panel
-  cy.on('tap', 'node', (e) => {
-    const node = e.target;
-    showInfoPanel(node);
-  });
+    // Initial focus: Marcelo (gp1). User can switch to "all fragments" via button.
+    f3Chart.setAncestryDepth(4);
+    f3Chart.setProgenyDepth(8);
 
-  // Event: tap background -> close panel
-  cy.on('tap', (e) => {
-    if (e.target === cy) hideInfoPanel();
-  });
+    f3Chart.setOnUpdate(function () {
+      try { applyTheme(); } catch (e) { /* silent */ }
+    });
 
-  // Search input
-  const searchInput = document.getElementById('searchInput');
-  let searchTimeout;
-  searchInput.addEventListener('input', () => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-      const query = searchInput.value.toLowerCase().trim();
-      if (query.length === 0) {
-        cy.elements().removeClass('faded highlight');
-        return;
-      }
-      // Find matching nodes
-      const matches = [];
-      searchIndex.forEach((ids, label) => {
-        if (label.includes(query)) matches.push(...ids);
+    // First render with any non-virtual main (so lib runs full pipeline)
+    f3Chart.updateMainId('gp1');
+    f3Chart.updateTree({ initial: true });
+
+    // Pan/zoom + custom centering after render
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        try { enablePanZoom(); } catch (e) { /* silent */ }
+        try { centerOnMain(); } catch (e) { console.warn('[KG-NETWORK] centerOnMain:', e); }
+        try { applyTheme(); } catch (e) { /* silent */ }
+        hideLoading();
       });
-      if (matches.length > 0) {
-        cy.elements().addClass('faded');
-        matches.forEach(id => {
-          const n = cy.getElementById(id);
-          n.removeClass('faded').addClass('highlight');
+    });
+
+    // Wire view controls
+    wireViewButtons();
+    setTimeout(() => { try { applyTheme(); } catch (e) { /* */ } }, 500);
+  }
+
+  // ========== Center on main card ==========
+  // Compute bounds of all cards and pan/zoom the svg.g.view to frame Marcelo (gp1)
+  function centerOnMain() {
+    const svg = document.querySelector('#tree-chart svg.main_svg');
+    if (!svg) return;
+    // Force SVG to fill its parent by hand (default viewBox fallback gives 300x150)
+    svg.removeAttribute('viewBox');
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    const viewG = svg.querySelector('g.view');
+    if (!viewG) return;
+
+    // Find Marcelo's card
+    const cards = Array.from(svg.querySelectorAll('.card_cont'));
+    if (cards.length === 0) { console.warn('[KG-NETWORK] no cards to center'); return; }
+
+    // The main card (Marcelo) is the one closest to (0,0) by ancestry depth, but easier:
+    // use a "card-main" if it exists; otherwise the FIRST root (depth 0 or closest to 0).
+    const mainCard = svg.querySelector('.card-main')?.closest('.card_cont')
+                  || cards.find(c => /translate\(-?\d+, 0\)/.test(c.getAttribute('transform') || ''))
+                  || cards[0];
+    const t = mainCard.getAttribute('transform') || '';
+    const m = t.match(/translate\(([-\d.]+),\s*([-\d.]+)\)/);
+    if (!m) return;
+    const cx = parseFloat(m[1]);
+    const cy = parseFloat(m[2]);
+
+    // Apply transform directly to g.view — this is what the lib's pan-zoom listens to
+    const scale = 0.75;
+    const parentRect = svg.getBoundingClientRect();
+    const tx = parentRect.width / 2 - cx * scale;
+    const ty = parentRect.height / 2 - cy * scale;
+    const newTransform = `translate(${tx}, ${ty}) scale(${scale})`;
+    viewG.setAttribute('transform', newTransform);
+
+    // Update __zoomObj so zoom events continue correctly
+    if (svg.__zoomObj && d3 && d3.zoomIdentity) {
+      try {
+        d3.select(svg).call(svg.__zoomObj.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+      } catch (e) { /* ignore */ }
+    }
+  }
+
+  // ========== Pan/Zoom ==========
+  function enablePanZoom() {
+    const svgSel = d3.select('#tree-chart svg.main_svg');
+    const svg = svgSel.node();
+    if (!svg) return;
+
+    const viewSel = svgSel.select('g.view');
+    if (viewSel.empty()) return;
+
+    viewSel.style('transform', null);
+
+    let zoom = svg.__zoomObj;
+    if (!zoom) {
+      zoom = d3.zoom()
+        .scaleExtent([0.15, 2.5])
+        .on('zoom', function (event) {
+          viewSel.style('transform', null).attr('transform', event.transform);
         });
-        // Center on first match
-        if (matches.length === 1) {
-          cy.getElementById(matches[0]).animate({ position: { name: 'center' } }, { duration: 500 });
-        }
-      } else {
-        cy.elements().removeClass('faded highlight');
+      svg.__zoomObj = zoom;
+      svgSel.call(zoom);
+    } else {
+      svgSel.call(zoom);
+    }
+
+    svgSel.on('dblclick.zoom', null);
+    svgSel.style('touch-action', 'none');
+    return zoom;
+  }
+
+  // ========== Center tree ==========
+  function centerTree(options = {}) {
+    const {
+      padding = 50,
+      preferredScale = 1,
+      minReadableScale = 0.5,
+      maxInitialScale = 1.15,
+      fitWidth = true,
+      centerMode = 'main',
+      duration = 0
+    } = options;
+
+    const svgSel = d3.select('#tree-chart svg.main_svg');
+    const svg = svgSel.node();
+    if (!svg) return;
+    const zoom = enablePanZoom();
+    if (!zoom) return;
+
+    const cardsView = svg.querySelector('.cards_view');
+    if (!cardsView) return;
+
+    let bbox;
+    try { bbox = cardsView.getBBox(); } catch (e) { return; }
+    if (!bbox || !isFinite(bbox.width) || bbox.width === 0) return;
+
+    const svgRect = svg.getBoundingClientRect();
+    const svgW = svgRect.width || 1400;
+    const svgH = svgRect.height || 720;
+
+    const fitScaleW = (svgW - padding * 2) / bbox.width;
+    const fitScaleH = (svgH - padding * 2) / bbox.height;
+
+    let scale;
+    if (fitWidth) {
+      scale = Math.min(fitScaleW, fitScaleH, maxInitialScale);
+    } else {
+      scale = preferredScale;
+      scale = Math.min(scale, fitScaleH, maxInitialScale);
+      scale = Math.max(scale, minReadableScale);
+    }
+
+    const targetCx = bbox.x + bbox.width / 2;
+    const targetCy = bbox.y + bbox.height / 2;
+
+    const tx = svgW / 2 - targetCx * scale;
+    const ty = svgH / 2 - targetCy * scale;
+
+    const transform = d3.zoomIdentity.translate(tx, ty).scale(scale);
+    if (duration > 0) {
+      svgSel.transition().duration(duration).call(zoom.transform, transform);
+    } else {
+      svgSel.call(zoom.transform, transform);
+    }
+  }
+
+  // ========== Theme (parchment + category colors) ==========
+  function applyTheme() {
+    // Card background
+    document.querySelectorAll('#tree-chart .card-body-rect').forEach(el => {
+      const card = el.closest('.card');
+      if (card) {
+        if (card.classList.contains('card-female')) el.setAttribute('fill', '#f0dde5');
+        else if (card.classList.contains('card-male')) el.setAttribute('fill', '#dde8f0');
+        else el.setAttribute('fill', '#fffcf5');
       }
-    }, 150);
-  });
+    });
+    // Card outline
+    document.querySelectorAll('#tree-chart .card-outline').forEach(el => {
+      el.setAttribute('fill', '#fffcf5');
+      el.setAttribute('stroke', '#c9b896');
+      el.setAttribute('stroke-width', '1');
+    });
+    // Main outline
+    document.querySelectorAll('#tree-chart .card-main-outline').forEach(el => {
+      el.setAttribute('stroke', '#9e7c2e');
+      el.setAttribute('stroke-width', '2');
+    });
+    // Text
+    document.querySelectorAll('#tree-chart .card text, #tree-chart .card tspan').forEach(el => {
+      el.setAttribute('fill', '#1a1008');
+      el.setAttribute('font-family', "'EB Garamond', Georgia, serif");
+    });
+    // Text overflow mask (hide fade)
+    document.querySelectorAll('#tree-chart .text-overflow-mask').forEach(el => {
+      const card = el.closest('.card');
+      if (card) {
+        if (card.classList.contains('card-female')) el.setAttribute('fill', '#f0dde5');
+        else if (card.classList.contains('card-male')) el.setAttribute('fill', '#dde8f0');
+        else el.setAttribute('fill', '#fffcf5');
+      }
+    });
+    // Links
+    document.querySelectorAll('#tree-chart .link').forEach(el => {
+      el.setAttribute('stroke', '#c9b896');
+      el.setAttribute('stroke-width', '1.5');
+    });
+    // Apply category class to card containers for CSS-driven borders
+    document.querySelectorAll('#tree-chart .card_cont').forEach(el => {
+      // Find which data node this card belongs to
+      const cardId = el.id; // "card-{nodeId}"
+      if (!cardId) return;
+      const nodeId = cardId.replace('card-', '');
+      const node = dataMap[nodeId];
+      if (!node) return;
+      // Remove old cat- classes
+      el.classList.remove('cat-confirmada', 'cat-provavel', 'cat-hipotetica', 'cat-barao', 'cat-colonial', 'cat-historical', 'cat-materno');
+      el.classList.add(getCategoryClass(node));
+    });
+  }
 
-  // Layout buttons
-  document.getElementById('btnTimeline').addEventListener('click', () => runLayout('timeline'));
-  document.getElementById('btnForce').addEventListener('click', () => runLayout('force'));
-  document.getElementById('btnReset').addEventListener('click', () => runLayout('reset'));
-  document.getElementById('btnFit').addEventListener('click', () => runLayout('fit'));
+  // ========== Info panel ==========
+  function showInfo(nodeId) {
+    const node = dataMap[nodeId];
+    if (!node) return;
+    const d = node.data;
 
-  // Legend
-  renderLegend();
+    document.getElementById('infoName').textContent = d['nome completo'] || ((d['first name'] || '') + ' ' + (d['last name'] || '')).trim();
+
+    // Badges
+    const meta = document.getElementById('infoMeta');
+    meta.innerHTML = '';
+    const catLabel = getCategoryLabel(node);
+    const cat = d.categoria || d.confiabilidade || '';
+    const badgeClass = cat === 'barao' ? 'barao' : cat === 'colonial' ? 'colonial' : cat === 'historical' ? 'historical' : cat === 'materno' ? 'materno' : d.confiabilidade === 'hipotética' ? 'hipotetica' : d.confiabilidade === 'provável' ? 'provavel' : 'confirmada';
+    meta.innerHTML = `<span class="info-badge ${badgeClass}">${catLabel}</span>`;
+    if (d.gender === 'M') meta.innerHTML += '<span class="info-badge">♂ Masculino</span>';
+    else if (d.gender === 'F') meta.innerHTML += '<span class="info-badge">♀ Feminino</span>';
+
+    // Body
+    const body = document.getElementById('infoBody');
+    body.innerHTML = '';
+
+    // Dates
+    let datesHtml = '<div class="info-section"><div class="info-section-title">Datas & Locais</div>';
+    const bd = d['birthday'] || '';
+    const bp = d['place_birth'] || d['birth_place'] || '';
+    if (bd || bp) datesHtml += `<div class="info-rel"><span class="rel-type">Nascimento:</span>${bp ? ' ' + bp : ''}${bd ? ' · ' + bd : ''}</div>`;
+    const dd = d['deathday'] || '';
+    const dp = d['place_death'] || d['death_place'] || '';
+    if (dd || dp) datesHtml += `<div class="info-rel"><span class="rel-type">Falecimento:</span>${dp ? ' ' + dp : ''}${dd ? ' · ' + dd : ''}</div>`;
+    const datesFull = d['dates_full'] || '';
+    if (datesFull && !bd && !dd) datesHtml += `<div class="info-rel"><span class="rel-type">Período:</span> ${datesFull}</div>`;
+    datesHtml += '</div>';
+    body.innerHTML += datesHtml;
+
+    // Relations
+    const rels = node.rels || {};
+    let relsHtml = '<div class="info-section"><div class="info-section-title">Relações</div>';
+    let hasRels = false;
+    if (rels.parents && rels.parents.length) {
+      rels.parents.forEach(pid => {
+        if (pid === 'virtual_root' || pid.startsWith('virtual_')) return;
+        const p = dataMap[pid];
+        if (p) { relsHtml += `<div class="info-rel" data-goto="${pid}"><span class="rel-type">Filho/a de:</span> ${p.data['nome completo'] || pid}</div>`; hasRels = true; }
+      });
+    }
+    if (rels.spouses && rels.spouses.length) {
+      rels.spouses.forEach(sid => {
+        const s = dataMap[sid];
+        if (s) { relsHtml += `<div class="info-rel" data-goto="${sid}"><span class="rel-type">Casou com:</span> ${s.data['nome completo'] || sid}</div>`; hasRels = true; }
+      });
+    }
+    if (rels.children && rels.children.length) {
+      rels.children.forEach(cid => {
+        if (cid === 'virtual_root') return;
+        const c = dataMap[cid];
+        if (c) { relsHtml += `<div class="info-rel" data-goto="${cid}"><span class="rel-type">Pai/Mãe de:</span> ${c.data['nome completo'] || cid}</div>`; hasRels = true; }
+      });
+    }
+    relsHtml += '</div>';
+    if (hasRels) body.innerHTML += relsHtml;
+
+    // Notes
+    const note = d['notas'] || '';
+    if (note) body.innerHTML += `<div class="info-note">${note}</div>`;
+
+    // Click to navigate to related person
+    body.querySelectorAll('.info-rel[data-goto]').forEach(el => {
+      el.addEventListener('click', () => {
+        const gotoId = el.dataset.goto;
+        if (gotoId && dataMap[gotoId]) {
+          focusOnNode(gotoId);
+          showInfo(gotoId);
+        }
+      });
+    });
+
+    document.getElementById('infoPanel').classList.add('open');
+  }
+
+  function focusOnNode(nodeId) {
+    if (!f3Chart) return;
+    f3Chart.updateMainId(nodeId);
+    f3Chart.updateTree({});
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        try { applyTheme(); } catch (e) { /* */ }
+        // Try to center on that node
+        const svgSel = d3.select('#tree-chart svg.main_svg');
+        const svg = svgSel.node();
+        if (!svg) return;
+        const mainCard = svg.querySelector('.card-main') || svg.querySelector('.card-depth-0');
+        if (mainCard) {
+          const cont = mainCard.closest('.card_cont');
+          if (cont && cont.transform && cont.transform.baseVal.length) {
+            const zoom = svg.__zoomObj;
+            if (zoom) {
+              const matrix = cont.transform.baseVal.consolidate().matrix;
+              const svgRect = svg.getBoundingClientRect();
+              const scale = 0.65;
+              const tx = svgRect.width / 2 - matrix.e * scale;
+              const ty = svgRect.height / 2 - matrix.f * scale;
+              svgSel.call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+            }
+          }
+        }
+      });
+    });
+  }
 
   // Close panel
-  document.getElementById('infoClose').addEventListener('click', hideInfoPanel);
-
-  // Hide loading
-  document.getElementById('loadingOverlay').classList.add('hidden');
-
-  // Initial layout - timeline by birth date
-  runTimelineLayout();
-}
-
-function runLayout(type) {
-  if (!cy) return;
-
-  // Update button states
-  document.querySelectorAll('.ctrl-btn[data-layout]').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.layout === type);
+  document.getElementById('infoClose').addEventListener('click', () => {
+    document.getElementById('infoPanel').classList.remove('open');
   });
 
-  if (type === 'timeline') {
-    currentLayout = 'timeline';
-    runTimelineLayout();
-  } else if (type === 'force') {
-    currentLayout = 'force';
-    runCoseLayout('force');
-  } else if (type === 'reset') {
-    cy.animate({ zoom: 1, pan: { x: 0, y: 0 } }, { duration: 500 });
-    showToast('Zoom e pan resetados');
-  } else if (type === 'fit') {
-    cy.fit(null, 80);
-    showToast('Ajustado para mostrar todos os nós');
-  }
-}
-
-function runTimelineLayout() {
-  // 1. Extract birth years for all nodes
-  const nodeData = [];
-  cy.nodes().forEach(n => {
-    const birthYear = parseBirthYear(n.data('dates'));
-    const deathYear = parseDeathYear(n.data('dates'));
-    const generation = n.data('generation') || 5;
-    const label = n.data('label');
-    const width = n.width() || 140;
-    
-    nodeData.push({
-      node: n,
-      birthYear: birthYear,
-      deathYear: deathYear,
-      generation: generation,
-      label: label,
-      width: width
-    });
+  // ========== Controls ==========
+  document.getElementById('btnReset').addEventListener('click', () => {
+    centerTree({ preferredScale: 0.55, minReadableScale: 0.4, fitWidth: true, centerMode: 'bbox' });
   });
 
-  // 2. Sort by birth year (oldest first), then by generation
-  nodeData.sort((a, b) => {
-    if (a.birthYear !== null && b.birthYear === null) return -1;
-    if (a.birthYear === null && b.birthYear !== null) return 1;
-    if (a.birthYear !== null && b.birthYear !== null) {
-      if (a.birthYear !== b.birthYear) return a.birthYear - b.birthYear;
-    }
-    // Both null: sort by generation (older generations first)
-    return a.generation - b.generation;
+  document.getElementById('btnFit').addEventListener('click', () => {
+    centerTree({ fitWidth: true, maxInitialScale: 0.9, centerMode: 'bbox' });
   });
 
-  // 3. Assign vertical positions: prefer birth year, fallback to generation
-  const yearsWithDates = nodeData.filter(d => d.birthYear !== null);
-  let minYear = 1630, maxYear = 2020;
-  if (yearsWithDates.length > 0) {
-    minYear = Math.min(...yearsWithDates.map(d => d.birthYear));
-    maxYear = Math.max(...yearsWithDates.map(d => d.birthYear));
-  }
-
-  const centerX = cy.width() / 2;
-  const topMargin = 100;
-  const bottomMargin = 100;
-  const availableHeight = cy.height() - topMargin - bottomMargin;
-
-  // 4. Build buckets: 20-year buckets for dated nodes, generation buckets for undated
-  const bucketSize = 20;
-  const buckets = new Map();
-  const generationBuckets = new Map(); // generation -> nodes without dates
-  
-  nodeData.forEach(d => {
-    if (d.birthYear !== null) {
-      const bucketKey = Math.floor(d.birthYear / bucketSize) * bucketSize;
-      if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
-      buckets.get(bucketKey).push(d);
-    } else {
-      // Undated: group by generation
-      if (!generationBuckets.has(d.generation)) generationBuckets.set(d.generation, []);
-      generationBuckets.get(d.generation).push(d);
-    }
+  document.getElementById('btnCenter').addEventListener('click', () => {
+    focusOnNode('gp1');
   });
 
-  // 5. Merge generation buckets into timeline at appropriate positions
-  // Find where each generation would fit based on dated siblings/cousins
-  const genToYear = new Map();
-  nodeData.forEach(d => {
-    if (d.birthYear !== null) {
-      if (!genToYear.has(d.generation) || d.birthYear < genToYear.get(d.generation)) {
-        genToYear.set(d.generation, d.birthYear);
-      }
-    }
-  });
-
-  // Assign undated nodes to buckets based on their generation's typical year
-  generationBuckets.forEach((nodes, gen) => {
-    let estYear = genToYear.get(gen);
-    if (estYear === undefined) {
-      // No dated nodes in this generation: estimate from adjacent generations
-      const datedGens = Array.from(genToYear.keys()).sort((a, b) => a - b);
-      if (datedGens.length > 0) {
-        // Find closest generation with dates
-        let closest = datedGens[0];
-        for (const g of datedGens) {
-          if (Math.abs(g - gen) < Math.abs(closest - gen)) closest = g;
-        }
-        estYear = genToYear.get(closest) + (gen - closest) * 25; // ~25 years per generation
+  // ========== Search ==========
+  let searchTimeout = null;
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      const q = e.target.value.trim().toLowerCase();
+      if (!q) return;
+      // Find first match
+      const match = F3_NETWORK_DATA.find(n => {
+        const full = (n.data['nome completo'] || ((n.data['first name'] || '') + ' ' + (n.data['last name'] || ''))).toLowerCase();
+        return full.includes(q) && n.id !== 'virtual_root';
+      });
+      if (match) {
+        focusOnNode(match.id);
+        showInfo(match.id);
+        toast(`Encontrado: ${match.data['nome completo'] || match.id}`);
       } else {
-        estYear = 1900 + gen * 25; // fallback
+        toast('Nenhum resultado');
       }
+    }, 400);
+  });
+
+  // ========== Category filter ==========
+  document.querySelectorAll('.cat-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cat = chip.dataset.cat;
+      if (activeCategories.has(cat)) {
+        activeCategories.delete(cat);
+        chip.classList.remove('active');
+      } else {
+        activeCategories.add(cat);
+        chip.classList.add('active');
+      }
+      applyCategoryFilter();
+    });
+  });
+
+  function applyCategoryFilter() {
+    // Dim cards not in active categories (CSS opacity approach, don't re-render tree)
+    document.querySelectorAll('#tree-chart .card_cont').forEach(el => {
+      const cardId = el.id;
+      if (!cardId) return;
+      const nodeId = cardId.replace('card-', '');
+      const node = dataMap[nodeId];
+      if (!node) return;
+      const cat = getNormalizedCategory(node);
+      if (activeCategories.has(cat)) {
+        el.style.opacity = '1';
+      } else {
+        el.style.opacity = '0.15';
+      }
+    });
+  }
+
+  function getNormalizedCategory(node) {
+    const d = node.data;
+    const cat = d.categoria || '';
+    const conf = d.confiabilidade || '';
+    if (cat === 'barao') return 'barao';
+    if (cat === 'colonial') return 'colonial';
+    if (cat === 'historical') return 'historical';
+    if (cat === 'materno') return 'materno';
+    if (conf === 'hipotética') return 'hipotética';
+    if (conf === 'provável') return 'provável';
+    return 'confirmada';
+  }
+
+  // ========== Toast ==========
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2000);
+  }
+
+  // ========== Loading ==========
+  function hideLoading() {
+    const el = document.getElementById('loadingOverlay');
+    if (el) el.classList.add('hidden');
+  }
+
+  // ========== View control buttons ==========
+  function wireViewButtons() {
+    const btnReset = document.getElementById('btnReset');
+    const btnFit = document.getElementById('btnFit');
+    const btnCenter = document.getElementById('btnCenter');
+
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        const svg = document.querySelector('#tree-chart svg.main_svg');
+        if (svg && svg.__zoomObj) svg.__zoomObj.transform(svg, d3.zoomIdentity);
+      });
     }
-    const bucketKey = Math.floor(estYear / bucketSize) * bucketSize;
-    if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
-    buckets.get(bucketKey).push(...nodes);
-  });
 
-  const sortedBuckets = Array.from(buckets.entries()).sort((a, b) => a[0] - b[0]);
-  const bucketCount = sortedBuckets.length;
-  const bucketHeight = availableHeight / Math.max(1, bucketCount - 1);
-
-  sortedBuckets.forEach((bucket, bucketIdx) => {
-    const [yearKey, nodes] = bucket;
-    const y = topMargin + bucketIdx * bucketHeight;
-    
-    const nodeCount = nodes.length;
-    const spacing = 40;
-    let totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
-    let startX = centerX - totalWidth / 2;
-    
-    if (totalWidth > cy.width() * 0.9) {
-      const scale = (cy.width() * 0.9) / totalWidth;
-      const newSpacing = spacing * scale;
-      totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * newSpacing;
-      startX = centerX - totalWidth / 2;
+    if (btnFit) {
+      btnFit.addEventListener('click', () => {
+        if (!f3Chart) return;
+        f3Chart.setAncestryDepth(1);
+        f3Chart.setProgenyDepth(8);
+        f3Chart.updateMainId('virtual_root');
+        f3Chart.updateTree({ tree_position: 'fit' });
+        requestAnimationFrame(() => {
+          try { applyTheme(); } catch (e) { /* */ }
+          try { enablePanZoom(); } catch (e) { /* */ }
+          toast('Visão completa — todos os fragmentos');
+        });
+      });
     }
-    
-    let currentX = startX;
-    nodes.forEach((d, i) => {
-      d.node.position({ x: currentX + d.width / 2, y });
-      // Store original Y for physics constraint
-      d.node.data('timelineY', y);
-      currentX += d.width + (i < nodeCount - 1 ? spacing : 0);
-    });
-  });
-  
-  cy.fit(null, 80);
-  
-  // 6. Run force-directed with differentiated edge weights
-  setTimeout(() => {
-    runPhysicsLayout();
-  }, 100);
-  
-  showToast('Linha do tempo com física aplicada');
-}
 
-function runPhysicsLayout() {
-  // Force-directed layout with differentiated edge weights
-  // Edge weights: casamento=10 (forte atração), filiação=5, irmandade=2, outros=0.5
-  
-  // First, assign weights and ideal lengths to edges based on type
-  cy.edges().forEach(e => {
-    const type = e.data('type');
-    let weight = 1;
-    let idealLen = 180;
-    if (type === 'casou_com') {
-      weight = 10;      // Casamento: atração muito forte
-      idealLen = 80;    // Cônjuges grudados
-    } else if (type === 'pai_de' || type === 'mae_de') {
-      weight = 5;       // Filiação: atração forte
-      idealLen = 160;   // Pais acima dos filhos
-    } else if (type === 'irmao_de') {
-      weight = 1.5;     // Irmandade: atração leve (queremos repulsão horizontal)
-      idealLen = 280;   // Irmãos bem espaçados horizontalmente
-    } else {
-      weight = 0.5;     // Outros: fraca
-      idealLen = 180;
+    if (btnCenter) {
+      btnCenter.addEventListener('click', () => {
+        if (!f3Chart) return;
+        f3Chart.updateMainId('gp1');
+        f3Chart.updateTree({});
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            try { applyTheme(); } catch (e) { /* */ }
+            try { centerOnMain(); } catch (e) { /* */ }
+          });
+        });
+      });
     }
-    e.data('physicsWeight', weight);
-    e.data('idealLen', idealLen);
-  });
-
-  try {
-    const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
-    console.log(`Running ${layoutName} with physics weights`);
-    
-    cy.layout({
-      name: layoutName,
-      animate: true,
-      animationDuration: 2000,
-      fit: true,
-      padding: 150,
-      nodeDimensionsIncludeLabels: true,
-      randomize: false,
-      // Physics parameters
-      idealEdgeLength: (edge) => edge.data('idealLen') || 180,
-      nodeRepulsion: 15000,      // Repulsão forte entre nós não conectados
-      nodeOverlap: 100,          // Penalidade máxima para sobreposição
-      edgeElasticity: (edge) => {
-        // Elasticidade inversa ao peso: casamentos mais rígidos
-        const w = edge.data('physicsWeight') || 1;
-        return 0.05 / w;  // Casamento (10) = 0.005 (muito rígido), filiação (5) = 0.01
-      },
-      nestingFactor: 0.05,
-      gravity: 0.02,             // Gravidade muito baixa para manter timeline Y
-      numIter: 6000,
-      initialTemp: 3000,
-      coolingFactor: 0.92,
-      minTemp: 1,
-      tile: false,
-      // cose-bilkent specific
-      gravityRange: 2.0,
-      gravityCompound: 1.0,
-      initialEnergyOnIncremental: 0.2
-    }).run();
-    
-    showToast('Física aplicada: casamentos rígidos, filiação forte, repulsão entre núcleos');
-  } catch (err) {
-    console.warn(`${layoutName} failed:`, err);
-    // Ultra-aggressive cose fallback
-    cy.layout({
-      name: 'cose',
-      animate: true,
-      animationDuration: 2500,
-      fit: true,
-      padding: 200,
-      nodeDimensionsIncludeLabels: true,
-      idealEdgeLength: (edge) => edge.data('idealLen') || 200,
-      nodeRepulsion: 30000,
-      nodeOverlap: 120,
-      edgeElasticity: (edge) => {
-        const w = edge.data('physicsWeight') || 1;
-        return 0.05 / w;
-      },
-      nestingFactor: 0.05,
-      gravity: 0.01,
-      numIter: 8000,
-      initialTemp: 4000,
-      coolingFactor: 0.9,
-      minTemp: 1
-    }).run();
-    showToast('Física aplicada (cose ultra)');
-  }
-}
-
-// Keep the old function for 'force' button
-function runCoseLayout(mode) {
-  const isForce = mode === 'force';
-  
-  // Ensure edge weights are assigned
-  cy.edges().forEach(e => {
-    if (!e.data('physicsWeight')) {
-      const type = e.data('type');
-      let weight = 1;
-      let idealLen = 180;
-      if (type === 'casou_com') { weight = 10; idealLen = 80; }
-      else if (type === 'pai_de' || type === 'mae_de') { weight = 5; idealLen = 160; }
-      else if (type === 'irmao_de') { weight = 1.5; idealLen = 280; }
-      else { weight = 0.5; idealLen = 180; }
-      e.data('physicsWeight', weight);
-      e.data('idealLen', idealLen);
-    }
-  });
-
-  // For 'force' mode: first position by generation (like timeline) to give structure
-  // then run force-directed. This prevents random scatter breaking family clusters.
-  if (isForce) {
-    runGenerationPreLayout();
   }
 
-  try {
-    const layoutName = (typeof window.coseBilkent !== 'undefined') ? 'cose-bilkent' : 'cose';
-    console.log(`Running ${layoutName} for ${mode} mode`);
-    
-    cy.layout({
-      name: layoutName,
-      animate: true,
-      animationDuration: isForce ? 2000 : 1500,
-      fit: true,
-      padding: 150,
-      nodeDimensionsIncludeLabels: true,
-      randomize: false,  // Never randomize - use current positions (pre-layout or existing)
-      idealEdgeLength: (edge) => edge.data('idealLen') || (isForce ? 160 : 180),
-      nodeRepulsion: isForce ? 15000 : 15000,
-      nodeOverlap: 100,
-      edgeElasticity: (edge) => {
-        const w = edge.data('physicsWeight') || 1;
-        return 0.05 / w;
-      },
-      nestingFactor: 0.05,
-      gravity: isForce ? 0.03 : 0.05,
-      numIter: isForce ? 6000 : 4000,
-      initialTemp: isForce ? 3000 : 2500,
-      coolingFactor: 0.92,
-      minTemp: 1,
-      tile: false
-    }).run();
-    
-    showToast(`Layout ${isForce ? 'livre' : 'refinado'} aplicado (${layoutName})`);
-  } catch (err) {
-    console.warn(`${layoutName} failed:`, err);
-    cy.layout({
-      name: 'cose',
-      animate: true,
-      animationDuration: 2000,
-      fit: true,
-      padding: 200,
-      nodeDimensionsIncludeLabels: true,
-      idealEdgeLength: (edge) => edge.data('idealLen') || 180,
-      nodeRepulsion: 25000,
-      nodeOverlap: 100,
-      edgeElasticity: (edge) => {
-        const w = edge.data('physicsWeight') || 1;
-        return 0.05 / w;
-      },
-      nestingFactor: 0.05,
-      gravity: 0.05,
-      numIter: 6000,
-      initialTemp: 3500,
-      coolingFactor: 0.92,
-      minTemp: 1
-    }).run();
-    showToast('Layout aplicado (cose ultra)');
-  }
-}
-
-// Pre-layout: position nodes by generation (vertical) + horizontal spread
-// Gives force-directed a structured starting point so family clusters stay together
-function runGenerationPreLayout() {
-  const nodeData = [];
-  cy.nodes().forEach(n => {
-    const generation = n.data('generation') || 5;
-    const label = n.data('label');
-    const width = n.width() || 140;
-    nodeData.push({ node: n, generation, label, width });
-  });
-
-  // Group by generation
-  const genBuckets = new Map();
-  nodeData.forEach(d => {
-    if (!genBuckets.has(d.generation)) genBuckets.set(d.generation, []);
-    genBuckets.get(d.generation).push(d);
-  });
-
-  const sortedGens = Array.from(genBuckets.keys()).sort((a, b) => a - b);
-  const centerX = cy.width() / 2;
-  const topMargin = 100;
-  const bottomMargin = 100;
-  const availableHeight = cy.height() - topMargin - bottomMargin;
-  const genCount = sortedGens.length;
-  const genHeight = availableHeight / Math.max(1, genCount - 1);
-
-  sortedGens.forEach((gen, idx) => {
-    const nodes = genBuckets.get(gen);
-    const y = topMargin + idx * genHeight;
-    
-    const nodeCount = nodes.length;
-    const spacing = 40;
-    let totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * spacing;
-    let startX = centerX - totalWidth / 2;
-    
-    if (totalWidth > cy.width() * 0.9) {
-      const scale = (cy.width() * 0.9) / totalWidth;
-      const newSpacing = spacing * scale;
-      totalWidth = nodes.reduce((sum, d) => sum + d.width, 0) + (nodeCount - 1) * newSpacing;
-      startX = centerX - totalWidth / 2;
-    }
-    
-    let currentX = startX;
-    nodes.forEach((d, i) => {
-      d.node.position({ x: currentX + d.width / 2, y });
-      currentX += d.width + (i < nodeCount - 1 ? spacing : 0);
-    });
-  });
-  
-  cy.fit(null, 80);
-}
-
-function renderLegend() {
-  const legend = document.getElementById('legend');
-  legend.innerHTML = '';
-  Object.entries(CATEGORY_LABELS).forEach(([cat, label]) => {
-    if (cat === 'filho' || cat === 'sobrinho') return; // Skip duplicates
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = `<div class="legend-dot" style="background:${CATEGORY_COLORS[cat]}"></div> ${label}`;
-    legend.appendChild(item);
-  });
-}
-
-function showInfoPanel(node) {
-  const data = node.data();
-  const panel = document.getElementById('infoPanel');
-  document.getElementById('infoName').textContent = data.label;
-  document.getElementById('infoMeta').innerHTML = `
-    <span class="info-badge ${data.category}">${CATEGORY_LABELS[data.category] || data.category}</span>
-    ${data.dates ? `<span class="info-badge">${data.dates}</span>` : ''}
-    ${data.generation !== undefined ? `<span class="info-badge">Geração ${data.generation}</span>` : ''}
-  `;
-
-  // Build relationships
-  let html = '';
-  const edges = node.connectedEdges();
-
-  // Spouse
-  const spouseEdges = edges.filter(e => e.data('type') === 'casou_com');
-  if (spouseEdges.length > 0) {
-    html += `<div class="info-section"><div class="info-section-title">💍 Cônjuge(s)</div>`;
-    spouseEdges.forEach(e => {
-      const other = e.source().id() === data.id ? e.target() : e.source();
-      html += `<div class="info-rel"><span class="rel-type">Casou com </span><span class="rel-target">${other.data('label')}</span></div>`;
-    });
-    html += '</div>';
-  }
-
-  // Parents
-  const parentEdges = edges.filter(e => e.data('type') === 'pai_de' || e.data('type') === 'mae_de').filter(e => e.target().id() === data.id);
-  if (parentEdges.length > 0) {
-    html += `<div class="info-section"><div class="info-section-title">👨‍👩‍👧 Pais</div>`;
-    parentEdges.forEach(e => {
-      const rel = e.data('type') === 'pai_de' ? 'Pai' : 'Mãe';
-      html += `<div class="info-rel"><span class="rel-type">${rel}: </span><span class="rel-target">${e.source().data('label')}</span></div>`;
-    });
-    html += '</div>';
-  }
-
-  // Children
-  const childEdges = edges.filter(e => e.data('type') === 'pai_de' || e.data('type') === 'mae_de').filter(e => e.source().id() === data.id);
-  if (childEdges.length > 0) {
-    html += `<div class="info-section"><div class="info-section-title">👶 Filhos (${childEdges.length})</div>`;
-    childEdges.forEach(e => {
-      const rel = e.data('type') === 'pai_de' ? 'Pai de' : 'Mãe de';
-      html += `<div class="info-rel"><span class="rel-type">${rel} </span><span class="rel-target">${e.target().data('label')}</span></div>`;
-    });
-    html += '</div>';
-  }
-
-  // Siblings — via shared parents (pai_de/mae_de)
-  const siblingsFromParents = new Set();
-  parentEdges.forEach(e => {
-    const parent = e.source();
-    parent.outgoers('edge[type="pai_de"], edge[type="mae_de"]').forEach(sib => {
-      if (sib.id() !== data.id) siblingsFromParents.add(sib);
-    });
-  });
-
-  // Siblings — via explicit 'irmao_de' edges
-  const siblingEdges = edges.filter(e => e.data('type') === 'irmao_de');
-  const siblingsFromEdges = new Set();
-  siblingEdges.forEach(e => {
-    const other = e.source().id() === data.id ? e.target() : e.source();
-    siblingsFromEdges.add(other);
-  });
-
-  // Combine both sources
-  const allSiblings = new Set([...siblingsFromParents, ...siblingsFromEdges]);
-
-  if (allSiblings.size > 0) {
-    html += `<div class="info-section"><div class="info-section-title">👫 Irmãos (${allSiblings.size})</div>`;
-    allSiblings.forEach(sib => {
-      html += `<div class="info-rel"><span class="rel-target">${sib.data('label')}</span></div>`;
-    });
-    html += '</div>';
-  }
-
-  // Note
-  if (data.note) {
-    html += `<div class="info-note">${data.note}</div>`;
-  }
-
-  document.getElementById('infoBody').innerHTML = html;
-  panel.classList.add('open');
-}
-
-function hideInfoPanel() {
-  document.getElementById('infoPanel').classList.remove('open');
-}
-
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-// Init on DOM ready
-document.addEventListener('DOMContentLoaded', initCy);
-
-// Handle resize
-window.addEventListener('resize', () => {
-  if (cy) cy.resize();
-});
+  // ========== Start ==========
+  initChart('gp1');
+})();
