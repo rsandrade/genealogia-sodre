@@ -980,10 +980,14 @@ const F3_DATA = [
     "data": {
         "first name": "Antenor",
         "last name": "Soares Pereira",
-        "gender": "F",
+        "gender": "M",
         "nome completo": "Antenor Soares Pereira",
-        "confiabilidade": "hipotética",
-        "notas": "Esposo de Carmelinda Sodré Pereira · pai de Deusdete Pereira Sodré · nome citado por Ricardo Andrade em jun 2026 (informação verbal, sem confirmação documental)"
+        "nascimento": "13/04/1924",
+        "naturalidade": "Jequié-BA",
+        "falecimento": "16/05/2007",
+        "local falecimento": "Ariquemes-RO",
+        "confiabilidade": "confirmada",
+        "notas": "Filho de Eustáquio José Pereira e Maria Soares Rocha (certidão de óbito) · esposo de Carmelinda Sodré Pereira · pai de Deusdete, Valdenor e Valdomiro · n. 13/04/1924 Jequié-BA · f. 16/05/2007 Ariquemes-RO"
     },
     "rels": {
         "spouses": [
@@ -995,7 +999,8 @@ const F3_DATA = [
             "deusdete_ps"
         ],
         "parents": [
-            "virtual_1002"
+            "eustaquio_p",
+            "maria_sr"
         ]
     }
 },
@@ -1026,8 +1031,8 @@ const F3_DATA = [
         "last name": "Sodré Pereira",
         "gender": "F",
         "nome completo": "Carmelinda Sodré Pereira",
-        "confiabilidade": "hipotética",
-        "notas": "Esposa de Antenor Soares Pereira · mãe de Deusdete Pereira Sodré · sobrenome Sodré Pereira = mesmo agrupamento do Tronco Baiano do séc. XVIII (Jerônimo Sodré Pereira) — parentesco a confirmar · nome citado por Ricardo Andrade em jun 2026"
+        "confiabilidade": "provável",
+        "notas": "Esposa de Antenor Soares Pereira · mãe de Valdenor, Valdomiro e Deusdete · sobrenome Sodré Pereira = mesmo agrupamento do Tronco Baiano do séc. XVIII (Jerônimo Sodré Pereira) — parentesco a confirmar · nome citado por Ricardo Andrade em jun 2026"
     },
     "rels": {
         "spouses": [
@@ -1636,7 +1641,7 @@ const F3_DATA = [
     "data": {
         "first name": "Alzira",
         "last name": "Santos Sodré",
-        "gender": "M",
+        "gender": "F",
         "nome completo": "Alzira Santos Sodré",
         "confiabilidade": "provável",
         "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
@@ -2011,16 +2016,19 @@ const F3_DATA = [
         "last name": "Gramilio Sodré",
         "gender": "M",
         "nome completo": "Valdomiro Gramilio Sodré",
-        "confiabilidade": "hipotética",
-        "notas": "Parentesco provável em jun 2026: Ricardo Andrade sugeriu irmandade com Deusdete Pereira Sodré e Valdenor Gramilio Sodré. Pais hipotéticos: Antenor Soares Pereira × Carmelinda Sodré Pereira. Pai de Valdemar de Jesus Sodré. Sobrenome 'Gramilio' = grafia familiar para Gramilo. Irmão de Valdenor Gramilio Sodré · 'Gramilio' = grafia familiar para Gramilo/Gramilu · sem confirmação de pais · pai de Valdemar de Jesus Sodré"
+        "confiabilidade": "confirmada",
+        "notas": "Filho de Antenor Soares Pereira × Carmelinda Sodré Pereira, irmão de Valdenor e Deusdete. Pai de Valdemar de Jesus Sodré. Sobrenome 'Gramilio' = provável erro cartorário, variante de Gramilo (mesmo padrão que Sudré/Sodré)."
     },
     "rels": {
-        "parents": [
-            "antenor_p",
+        "spouses": [
             "carmelinda_sp"
         ],
         "children": [
             "vdm"
+        ],
+        "parents": [
+            "antenor_p",
+            "carmelinda_sp"
         ]
     }
 },
@@ -2077,7 +2085,7 @@ const F3_DATA = [
     "data": {
         "first name": "Ana",
         "last name": "Maria Santos Sodré",
-        "gender": "M",
+        "gender": "F",
         "nome completo": "Ana Maria Santos Sodré",
         "confiabilidade": "provável",
         "notas": "Ana Maria Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
@@ -2109,7 +2117,7 @@ const F3_DATA = [
     "data": {
         "first name": "Ana",
         "last name": "Rita Santos Sodré",
-        "gender": "M",
+        "gender": "F",
         "nome completo": "Ana Rita Santos Sodré",
         "confiabilidade": "provável",
         "notas": "Ana Rita Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
@@ -3241,9 +3249,7 @@ const F3_DATA = [
     "rels": {
         "children": [
             "gm1",
-            "gm2",
-            "antenor_p",
-            "carmelinda_sp"
+            "gm2"
         ],
         "parents": [
             "virtual_root"
@@ -3307,6 +3313,45 @@ const F3_DATA = [
             "virtual_1002",
             "virtual_1003",
             "virtual_1004"
+        ]
+    }
+},
+
+{
+    "id": "eustaquio_p",
+    "data": {
+        "first name": "Eustáquio",
+        "last name": "José Pereira",
+        "gender": "M",
+        "nome completo": "Eustáquio José Pereira",
+        "confiabilidade": "confirmada",
+        "notas": "Pai de Antenor Soares Pereira · certidão de óbito (jun 2026) · sogro de Carmelinda Sodré Pereira"
+    },
+    "rels": {
+        "spouses": [
+            "maria_sr"
+        ],
+        "children": [
+            "antenor_p"
+        ]
+    }
+},
+{
+    "id": "maria_sr",
+    "data": {
+        "first name": "Maria",
+        "last name": "Soares Rocha",
+        "gender": "F",
+        "nome completo": "Maria Soares Rocha",
+        "confiabilidade": "confirmada",
+        "notas": "Mãe de Antenor Soares Pereira · certidão de óbito (jun 2026) · sogra de Carmelinda Sodré Pereira"
+    },
+    "rels": {
+        "spouses": [
+            "eustaquio_p"
+        ],
+        "children": [
+            "antenor_p"
         ]
     }
 }
