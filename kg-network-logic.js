@@ -136,16 +136,20 @@
       showInfo(d.data.id);
     });
 
-    // Initial focus: Marcelo (gp1). User can switch to "all fragments" via button.
-    f3Chart.setAncestryDepth(4);
+    // Initial focus: PANORAMA COMPLETO — todos os ~158 nós (virtual_root).
+    // ancestryDepth(0) = não mostrar "(sem dados)" acima dos ancestrais conhecidos.
+    f3Chart.setAncestryDepth(0);
     f3Chart.setProgenyDepth(8);
+
+    // Desabilita toggle buttons de ramos duplicados (ícones de expand/colapsa)
+    f3Chart.setDuplicateBranchToggle(false);
 
     f3Chart.setOnUpdate(function () {
       try { applyTheme(); } catch (e) { /* silent */ }
     });
 
-    // First render with any non-virtual main (so lib runs full pipeline)
-    f3Chart.updateMainId('gp1');
+    // First render with virtual_root para mostrar TODOS os fragmentos
+    f3Chart.updateMainId('virtual_root');
     f3Chart.updateTree({ initial: true });
 
     // Pan/zoom + custom centering after render

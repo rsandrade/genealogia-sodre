@@ -1,5 +1,5 @@
 // Auto-generated from data/membros_encontrados.json
-// Total: 158 entries, mainId: virtual_root
+// Total: 175 entries, mainId: virtual_root
 const F3_DATA = [
 {
     "id": "auto_9",
@@ -976,6 +976,30 @@ const F3_DATA = [
     }
 },
 {
+    "id": "antenor_p",
+    "data": {
+        "first name": "Antenor",
+        "last name": "Soares Pereira",
+        "gender": "F",
+        "nome completo": "Antenor Soares Pereira",
+        "confiabilidade": "hipotética",
+        "notas": "Esposo de Carmelinda Sodré Pereira · pai de Deusdete Pereira Sodré · nome citado por Ricardo Andrade em jun 2026 (informação verbal, sem confirmação documental)"
+    },
+    "rels": {
+        "spouses": [
+            "carmelinda_sp"
+        ],
+        "children": [
+            "vno",
+            "vmo",
+            "deusdete_ps"
+        ],
+        "parents": [
+            "virtual_1002"
+        ]
+    }
+},
+{
     "id": "a115",
     "data": {
         "first name": "Antonia",
@@ -992,6 +1016,30 @@ const F3_DATA = [
         ],
         "spouses": [
             "fs21"
+        ]
+    }
+},
+{
+    "id": "carmelinda_sp",
+    "data": {
+        "first name": "Carmelinda",
+        "last name": "Sodré Pereira",
+        "gender": "F",
+        "nome completo": "Carmelinda Sodré Pereira",
+        "confiabilidade": "hipotética",
+        "notas": "Esposa de Antenor Soares Pereira · mãe de Deusdete Pereira Sodré · sobrenome Sodré Pereira = mesmo agrupamento do Tronco Baiano do séc. XVIII (Jerônimo Sodré Pereira) — parentesco a confirmar · nome citado por Ricardo Andrade em jun 2026"
+    },
+    "rels": {
+        "spouses": [
+            "antenor_p"
+        ],
+        "children": [
+            "vno",
+            "vmo",
+            "deusdete_ps"
+        ],
+        "parents": [
+            "virtual_1002"
         ]
     }
 },
@@ -1584,6 +1632,33 @@ const F3_DATA = [
     }
 },
 {
+    "id": "valdivino_alzira_conjuge",
+    "data": {
+        "first name": "Alzira",
+        "last name": "Santos Sodré",
+        "gender": "M",
+        "nome completo": "Alzira Santos Sodré",
+        "confiabilidade": "provável",
+        "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
+    },
+    "rels": {
+        "children": [
+            "valdivino_1",
+            "valdivino_2",
+            "valdivino_3",
+            "valdivino_4",
+            "valdivino_5",
+            "valdivino_6",
+            "valdivino_7",
+            "valdivino_8",
+            "valdivino_9"
+        ],
+        "parents": [
+            "virtual_1003"
+        ]
+    }
+},
+{
     "id": "f2",
     "data": {
         "first name": "Arlindo",
@@ -1646,6 +1721,26 @@ const F3_DATA = [
             "c10",
             "c11",
             "c12"
+        ]
+    }
+},
+{
+    "id": "deusdete_ps",
+    "data": {
+        "first name": "Deusdete",
+        "last name": "Pereira Sodré",
+        "gender": "M",
+        "nome completo": "Deusdete Pereira Sodré",
+        "confiabilidade": "provável",
+        "notas": "Filho de Antenor Soares Pereira × Carmelinda Sodré Pereira · confirmado em jun 2026. Provável irmão de Valdenor e Valdomiro Gramilio Sodré (hipótese de Ricardo), ambos passaram a receber estes mesmos pais como indicativo de irmandade. 4 ou 5 filhos (apenas Abraão confirmado — os demais a registrar). NÃO criar registros fictícios para os outros filhos."
+    },
+    "rels": {
+        "parents": [
+            "antenor_p",
+            "carmelinda_sp"
+        ],
+        "children": [
+            "abraao_ps"
         ]
     }
 },
@@ -1893,6 +1988,75 @@ const F3_DATA = [
     }
 },
 {
+    "id": "vno",
+    "data": {
+        "first name": "Valdenor",
+        "last name": "Gramilio Sodré",
+        "gender": "M",
+        "nome completo": "Valdenor Gramilio Sodré",
+        "confiabilidade": "hipotética",
+        "notas": "Parentesco confirmado em jun 2026 por Ricardo Andrade: filho de Antenor Soares Pereira × Carmelinda Sodré Pereira (irmão de Deusdete Pereira Sodré, possivelmente também irmão de Valdomiro Gramilio Sodré). Sobrenome 'Gramilio' = grafia familiar para Gramilo/Gramilu (mesmo padrão que 'Sudré' = Sodré). NÃO conectar filhos do séc. XIX diretamente — provável homônimo. Sobrenome 'Gramilio' é grafia familiar (mesmo padrão de erro cartorário que 'Sudré' e 'Sodré'): possível homônimo ou variante de Gramilo · sem confirmação de pais · avô da prima de Ibitupan · voluntário para fundir com ramos oficiais"
+    },
+    "rels": {
+        "parents": [
+            "antenor_p",
+            "carmelinda_sp"
+        ]
+    }
+},
+{
+    "id": "vmo",
+    "data": {
+        "first name": "Valdomiro",
+        "last name": "Gramilio Sodré",
+        "gender": "M",
+        "nome completo": "Valdomiro Gramilio Sodré",
+        "confiabilidade": "hipotética",
+        "notas": "Parentesco provável em jun 2026: Ricardo Andrade sugeriu irmandade com Deusdete Pereira Sodré e Valdenor Gramilio Sodré. Pais hipotéticos: Antenor Soares Pereira × Carmelinda Sodré Pereira. Pai de Valdemar de Jesus Sodré. Sobrenome 'Gramilio' = grafia familiar para Gramilo. Irmão de Valdenor Gramilio Sodré · 'Gramilio' = grafia familiar para Gramilo/Gramilu · sem confirmação de pais · pai de Valdemar de Jesus Sodré"
+    },
+    "rels": {
+        "parents": [
+            "antenor_p",
+            "carmelinda_sp"
+        ],
+        "children": [
+            "vdm"
+        ]
+    }
+},
+{
+    "id": "abraao_ps",
+    "data": {
+        "first name": "Abraão",
+        "last name": "Pereira Sodré",
+        "gender": "M",
+        "nome completo": "Abraão Pereira Sodré",
+        "confiabilidade": "provável",
+        "notas": "Filho de Deusdete Pereira Sodré (1º ou entre os primeiros) · mora em Portugal · pastor (liderança religiosa) · Deusdete teria 4-5 filhos no total; outros 3-4 ainda a documentar. NÃO confunda com Abraão bíblico em registros bíblicos."
+    },
+    "rels": {
+        "parents": [
+            "deusdete_ps"
+        ]
+    }
+},
+{
+    "id": "valdivino_4",
+    "data": {
+        "first name": "Ana",
+        "last name": "Angélica",
+        "gender": "F",
+        "nome completo": "Ana Angélica",
+        "confiabilidade": "provável",
+        "notas": "Ana Angélica · filha(o) de Valdivino × Alzira Santos Sodré · NOTA: 'Ana Quitéria' / 'Ana Angélica' podem ser nomes de batismo + apelido (verificar certidão)."
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
     "id": "f4a",
     "data": {
         "first name": "Ana",
@@ -1905,6 +2069,54 @@ const F3_DATA = [
         "parents": [
             "f2",
             "f3"
+        ]
+    }
+},
+{
+    "id": "valdivino_2",
+    "data": {
+        "first name": "Ana",
+        "last name": "Maria Santos Sodré",
+        "gender": "M",
+        "nome completo": "Ana Maria Santos Sodré",
+        "confiabilidade": "provável",
+        "notas": "Ana Maria Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
+    "id": "valdivino_3",
+    "data": {
+        "first name": "Ana",
+        "last name": "Quitéria",
+        "gender": "F",
+        "nome completo": "Ana Quitéria",
+        "confiabilidade": "provável",
+        "notas": "Ana Quitéria · filha(o) de Valdivino × Alzira Santos Sodré · NOTA: 'Ana Quitéria' / 'Ana Angélica' podem ser nomes de batismo + apelido (verificar certidão)."
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
+    "id": "valdivino_1",
+    "data": {
+        "first name": "Ana",
+        "last name": "Rita Santos Sodré",
+        "gender": "M",
+        "nome completo": "Ana Rita Santos Sodré",
+        "confiabilidade": "provável",
+        "notas": "Ana Rita Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
         ]
     }
 },
@@ -2260,6 +2472,22 @@ const F3_DATA = [
     }
 },
 {
+    "id": "valdivino_7",
+    "data": {
+        "first name": "João",
+        "last name": "Carlos",
+        "gender": "M",
+        "nome completo": "João Carlos",
+        "confiabilidade": "provável",
+        "notas": "João Carlos · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
     "id": "a105",
     "data": {
         "first name": "Juvenil",
@@ -2581,6 +2809,22 @@ const F3_DATA = [
     }
 },
 {
+    "id": "valdivino_9",
+    "data": {
+        "first name": "Rosana",
+        "last name": "",
+        "gender": "F",
+        "nome completo": "Rosana",
+        "confiabilidade": "provável",
+        "notas": "Rosana · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
     "id": "f4c",
     "data": {
         "first name": "Sandro",
@@ -2679,6 +2923,54 @@ const F3_DATA = [
     }
 },
 {
+    "id": "vdm",
+    "data": {
+        "first name": "Valdemar",
+        "last name": "de Jesus Sodré",
+        "gender": "M",
+        "nome completo": "Valdemar de Jesus Sodré",
+        "confiabilidade": "hipotética",
+        "notas": "Filho de Valdomiro Gramilio Sodré · nome 'de Jesus' = provavelmente padroeiro da pia batismal, não sobrenome do cônjuge — confirmar documentação"
+    },
+    "rels": {
+        "parents": [
+            "vmo"
+        ]
+    }
+},
+{
+    "id": "valdivino_6",
+    "data": {
+        "first name": "Valmir",
+        "last name": "",
+        "gender": "M",
+        "nome completo": "Valmir",
+        "confiabilidade": "provável",
+        "notas": "Valmir · filha(o) de Valdivino × Alzira Santos Sodré · ✝ falecido(a)"
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
+    "id": "valdivino_5",
+    "data": {
+        "first name": "Valvir",
+        "last name": "",
+        "gender": "M",
+        "nome completo": "Valvir",
+        "confiabilidade": "provável",
+        "notas": "Valvir · filha(o) de Valdivino × Alzira Santos Sodré · 'Valvir' pode ser hipocorístico masculino ou feminino (padrão familiar)."
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
     "id": "c2",
     "data": {
         "first name": "Veralúcia",
@@ -2696,6 +2988,22 @@ const F3_DATA = [
         ],
         "spouses": [
             "auto_4"
+        ]
+    }
+},
+{
+    "id": "valdivino_8",
+    "data": {
+        "first name": "Wanderley",
+        "last name": "",
+        "gender": "M",
+        "nome completo": "Wanderley",
+        "confiabilidade": "provável",
+        "notas": "Wanderley · filha(o) de Valdivino × Alzira Santos Sodré · ✝ falecido(a)"
+    },
+    "rels": {
+        "parents": [
+            "valdivino_alzira_conjuge"
         ]
     }
 },
@@ -2933,7 +3241,9 @@ const F3_DATA = [
     "rels": {
         "children": [
             "gm1",
-            "gm2"
+            "gm2",
+            "antenor_p",
+            "carmelinda_sp"
         ],
         "parents": [
             "virtual_root"
@@ -2953,7 +3263,8 @@ const F3_DATA = [
         "children": [
             "f3",
             "f8c",
-            "f10b"
+            "f10b",
+            "valdivino_alzira_conjuge"
         ],
         "parents": [
             "virtual_root"
