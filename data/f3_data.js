@@ -1,5 +1,5 @@
 // Auto-generated from data/membros_encontrados.json
-// Total: 175 entries, mainId: virtual_root
+// Total: 180 entries, mainId: virtual_root
 const F3_DATA = [
 {
     "id": "auto_9",
@@ -1637,6 +1637,37 @@ const F3_DATA = [
     }
 },
 {
+    "id": "valdivino",
+    "data": {
+        "first name": "Valdivino",
+        "last name": "",
+        "gender": "M",
+        "nome completo": "Valdivino",
+        "confiabilidade": "confirmada",
+        "notas": "casou com Alzira Santos Sodré · 9 filhos: Ana Rita, Ana Maria, Ana Quitéria, Ana Angélica, Valvir, Valmir ✝, João Carlos, Wanderley ✝, Rosana · filho de Isabel Rosa Sodré × Maximiano José de Souza"
+    },
+    "rels": {
+        "spouses": [
+            "valdivino_alzira_conjuge"
+        ],
+        "children": [
+            "valdivino_1",
+            "valdivino_2",
+            "valdivino_3",
+            "valdivino_4",
+            "valdivino_5",
+            "valdivino_6",
+            "valdivino_7",
+            "valdivino_8",
+            "valdivino_9"
+        ],
+        "parents": [
+            "f10",
+            "f10b"
+        ]
+    }
+},
+{
     "id": "valdivino_alzira_conjuge",
     "data": {
         "first name": "Alzira",
@@ -1644,7 +1675,7 @@ const F3_DATA = [
         "gender": "F",
         "nome completo": "Alzira Santos Sodré",
         "confiabilidade": "provável",
-        "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
+        "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · pais: Carlos × Euflozina (confirmado por memória oral, jun 2026) · avós maternos de Valvir e demais filhos · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo — confirmar"
     },
     "rels": {
         "children": [
@@ -1658,8 +1689,12 @@ const F3_DATA = [
             "valdivino_8",
             "valdivino_9"
         ],
+        "spouses": [
+            "valdivino"
+        ],
         "parents": [
-            "virtual_1003"
+            "carlos_alzira_pai",
+            "euflozina_alzira_mae"
         ]
     }
 },
@@ -1871,7 +1906,8 @@ const F3_DATA = [
             "i4",
             "i5",
             "i6",
-            "i7"
+            "i7",
+            "valdivino"
         ]
     }
 },
@@ -1913,7 +1949,8 @@ const F3_DATA = [
             "i4",
             "i5",
             "i6",
-            "i7"
+            "i7",
+            "valdivino"
         ],
         "parents": [
             "virtual_1003"
@@ -3269,8 +3306,7 @@ const F3_DATA = [
         "children": [
             "f3",
             "f8c",
-            "f10b",
-            "valdivino_alzira_conjuge"
+            "f10b"
         ],
         "parents": [
             "virtual_root"
@@ -3352,6 +3388,50 @@ const F3_DATA = [
         ],
         "children": [
             "antenor_p"
+        ]
+    }
+},
+{
+    "id": "carlos_alzira_pai",
+    "data": {
+        "first name": "Carlos",
+        "last name": "",
+        "gender": "M",
+        "nome completo": "Carlos",
+        "confiabilidade": "provável",
+        "notas": "Pai de Alzira Santos Sodré · avô materno de Valvir e demais filhos de Valdivino × Alzira · NÃO confundir com Carlos (id: i2), filho de Isabel Rosa Sodré × Maximiano José de Souza"
+    },
+    "rels": {
+        "spouses": [
+            "euflozina_alzira_mae"
+        ],
+        "children": [
+            "valdivino_alzira_conjuge"
+        ],
+        "parents": [
+            "virtual_1001"
+        ]
+    }
+},
+{
+    "id": "euflozina_alzira_mae",
+    "data": {
+        "first name": "Euflozina",
+        "last name": "",
+        "gender": "F",
+        "nome completo": "Euflozina",
+        "confiabilidade": "provável",
+        "notas": "Mãe de Alzira Santos Sodré · avó materna de Valvir e demais filhos de Valdivino × Alzira"
+    },
+    "rels": {
+        "spouses": [
+            "carlos_alzira_pai"
+        ],
+        "children": [
+            "valdivino_alzira_conjuge"
+        ],
+        "parents": [
+            "virtual_1001"
         ]
     }
 }

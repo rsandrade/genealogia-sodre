@@ -1170,6 +1170,7 @@
     "notas": "filha adotiva (mais velha) · mãe de Cesar e de Tânia Karla Sodré Bulhões"
   },
   {
+    "id": "valdivino",
     "nome_completo": "Valdivino",
     "nascimento": "",
     "falecimento": "",
@@ -1181,7 +1182,7 @@
     "fonte": "Memória oral (família, jun 2026) · atualizado jun 2026",
     "confiabilidade": "confirmada",
     "data_registro": "2026-06-26",
-    "notas": "casou com Alzira Santos Sodré · 9 filhos: Ana Rita, Ana Maria, Ana Quitéria, Ana Angélica, Valvir, Valmir ✝, João Carlos, Wanderley ✝, Rosana · filho de Isabel Rosa Sodré × Maximiano José de Souza"
+    "notas": "casou com Alzira Santos Sodré · 9 filhos: Ana Rita, Ana Maria, Ana Quitéria, Ana Angélica, Valvir, Valmir ✝, João Carlos, Wanderley ✝, Rosana · filho de Isabel Rosa Sodré × Maximiano José de Souza · sexo: masculino (confirmado por Ricardo, jun 2026)"
   },
   {
     "nome_completo": "Alice dos Santos",
@@ -1819,15 +1820,18 @@
     "nome_completo": "Alzira Santos Sodré",
     "nascimento": null,
     "falecimento": null,
-    "pais": null,
+    "pais": [
+      "Carlos",
+      "Euflozina"
+    ],
     "conjuge": "Valdivino",
     "casamento": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade, jun 2026)",
-    "data_registro": "2026-06-26",
+    "data_registro": "2026-06-29",
     "confiabilidade": "provável",
     "geracao": 3,
     "ordem_filho": null,
-    "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
+    "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · pais: Carlos × Euflozina (confirmado por memória oral, jun 2026) · avós maternos de Valvir e demais filhos de Valdivino × Alzira · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
   },
   {
     "id": "valdivino_1",
@@ -2043,5 +2047,33 @@
     "geracao": 4,
     "ordem_filho": null,
     "notas": "Filho de Deusdete Pereira Sodré (1º ou entre os primeiros) · mora em Portugal · pastor (liderança religiosa) · Deusdete teria 4-5 filhos no total; outros 3-4 ainda a documentar. NÃO confunda com Abraão bíblico em registros bíblicos."
+  },
+  {
+    "id": "carlos_alzira_pai",
+    "nome_completo": "Carlos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Euflozina",
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jun 2026)",
+    "data_registro": "2026-06-29",
+    "confiabilidade": "provável",
+    "geracao": 2,
+    "ordem_filho": null,
+    "notas": "Pai de Alzira Santos Sodré · avô materno de Valvir e demais filhos de Valdivino × Alzira · NÃO confundir com Carlos (id: i2), filho de Isabel Rosa Sodré × Maximiano José de Souza (tio de Valdivino, geração diferente)"
+  },
+  {
+    "id": "euflozina_alzira_mae",
+    "nome_completo": "Euflozina",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Carlos",
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jun 2026)",
+    "data_registro": "2026-06-29",
+    "confiabilidade": "provável",
+    "geracao": 2,
+    "ordem_filho": null,
+    "notas": "Mãe de Alzira Santos Sodré · avó materna de Valvir e demais filhos de Valdivino × Alzira"
   }
 ]
