@@ -61,17 +61,17 @@ body::before {
 
 /* f3 chart container */
 #FamilyChart {
-  width:100vw; height:90vh; min-width:1920px; min-height:1080px; position:relative;
+  width:100vw; height:90vh; min-width:800px; min-height:600px; position:relative;
   background:var(--parchment);
-  overflow:auto;
+  overflow:hidden;
 }
 .f3, .f3 > svg, #FamilyChart > svg, .main_svg {
-  width:100vw !important;
+  width:100% !important;
   height:100% !important;
-  min-height:1080px !important;
+  min-height:600px !important;
   background:var(--parchment);
 }
-#htmlSvg { width:100% !important; height:100% !important; min-height:700px !important; }
+#htmlSvg { width:100% !important; height:100% !important; min-height:600px !important; }
 
 /* Info panel */
 .info-panel {
@@ -1149,8 +1149,8 @@ function startKnowledgeGraph() {
   });
 
   // Set main person to virtual_root to show all fragments horizontally aligned
-  f3Chart.setAncestryDepth(1);
-  f3Chart.setProgenyDepth(8);
+  f3Chart.setAncestryDepth(2);
+  f3Chart.setProgenyDepth(4);
   
   // Initial usable focus: core family branch. The virtual root remains in data,
   // but centering on it creates a 132k px-wide graph that appears blank.
@@ -1165,7 +1165,7 @@ function startKnowledgeGraph() {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       try { enableF3PanZoom(f3Chart); } catch (e) { console.warn('[KG] enableF3PanZoom erro:', e); }
-      try { centerF3Tree(f3Chart, {preferredScale: 0.65, minReadableScale: 0.6, fitWidth: false, centerMode: 'main', focusText: 'Marcelo,Gramilo Sodré', offsetX: -350, offsetY: -230}); } catch (e) { console.warn('[KG] centerF3Tree erro:', e); }
+      try { centerF3Tree(f3Chart, {preferredScale: 0.5, minReadableScale: 0.4, fitWidth: true, centerMode: 'main', focusText: 'Marcelo,Gramilo Sodré', offsetX: 0, offsetY: 0}); } catch (e) { console.warn('[KG] centerF3Tree erro:', e); }
       try { applyParchmentTheme(); } catch (e) { console.warn('[KG] applyParchmentTheme erro:', e); }
     });
   });
@@ -1442,14 +1442,14 @@ function filterData() {
     f3Card.setOnCardClick((d) => {
       showInfo(d.data.id);
     });
-    f3Chart.setAncestryDepth(4);
-    f3Chart.setProgenyDepth(8);
+    f3Chart.setAncestryDepth(2);
+    f3Chart.setProgenyDepth(4);
     f3Chart.updateMainId('virtual_root');
     f3Chart.updateTree({initial: true});
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         enableF3PanZoom(f3Chart);
-        centerF3Tree(f3Chart, {preferredScale: 0.65, minReadableScale: 0.6, fitWidth: false, centerMode: 'main', focusText: 'Marcelo,Gramilo Sodré', offsetX: -350, offsetY: -230});
+        centerF3Tree(f3Chart, {preferredScale: 0.5, minReadableScale: 0.4, fitWidth: true, centerMode: 'main', focusText: 'Marcelo,Gramilo Sodré', offsetX: 0, offsetY: 0});
         applyParchmentTheme();
       });
     });
