@@ -66,6 +66,13 @@ fs_v*_run*.log
 data/fs_*.json
 data/fs_*.txt
 data/fs_*.log
+# Full-res images (not used by site, too large for Pages)
+data/images/fullres/
+data/images/fullres_test/
+
+# FS gap search dump (debug data, not site content)
+data/fs_gap_search_results.json
+
 node_modules/
 package-lock.json
 package.json
