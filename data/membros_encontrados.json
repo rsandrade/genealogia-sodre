@@ -2075,5 +2075,341 @@
     "geracao": 2,
     "ordem_filho": null,
     "notas": "Mãe de Alzira Santos Sodré · avó materna de Valvir e demais filhos de Valdivino × Alzira"
+  },
+  {
+    "id": "a126",
+    "nome_completo": "Rayerverton Sodré Sampaio",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Atanagilda Sodré Sampaio"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a127",
+    "nome_completo": "Jaqueline Sodré Sampaio",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Atanagilda Sodré Sampaio"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 2
+  },
+  {
+    "id": "a128",
+    "nome_completo": "Ricardo Sodré Andrade",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Veralúcia Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a129",
+    "nome_completo": "Luiz Carlos Sudré Filho",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Luiz Carlos Sudré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a130",
+    "nome_completo": "Luana Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Luiz Carlos Sudré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 2
+  },
+  {
+    "id": "a131",
+    "nome_completo": "Lorena Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Luiz Carlos Sudré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 3
+  },
+  {
+    "id": "a132",
+    "nome_completo": "Lais Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Luiz Carlos Sudré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 4
+  },
+  {
+    "id": "a133",
+    "nome_completo": "Latifa Sudré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Luiz Carlos Sudré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 5
+  },
+  {
+    "id": "a134",
+    "nome_completo": "Thays Tâmara Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré Filho"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a135",
+    "nome_completo": "Thames Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré Filho"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 2
+  },
+  {
+    "id": "a136",
+    "nome_completo": "Thiago Lucas Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Francisco Gramilo Sodré Filho"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 3
+  },
+  {
+    "id": "a137",
+    "nome_completo": "Tatiana Sodré Costa",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Angélica Maria Sodré Costa"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a138",
+    "nome_completo": "Estevão Sodré Fontes",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Rita de Cássia Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a139",
+    "nome_completo": "Lara Sodré Fontes",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Rita de Cássia Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 2
+  },
+  {
+    "id": "a140",
+    "nome_completo": "Laisa Sodré Fontes",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Rita de Cássia Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 3
+  },
+  {
+    "id": "a141",
+    "nome_completo": "Denise Sodré Fontes",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Rita de Cássia Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 4
+  },
+  {
+    "id": "a142",
+    "nome_completo": "Ananda Sodré Fontes",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Rita de Cássia Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 5
+  },
+  {
+    "id": "a143",
+    "nome_completo": "Carol Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Paulo Renato Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a144",
+    "nome_completo": "Clara Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Paulo Renato Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 2
+  },
+  {
+    "id": "a145",
+    "nome_completo": "Ramon Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Paulo Renato Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 3
+  },
+  {
+    "id": "a146",
+    "nome_completo": "Rafael Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Paulo Renato Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 4
+  },
+  {
+    "id": "a147",
+    "nome_completo": "Erick Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Júlio César Gramilo Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a148",
+    "nome_completo": "Klycia Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Sinara Magali Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 1
+  },
+  {
+    "id": "a149",
+    "nome_completo": "Amanda Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Sinara Magali Sodré"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 5,
+    "ordem_filho": 2
   }
 ]

@@ -1023,6 +1023,28 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "carlos_alzira_pai",
+    "data": {
+      "first name": "Carlos",
+      "last name": "",
+      "gender": "M",
+      "nome completo": "Carlos",
+      "confiabilidade": "provável",
+      "notas": "Pai de Alzira Santos Sodré · avô materno de Valvir e demais filhos de Valdivino × Alzira · NÃO confundir com Carlos (id: i2), filho de Isabel Rosa Sodré × Maximiano José de Souza (tio de Valdivino, geração diferente)"
+    },
+    "rels": {
+      "spouses": [
+        "euflozina_alzira_mae"
+      ],
+      "children": [
+        "valdivino_alzira_conjuge"
+      ],
+      "parents": [
+        "virtual_1002"
+      ]
+    }
+  },
+  {
     "id": "carmelinda_sp",
     "data": {
       "first name": "Carmerina",
@@ -1151,6 +1173,28 @@ const F3_NETWORK_DATA = [
       ],
       "children": [
         "12"
+      ]
+    }
+  },
+  {
+    "id": "euflozina_alzira_mae",
+    "data": {
+      "first name": "Euflozina",
+      "last name": "",
+      "gender": "F",
+      "nome completo": "Euflozina",
+      "confiabilidade": "provável",
+      "notas": "Mãe de Alzira Santos Sodré · avó materna de Valvir e demais filhos de Valdivino × Alzira"
+    },
+    "rels": {
+      "spouses": [
+        "carlos_alzira_pai"
+      ],
+      "children": [
+        "valdivino_alzira_conjuge"
+      ],
+      "parents": [
+        "virtual_1002"
       ]
     }
   },
@@ -1642,9 +1686,16 @@ const F3_NETWORK_DATA = [
       "gender": "M",
       "nome completo": "Alzira Santos Sodré",
       "confiabilidade": "provável",
-      "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
+      "notas": "Casou com Valdivino (filho de Isabel Rosa Sodré × Maximiano José de Souza) · pais: Carlos × Euflozina (confirmado por memória oral, jun 2026) · avós maternos de Valvir e demais filhos de Valdivino × Alzira · sobrenome 'Santos' possivelmente alusão à família materna de Marcelo (Alice / Atanagilda Odete dos Santos) — confirmar"
     },
     "rels": {
+      "parents": [
+        "carlos_alzira_pai",
+        "euflozina_alzira_mae"
+      ],
+      "spouses": [
+        "valdivino"
+      ],
       "children": [
         "valdivino_1",
         "valdivino_2",
@@ -1655,9 +1706,6 @@ const F3_NETWORK_DATA = [
         "valdivino_7",
         "valdivino_8",
         "valdivino_9"
-      ],
-      "parents": [
-        "virtual_1003"
       ]
     }
   },
@@ -1869,7 +1917,8 @@ const F3_NETWORK_DATA = [
         "i4",
         "i5",
         "i6",
-        "i7"
+        "i7",
+        "valdivino"
       ]
     }
   },
@@ -1911,7 +1960,8 @@ const F3_NETWORK_DATA = [
         "i4",
         "i5",
         "i6",
-        "i7"
+        "i7",
+        "valdivino"
       ],
       "parents": [
         "virtual_1003"
@@ -2008,6 +2058,37 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "valdivino",
+    "data": {
+      "first name": "Valdivino",
+      "last name": "",
+      "gender": "M",
+      "nome completo": "Valdivino",
+      "confiabilidade": "confirmada",
+      "notas": "casou com Alzira Santos Sodré · 9 filhos: Ana Rita, Ana Maria, Ana Quitéria, Ana Angélica, Valvir, Valmir ✝, João Carlos, Wanderley ✝, Rosana · filho de Isabel Rosa Sodré × Maximiano José de Souza · sexo: masculino (confirmado por Ricardo, jun 2026)"
+    },
+    "rels": {
+      "parents": [
+        "f10",
+        "f10b"
+      ],
+      "spouses": [
+        "valdivino_alzira_conjuge"
+      ],
+      "children": [
+        "valdivino_1",
+        "valdivino_2",
+        "valdivino_3",
+        "valdivino_4",
+        "valdivino_5",
+        "valdivino_6",
+        "valdivino_7",
+        "valdivino_8",
+        "valdivino_9"
+      ]
+    }
+  },
+  {
     "id": "vmo",
     "data": {
       "first name": "Valdomiro",
@@ -2044,22 +2125,6 @@ const F3_NETWORK_DATA = [
     }
   },
   {
-    "id": "valdivino_4",
-    "data": {
-      "first name": "Ana",
-      "last name": "Angélica",
-      "gender": "F",
-      "nome completo": "Ana Angélica",
-      "confiabilidade": "provável",
-      "notas": "Ana Angélica · filha(o) de Valdivino × Alzira Santos Sodré · NOTA: 'Ana Quitéria' / 'Ana Angélica' podem ser nomes de batismo + apelido (verificar certidão)."
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
     "id": "f4a",
     "data": {
       "first name": "Ana",
@@ -2072,54 +2137,6 @@ const F3_NETWORK_DATA = [
       "parents": [
         "f2",
         "f3"
-      ]
-    }
-  },
-  {
-    "id": "valdivino_2",
-    "data": {
-      "first name": "Ana",
-      "last name": "Maria Santos Sodré",
-      "gender": "M",
-      "nome completo": "Ana Maria Santos Sodré",
-      "confiabilidade": "provável",
-      "notas": "Ana Maria Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
-    "id": "valdivino_3",
-    "data": {
-      "first name": "Ana",
-      "last name": "Quitéria",
-      "gender": "F",
-      "nome completo": "Ana Quitéria",
-      "confiabilidade": "provável",
-      "notas": "Ana Quitéria · filha(o) de Valdivino × Alzira Santos Sodré · NOTA: 'Ana Quitéria' / 'Ana Angélica' podem ser nomes de batismo + apelido (verificar certidão)."
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
-    "id": "valdivino_1",
-    "data": {
-      "first name": "Ana",
-      "last name": "Rita Santos Sodré",
-      "gender": "M",
-      "nome completo": "Ana Rita Santos Sodré",
-      "confiabilidade": "provável",
-      "notas": "Ana Rita Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
       ]
     }
   },
@@ -2137,6 +2154,9 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a137"
       ]
     }
   },
@@ -2220,6 +2240,10 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a126",
+        "a127"
       ]
     }
   },
@@ -2422,6 +2446,11 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a134",
+        "a135",
+        "a136"
       ]
     }
   },
@@ -2475,22 +2504,6 @@ const F3_NETWORK_DATA = [
     }
   },
   {
-    "id": "valdivino_7",
-    "data": {
-      "first name": "João",
-      "last name": "Carlos",
-      "gender": "M",
-      "nome completo": "João Carlos",
-      "confiabilidade": "provável",
-      "notas": "João Carlos · filha(o) de Valdivino × Alzira Santos Sodré"
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
     "id": "a105",
     "data": {
       "first name": "Juvenil",
@@ -2520,6 +2533,9 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a147"
       ]
     }
   },
@@ -2572,6 +2588,13 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a129",
+        "a130",
+        "a131",
+        "a132",
+        "a133"
       ]
     }
   },
@@ -2725,6 +2748,12 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a143",
+        "a144",
+        "a145",
+        "a146"
       ]
     }
   },
@@ -2775,6 +2804,13 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a138",
+        "a139",
+        "a140",
+        "a141",
+        "a142"
       ]
     }
   },
@@ -2812,22 +2848,6 @@ const F3_NETWORK_DATA = [
     }
   },
   {
-    "id": "valdivino_9",
-    "data": {
-      "first name": "Rosana",
-      "last name": "",
-      "gender": "F",
-      "nome completo": "Rosana",
-      "confiabilidade": "provável",
-      "notas": "Rosana · filha(o) de Valdivino × Alzira Santos Sodré"
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
     "id": "f4c",
     "data": {
       "first name": "Sandro",
@@ -2857,6 +2877,10 @@ const F3_NETWORK_DATA = [
       "parents": [
         "3",
         "4"
+      ],
+      "children": [
+        "a148",
+        "a149"
       ]
     }
   },
@@ -2942,38 +2966,6 @@ const F3_NETWORK_DATA = [
     }
   },
   {
-    "id": "valdivino_6",
-    "data": {
-      "first name": "Valmir",
-      "last name": "",
-      "gender": "M",
-      "nome completo": "Valmir",
-      "confiabilidade": "provável",
-      "notas": "Valmir · filha(o) de Valdivino × Alzira Santos Sodré · ✝ falecido(a)"
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
-    "id": "valdivino_5",
-    "data": {
-      "first name": "Valvir",
-      "last name": "",
-      "gender": "M",
-      "nome completo": "Valvir",
-      "confiabilidade": "provável",
-      "notas": "Valvir · filha(o) de Valdivino × Alzira Santos Sodré · 'Valvir' pode ser hipocorístico masculino ou feminino (padrão familiar)."
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
-      ]
-    }
-  },
-  {
     "id": "c2",
     "data": {
       "first name": "Veralúcia",
@@ -2991,22 +2983,9 @@ const F3_NETWORK_DATA = [
       ],
       "spouses": [
         "auto_4"
-      ]
-    }
-  },
-  {
-    "id": "valdivino_8",
-    "data": {
-      "first name": "Wanderley",
-      "last name": "",
-      "gender": "M",
-      "nome completo": "Wanderley",
-      "confiabilidade": "provável",
-      "notas": "Wanderley · filha(o) de Valdivino × Alzira Santos Sodré · ✝ falecido(a)"
-    },
-    "rels": {
-      "parents": [
-        "valdivino_alzira_conjuge"
+      ],
+      "children": [
+        "a128"
       ]
     }
   },
@@ -3078,6 +3057,21 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a149",
+    "data": {
+      "first name": "Amanda",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Amanda Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c12"
+      ]
+    }
+  },
+  {
     "id": "a113",
     "data": {
       "first name": "Amélia",
@@ -3090,6 +3084,104 @@ const F3_NETWORK_DATA = [
     "rels": {
       "parents": [
         "virtual_1004"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_4",
+    "data": {
+      "first name": "Ana",
+      "last name": "Angélica",
+      "gender": "F",
+      "nome completo": "Ana Angélica",
+      "confiabilidade": "provável",
+      "notas": "Ana Angélica · filha(o) de Valdivino × Alzira Santos Sodré · NOTA: 'Ana Quitéria' / 'Ana Angélica' podem ser nomes de batismo + apelido (verificar certidão)."
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_2",
+    "data": {
+      "first name": "Ana",
+      "last name": "Maria Santos Sodré",
+      "gender": "M",
+      "nome completo": "Ana Maria Santos Sodré",
+      "confiabilidade": "provável",
+      "notas": "Ana Maria Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_3",
+    "data": {
+      "first name": "Ana",
+      "last name": "Quitéria",
+      "gender": "F",
+      "nome completo": "Ana Quitéria",
+      "confiabilidade": "provável",
+      "notas": "Ana Quitéria · filha(o) de Valdivino × Alzira Santos Sodré · NOTA: 'Ana Quitéria' / 'Ana Angélica' podem ser nomes de batismo + apelido (verificar certidão)."
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_1",
+    "data": {
+      "first name": "Ana",
+      "last name": "Rita Santos Sodré",
+      "gender": "M",
+      "nome completo": "Ana Rita Santos Sodré",
+      "confiabilidade": "provável",
+      "notas": "Ana Rita Santos Sodré · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "a142",
+    "data": {
+      "first name": "Ananda",
+      "last name": "Sodré Fontes",
+      "gender": "M",
+      "nome completo": "Ananda Sodré Fontes",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c6"
+      ]
+    }
+  },
+  {
+    "id": "a143",
+    "data": {
+      "first name": "Carol",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Carol Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c8"
       ]
     }
   },
@@ -3110,6 +3202,66 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a144",
+    "data": {
+      "first name": "Clara",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Clara Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c8"
+      ]
+    }
+  },
+  {
+    "id": "a141",
+    "data": {
+      "first name": "Denise",
+      "last name": "Sodré Fontes",
+      "gender": "M",
+      "nome completo": "Denise Sodré Fontes",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c6"
+      ]
+    }
+  },
+  {
+    "id": "a147",
+    "data": {
+      "first name": "Erick",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Erick Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c10"
+      ]
+    }
+  },
+  {
+    "id": "a138",
+    "data": {
+      "first name": "Estevão",
+      "last name": "Sodré Fontes",
+      "gender": "M",
+      "nome completo": "Estevão Sodré Fontes",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c6"
+      ]
+    }
+  },
+  {
     "id": "a120",
     "data": {
       "first name": "Ismael",
@@ -3126,6 +3278,21 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a127",
+    "data": {
+      "first name": "Jaqueline",
+      "last name": "Sodré Sampaio",
+      "gender": "M",
+      "nome completo": "Jaqueline Sodré Sampaio",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c1"
+      ]
+    }
+  },
+  {
     "id": "a123",
     "data": {
       "first name": "José",
@@ -3138,6 +3305,331 @@ const F3_NETWORK_DATA = [
     "rels": {
       "parents": [
         "virtual_1004"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_7",
+    "data": {
+      "first name": "João",
+      "last name": "Carlos",
+      "gender": "M",
+      "nome completo": "João Carlos",
+      "confiabilidade": "provável",
+      "notas": "João Carlos · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "a148",
+    "data": {
+      "first name": "Klycia",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Klycia Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c12"
+      ]
+    }
+  },
+  {
+    "id": "a132",
+    "data": {
+      "first name": "Lais",
+      "last name": "Sudré",
+      "gender": "M",
+      "nome completo": "Lais Sudré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c3"
+      ]
+    }
+  },
+  {
+    "id": "a140",
+    "data": {
+      "first name": "Laisa",
+      "last name": "Sodré Fontes",
+      "gender": "M",
+      "nome completo": "Laisa Sodré Fontes",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c6"
+      ]
+    }
+  },
+  {
+    "id": "a139",
+    "data": {
+      "first name": "Lara",
+      "last name": "Sodré Fontes",
+      "gender": "M",
+      "nome completo": "Lara Sodré Fontes",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c6"
+      ]
+    }
+  },
+  {
+    "id": "a133",
+    "data": {
+      "first name": "Latifa",
+      "last name": "Sudré",
+      "gender": "M",
+      "nome completo": "Latifa Sudré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c3"
+      ]
+    }
+  },
+  {
+    "id": "a131",
+    "data": {
+      "first name": "Lorena",
+      "last name": "Sudré",
+      "gender": "M",
+      "nome completo": "Lorena Sudré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c3"
+      ]
+    }
+  },
+  {
+    "id": "a130",
+    "data": {
+      "first name": "Luana",
+      "last name": "Sudré",
+      "gender": "M",
+      "nome completo": "Luana Sudré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c3"
+      ]
+    }
+  },
+  {
+    "id": "a129",
+    "data": {
+      "first name": "Luiz",
+      "last name": "Carlos Sudré Filho",
+      "gender": "M",
+      "nome completo": "Luiz Carlos Sudré Filho",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c3"
+      ]
+    }
+  },
+  {
+    "id": "a146",
+    "data": {
+      "first name": "Rafael",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Rafael Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c8"
+      ]
+    }
+  },
+  {
+    "id": "a145",
+    "data": {
+      "first name": "Ramon",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Ramon Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c8"
+      ]
+    }
+  },
+  {
+    "id": "a126",
+    "data": {
+      "first name": "Rayerverton",
+      "last name": "Sodré Sampaio",
+      "gender": "M",
+      "nome completo": "Rayerverton Sodré Sampaio",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c1"
+      ]
+    }
+  },
+  {
+    "id": "a128",
+    "data": {
+      "first name": "Ricardo",
+      "last name": "Sodré Andrade",
+      "gender": "M",
+      "nome completo": "Ricardo Sodré Andrade",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c2"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_9",
+    "data": {
+      "first name": "Rosana",
+      "last name": "",
+      "gender": "F",
+      "nome completo": "Rosana",
+      "confiabilidade": "provável",
+      "notas": "Rosana · filha(o) de Valdivino × Alzira Santos Sodré"
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "a137",
+    "data": {
+      "first name": "Tatiana",
+      "last name": "Sodré Costa",
+      "gender": "F",
+      "nome completo": "Tatiana Sodré Costa",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c5"
+      ]
+    }
+  },
+  {
+    "id": "a135",
+    "data": {
+      "first name": "Thames",
+      "last name": "Sodré",
+      "gender": "M",
+      "nome completo": "Thames Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c4"
+      ]
+    }
+  },
+  {
+    "id": "a134",
+    "data": {
+      "first name": "Thays",
+      "last name": "Tâmara Sodré",
+      "gender": "M",
+      "nome completo": "Thays Tâmara Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c4"
+      ]
+    }
+  },
+  {
+    "id": "a136",
+    "data": {
+      "first name": "Thiago",
+      "last name": "Lucas Sodré",
+      "gender": "M",
+      "nome completo": "Thiago Lucas Sodré",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "c4"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_6",
+    "data": {
+      "first name": "Valmir",
+      "last name": "",
+      "gender": "M",
+      "nome completo": "Valmir",
+      "confiabilidade": "provável",
+      "notas": "Valmir · filha(o) de Valdivino × Alzira Santos Sodré · ✝ falecido(a)"
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_5",
+    "data": {
+      "first name": "Valvir",
+      "last name": "",
+      "gender": "M",
+      "nome completo": "Valvir",
+      "confiabilidade": "provável",
+      "notas": "Valvir · filha(o) de Valdivino × Alzira Santos Sodré · 'Valvir' pode ser hipocorístico masculino ou feminino (padrão familiar)."
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
+      ]
+    }
+  },
+  {
+    "id": "valdivino_8",
+    "data": {
+      "first name": "Wanderley",
+      "last name": "",
+      "gender": "M",
+      "nome completo": "Wanderley",
+      "confiabilidade": "provável",
+      "notas": "Wanderley · filha(o) de Valdivino × Alzira Santos Sodré · ✝ falecido(a)"
+    },
+    "rels": {
+      "parents": [
+        "valdivino",
+        "valdivino_alzira_conjuge"
       ]
     }
   },
@@ -3246,7 +3738,9 @@ const F3_NETWORK_DATA = [
         "gm1",
         "gm2",
         "antenor_p",
-        "carmelinda_sp"
+        "carmelinda_sp",
+        "carlos_alzira_pai",
+        "euflozina_alzira_mae"
       ],
       "parents": [
         "virtual_root"
@@ -3266,8 +3760,7 @@ const F3_NETWORK_DATA = [
       "children": [
         "f3",
         "f8c",
-        "f10b",
-        "valdivino_alzira_conjuge"
+        "f10b"
       ],
       "parents": [
         "virtual_root"

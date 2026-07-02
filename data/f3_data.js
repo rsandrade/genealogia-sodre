@@ -1,5 +1,5 @@
 // Auto-generated from data/membros_encontrados.json
-// Total: 178 entries, mainId: virtual_root
+// Total: 202 entries, mainId: virtual_root
 const F3_DATA = [
 {
     "id": "auto_9",
@@ -2151,6 +2151,9 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a137"
         ]
     }
 },
@@ -2234,6 +2237,10 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a126",
+            "a127"
         ]
     }
 },
@@ -2436,6 +2443,11 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a134",
+            "a135",
+            "a136"
         ]
     }
 },
@@ -2518,6 +2530,9 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a147"
         ]
     }
 },
@@ -2570,6 +2585,13 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a129",
+            "a130",
+            "a131",
+            "a132",
+            "a133"
         ]
     }
 },
@@ -2723,6 +2745,12 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a143",
+            "a144",
+            "a145",
+            "a146"
         ]
     }
 },
@@ -2773,6 +2801,13 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a138",
+            "a139",
+            "a140",
+            "a141",
+            "a142"
         ]
     }
 },
@@ -2839,6 +2874,10 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "a148",
+            "a149"
         ]
     }
 },
@@ -2941,6 +2980,9 @@ const F3_DATA = [
         ],
         "spouses": [
             "auto_4"
+        ],
+        "children": [
+            "a128"
         ]
     }
 },
@@ -3008,6 +3050,21 @@ const F3_DATA = [
         "parents": [
             "11",
             "i1"
+        ]
+    }
+},
+{
+    "id": "a149",
+    "data": {
+        "first name": "Amanda",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Amanda Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c12"
         ]
     }
 },
@@ -3096,6 +3153,36 @@ const F3_DATA = [
     }
 },
 {
+    "id": "a142",
+    "data": {
+        "first name": "Ananda",
+        "last name": "Sodré Fontes",
+        "gender": "M",
+        "nome completo": "Ananda Sodré Fontes",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c6"
+        ]
+    }
+},
+{
+    "id": "a143",
+    "data": {
+        "first name": "Carol",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Carol Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c8"
+        ]
+    }
+},
+{
     "id": "a125",
     "data": {
         "first name": "Cesar",
@@ -3112,6 +3199,66 @@ const F3_DATA = [
     }
 },
 {
+    "id": "a144",
+    "data": {
+        "first name": "Clara",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Clara Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c8"
+        ]
+    }
+},
+{
+    "id": "a141",
+    "data": {
+        "first name": "Denise",
+        "last name": "Sodré Fontes",
+        "gender": "M",
+        "nome completo": "Denise Sodré Fontes",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c6"
+        ]
+    }
+},
+{
+    "id": "a147",
+    "data": {
+        "first name": "Erick",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Erick Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c10"
+        ]
+    }
+},
+{
+    "id": "a138",
+    "data": {
+        "first name": "Estevão",
+        "last name": "Sodré Fontes",
+        "gender": "M",
+        "nome completo": "Estevão Sodré Fontes",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c6"
+        ]
+    }
+},
+{
     "id": "a120",
     "data": {
         "first name": "Ismael",
@@ -3124,6 +3271,21 @@ const F3_DATA = [
     "rels": {
         "parents": [
             "virtual_1004"
+        ]
+    }
+},
+{
+    "id": "a127",
+    "data": {
+        "first name": "Jaqueline",
+        "last name": "Sodré Sampaio",
+        "gender": "M",
+        "nome completo": "Jaqueline Sodré Sampaio",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c1"
         ]
     }
 },
@@ -3161,6 +3323,186 @@ const F3_DATA = [
     }
 },
 {
+    "id": "a148",
+    "data": {
+        "first name": "Klycia",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Klycia Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c12"
+        ]
+    }
+},
+{
+    "id": "a132",
+    "data": {
+        "first name": "Lais",
+        "last name": "Sudré",
+        "gender": "M",
+        "nome completo": "Lais Sudré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c3"
+        ]
+    }
+},
+{
+    "id": "a140",
+    "data": {
+        "first name": "Laisa",
+        "last name": "Sodré Fontes",
+        "gender": "M",
+        "nome completo": "Laisa Sodré Fontes",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c6"
+        ]
+    }
+},
+{
+    "id": "a139",
+    "data": {
+        "first name": "Lara",
+        "last name": "Sodré Fontes",
+        "gender": "M",
+        "nome completo": "Lara Sodré Fontes",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c6"
+        ]
+    }
+},
+{
+    "id": "a133",
+    "data": {
+        "first name": "Latifa",
+        "last name": "Sudré",
+        "gender": "M",
+        "nome completo": "Latifa Sudré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c3"
+        ]
+    }
+},
+{
+    "id": "a131",
+    "data": {
+        "first name": "Lorena",
+        "last name": "Sudré",
+        "gender": "M",
+        "nome completo": "Lorena Sudré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c3"
+        ]
+    }
+},
+{
+    "id": "a130",
+    "data": {
+        "first name": "Luana",
+        "last name": "Sudré",
+        "gender": "M",
+        "nome completo": "Luana Sudré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c3"
+        ]
+    }
+},
+{
+    "id": "a129",
+    "data": {
+        "first name": "Luiz",
+        "last name": "Carlos Sudré Filho",
+        "gender": "M",
+        "nome completo": "Luiz Carlos Sudré Filho",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c3"
+        ]
+    }
+},
+{
+    "id": "a146",
+    "data": {
+        "first name": "Rafael",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Rafael Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c8"
+        ]
+    }
+},
+{
+    "id": "a145",
+    "data": {
+        "first name": "Ramon",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Ramon Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c8"
+        ]
+    }
+},
+{
+    "id": "a126",
+    "data": {
+        "first name": "Rayerverton",
+        "last name": "Sodré Sampaio",
+        "gender": "M",
+        "nome completo": "Rayerverton Sodré Sampaio",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c1"
+        ]
+    }
+},
+{
+    "id": "a128",
+    "data": {
+        "first name": "Ricardo",
+        "last name": "Sodré Andrade",
+        "gender": "M",
+        "nome completo": "Ricardo Sodré Andrade",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c2"
+        ]
+    }
+},
+{
     "id": "valdivino_9",
     "data": {
         "first name": "Rosana",
@@ -3174,6 +3516,66 @@ const F3_DATA = [
         "parents": [
             "valdivino",
             "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
+    "id": "a137",
+    "data": {
+        "first name": "Tatiana",
+        "last name": "Sodré Costa",
+        "gender": "F",
+        "nome completo": "Tatiana Sodré Costa",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c5"
+        ]
+    }
+},
+{
+    "id": "a135",
+    "data": {
+        "first name": "Thames",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Thames Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c4"
+        ]
+    }
+},
+{
+    "id": "a134",
+    "data": {
+        "first name": "Thays",
+        "last name": "Tâmara Sodré",
+        "gender": "M",
+        "nome completo": "Thays Tâmara Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c4"
+        ]
+    }
+},
+{
+    "id": "a136",
+    "data": {
+        "first name": "Thiago",
+        "last name": "Lucas Sodré",
+        "gender": "M",
+        "nome completo": "Thiago Lucas Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c4"
         ]
     }
 },
