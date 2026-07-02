@@ -1766,7 +1766,6 @@ const F3_DATA = [
             "c7",
             "c8",
             "c9",
-            "c11",
             "c12"
         ]
     }
@@ -1882,7 +1881,6 @@ const F3_DATA = [
             "c7",
             "c8",
             "c9",
-            "c11",
             "c12"
         ]
     }
@@ -2308,23 +2306,6 @@ const F3_DATA = [
     }
 },
 {
-    "id": "c11",
-    "data": {
-        "first name": "Cristina",
-        "last name": "Margarete Gramilo Sodré",
-        "gender": "M",
-        "nome completo": "Cristina Margarete Gramilo Sodré",
-        "birthday": "1969",
-        "confiabilidade": "confirmada"
-    },
-    "rels": {
-        "parents": [
-            "3",
-            "4"
-        ]
-    }
-},
-{
     "id": "c7",
     "data": {
         "first name": "Djalma",
@@ -2338,6 +2319,9 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "c11"
         ]
     }
 },
@@ -3163,6 +3147,21 @@ const F3_DATA = [
         ],
         "children": [
             "a147"
+        ]
+    }
+},
+{
+    "id": "c11",
+    "data": {
+        "first name": "Camille",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Camille Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c7"
         ]
     }
 },
