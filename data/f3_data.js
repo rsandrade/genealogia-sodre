@@ -1766,7 +1766,6 @@ const F3_DATA = [
             "c7",
             "c8",
             "c9",
-            "c10",
             "c11",
             "c12"
         ]
@@ -1883,7 +1882,6 @@ const F3_DATA = [
             "c7",
             "c8",
             "c9",
-            "c10",
             "c11",
             "c12"
         ]
@@ -2517,26 +2515,6 @@ const F3_DATA = [
     }
 },
 {
-    "id": "c10",
-    "data": {
-        "first name": "Júlio",
-        "last name": "César Gramilo Sodré",
-        "gender": "M",
-        "nome completo": "Júlio César Gramilo Sodré",
-        "birthday": "1968",
-        "confiabilidade": "confirmada"
-    },
-    "rels": {
-        "parents": [
-            "3",
-            "4"
-        ],
-        "children": [
-            "a147"
-        ]
-    }
-},
-{
     "id": "i6",
     "data": {
         "first name": "Lelinha",
@@ -2841,6 +2819,9 @@ const F3_DATA = [
         "parents": [
             "3",
             "4"
+        ],
+        "children": [
+            "c10"
         ]
     }
 },
@@ -3168,6 +3149,24 @@ const F3_DATA = [
     }
 },
 {
+    "id": "c10",
+    "data": {
+        "first name": "Antônio",
+        "last name": "Matheus Sodré",
+        "gender": "M",
+        "nome completo": "Antônio Matheus Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c9"
+        ],
+        "children": [
+            "a147"
+        ]
+    }
+},
+{
     "id": "a143",
     "data": {
         "first name": "Carol",
@@ -3225,21 +3224,6 @@ const F3_DATA = [
     "rels": {
         "parents": [
             "c6"
-        ]
-    }
-},
-{
-    "id": "a147",
-    "data": {
-        "first name": "Erick",
-        "last name": "Sodré",
-        "gender": "M",
-        "nome completo": "Erick Sodré",
-        "confiabilidade": "confirmada"
-    },
-    "rels": {
-        "parents": [
-            "c10"
         ]
     }
 },
@@ -3627,6 +3611,21 @@ const F3_DATA = [
         "parents": [
             "valdivino",
             "valdivino_alzira_conjuge"
+        ]
+    }
+},
+{
+    "id": "a147",
+    "data": {
+        "first name": "Erick",
+        "last name": "Sodré",
+        "gender": "M",
+        "nome completo": "Erick Sodré",
+        "confiabilidade": "confirmada"
+    },
+    "rels": {
+        "parents": [
+            "c10"
         ]
     }
 },
