@@ -2439,5 +2439,31 @@
     "confiabilidade": "confirmada",
     "geracao": 5,
     "ordem_filho": 1
+  },
+  {
+    "nome_completo": "Débora Nunes Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Cesar",
+      null
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 6
+  },
+  {
+    "nome_completo": "Melissa Nunes Sodré",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Cesar",
+      null
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 6
   }
 ]
