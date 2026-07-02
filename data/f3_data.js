@@ -3121,9 +3121,9 @@ const F3_DATA = [
     "id": "a142",
     "data": {
         "first name": "Ananda",
-        "last name": "Sodré Fontes",
+        "last name": "Sodré",
         "gender": "M",
-        "nome completo": "Ananda Sodré Fontes",
+        "nome completo": "Ananda Sodré",
         "confiabilidade": "confirmada"
     },
     "rels": {
@@ -3215,9 +3215,9 @@ const F3_DATA = [
     "id": "a141",
     "data": {
         "first name": "Denise",
-        "last name": "Sodré Fontes",
+        "last name": "Sodré",
         "gender": "M",
-        "nome completo": "Denise Sodré Fontes",
+        "nome completo": "Denise Sodré",
         "confiabilidade": "confirmada"
     },
     "rels": {
@@ -3339,9 +3339,9 @@ const F3_DATA = [
     "id": "a140",
     "data": {
         "first name": "Laisa",
-        "last name": "Sodré Fontes",
+        "last name": "Sodré",
         "gender": "M",
-        "nome completo": "Laisa Sodré Fontes",
+        "nome completo": "Laisa Sodré",
         "confiabilidade": "confirmada"
     },
     "rels": {
@@ -3354,9 +3354,9 @@ const F3_DATA = [
     "id": "a139",
     "data": {
         "first name": "Lara",
-        "last name": "Sodré Fontes",
+        "last name": "Sodré",
         "gender": "M",
-        "nome completo": "Lara Sodré Fontes",
+        "nome completo": "Lara Sodré",
         "confiabilidade": "confirmada"
     },
     "rels": {
