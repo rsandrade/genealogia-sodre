@@ -3518,12 +3518,12 @@ const F3_DATA = [
     }
 },
 {
-    "id": "a135",
+    "id": "a134",
     "data": {
-        "first name": "Thames",
-        "last name": "Sodré",
+        "first name": "Thais",
+        "last name": "Tâmara Sodré",
         "gender": "M",
-        "nome completo": "Thames Sodré",
+        "nome completo": "Thais Tâmara Sodré",
         "confiabilidade": "confirmada"
     },
     "rels": {
@@ -3533,12 +3533,12 @@ const F3_DATA = [
     }
 },
 {
-    "id": "a134",
+    "id": "a135",
     "data": {
-        "first name": "Thays",
-        "last name": "Tâmara Sodré",
+        "first name": "Thames",
+        "last name": "Sodré",
         "gender": "M",
-        "nome completo": "Thays Tâmara Sodré",
+        "nome completo": "Thames Sodré",
         "confiabilidade": "confirmada"
     },
     "rels": {
