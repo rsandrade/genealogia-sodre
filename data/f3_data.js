@@ -1,5 +1,5 @@
 // Auto-generated from data/membros_encontrados.json
-// Total: 202 entries, mainId: virtual_root
+// Total: 208 entries, mainId: virtual_root
 const F3_DATA = [
 {
     "id": "auto_9",
@@ -31,8 +31,8 @@ const F3_DATA = [
     },
     "rels": {
         "spouses": [
-            "auto_21",
-            "auto_22"
+            "auto_22",
+            "auto_23"
         ],
         "children": [
             "fs9",
@@ -100,7 +100,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_22",
+    "id": "auto_23",
     "data": {
         "first name": "Adelia",
         "last name": "Maria Sódre (?)",
@@ -156,7 +156,26 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_21",
+    "id": "a150",
+    "data": {
+        "first name": "Alice",
+        "last name": "dos Santos",
+        "gender": "F",
+        "nome completo": "Alice dos Santos",
+        "confiabilidade": "confirmada",
+        "notas": "Irmã de Maria Aleluia dos Santos, Maria Celestina Santos e Gerosina Cleuza Santos. 1ª esposa de Marcos Freire de Andrade. 5 filhos: Marcos, Marlice, Janete, Marcus \"Marquinhos\", Lígia."
+    },
+    "rels": {
+        "spouses": [
+            "auto_17"
+        ],
+        "parents": [
+            "virtual_1002"
+        ]
+    }
+},
+{
+    "id": "auto_22",
     "data": {
         "first name": "Bastilla",
         "last name": "Maria de Jesus",
@@ -195,7 +214,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_26",
+    "id": "auto_27",
     "data": {
         "first name": "Christino",
         "last name": "José de Almeida",
@@ -376,7 +395,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_27",
+    "id": "auto_28",
     "data": {
         "first name": "Jacula",
         "last name": "Conceição de Almeida",
@@ -483,7 +502,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_17",
+    "id": "auto_18",
     "data": {
         "first name": "José",
         "last name": "Gramilo Sodré (\"Zeca\")",
@@ -559,7 +578,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_25",
+    "id": "auto_26",
     "data": {
         "first name": "Macula",
         "last name": "Conceição de Almeida",
@@ -632,7 +651,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_19",
+    "id": "auto_20",
     "data": {
         "first name": "Manuel",
         "last name": "Ribeiro Sodré",
@@ -643,6 +662,24 @@ const F3_DATA = [
     "rels": {
         "children": [
             "11"
+        ],
+        "parents": [
+            "virtual_1001"
+        ]
+    }
+},
+{
+    "id": "auto_17",
+    "data": {
+        "first name": "Marcos",
+        "last name": "Freire de Andrade (1ª esposa)",
+        "gender": "M",
+        "nome completo": "Marcos Freire de Andrade (1ª esposa)",
+        "confiabilidade": "hipotética"
+    },
+    "rels": {
+        "spouses": [
+            "a150"
         ],
         "parents": [
             "virtual_1001"
@@ -716,7 +753,7 @@ const F3_DATA = [
     },
     "rels": {
         "spouses": [
-            "auto_23"
+            "auto_24"
         ],
         "children": [
             "fs17"
@@ -745,7 +782,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_20",
+    "id": "auto_21",
     "data": {
         "first name": "Mariana",
         "last name": "Rosa de Jesus",
@@ -800,7 +837,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_24",
+    "id": "auto_25",
     "data": {
         "first name": "Ricardo",
         "last name": "José de Almeida",
@@ -818,7 +855,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_23",
+    "id": "auto_24",
     "data": {
         "first name": "Sofísio",
         "last name": "Moreira de Freitas (falecido)",
@@ -910,7 +947,7 @@ const F3_DATA = [
     }
 },
 {
-    "id": "auto_18",
+    "id": "auto_19",
     "data": {
         "first name": "Valdeci",
         "last name": "(Sísio)",
@@ -955,7 +992,7 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_18"
+            "auto_19"
         ]
     }
 },
@@ -1076,7 +1113,7 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_17"
+            "auto_18"
         ]
     }
 },
@@ -1128,6 +1165,28 @@ const F3_DATA = [
     }
 },
 {
+    "id": "a152",
+    "data": {
+        "first name": "Epifânio",
+        "last name": "",
+        "gender": "M",
+        "nome completo": "Epifânio",
+        "confiabilidade": "hipotética",
+        "notas": "Esposo de Maria Celestina Santos. Sobrenome desconhecido. Pai de Jandira."
+    },
+    "rels": {
+        "spouses": [
+            "a151"
+        ],
+        "children": [
+            "a153"
+        ],
+        "parents": [
+            "virtual_1001"
+        ]
+    }
+},
+{
     "id": "11",
     "data": {
         "first name": "Erotildes",
@@ -1139,8 +1198,8 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_19",
-            "auto_20"
+            "auto_20",
+            "auto_21"
         ],
         "spouses": [
             "i1"
@@ -1208,7 +1267,7 @@ const F3_DATA = [
     "rels": {
         "parents": [
             "fs15",
-            "auto_21"
+            "auto_22"
         ],
         "spouses": [
             "fs17"
@@ -1227,7 +1286,7 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_23",
+            "auto_24",
             "fs18"
         ],
         "spouses": [
@@ -1248,6 +1307,22 @@ const F3_DATA = [
     "rels": {
         "parents": [
             "auto_8"
+        ]
+    }
+},
+{
+    "id": "a154",
+    "data": {
+        "first name": "Gerosina",
+        "last name": "Cleuza Santos",
+        "gender": "F",
+        "nome completo": "Gerosina Cleuza Santos",
+        "confiabilidade": "confirmada",
+        "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Maria Celestina Santos. Não casou, não teve filhos."
+    },
+    "rels": {
+        "parents": [
+            "virtual_1002"
         ]
     }
 },
@@ -1300,7 +1375,7 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_17"
+            "auto_18"
         ]
     }
 },
@@ -1572,7 +1647,7 @@ const F3_DATA = [
         "gender": "M",
         "nome completo": "Maria Aleluia dos Santos",
         "confiabilidade": "provável",
-        "notas": "Mãe de Atanagilda Odete dos Santos."
+        "notas": "Mãe de Atanagilda Odete dos Santos. Irmã de Alice dos Santos, Maria Celestina Santos e Gerosina Cleuza Santos."
     },
     "rels": {
         "spouses": [
@@ -1580,6 +1655,28 @@ const F3_DATA = [
         ],
         "children": [
             "4"
+        ],
+        "parents": [
+            "virtual_1002"
+        ]
+    }
+},
+{
+    "id": "a151",
+    "data": {
+        "first name": "Maria",
+        "last name": "Celestina Santos",
+        "gender": "F",
+        "nome completo": "Maria Celestina Santos",
+        "confiabilidade": "confirmada",
+        "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Gerosina Cleuza Santos. Casou com Epifânio. 1 filha: Jandira."
+    },
+    "rels": {
+        "spouses": [
+            "a152"
+        ],
+        "children": [
+            "a153"
         ],
         "parents": [
             "virtual_1002"
@@ -1597,7 +1694,7 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_17"
+            "auto_18"
         ]
     }
 },
@@ -1647,8 +1744,8 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_24",
-            "auto_25"
+            "auto_25",
+            "auto_26"
         ],
         "spouses": [
             "fs11"
@@ -1667,8 +1764,8 @@ const F3_DATA = [
     },
     "rels": {
         "parents": [
-            "auto_26",
-            "auto_27"
+            "auto_27",
+            "auto_28"
         ],
         "spouses": [
             "a115"
@@ -1912,6 +2009,23 @@ const F3_DATA = [
             "i6",
             "i7",
             "valdivino"
+        ]
+    }
+},
+{
+    "id": "a153",
+    "data": {
+        "first name": "Jandira",
+        "last name": "",
+        "gender": "F",
+        "nome completo": "Jandira",
+        "confiabilidade": "confirmada",
+        "notas": "Filha de Maria Celestina Santos e Epifânio. Sobrenome desconhecido."
+    },
+    "rels": {
+        "parents": [
+            "a152",
+            "a151"
         ]
     }
 },
@@ -3712,7 +3826,9 @@ const F3_DATA = [
             "auto_24",
             "auto_25",
             "auto_26",
-            "auto_27"
+            "auto_27",
+            "auto_28",
+            "a152"
         ],
         "parents": [
             "virtual_root"
@@ -3735,7 +3851,10 @@ const F3_DATA = [
             "antenor_p",
             "carmelinda_sp",
             "carlos_alzira_pai",
-            "euflozina_alzira_mae"
+            "euflozina_alzira_mae",
+            "a151",
+            "a154",
+            "a150"
         ],
         "parents": [
             "virtual_root"
@@ -3802,5 +3921,4 @@ const F3_DATA = [
     }
 }
 ];
-
 const F3_MAIN_ID = 'virtual_root';

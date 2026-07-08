@@ -84,7 +84,7 @@
     "conjuge": "Gervásio Eusébio dos Santos",
     "fonte": "Memória oral (Ricardo Sodré Andrade)",
     "confiabilidade": "provável",
-    "notas": "Mãe de Atanagilda Odete dos Santos.",
+    "notas": "Mãe de Atanagilda Odete dos Santos. Irmã de Alice dos Santos, Maria Celestina Santos e Gerosina Cleuza Santos.",
     "geracao": 2
   },
   {
@@ -1188,11 +1188,14 @@
     "nome_completo": "Alice dos Santos",
     "nascimento": "",
     "falecimento": "",
-    "pais": [],
+    "pais": null,
     "conjuge": "Marcos Freire de Andrade (1ª esposa)",
     "fonte": "Memória oral (família, jun 2026)",
     "confiabilidade": "confirmada",
-    "notas": "Irmã de Maria Aleluia dos Santos. 1ª esposa de Marcos Freire de Andrade. 5 filhos: Marcos, Marlice, Janete, Marcus \"Marquinhos\", Lígia."
+    "notas": "Irmã de Maria Aleluia dos Santos, Maria Celestina Santos e Gerosina Cleuza Santos. 1ª esposa de Marcos Freire de Andrade. 5 filhos: Marcos, Marlice, Janete, Marcus \"Marquinhos\", Lígia.",
+    "id": "a150",
+    "geracao": 2,
+    "genero": "F"
   },
   {
     "nome_completo": "Marcos Freire de Andrade",
@@ -2465,5 +2468,60 @@
     "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
     "confiabilidade": "confirmada",
     "geracao": 5
+  },
+  {
+    "id": "a151",
+    "nome_completo": "Maria Celestina Santos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Epifânio",
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 2,
+    "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Gerosina Cleuza Santos. Casou com Epifânio. 1 filha: Jandira.",
+    "genero": "F"
+  },
+  {
+    "id": "a152",
+    "nome_completo": "Epifânio",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": "Maria Celestina Santos",
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "hipotética",
+    "geracao": 2,
+    "notas": "Esposo de Maria Celestina Santos. Sobrenome desconhecido. Pai de Jandira.",
+    "genero": "M"
+  },
+  {
+    "id": "a153",
+    "nome_completo": "Jandira",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Epifânio",
+      "Maria Celestina Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 3,
+    "notas": "Filha de Maria Celestina Santos e Epifânio. Sobrenome desconhecido.",
+    "genero": "F"
+  },
+  {
+    "id": "a154",
+    "nome_completo": "Gerosina Cleuza Santos",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": null,
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 2,
+    "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Maria Celestina Santos. Não casou, não teve filhos.",
+    "genero": "F"
   }
 ]
