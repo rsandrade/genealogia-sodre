@@ -20,6 +20,7 @@ Pesquisa genealógica da família Gramilo Sodré, radicada em Aiquara e região 
 
 ### G2: Avós maternos
 - **Gervásio Eusébio dos Santos** + **Maria Aleluia dos Santos**
+- Irmãs de Maria Aleluia: **Alice dos Santos** (1ª esposa de Marcos Freire de Andrade; 5 filhos), **Maria Celestina Santos** (casou com Epifânio Henrique Sacramento; 6 filhos: Jaci Gonzaga, Joselita, Carlita, Gedeon, Jandira e Gildasio Henrique Sacramento), **Gerosina Cleuza Santos** (não casou, sem filhos)
 
 ### G3: 7 irmãos (filhos de Marcelo + Rita Rosa)
 1. **Francisco Gramilo Sodré** — casou Atanagilda Odete dos Santos; 12 filhos

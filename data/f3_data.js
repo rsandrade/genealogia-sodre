@@ -698,6 +698,7 @@ const F3_DATA = [
     },
     "rels": {
         "spouses": [
+            "auto_29",
             "a152"
         ],
         "children": [
@@ -2078,7 +2079,7 @@ const F3_DATA = [
         "gender": "F",
         "nome completo": "Jaci Gonzaga",
         "confiabilidade": "confirmada",
-        "notas": "Filho(a) de Maria Celestina Santos e Epifânio Henrique Sacramento. Sobrenome Gonzaga distinto dos demais irmãos (Henrique Sacramento)."
+        "notas": "Filho(a) de Maria Celestina Santos e Epifânio Henrique Sacramento. Sobrenome Gonzaga é provavelmente nome de casada; nome de solteira seria Henrique Sacramento (como os 5 irmãos)."
     },
     "rels": {
         "parents": [

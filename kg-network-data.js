@@ -958,6 +958,105 @@ const NODES_DATA = [
   },
   {
     "data": {
+      "id": "maria_celestina",
+      "label": "Maria Celestina Santos",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 4,
+      "note": "Irmã de Maria Aleluia · casou com Epifânio Henrique Sacramento · 6 filhos",
+      "spouse": "epifanio"
+    }
+  },
+  {
+    "data": {
+      "id": "epifanio",
+      "label": "Epifânio Henrique Sacramento",
+      "dates": "",
+      "category": "provável",
+      "generation": 4,
+      "note": "Esposo de Maria Celestina Santos · Sobrenome inferido dos filhos",
+      "spouse": "maria_celestina"
+    }
+  },
+  {
+    "data": {
+      "id": "jaci_gonzaga",
+      "label": "Jaci Gonzaga",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 5,
+      "note": "Provável nome de casada (Gonzaga ≠ Henrique Sacramento) · Filho(a) de Maria Celestina × Epifânio",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
+      "id": "joselita_hs",
+      "label": "Joselita Henrique Sacramento",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 5,
+      "note": "Filha de Maria Celestina × Epifânio",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
+      "id": "carlita_hs",
+      "label": "Carlita Henrique Sacramento",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 5,
+      "note": "Filha de Maria Celestina × Epifânio",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
+      "id": "gedeon_hs",
+      "label": "Gedeon Henrique Sacramento",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 5,
+      "note": "Filho de Maria Celestina × Epifânio",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
+      "id": "jandira_hs",
+      "label": "Jandira Henrique Sacramento",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 5,
+      "note": "Filha de Maria Celestina × Epifânio",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
+      "id": "gildasio_hs",
+      "label": "Gildasio Henrique Sacramento",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 5,
+      "note": "Filho de Maria Celestina × Epifânio",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
+      "id": "gerosina_santos",
+      "label": "Gerosina Cleuza Santos",
+      "dates": "",
+      "category": "confirmed",
+      "generation": 4,
+      "note": "Irmã de Maria Aleluia · não casou, sem filhos",
+      "spouse": null
+    }
+  },
+  {
+    "data": {
       "id": "marcos_andrade",
       "label": "Marcos Freire de Andrade",
       "dates": "",
@@ -2714,6 +2813,141 @@ const EDGES_DATA = [
       "target": "admilson",
       "type": "mae_de",
       "label": "↓"
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_epifanio",
+      "source": "maria_celestina",
+      "target": "epifanio",
+      "type": "casou_com",
+      "label": "∞"
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_jaci",
+      "source": "maria_celestina",
+      "target": "jaci_gonzaga",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_joselita",
+      "source": "maria_celestina",
+      "target": "joselita_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_carlita",
+      "source": "maria_celestina",
+      "target": "carlita_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_gedeon",
+      "source": "maria_celestina",
+      "target": "gedeon_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_jandira",
+      "source": "maria_celestina",
+      "target": "jandira_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_celestina_gildasio",
+      "source": "maria_celestina",
+      "target": "gildasio_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_epifanio_jaci",
+      "source": "epifanio",
+      "target": "jaci_gonzaga",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_epifanio_joselita",
+      "source": "epifanio",
+      "target": "joselita_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_epifanio_carlita",
+      "source": "epifanio",
+      "target": "carlita_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_epifanio_gedeon",
+      "source": "epifanio",
+      "target": "gedeon_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_epifanio_jandira",
+      "source": "epifanio",
+      "target": "jandira_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_epifanio_gildasio",
+      "source": "epifanio",
+      "target": "gildasio_hs",
+      "type": "filho_de",
+      "label": ""
+    }
+  },
+  {
+    "data": {
+      "id": "e_irma_celestina",
+      "source": "maria_aleluia",
+      "target": "maria_celestina",
+      "type": "irma_de",
+      "label": "irmã"
+    }
+  },
+  {
+    "data": {
+      "id": "e_irma_gerosina",
+      "source": "maria_aleluia",
+      "target": "gerosina_santos",
+      "type": "irma_de",
+      "label": "irmã"
     }
   }
 ];
