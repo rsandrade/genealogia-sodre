@@ -687,6 +687,33 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a151",
+    "data": {
+      "first name": "Maria",
+      "last name": "Celestina Santos",
+      "gender": "F",
+      "nome completo": "Maria Celestina Santos",
+      "confiabilidade": "confirmada",
+      "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Gerosina Cleuza Santos. Casou com Epifânio Henrique Sacramento. 6 filhos: Jaci Gonzaga, Joselita, Carlita, Gedeon, Jandira e Gildasio Henrique Sacramento."
+    },
+    "rels": {
+      "spouses": [
+        "a152"
+      ],
+      "children": [
+        "a153",
+        "a155",
+        "a156",
+        "a157",
+        "a158",
+        "a159"
+      ],
+      "parents": [
+        "virtual_1002"
+      ]
+    }
+  },
+  {
     "id": "auto_8",
     "data": {
       "first name": "Maria",
@@ -1171,18 +1198,23 @@ const F3_NETWORK_DATA = [
     "id": "a152",
     "data": {
       "first name": "Epifânio",
-      "last name": "",
+      "last name": "Henrique Sacramento",
       "gender": "M",
-      "nome completo": "Epifânio",
-      "confiabilidade": "hipotética",
-      "notas": "Esposo de Maria Celestina Santos. Sobrenome desconhecido. Pai de Jandira."
+      "nome completo": "Epifânio Henrique Sacramento",
+      "confiabilidade": "provável",
+      "notas": "Esposo de Maria Celestina Santos. Sobrenome inferido dos filhos (5 de 6 usam \"Henrique Sacramento\"). Pai de Jaci, Joselita, Carlita, Gedeon, Jandira e Gildasio."
     },
     "rels": {
       "spouses": [
         "a151"
       ],
       "children": [
-        "a153"
+        "a153",
+        "a155",
+        "a156",
+        "a157",
+        "a158",
+        "a159"
       ],
       "parents": [
         "virtual_1001"
@@ -1665,28 +1697,6 @@ const F3_NETWORK_DATA = [
     }
   },
   {
-    "id": "a151",
-    "data": {
-      "first name": "Maria",
-      "last name": "Celestina Santos",
-      "gender": "F",
-      "nome completo": "Maria Celestina Santos",
-      "confiabilidade": "confirmada",
-      "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Gerosina Cleuza Santos. Casou com Epifânio. 1 filha: Jandira."
-    },
-    "rels": {
-      "spouses": [
-        "a152"
-      ],
-      "children": [
-        "a153"
-      ],
-      "parents": [
-        "virtual_1002"
-      ]
-    }
-  },
-  {
     "id": "a109",
     "data": {
       "first name": "Maria",
@@ -1871,6 +1881,22 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a157",
+    "data": {
+      "first name": "Carlita",
+      "last name": "Henrique Sacramento",
+      "gender": "M",
+      "nome completo": "Carlita Henrique Sacramento",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "a152",
+        "a151"
+      ]
+    }
+  },
+  {
     "id": "deusdete_ps",
     "data": {
       "first name": "Deusdete",
@@ -1986,6 +2012,38 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a158",
+    "data": {
+      "first name": "Gedeon",
+      "last name": "Henrique Sacramento",
+      "gender": "M",
+      "nome completo": "Gedeon Henrique Sacramento",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "a152",
+        "a151"
+      ]
+    }
+  },
+  {
+    "id": "a159",
+    "data": {
+      "first name": "Gildasio",
+      "last name": "Henrique Sacramento",
+      "gender": "M",
+      "nome completo": "Gildasio Henrique Sacramento",
+      "confiabilidade": "confirmada"
+    },
+    "rels": {
+      "parents": [
+        "a152",
+        "a151"
+      ]
+    }
+  },
+  {
     "id": "f10",
     "data": {
       "first name": "Isabel",
@@ -2016,14 +2074,47 @@ const F3_NETWORK_DATA = [
     }
   },
   {
+    "id": "a155",
+    "data": {
+      "first name": "Jaci",
+      "last name": "Gonzaga",
+      "gender": "F",
+      "nome completo": "Jaci Gonzaga",
+      "confiabilidade": "confirmada",
+      "notas": "Filho(a) de Maria Celestina Santos e Epifânio Henrique Sacramento. Sobrenome Gonzaga distinto dos demais irmãos (Henrique Sacramento)."
+    },
+    "rels": {
+      "parents": [
+        "a152",
+        "a151"
+      ]
+    }
+  },
+  {
     "id": "a153",
     "data": {
       "first name": "Jandira",
-      "last name": "",
+      "last name": "Henrique Sacramento",
       "gender": "F",
-      "nome completo": "Jandira",
+      "nome completo": "Jandira Henrique Sacramento",
       "confiabilidade": "confirmada",
-      "notas": "Filha de Maria Celestina Santos e Epifânio. Sobrenome desconhecido."
+      "notas": "Filha de Maria Celestina Santos e Epifânio Henrique Sacramento."
+    },
+    "rels": {
+      "parents": [
+        "a152",
+        "a151"
+      ]
+    }
+  },
+  {
+    "id": "a156",
+    "data": {
+      "first name": "Joselita",
+      "last name": "Henrique Sacramento",
+      "gender": "M",
+      "nome completo": "Joselita Henrique Sacramento",
+      "confiabilidade": "confirmada"
     },
     "rels": {
       "parents": [
@@ -3855,9 +3946,9 @@ const F3_NETWORK_DATA = [
         "carmelinda_sp",
         "carlos_alzira_pai",
         "euflozina_alzira_mae",
-        "a151",
         "a154",
-        "a150"
+        "a150",
+        "a151"
       ],
       "parents": [
         "virtual_root"

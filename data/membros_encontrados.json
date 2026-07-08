@@ -2479,36 +2479,36 @@
     "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
     "confiabilidade": "confirmada",
     "geracao": 2,
-    "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Gerosina Cleuza Santos. Casou com Epifânio. 1 filha: Jandira.",
+    "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Gerosina Cleuza Santos. Casou com Epifânio Henrique Sacramento. 6 filhos: Jaci Gonzaga, Joselita, Carlita, Gedeon, Jandira e Gildasio Henrique Sacramento.",
     "genero": "F"
   },
   {
     "id": "a152",
-    "nome_completo": "Epifânio",
+    "nome_completo": "Epifânio Henrique Sacramento",
     "nascimento": null,
     "falecimento": null,
     "pais": null,
     "conjuge": "Maria Celestina Santos",
     "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
-    "confiabilidade": "hipotética",
+    "confiabilidade": "provável",
     "geracao": 2,
-    "notas": "Esposo de Maria Celestina Santos. Sobrenome desconhecido. Pai de Jandira.",
+    "notas": "Esposo de Maria Celestina Santos. Sobrenome inferido dos filhos (5 de 6 usam \"Henrique Sacramento\"). Pai de Jaci, Joselita, Carlita, Gedeon, Jandira e Gildasio.",
     "genero": "M"
   },
   {
     "id": "a153",
-    "nome_completo": "Jandira",
+    "nome_completo": "Jandira Henrique Sacramento",
     "nascimento": null,
     "falecimento": null,
     "pais": [
-      "Epifânio",
+      "Epifânio Henrique Sacramento",
       "Maria Celestina Santos"
     ],
     "conjuge": null,
     "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
     "confiabilidade": "confirmada",
     "geracao": 3,
-    "notas": "Filha de Maria Celestina Santos e Epifânio. Sobrenome desconhecido.",
+    "notas": "Filha de Maria Celestina Santos e Epifânio Henrique Sacramento.",
     "genero": "F"
   },
   {
@@ -2523,5 +2523,76 @@
     "geracao": 2,
     "notas": "Irmã de Maria Aleluia dos Santos, Alice dos Santos e Maria Celestina Santos. Não casou, não teve filhos.",
     "genero": "F"
+  },
+  {
+    "id": "a155",
+    "nome_completo": "Jaci Gonzaga",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Epifânio Henrique Sacramento",
+      "Maria Celestina Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 3,
+    "notas": "Filho(a) de Maria Celestina Santos e Epifânio Henrique Sacramento. Sobrenome Gonzaga distinto dos demais irmãos (Henrique Sacramento)."
+  },
+  {
+    "id": "a156",
+    "nome_completo": "Joselita Henrique Sacramento",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Epifânio Henrique Sacramento",
+      "Maria Celestina Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 3
+  },
+  {
+    "id": "a157",
+    "nome_completo": "Carlita Henrique Sacramento",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Epifânio Henrique Sacramento",
+      "Maria Celestina Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 3
+  },
+  {
+    "id": "a158",
+    "nome_completo": "Gedeon Henrique Sacramento",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Epifânio Henrique Sacramento",
+      "Maria Celestina Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 3
+  },
+  {
+    "id": "a159",
+    "nome_completo": "Gildasio Henrique Sacramento",
+    "nascimento": null,
+    "falecimento": null,
+    "pais": [
+      "Epifânio Henrique Sacramento",
+      "Maria Celestina Santos"
+    ],
+    "conjuge": null,
+    "fonte": "Memória oral (Ricardo Sodré Andrade, jul 2026)",
+    "confiabilidade": "confirmada",
+    "geracao": 3
   }
 ]
